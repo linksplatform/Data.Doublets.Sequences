@@ -11,8 +11,6 @@ namespace Platform.Data.Doublets
 {
     public static class UInt64LinksExtensions
     {
-        public static readonly LinksConstants<ulong> Constants = Default<LinksConstants<ulong>>.Instance;
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void UseUnicode(this ILinks<ulong> links) => UnicodeMap.InitNew(links);
     }
