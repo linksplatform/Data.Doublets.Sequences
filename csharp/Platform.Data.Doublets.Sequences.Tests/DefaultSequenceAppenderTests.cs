@@ -12,7 +12,7 @@ using Xunit;
 using Xunit.Abstractions;
 using TLink = System.UInt64;
 
-namespace Platform.Data.Doublets.Tests
+namespace Platform.Data.Doublets.Sequences.Tests
 {
     public class DefaultSequenceAppenderTests
     {

@@ -19,7 +19,7 @@ using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.Memory.United.Specific;
 using Platform.Data.Doublets.Memory;
 
-namespace Platform.Data.Doublets.Tests
+namespace Platform.Data.Doublets.Sequences.Tests
 {
     public static class OptimalVariantSequenceTests
     {

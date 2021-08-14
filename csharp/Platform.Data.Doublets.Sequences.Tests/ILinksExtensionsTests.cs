@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Platform.Data.Doublets.Tests
+namespace Platform.Data.Doublets.Sequences.Tests
 {
     public class ILinksExtensionsTests
     {

@@ -6,7 +6,7 @@ using Platform.Data.Doublets.Memory.United.Specific;
 using Platform.Data.Doublets.Memory.Split.Specific;
 using Platform.Memory;
 
-namespace Platform.Data.Doublets.Tests
+namespace Platform.Data.Doublets.Sequences.Tests
 {
     public class TempLinksTestScope : DisposableBase
     {

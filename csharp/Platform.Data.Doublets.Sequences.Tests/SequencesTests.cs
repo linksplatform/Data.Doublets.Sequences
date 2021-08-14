@@ -14,7 +14,7 @@ using Platform.Data.Doublets.Sequences.Frequencies.Counters;
 using Platform.Data.Doublets.Sequences.Converters;
 using Platform.Data.Doublets.Unicode;
 
-namespace Platform.Data.Doublets.Tests
+namespace Platform.Data.Doublets.Sequences.Tests
 {
     public static class SequencesTests
     {

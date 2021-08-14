@@ -2,7 +2,7 @@
 using Platform.Random;
 using Platform.Data.Doublets.Numbers.Unary;
 
-namespace Platform.Data.Doublets.Tests
+namespace Platform.Data.Doublets.Sequences.Tests
 {
     public static class UnaryNumberConvertersTests
     {

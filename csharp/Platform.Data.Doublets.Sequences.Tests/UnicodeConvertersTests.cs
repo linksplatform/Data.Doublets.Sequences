@@ -14,7 +14,7 @@ using Platform.Data.Doublets.Unicode;
 using Platform.Data.Doublets.Memory.United.Generic;
 using Platform.Data.Doublets.CriterionMatchers;
 
-namespace Platform.Data.Doublets.Tests
+namespace Platform.Data.Doublets.Sequences.Tests
 {
     public static class UnicodeConvertersTests
     {
