@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>LinksPlatform's Platform.Data.Doublets.Sequences Class Library</Description>
+    <Copyright>konard, FreePhoenix888</Copyright>
+    <AssemblyTitle>Platform.Data.Doublets.Sequences</AssemblyTitle>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Authors>konard, FreePhoenix888</Authors>
+    <TargetFrameworks>net472;netstandard2.0;netstandard2.1;net5</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>Platform.Data.Doublets.Sequences</AssemblyName>
+    <PackageId>Platform.Data.Doublets.Sequences</PackageId>
+    <PackageTags>LinksPlatform;Data;Doublets;Sequences</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/linksplatform/Documentation/18469f4d033ee9a5b7b84caab9c585acab2ac519/doc/Avatar-rainbow-icon-64x64.png</PackageIconUrl>
+    <PackageProjectUrl>https://linksplatform.github.io/Data.Doublets.Sequences</PackageProjectUrl>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/linksplatform/Data.Doublets.Sequences</RepositoryUrl>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <LangVersion>latest</LangVersion>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4')) AND '$(MSBuildRuntimeType)' == 'Core' AND '$(OS)' != 'Windows_NT'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Platform.Data.Doublets" Version="0.6.11" />
+  </ItemGroup>
+
+</Project>

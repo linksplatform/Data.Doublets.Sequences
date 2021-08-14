@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Doublets.Sequences", "csharp\Platform.Data.Doublets.Sequences\Platform.Data.Doublets.Sequences.csproj", "{1AAE3521-D8D6-4C7A-8233-923F9C9DE6A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Data.Doublets.Tests", "csharp\Platform.Data.Doublets.Tests\Platform.Data.Doublets.Tests.csproj", "{E6941D45-BFF5-49BF-8B81-1F06DAE8CEDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AAE3521-D8D6-4C7A-8233-923F9C9DE6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AAE3521-D8D6-4C7A-8233-923F9C9DE6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AAE3521-D8D6-4C7A-8233-923F9C9DE6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AAE3521-D8D6-4C7A-8233-923F9C9DE6A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6941D45-BFF5-49BF-8B81-1F06DAE8CEDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6941D45-BFF5-49BF-8B81-1F06DAE8CEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6941D45-BFF5-49BF-8B81-1F06DAE8CEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6941D45-BFF5-49BF-8B81-1F06DAE8CEDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
