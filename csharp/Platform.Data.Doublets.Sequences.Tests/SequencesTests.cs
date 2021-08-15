@@ -301,7 +301,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
         [Fact(Skip = "Correct implementation is pending")]
         public static void PatternMatchTest()
         {
-            var zeroOrMany = Sequences.Sequences.ZeroOrMany;
+            var zeroOrMany = Sequences.ZeroOrMany;
 
             using (var scope = new TempLinksTestScope(useSequences: true))
             {

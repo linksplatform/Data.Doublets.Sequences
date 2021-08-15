@@ -12,7 +12,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
     {
         public ILinks<ulong> MemoryAdapter { get; }
         public SynchronizedLinks<ulong> Links { get; }
-        public Sequences.Sequences Sequences { get; }
+        public Sequences Sequences { get; }
         public string TempFilename { get; }
         public string TempTransactionLogFilename { get; }
         private readonly bool _deleteFiles;
@@ -30,7 +30,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Links = new SynchronizedLinks<ulong>(new UInt64Links(MemoryAdapter));
             if (useSequences)
             {
-                Sequences = new Sequences.Sequences(Links, sequencesOptions);
+                Sequences = new Sequences(Links, sequencesOptions);
             }
         }
 

@@ -101,7 +101,7 @@ Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
                 var sequenceToItsLocalElementLevelsConverter = new SequenceToItsLocalElementLevelsConverter<ulong>(links, linkToItsFrequencyNumberConverter);
                 var optimalVariantConverter = new OptimalVariantConverter<ulong>(links, sequenceToItsLocalElementLevelsConverter);
 
-                var sequences = new Sequences.Sequences(links, new SequencesOptions<ulong>() { Walker = new LeveledSequenceWalker<ulong>(links) });
+                var sequences = new Sequences(links, new SequencesOptions<ulong>() { Walker = new LeveledSequenceWalker<ulong>(links) });
 
                 ExecuteTest(sequences, sequence, sequenceToItsLocalElementLevelsConverter, index, optimalVariantConverter);
             }
@@ -128,13 +128,13 @@ Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
                 var sequenceToItsLocalElementLevelsConverter = new SequenceToItsLocalElementLevelsConverter<ulong>(links, linkToItsFrequencyNumberConverter);
                 var optimalVariantConverter = new OptimalVariantConverter<ulong>(links, sequenceToItsLocalElementLevelsConverter);
 
-                var sequences = new Sequences.Sequences(links, new SequencesOptions<ulong>() { Walker = new LeveledSequenceWalker<ulong>(links) });
+                var sequences = new Sequences(links, new SequencesOptions<ulong>() { Walker = new LeveledSequenceWalker<ulong>(links) });
 
                 ExecuteTest(sequences, sequence, sequenceToItsLocalElementLevelsConverter, index, optimalVariantConverter);
             }
         }
 
-        private static void ExecuteTest(Sequences.Sequences sequences, ulong[] sequence, SequenceToItsLocalElementLevelsConverter<ulong> sequenceToItsLocalElementLevelsConverter, ISequenceIndex<ulong> index, OptimalVariantConverter<ulong> optimalVariantConverter)
+        private static void ExecuteTest(Sequences sequences, ulong[] sequence, SequenceToItsLocalElementLevelsConverter<ulong> sequenceToItsLocalElementLevelsConverter, ISequenceIndex<ulong> index, OptimalVariantConverter<ulong> optimalVariantConverter)
         {
             index.Add(sequence);
 
@@ -183,7 +183,7 @@ Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
                     UseGarbageCollection = true
                 };
 
-                var unicodeSequences = new Sequences.Sequences(new SynchronizedLinks<ulong>(links), unicodeSequencesOptions);
+                var unicodeSequences = new Sequences(new SynchronizedLinks<ulong>(links), unicodeSequencesOptions);
 
                 // Create some sequences
                 var strings = _loremIpsumExample.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
