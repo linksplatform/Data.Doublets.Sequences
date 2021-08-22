@@ -1,19 +1,62 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Platform.Data.Doublets.Sequences.Indexes
 {
+    /// <summary>
+    /// <para>
+    /// Represents the synchronized sequence index.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="ISequenceIndex{TLink}"/>
     public class SynchronizedSequenceIndex<TLink> : ISequenceIndex<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ISynchronizedLinks<TLink> _links;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="SynchronizedSequenceIndex"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SynchronizedSequenceIndex(ISynchronizedLinks<TLink> links) => _links = links;
 
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance add.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The indexed.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Add(IList<TLink> sequence)
         {
@@ -37,6 +80,20 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             return indexed;
         }
 
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance might contain.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The bool</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool MightContain(IList<TLink> sequence)
         {

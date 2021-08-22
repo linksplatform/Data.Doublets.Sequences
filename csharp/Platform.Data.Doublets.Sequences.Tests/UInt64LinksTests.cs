@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -22,14 +22,38 @@ using Platform.Data.Doublets.Memory.United.Specific;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
+    /// <summary>
+    /// <para>
+    /// Represents the int 64 links tests.
+    /// </para>
+    /// <para></para>
+    /// </summary>
     public static class UInt64LinksTests
     {
+        /// <summary>
+        /// <para>
+        /// The instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly LinksConstants<ulong> _constants = Default<LinksConstants<ulong>>.Instance;
 
+        /// <summary>
+        /// <para>
+        /// The iterations.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private const long Iterations = 10 * 1024;
 
         #region Concept
 
+        /// <summary>
+        /// <para>
+        /// Tests that multiple create and delete test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void MultipleCreateAndDeleteTest()
         {
@@ -39,6 +63,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that cascade update test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void CascadeUpdateTest()
         {
@@ -67,6 +97,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that basic transaction log test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void BasicTransactionLogTest()
         {
@@ -86,6 +122,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that transaction auto reverted test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void TransactionAutoRevertedTest()
         {
@@ -111,6 +153,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that transaction user code error no data saved test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void TransactionUserCodeErrorNoDataSavedTest()
         {
@@ -160,6 +208,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that transaction user code error some data saved test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void TransactionUserCodeErrorSomeDataSavedTest()
         {
@@ -216,6 +270,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that transaction commit.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void TransactionCommit()
         {
@@ -246,6 +306,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Global.Trash = FileHelpers.ReadAll<UInt64LinksTransactionsLayer.Transition>(tempTransactionLogFilename);
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that transaction damage.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void TransactionDamage()
         {
@@ -300,6 +366,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             File.Delete(tempTransactionLogFilename);
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that bug 1 test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void Bug1Test()
         {
@@ -356,8 +428,20 @@ namespace Platform.Data.Doublets.Sequences.Tests
             File.Delete(tempTransactionLogFilename);
         }
 
+        /// <summary>
+        /// <para>
+        /// Exceptions the thrower.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static void ExceptionThrower() => throw new InvalidOperationException();
 
+        /// <summary>
+        /// <para>
+        /// Tests that paths test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void PathsTest()
         {
@@ -375,6 +459,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that recursive string formatting test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void RecursiveStringFormattingTest()
         {
@@ -411,6 +501,20 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Defaults the formatter using the specified sb.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sb">
+        /// <para>The sb.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
         private static void DefaultFormatter(StringBuilder sb, ulong link)
         {
             sb.Append(link.ToString());
@@ -550,6 +654,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
         }
          */
 
+        /// <summary>
+        /// <para>
+        /// Tests that get source test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "performance test")]
         public static void GetSourceTest()
         {
@@ -585,6 +695,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that get source in parallel.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "performance test")]
         public static void GetSourceInParallel()
         {
@@ -619,6 +735,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that test get target.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "performance test")]
         public static void TestGetTarget()
         {
@@ -651,6 +773,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that test get target in parallel.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "performance test")]
         public static void TestGetTargetInParallel()
         {
@@ -720,6 +848,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             File.Delete(tempFilename);
         }*/
 
+        /// <summary>
+        /// <para>
+        /// Tests that test random search all.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "useless: O(0), was dependent on creation tests")]
         public static void TestRandomSearchAll()
         {
@@ -755,6 +889,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that test each.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "useless: O(0), was dependent on creation tests")]
         public static void TestEach()
         {
@@ -840,6 +980,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
         }
         */
 
+        /// <summary>
+        /// <para>
+        /// Tests that create 64 billion links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "performance test")]
         public static void Create64BillionLinks()
         {
@@ -870,6 +1016,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that create 64 billion links in parallel.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "performance test")]
         public static void Create64BillionLinksInParallel()
         {
@@ -896,6 +1048,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that test deletion of all links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "useless: O(0), was dependent on creation tests")]
         public static void TestDeletionOfAllLinks()
         {

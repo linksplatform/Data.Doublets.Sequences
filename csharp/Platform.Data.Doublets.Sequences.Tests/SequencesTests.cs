@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -16,16 +16,40 @@ using Platform.Data.Doublets.Unicode;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
+    /// <summary>
+    /// <para>
+    /// Represents the sequences tests.
+    /// </para>
+    /// <para></para>
+    /// </summary>
     public static class SequencesTests
     {
+        /// <summary>
+        /// <para>
+        /// The instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly LinksConstants<ulong> _constants = Default<LinksConstants<ulong>>.Instance;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="SequencesTests"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         static SequencesTests()
         {
             // Trigger static constructor to not mess with perfomance measurements
             _ = BitString.GetBitMaskFromIndex(1);
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that create all variants test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void CreateAllVariantsTest()
         {
@@ -99,6 +123,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
         //    File.Delete(tempFilename);
         //}
 
+        /// <summary>
+        /// <para>
+        /// Tests that all variants search test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void AllVariantsSearchTest()
         {
@@ -155,6 +185,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that balanced variant search test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void BalancedVariantSearchTest()
         {
@@ -199,6 +235,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that all partial variants search test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void AllPartialVariantsSearchTest()
         {
@@ -257,6 +299,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that balanced partial variants search test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void BalancedPartialVariantsSearchTest()
         {
@@ -298,6 +346,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that pattern match test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "Correct implementation is pending")]
         public static void PatternMatchTest()
         {
@@ -351,6 +405,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that index test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void IndexTest()
         {
@@ -432,10 +492,22 @@ namespace Platform.Data.Doublets.Sequences.Tests
 
 [![анимация](https://raw.githubusercontent.com/Konard/LinksPlatform/master/doc/Intro/intro-animation-500.gif ""анимация"")](https://raw.githubusercontent.com/Konard/LinksPlatform/master/doc/Intro/intro-animation-500.gif)";
 
+        /// <summary>
+        /// <para>
+        /// The example lorem ipsum text.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly string _exampleLoremIpsumText =
             @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
+        /// <summary>
+        /// <para>
+        /// Tests that compression test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void CompressionTest()
         {
@@ -485,6 +557,12 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that compression efficiency test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void CompressionEfficiencyTest()
         {
@@ -646,6 +724,12 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that compression stability test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void CompressionStabilityTest()
         {
@@ -770,6 +854,12 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that rundom numbers compression quality test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void RundomNumbersCompressionQualityTest()
         {
@@ -862,6 +952,12 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that all tree break down at sequences creation bug test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void AllTreeBreakDownAtSequencesCreationBugTest()
         {
@@ -893,6 +989,12 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that all possible connections test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void AllPossibleConnectionsTest()
         {
@@ -952,6 +1054,12 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that calculate all usages test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact(Skip = "Correct implementation is pending")]
         public static void CalculateAllUsagesTest()
         {

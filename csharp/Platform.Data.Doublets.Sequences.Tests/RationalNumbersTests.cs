@@ -10,16 +10,56 @@ using TLink = System.UInt64;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
+    /// <summary>
+    /// <para>
+    /// Represents the rational numbers tests.
+    /// </para>
+    /// <para></para>
+    /// </summary>
     public class RationalNumbersTests
     {
+        /// <summary>
+        /// <para>
+        /// Creates the links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <returns>
+        /// <para>A links of t link</para>
+        /// <para></para>
+        /// </returns>
         public ILinks<TLink> CreateLinks() => CreateLinks<TLink>(new IO.TemporaryFile());
 
+        /// <summary>
+        /// <para>
+        /// Creates the links using the specified data db filename.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <typeparam name="TLink">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </typeparam>
+        /// <param name="dataDbFilename">
+        /// <para>The data db filename.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>A links of t link</para>
+        /// <para></para>
+        /// </returns>
         public ILinks<TLink> CreateLinks<TLink>(string dataDbFilename)
         {
             var linksConstants = new LinksConstants<TLink>(enableExternalReferencesSupport: true);
             return new UnitedMemoryLinks<TLink>(new FileMappedResizableDirectMemory(dataDbFilename), UnitedMemoryLinks<TLink>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that decimal min value test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public void DecimalMinValueTest()
         {
@@ -38,6 +78,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
            Assert.Equal(@decimal, decimalFromRational);
         }
         
+        /// <summary>
+        /// <para>
+        /// Tests that decimal max value test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public void DecimalMaxValueTest()
         {
@@ -56,6 +102,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Assert.Equal(@decimal, decimalFromRational);
         }
         
+        /// <summary>
+        /// <para>
+        /// Tests that decimal positive half test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public void DecimalPositiveHalfTest()
         {
@@ -74,6 +126,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Assert.Equal(@decimal, decimalFromRational);
         }
         
+        /// <summary>
+        /// <para>
+        /// Tests that decimal negative half test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public void DecimalNegativeHalfTest()
         {
@@ -92,6 +150,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Assert.Equal(@decimal, decimalFromRational);
         }
         
+        /// <summary>
+        /// <para>
+        /// Tests that decimal one test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public void DecimalOneTest()
         {
@@ -110,6 +174,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Assert.Equal(@decimal, decimalFromRational);
         }
         
+        /// <summary>
+        /// <para>
+        /// Tests that decimal minus one test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public void DecimalMinusOneTest()
         {

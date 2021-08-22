@@ -1,15 +1,46 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 namespace Platform.Data.Doublets.Sequences.Converters
 {
+    /// <summary>
+    /// <para>
+    /// Represents the balanced variant converter.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="LinksListToSequenceConverterBase{TLink}"/>
     public class BalancedVariantConverter<TLink> : LinksListToSequenceConverterBase<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="BalancedVariantConverter"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public BalancedVariantConverter(ILinks<TLink> links) : base(links) { }
 
+        /// <summary>
+        /// <para>
+        /// Converts the sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override TLink Convert(IList<TLink> sequence)
         {
@@ -40,6 +71,24 @@ namespace Platform.Data.Doublets.Sequences.Converters
             return _links.GetOrCreate(sequence[0], sequence[1]);
         }
 
+        /// <summary>
+        /// <para>
+        /// Halves the sequence using the specified destination.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="destination">
+        /// <para>The destination.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="length">
+        /// <para>The length.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void HalveSequence(IList<TLink> destination, IList<TLink> source, int length)
         {

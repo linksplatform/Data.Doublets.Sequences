@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -15,37 +15,175 @@ using Platform.Data.Doublets.Unicode;
 
 namespace Platform.Data.Doublets.Sequences
 {
+    /// <summary>
+    /// <para>
+    /// Represents the duplicate segments provider.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="DictionaryBasedDuplicateSegmentsWalkerBase{TLink}"/>
+    /// <seealso cref="IProvider{IList{KeyValuePair{IList{TLink}, IList{TLink}}}}"/>
     public class DuplicateSegmentsProvider<TLink> : DictionaryBasedDuplicateSegmentsWalkerBase<TLink>, IProvider<IList<KeyValuePair<IList<TLink>, IList<TLink>>>>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<TLink, long> _addressToInt64Converter = UncheckedConverter<TLink, long>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<TLink, ulong> _addressToUInt64Converter = UncheckedConverter<TLink, ulong>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<ulong, TLink> _uInt64ToAddressConverter = UncheckedConverter<ulong, TLink>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ILinks<TLink> _links;
+        /// <summary>
+        /// <para>
+        /// The sequences.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ILinks<TLink> _sequences;
+        /// <summary>
+        /// <para>
+        /// The groups.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private HashSet<KeyValuePair<IList<TLink>, IList<TLink>>> _groups;
+        /// <summary>
+        /// <para>
+        /// The visited.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private BitString _visited;
 
+        /// <summary>
+        /// <para>
+        /// Represents the item equility comparer.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <seealso cref="IEqualityComparer{KeyValuePair{IList{TLink}, IList{TLink}}}"/>
         private class ItemEquilityComparer : IEqualityComparer<KeyValuePair<IList<TLink>, IList<TLink>>>
         {
+            /// <summary>
+            /// <para>
+            /// The list comparer.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly IListEqualityComparer<TLink> _listComparer;
 
+            /// <summary>
+            /// <para>
+            /// Initializes a new <see cref="ItemEquilityComparer"/> instance.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             public ItemEquilityComparer() => _listComparer = Default<IListEqualityComparer<TLink>>.Instance;
 
+            /// <summary>
+            /// <para>
+            /// Determines whether this instance equals.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="left">
+            /// <para>The left.</para>
+            /// <para></para>
+            /// </param>
+            /// <param name="right">
+            /// <para>The right.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The bool</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public bool Equals(KeyValuePair<IList<TLink>, IList<TLink>> left, KeyValuePair<IList<TLink>, IList<TLink>> right) => _listComparer.Equals(left.Key, right.Key) && _listComparer.Equals(left.Value, right.Value);
 
+            /// <summary>
+            /// <para>
+            /// Gets the hash code using the specified pair.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="pair">
+            /// <para>The pair.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The int</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public int GetHashCode(KeyValuePair<IList<TLink>, IList<TLink>> pair) => (_listComparer.GetHashCode(pair.Key), _listComparer.GetHashCode(pair.Value)).GetHashCode();
         }
 
+        /// <summary>
+        /// <para>
+        /// Represents the item comparer.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <seealso cref="IComparer{KeyValuePair{IList{TLink}, IList{TLink}}}"/>
         private class ItemComparer : IComparer<KeyValuePair<IList<TLink>, IList<TLink>>>
         {
+            /// <summary>
+            /// <para>
+            /// The list comparer.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly IListComparer<TLink> _listComparer;
 
+            /// <summary>
+            /// <para>
+            /// Initializes a new <see cref="ItemComparer"/> instance.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public ItemComparer() => _listComparer = Default<IListComparer<TLink>>.Instance;
 
+            /// <summary>
+            /// <para>
+            /// Compares the left.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="left">
+            /// <para>The left.</para>
+            /// <para></para>
+            /// </param>
+            /// <param name="right">
+            /// <para>The right.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The intermediate result.</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public int Compare(KeyValuePair<IList<TLink>, IList<TLink>> left, KeyValuePair<IList<TLink>, IList<TLink>> right)
             {
@@ -58,6 +196,20 @@ namespace Platform.Data.Doublets.Sequences
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="DuplicateSegmentsProvider"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="sequences">
+        /// <para>A sequences.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DuplicateSegmentsProvider(ILinks<TLink> links, ILinks<TLink> sequences)
             : base(minimumStringSegmentLength: 2)
@@ -66,6 +218,16 @@ namespace Platform.Data.Doublets.Sequences
             _sequences = sequences;
         }
 
+        /// <summary>
+        /// <para>
+        /// Gets this instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <returns>
+        /// <para>The result list.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IList<KeyValuePair<IList<TLink>, IList<TLink>>> Get()
         {
@@ -102,9 +264,41 @@ namespace Platform.Data.Doublets.Sequences
             return resultList;
         }
 
+        /// <summary>
+        /// <para>
+        /// Creates the segment using the specified elements.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="elements">
+        /// <para>The elements.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="offset">
+        /// <para>The offset.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="length">
+        /// <para>The length.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>A segment of t link</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override Segment<TLink> CreateSegment(IList<TLink> elements, int offset, int length) => new Segment<TLink>(elements, offset, length);
 
+        /// <summary>
+        /// <para>
+        /// Ons the dublicate found using the specified segment.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="segment">
+        /// <para>The segment.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void OnDublicateFound(Segment<TLink> segment)
         {
@@ -115,6 +309,20 @@ namespace Platform.Data.Doublets.Sequences
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Collects the duplicates for segment using the specified segment.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="segment">
+        /// <para>The segment.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The duplicates.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private List<TLink> CollectDuplicatesForSegment(Segment<TLink> segment)
         {
@@ -152,6 +360,16 @@ namespace Platform.Data.Doublets.Sequences
             return duplicates;
         }
 
+        /// <summary>
+        /// <para>
+        /// Prints the duplicates using the specified duplicates item.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="duplicatesItem">
+        /// <para>The duplicates item.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PrintDuplicates(KeyValuePair<IList<TLink>, IList<TLink>> duplicatesItem)
         {

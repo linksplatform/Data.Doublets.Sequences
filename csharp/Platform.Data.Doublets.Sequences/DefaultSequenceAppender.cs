@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Platform.Collections.Stacks;
 using Platform.Data.Doublets.Sequences.HeightProviders;
@@ -8,13 +8,57 @@ using Platform.Data.Sequences;
 
 namespace Platform.Data.Doublets.Sequences
 {
+    /// <summary>
+    /// <para>
+    /// Represents the default sequence appender.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="LinksOperatorBase{TLink}"/>
+    /// <seealso cref="ISequenceAppender{TLink}"/>
     public class DefaultSequenceAppender<TLink> : LinksOperatorBase<TLink>, ISequenceAppender<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The stack.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IStack<TLink> _stack;
+        /// <summary>
+        /// <para>
+        /// The height provider.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ISequenceHeightProvider<TLink> _heightProvider;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="DefaultSequenceAppender"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="stack">
+        /// <para>A stack.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="heightProvider">
+        /// <para>A height provider.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DefaultSequenceAppender(ILinks<TLink> links, IStack<TLink> stack, ISequenceHeightProvider<TLink> heightProvider)
             : base(links)
@@ -23,6 +67,24 @@ namespace Platform.Data.Doublets.Sequences
             _heightProvider = heightProvider;
         }
 
+        /// <summary>
+        /// <para>
+        /// Appends the sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="appendant">
+        /// <para>The appendant.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TLink Append(TLink sequence, TLink appendant)
         {

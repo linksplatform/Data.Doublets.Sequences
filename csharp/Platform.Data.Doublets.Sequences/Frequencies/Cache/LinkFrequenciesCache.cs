@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
@@ -14,15 +14,65 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
     /// </remarks>
     public class LinkFrequenciesCache<TLink> : LinksOperatorBase<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _zero = default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _one = Arithmetic.Increment(_zero);
 
+        /// <summary>
+        /// <para>
+        /// The doublets cache.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly Dictionary<Doublet<TLink>, LinkFrequency<TLink>> _doubletsCache;
+        /// <summary>
+        /// <para>
+        /// The frequency counter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ICounter<TLink, TLink> _frequencyCounter;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="LinkFrequenciesCache"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="frequencyCounter">
+        /// <para>A frequency counter.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkFrequenciesCache(ILinks<TLink> links, ICounter<TLink, TLink> frequencyCounter)
             : base(links)
@@ -31,6 +81,24 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             _frequencyCounter = frequencyCounter;
         }
 
+        /// <summary>
+        /// <para>
+        /// Gets the frequency using the specified source.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="target">
+        /// <para>The target.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>A link frequency of t link</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkFrequency<TLink> GetFrequency(TLink source, TLink target)
         {
@@ -38,6 +106,20 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             return GetFrequency(ref doublet);
         }
 
+        /// <summary>
+        /// <para>
+        /// Gets the frequency using the specified doublet.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="doublet">
+        /// <para>The doublet.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The data.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkFrequency<TLink> GetFrequency(ref Doublet<TLink> doublet)
         {
@@ -45,6 +127,16 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             return data;
         }
 
+        /// <summary>
+        /// <para>
+        /// Increments the frequencies using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void IncrementFrequencies(IList<TLink> sequence)
         {
@@ -54,6 +146,24 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Increments the frequency using the specified source.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="target">
+        /// <para>The target.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>A link frequency of t link</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkFrequency<TLink> IncrementFrequency(TLink source, TLink target)
         {
@@ -61,6 +171,16 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             return IncrementFrequency(ref doublet);
         }
 
+        /// <summary>
+        /// <para>
+        /// Prints the frequencies using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PrintFrequencies(IList<TLink> sequence)
         {
@@ -70,6 +190,20 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Prints the frequency using the specified source.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="target">
+        /// <para>The target.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void PrintFrequency(TLink source, TLink target)
         {
@@ -77,6 +211,20 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             Console.WriteLine("({0},{1}) - {2}", source, target, number);
         }
 
+        /// <summary>
+        /// <para>
+        /// Increments the frequency using the specified doublet.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="doublet">
+        /// <para>The doublet.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The data.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkFrequency<TLink> IncrementFrequency(ref Doublet<TLink> doublet)
         {
@@ -97,6 +245,16 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             return data;
         }
 
+        /// <summary>
+        /// <para>
+        /// Validates the frequencies.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// <para>Frequencies validation failed.</para>
+        /// <para></para>
+        /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void ValidateFrequencies()
         {

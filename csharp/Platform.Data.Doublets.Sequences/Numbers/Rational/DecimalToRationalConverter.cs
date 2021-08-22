@@ -8,16 +8,58 @@ using Platform.Data.Doublets.Numbers.Raw;
 
 namespace Platform.Data.Doublets.Numbers.Rational
 {
+    /// <summary>
+    /// <para>
+    /// Represents the decimal to rational converter.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="LinksDecoratorBase{TLink}"/>
+    /// <seealso cref="IConverter{decimal, TLink}"/>
     public class DecimalToRationalConverter<TLink> : LinksDecoratorBase<TLink>, IConverter<decimal, TLink>
         where TLink: struct
     {
+        /// <summary>
+        /// <para>
+        /// The big integer to raw number sequence converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public readonly BigIntegerToRawNumberSequenceConverter<TLink> BigIntegerToRawNumberSequenceConverter;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="DecimalToRationalConverter"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="bigIntegerToRawNumberSequenceConverter">
+        /// <para>A big integer to raw number sequence converter.</para>
+        /// <para></para>
+        /// </param>
         public DecimalToRationalConverter(ILinks<TLink> links, BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter) : base(links)
         {
             BigIntegerToRawNumberSequenceConverter = bigIntegerToRawNumberSequenceConverter;
         }
 
+        /// <summary>
+        /// <para>
+        /// Converts the decimal.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="@decimal">
+        /// <para>The decimal.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link</para>
+        /// <para></para>
+        /// </returns>
         public TLink Convert(decimal @decimal)
         {
             var decimalAsString = @decimal.ToString(CultureInfo.InvariantCulture);

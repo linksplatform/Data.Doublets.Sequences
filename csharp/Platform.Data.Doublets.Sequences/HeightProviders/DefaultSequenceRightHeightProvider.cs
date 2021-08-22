@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Numbers;
 
@@ -6,13 +6,55 @@ using Platform.Numbers;
 
 namespace Platform.Data.Doublets.Sequences.HeightProviders
 {
+    /// <summary>
+    /// <para>
+    /// Represents the default sequence right height provider.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="LinksOperatorBase{TLink}"/>
+    /// <seealso cref="ISequenceHeightProvider{TLink}"/>
     public class DefaultSequenceRightHeightProvider<TLink> : LinksOperatorBase<TLink>, ISequenceHeightProvider<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The element matcher.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ICriterionMatcher<TLink> _elementMatcher;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="DefaultSequenceRightHeightProvider"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="elementMatcher">
+        /// <para>A element matcher.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public DefaultSequenceRightHeightProvider(ILinks<TLink> links, ICriterionMatcher<TLink> elementMatcher) : base(links) => _elementMatcher = elementMatcher;
 
+        /// <summary>
+        /// <para>
+        /// Gets the sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The height.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TLink Get(TLink sequence)
         {

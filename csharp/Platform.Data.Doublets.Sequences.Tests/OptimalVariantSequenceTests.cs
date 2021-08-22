@@ -21,9 +21,27 @@ using Platform.Data.Doublets.Memory;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
+    /// <summary>
+    /// <para>
+    /// Represents the optimal variant sequence tests.
+    /// </para>
+    /// <para></para>
+    /// </summary>
     public static class OptimalVariantSequenceTests
     {
+        /// <summary>
+        /// <para>
+        /// The sequence example.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly string _sequenceExample = "зеленела зелёная зелень";
+        /// <summary>
+        /// <para>
+        /// The lorem ipsum example.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly string _loremIpsumExample = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Facilisi nullam vehicula ipsum a arcu cursus vitae congue mauris.
 Et malesuada fames ac turpis egestas sed.
@@ -75,6 +93,12 @@ Eget lorem dolor sed viverra ipsum nunc.
 Leo a diam sollicitudin tempor id eu.
 Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
 
+        /// <summary>
+        /// <para>
+        /// Tests that links based frequency stored optimal variant sequence test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void LinksBasedFrequencyStoredOptimalVariantSequenceTest()
         {
@@ -107,6 +131,12 @@ Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that dictionary based frequency stored optimal variant sequence test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void DictionaryBasedFrequencyStoredOptimalVariantSequenceTest()
         {
@@ -134,6 +164,32 @@ Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Executes the test using the specified sequences.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequences">
+        /// <para>The sequences.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="sequenceToItsLocalElementLevelsConverter">
+        /// <para>The sequence to its local element levels converter.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="index">
+        /// <para>The index.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="optimalVariantConverter">
+        /// <para>The optimal variant converter.</para>
+        /// <para></para>
+        /// </param>
         private static void ExecuteTest(Sequences sequences, ulong[] sequence, SequenceToItsLocalElementLevelsConverter<ulong> sequenceToItsLocalElementLevelsConverter, ISequenceIndex<ulong> index, OptimalVariantConverter<ulong> optimalVariantConverter)
         {
             index.Add(sequence);
@@ -145,6 +201,12 @@ Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
             Assert.True(sequence.SequenceEqual(readSequence1));
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests that saved sequences optimization test.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Fact]
         public static void SavedSequencesOptimizationTest()
         {

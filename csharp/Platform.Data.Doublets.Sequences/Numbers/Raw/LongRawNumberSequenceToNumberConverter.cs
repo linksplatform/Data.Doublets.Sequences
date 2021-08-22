@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using Platform.Collections.Stacks;
 using Platform.Converters;
 using Platform.Numbers;
@@ -10,16 +10,70 @@ using Platform.Data.Doublets.Sequences.Walkers;
 
 namespace Platform.Data.Doublets.Numbers.Raw
 {
+    /// <summary>
+    /// <para>
+    /// Represents the long raw number sequence to number converter.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="LinksDecoratorBase{TSource}"/>
+    /// <seealso cref="IConverter{TSource, TTarget}"/>
     public class LongRawNumberSequenceToNumberConverter<TSource, TTarget> : LinksDecoratorBase<TSource>, IConverter<TSource, TTarget>
     {
+        /// <summary>
+        /// <para>
+        /// The bits size.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly int _bitsPerRawNumber = NumericType<TSource>.BitsSize - 1;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<TSource, TTarget> _sourceToTargetConverter = UncheckedConverter<TSource, TTarget>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The number to address converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<TSource> _numberToAddressConverter;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="LongRawNumberSequenceToNumberConverter"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="numberToAddressConverter">
+        /// <para>A number to address converter.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LongRawNumberSequenceToNumberConverter(ILinks<TSource> links, IConverter<TSource> numberToAddressConverter) : base(links) => _numberToAddressConverter = numberToAddressConverter;
 
+        /// <summary>
+        /// <para>
+        /// Converts the source.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The target</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TTarget Convert(TSource source)
         {

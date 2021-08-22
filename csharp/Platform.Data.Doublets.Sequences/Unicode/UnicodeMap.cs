@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -9,18 +9,78 @@ using Platform.Data.Sequences;
 
 namespace Platform.Data.Doublets.Unicode
 {
+    /// <summary>
+    /// <para>
+    /// Represents the unicode map.
+    /// </para>
+    /// <para></para>
+    /// </summary>
     public class UnicodeMap
     {
+        /// <summary>
+        /// <para>
+        /// The first char link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public static readonly ulong FirstCharLink = 1;
+        /// <summary>
+        /// <para>
+        /// The max value.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public static readonly ulong LastCharLink = FirstCharLink + char.MaxValue;
+        /// <summary>
+        /// <para>
+        /// The max value.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public static readonly ulong MapSize = 1 + char.MaxValue;
 
+        /// <summary>
+        /// <para>
+        /// The links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ILinks<ulong> _links;
+        /// <summary>
+        /// <para>
+        /// The initialized.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private bool _initialized;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="UnicodeMap"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public UnicodeMap(ILinks<ulong> links) => _links = links;
 
+        /// <summary>
+        /// <para>
+        /// Inits the new using the specified links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>The links.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The map.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UnicodeMap InitNew(ILinks<ulong> links)
         {
@@ -29,6 +89,16 @@ namespace Platform.Data.Doublets.Unicode
             return map;
         }
 
+        /// <summary>
+        /// <para>
+        /// Inits this instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// <para>Unable to initialize UTF 16 table.</para>
+        /// <para></para>
+        /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Init()
         {
@@ -62,15 +132,71 @@ namespace Platform.Data.Doublets.Unicode
         // ...
         // 65536 (0(1) + 65535 = 65536 possible values)
 
+        /// <summary>
+        /// <para>
+        /// Creates the char to link using the specified character.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="character">
+        /// <para>The character.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The ulong</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong FromCharToLink(char character) => (ulong)character + 1;
 
+        /// <summary>
+        /// <para>
+        /// Creates the link to char using the specified link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The char</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static char FromLinkToChar(ulong link) => (char)(link - 1);
 
+        /// <summary>
+        /// <para>
+        /// Determines whether is char link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The bool</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsCharLink(ulong link) => link <= MapSize;
 
+        /// <summary>
+        /// <para>
+        /// Creates the links to string using the specified links list.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="linksList">
+        /// <para>The links list.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The string</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string FromLinksToString(IList<ulong> linksList)
         {
@@ -82,6 +208,24 @@ namespace Platform.Data.Doublets.Unicode
             return sb.ToString();
         }
 
+        /// <summary>
+        /// <para>
+        /// Creates the sequence link to string using the specified link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="links">
+        /// <para>The links.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The string</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string FromSequenceLinkToString(ulong link, ILinks<ulong> links)
         {
@@ -98,9 +242,41 @@ namespace Platform.Data.Doublets.Unicode
             return sb.ToString();
         }
 
+        /// <summary>
+        /// <para>
+        /// Creates the chars to link array using the specified chars.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="chars">
+        /// <para>The chars.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The ulong array</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong[] FromCharsToLinkArray(char[] chars) => FromCharsToLinkArray(chars, chars.Length);
 
+        /// <summary>
+        /// <para>
+        /// Creates the chars to link array using the specified chars.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="chars">
+        /// <para>The chars.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="count">
+        /// <para>The count.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The links sequence.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong[] FromCharsToLinkArray(char[] chars, int count)
         {
@@ -113,6 +289,20 @@ namespace Platform.Data.Doublets.Unicode
             return linksSequence;
         }
 
+        /// <summary>
+        /// <para>
+        /// Creates the string to link array using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The links sequence.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong[] FromStringToLinkArray(string sequence)
         {
@@ -125,6 +315,20 @@ namespace Platform.Data.Doublets.Unicode
             return linksSequence;
         }
 
+        /// <summary>
+        /// <para>
+        /// Creates the string to link array groups using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The result.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static List<ulong[]> FromStringToLinkArrayGroups(string sequence)
         {
@@ -154,6 +358,20 @@ namespace Platform.Data.Doublets.Unicode
             return result;
         }
 
+        /// <summary>
+        /// <para>
+        /// Creates the link array to link array groups using the specified array.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="array">
+        /// <para>The array.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The result.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static List<ulong[]> FromLinkArrayToLinkArrayGroups(ulong[] array)
         {

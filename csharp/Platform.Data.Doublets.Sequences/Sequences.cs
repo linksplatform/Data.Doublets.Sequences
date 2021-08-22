@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -52,12 +52,50 @@ namespace Platform.Data.Doublets.Sequences
         /// <summary>Возвращает значение LinkIndex, обозначающее любое количество связей.</summary>
         public const LinkIndex ZeroOrMany = LinkIndex.MaxValue;
 
+        /// <summary>
+        /// <para>
+        /// Gets the options value.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public SequencesOptions<LinkIndex> Options { get; }
+        /// <summary>
+        /// <para>
+        /// Gets the links value.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public SynchronizedLinks<LinkIndex> Links { get; }
+        /// <summary>
+        /// <para>
+        /// The sync.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ISynchronization _sync;
 
+        /// <summary>
+        /// <para>
+        /// Gets the constants value.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public LinksConstants<LinkIndex> Constants { get; }
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="Sequences"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="options">
+        /// <para>A options.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Sequences(SynchronizedLinks<LinkIndex> links, SequencesOptions<LinkIndex> options)
         {
@@ -69,9 +107,33 @@ namespace Platform.Data.Doublets.Sequences
             Constants = links.Constants;
         }
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="Sequences"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Sequences(SynchronizedLinks<LinkIndex> links) : this(links, new SequencesOptions<LinkIndex>()) { }
 
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance is sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The bool</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsSequence(LinkIndex sequence)
         {
@@ -85,6 +147,20 @@ namespace Platform.Data.Doublets.Sequences
             });
         }
 
+        /// <summary>
+        /// <para>
+        /// Gets the sequence by elements using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex GetSequenceByElements(LinkIndex sequence)
         {
@@ -95,6 +171,20 @@ namespace Platform.Data.Doublets.Sequences
             return sequence;
         }
 
+        /// <summary>
+        /// <para>
+        /// Gets the sequence elements using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex GetSequenceElements(LinkIndex sequence)
         {
@@ -115,6 +205,24 @@ namespace Platform.Data.Doublets.Sequences
 
         #region Count
 
+        /// <summary>
+        /// <para>
+        /// Counts the restrictions.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="restrictions">
+        /// <para>The restrictions.</para>
+        /// <para></para>
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// <para></para>
+        /// <para></para>
+        /// </exception>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkIndex Count(IList<LinkIndex> restrictions)
         {
@@ -142,6 +250,24 @@ namespace Platform.Data.Doublets.Sequences
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// <para>
+        /// Counts the usages using the specified restrictions.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="restrictions">
+        /// <para>The restrictions.</para>
+        /// <para></para>
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// <para></para>
+        /// <para></para>
+        /// </exception>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex CountUsages(params LinkIndex[] restrictions)
         {
@@ -175,6 +301,20 @@ namespace Platform.Data.Doublets.Sequences
 
         #region Create
 
+        /// <summary>
+        /// <para>
+        /// Creates the restrictions.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="restrictions">
+        /// <para>The restrictions.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkIndex Create(IList<LinkIndex> restrictions)
         {
@@ -189,6 +329,20 @@ namespace Platform.Data.Doublets.Sequences
             });
         }
 
+        /// <summary>
+        /// <para>
+        /// Creates the core using the specified restrictions.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="restrictions">
+        /// <para>The restrictions.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The sequence root.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex CreateCore(IList<LinkIndex> restrictions)
         {
@@ -225,6 +379,20 @@ namespace Platform.Data.Doublets.Sequences
 
         #region Each
 
+        /// <summary>
+        /// <para>
+        /// Eaches the sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The results.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public List<LinkIndex> Each(IList<LinkIndex> sequence)
         {
@@ -234,6 +402,28 @@ namespace Platform.Data.Doublets.Sequences
             return results;
         }
 
+        /// <summary>
+        /// <para>
+        /// Eaches the handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="restrictions">
+        /// <para>The restrictions.</para>
+        /// <para></para>
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// <para></para>
+        /// <para></para>
+        /// </exception>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkIndex Each(Func<IList<LinkIndex>, LinkIndex> handler, IList<LinkIndex> restrictions)
         {
@@ -291,6 +481,24 @@ namespace Platform.Data.Doublets.Sequences
             });
         }
 
+        /// <summary>
+        /// <para>
+        /// Eaches the core using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="values">
+        /// <para>The values.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex EachCore(Func<IList<LinkIndex>, LinkIndex> handler, IList<LinkIndex> values)
         {
@@ -320,6 +528,28 @@ namespace Platform.Data.Doublets.Sequences
             return Constants.Continue;
         }
 
+        /// <summary>
+        /// <para>
+        /// Partials the step right using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex PartialStepRight(Func<IList<LinkIndex>, LinkIndex> handler, LinkIndex left, LinkIndex right)
         {
@@ -338,9 +568,53 @@ namespace Platform.Data.Doublets.Sequences
             }, new Link<LinkIndex>(Constants.Any, Constants.Any, left));
         }
 
+        /// <summary>
+        /// <para>
+        /// Steps the right using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex StepRight(Func<IList<LinkIndex>, LinkIndex> handler, LinkIndex left, LinkIndex right) => Links.Unsync.Each(rightStep => TryStepRightUp(handler, right, rightStep[Constants.IndexPart]), new Link<LinkIndex>(Constants.Any, left, Constants.Any));
 
+        /// <summary>
+        /// <para>
+        /// Tries the step right up using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="stepFrom">
+        /// <para>The step from.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex TryStepRightUp(Func<IList<LinkIndex>, LinkIndex> handler, LinkIndex right, LinkIndex stepFrom)
         {
@@ -358,9 +632,53 @@ namespace Platform.Data.Doublets.Sequences
             return Constants.Continue;
         }
 
+        /// <summary>
+        /// <para>
+        /// Steps the left using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex StepLeft(Func<IList<LinkIndex>, LinkIndex> handler, LinkIndex left, LinkIndex right) => Links.Unsync.Each(leftStep => TryStepLeftUp(handler, left, leftStep[Constants.IndexPart]), new Link<LinkIndex>(Constants.Any, Constants.Any, right));
 
+        /// <summary>
+        /// <para>
+        /// Tries the step left up using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="stepFrom">
+        /// <para>The step from.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex TryStepLeftUp(Func<IList<LinkIndex>, LinkIndex> handler, LinkIndex left, LinkIndex stepFrom)
         {
@@ -382,6 +700,24 @@ namespace Platform.Data.Doublets.Sequences
 
         #region Update
 
+        /// <summary>
+        /// <para>
+        /// Updates the restrictions.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="restrictions">
+        /// <para>The restrictions.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="substitution">
+        /// <para>The substitution.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkIndex Update(IList<LinkIndex> restrictions, IList<LinkIndex> substitution)
         {
@@ -408,6 +744,24 @@ namespace Platform.Data.Doublets.Sequences
             }));
         }
 
+        /// <summary>
+        /// <para>
+        /// Updates the core using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="newSequence">
+        /// <para>The new sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The best variant.</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex UpdateCore(IList<LinkIndex> sequence, IList<LinkIndex> newSequence)
         {
@@ -433,6 +787,20 @@ namespace Platform.Data.Doublets.Sequences
             return bestVariant;
         }
 
+        /// <summary>
+        /// <para>
+        /// Updates the one core using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="newSequence">
+        /// <para>The new sequence.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void UpdateOneCore(LinkIndex sequence, LinkIndex newSequence)
         {
@@ -485,6 +853,16 @@ namespace Platform.Data.Doublets.Sequences
 
         #region Delete
 
+        /// <summary>
+        /// <para>
+        /// Deletes the restrictions.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="restrictions">
+        /// <para>The restrictions.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Delete(IList<LinkIndex> restrictions)
         {
@@ -499,6 +877,16 @@ namespace Platform.Data.Doublets.Sequences
             });
         }
 
+        /// <summary>
+        /// <para>
+        /// Deletes the one core using the specified link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void DeleteOneCore(LinkIndex link)
         {
@@ -547,6 +935,12 @@ namespace Platform.Data.Doublets.Sequences
 
         #region Compactification
 
+        /// <summary>
+        /// <para>
+        /// Compacts the all.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void CompactAll()
         {
@@ -582,6 +976,20 @@ namespace Platform.Data.Doublets.Sequences
             });
         }
 
+        /// <summary>
+        /// <para>
+        /// Compacts the core using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link index</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private LinkIndex CompactCore(IList<LinkIndex> sequence) => UpdateCore(sequence, sequence);
 
@@ -595,6 +1003,16 @@ namespace Platform.Data.Doublets.Sequences
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsGarbage(LinkIndex link) => link != Options.SequenceMarkerLink && !Links.Unsync.IsPartialPoint(link) && Links.Count(Constants.Any, link) == 0;
 
+        /// <summary>
+        /// <para>
+        /// Clears the garbage using the specified link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ClearGarbage(LinkIndex link)
         {
@@ -611,6 +1029,24 @@ namespace Platform.Data.Doublets.Sequences
 
         #region Walkers
 
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance each part.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The bool</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool EachPart(Func<LinkIndex, bool> handler, LinkIndex sequence)
         {
@@ -628,16 +1064,91 @@ namespace Platform.Data.Doublets.Sequences
             });
         }
 
+        /// <summary>
+        /// <para>
+        /// Represents the matcher.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <seealso cref="RightSequenceWalker{LinkIndex}"/>
         public class Matcher : RightSequenceWalker<LinkIndex>
         {
+            /// <summary>
+            /// <para>
+            /// The sequences.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly Sequences _sequences;
+            /// <summary>
+            /// <para>
+            /// The pattern sequence.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly IList<LinkIndex> _patternSequence;
+            /// <summary>
+            /// <para>
+            /// The links in sequence.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _linksInSequence;
+            /// <summary>
+            /// <para>
+            /// The results.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _results;
+            /// <summary>
+            /// <para>
+            /// The stopable handler.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly Func<IList<LinkIndex>, LinkIndex> _stopableHandler;
+            /// <summary>
+            /// <para>
+            /// The read as elements.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _readAsElements;
+            /// <summary>
+            /// <para>
+            /// The filter position.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private int _filterPosition;
 
+            /// <summary>
+            /// <para>
+            /// Initializes a new <see cref="Matcher"/> instance.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="sequences">
+            /// <para>A sequences.</para>
+            /// <para></para>
+            /// </param>
+            /// <param name="patternSequence">
+            /// <para>A pattern sequence.</para>
+            /// <para></para>
+            /// </param>
+            /// <param name="results">
+            /// <para>A results.</para>
+            /// <para></para>
+            /// </param>
+            /// <param name="stopableHandler">
+            /// <para>A stopable handler.</para>
+            /// <para></para>
+            /// </param>
+            /// <param name="readAsElements">
+            /// <para>A read as elements.</para>
+            /// <para></para>
+            /// </param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public Matcher(Sequences sequences, IList<LinkIndex> patternSequence, HashSet<LinkIndex> results, Func<IList<LinkIndex>, LinkIndex> stopableHandler, HashSet<LinkIndex> readAsElements = null)
                 : base(sequences.Links.Unsync, new DefaultStack<LinkIndex>())
@@ -650,9 +1161,37 @@ namespace Platform.Data.Doublets.Sequences
                 _readAsElements = readAsElements;
             }
 
+            /// <summary>
+            /// <para>
+            /// Determines whether this instance is element.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="link">
+            /// <para>The link.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The bool</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             protected override bool IsElement(LinkIndex link) => base.IsElement(link) || (_readAsElements != null && _readAsElements.Contains(link)) || _linksInSequence.Contains(link);
 
+            /// <summary>
+            /// <para>
+            /// Determines whether this instance full match.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="sequenceToMatch">
+            /// <para>The sequence to match.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The bool</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public bool FullMatch(LinkIndex sequenceToMatch)
             {
@@ -667,6 +1206,20 @@ namespace Platform.Data.Doublets.Sequences
                 return _filterPosition == _patternSequence.Count;
             }
 
+            /// <summary>
+            /// <para>
+            /// Determines whether this instance full match core.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="element">
+            /// <para>The element.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The bool</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private bool FullMatchCore(LinkIndex element)
             {
@@ -685,6 +1238,16 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             }
 
+            /// <summary>
+            /// <para>
+            /// Adds the full matched to results using the specified restrictions.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="restrictions">
+            /// <para>The restrictions.</para>
+            /// <para></para>
+            /// </param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void AddFullMatchedToResults(IList<LinkIndex> restrictions)
             {
@@ -695,6 +1258,20 @@ namespace Platform.Data.Doublets.Sequences
                 }
             }
 
+            /// <summary>
+            /// <para>
+            /// Handles the full matched using the specified restrictions.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="restrictions">
+            /// <para>The restrictions.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The link index</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public LinkIndex HandleFullMatched(IList<LinkIndex> restrictions)
             {
@@ -706,6 +1283,20 @@ namespace Platform.Data.Doublets.Sequences
                 return _links.Constants.Continue;
             }
 
+            /// <summary>
+            /// <para>
+            /// Handles the full matched sequence using the specified restrictions.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="restrictions">
+            /// <para>The restrictions.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The link index</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public LinkIndex HandleFullMatchedSequence(IList<LinkIndex> restrictions)
             {
@@ -735,6 +1326,20 @@ namespace Platform.Data.Doublets.Sequences
                 return _filterPosition == _patternSequence.Count - 1;
             }
 
+            /// <summary>
+            /// <para>
+            /// Determines whether this instance partial match core.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="element">
+            /// <para>The element.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The bool</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private bool PartialMatchCore(LinkIndex element)
             {
@@ -763,6 +1368,16 @@ namespace Platform.Data.Doublets.Sequences
                 return true; // Ищем дальше
             }
 
+            /// <summary>
+            /// <para>
+            /// Adds the partial matched to results using the specified sequence to match.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="sequenceToMatch">
+            /// <para>The sequence to match.</para>
+            /// <para></para>
+            /// </param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void AddPartialMatchedToResults(LinkIndex sequenceToMatch)
             {
@@ -772,6 +1387,20 @@ namespace Platform.Data.Doublets.Sequences
                 }
             }
 
+            /// <summary>
+            /// <para>
+            /// Handles the partial matched using the specified restrictions.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="restrictions">
+            /// <para>The restrictions.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The link index</para>
+            /// <para></para>
+            /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public LinkIndex HandlePartialMatched(IList<LinkIndex> restrictions)
             {
@@ -783,6 +1412,16 @@ namespace Platform.Data.Doublets.Sequences
                 return _links.Constants.Continue;
             }
 
+            /// <summary>
+            /// <para>
+            /// Adds the all partial matched to results using the specified sequences to match.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="sequencesToMatch">
+            /// <para>The sequences to match.</para>
+            /// <para></para>
+            /// </param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void AddAllPartialMatchedToResults(IEnumerable<LinkIndex> sequencesToMatch)
             {
@@ -795,6 +1434,16 @@ namespace Platform.Data.Doublets.Sequences
                 }
             }
 
+            /// <summary>
+            /// <para>
+            /// Adds the all partial matched to results and read as elements using the specified sequences to match.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="sequencesToMatch">
+            /// <para>The sequences to match.</para>
+            /// <para></para>
+            /// </param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void AddAllPartialMatchedToResultsAndReadAsElements(IEnumerable<LinkIndex> sequencesToMatch)
             {

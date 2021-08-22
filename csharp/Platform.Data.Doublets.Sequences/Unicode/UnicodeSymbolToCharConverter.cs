@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Converters;
@@ -7,13 +7,57 @@ using Platform.Converters;
 
 namespace Platform.Data.Doublets.Unicode
 {
+    /// <summary>
+    /// <para>
+    /// Represents the unicode symbol to char converter.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="LinksOperatorBase{TLink}"/>
+    /// <seealso cref="IConverter{TLink, char}"/>
     public class UnicodeSymbolToCharConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink, char>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<TLink, char> _addressToCharConverter = UncheckedConverter<TLink, char>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The number to address converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<TLink> _numberToAddressConverter;
+        /// <summary>
+        /// <para>
+        /// The unicode symbol criterion matcher.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ICriterionMatcher<TLink> _unicodeSymbolCriterionMatcher;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="UnicodeSymbolToCharConverter"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="numberToAddressConverter">
+        /// <para>A number to address converter.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="unicodeSymbolCriterionMatcher">
+        /// <para>A unicode symbol criterion matcher.</para>
+        /// <para></para>
+        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public UnicodeSymbolToCharConverter(ILinks<TLink> links, IConverter<TLink> numberToAddressConverter, ICriterionMatcher<TLink> unicodeSymbolCriterionMatcher) : base(links)
         {
@@ -21,6 +65,24 @@ namespace Platform.Data.Doublets.Unicode
             _unicodeSymbolCriterionMatcher = unicodeSymbolCriterionMatcher;
         }
 
+        /// <summary>
+        /// <para>
+        /// Converts the source.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <para>Specified link is not a unicode symbol.</para>
+        /// <para></para>
+        /// </exception>
+        /// <returns>
+        /// <para>The char</para>
+        /// <para></para>
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public char Convert(TLink source)
         {

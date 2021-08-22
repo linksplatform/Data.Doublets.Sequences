@@ -11,14 +11,64 @@ using Platform.Unsafe;
 
 namespace Platform.Data.Doublets.Numbers.Raw
 {
+    /// <summary>
+    /// <para>
+    /// Represents the raw number sequence to big integer converter.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="LinksDecoratorBase{TLink}"/>
+    /// <seealso cref="IConverter{TLink, BigInteger}"/>
     public class RawNumberSequenceToBigIntegerConverter<TLink> : LinksDecoratorBase<TLink>, IConverter<TLink, BigInteger>
         where TLink : struct
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public readonly EqualityComparer<TLink> EqualityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The number to address converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public readonly IConverter<TLink, TLink> NumberToAddressConverter;
+        /// <summary>
+        /// <para>
+        /// The left sequence walker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public readonly LeftSequenceWalker<TLink> LeftSequenceWalker;
+        /// <summary>
+        /// <para>
+        /// The negative number marker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public readonly TLink NegativeNumberMarker;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="RawNumberSequenceToBigIntegerConverter"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>A links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="numberToAddressConverter">
+        /// <para>A number to address converter.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="negativeNumberMarker">
+        /// <para>A negative number marker.</para>
+        /// <para></para>
+        /// </param>
         public RawNumberSequenceToBigIntegerConverter(ILinks<TLink> links, IConverter<TLink, TLink> numberToAddressConverter, TLink negativeNumberMarker) : base(links)
         {
             NumberToAddressConverter = numberToAddressConverter;
@@ -26,6 +76,24 @@ namespace Platform.Data.Doublets.Numbers.Raw
             NegativeNumberMarker = negativeNumberMarker;
         }
 
+        /// <summary>
+        /// <para>
+        /// Converts the big integer.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="bigInteger">
+        /// <para>The big integer.</para>
+        /// <para></para>
+        /// </param>
+        /// <exception cref="Exception">
+        /// <para>Raw number sequence cannot be empty.</para>
+        /// <para></para>
+        /// </exception>
+        /// <returns>
+        /// <para>The big integer</para>
+        /// <para></para>
+        /// </returns>
         public BigInteger Convert(TLink bigInteger)
         {
             var sign = 1;
