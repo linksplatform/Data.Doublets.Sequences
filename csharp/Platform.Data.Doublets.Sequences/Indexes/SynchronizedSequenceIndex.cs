@@ -14,20 +14,8 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// <seealso cref="ISequenceIndex{TLink}"/>
     public class SynchronizedSequenceIndex<TLink> : ISequenceIndex<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
 
-        /// <summary>
-        /// <para>
-        /// The links.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly ISynchronizedLinks<TLink> _links;
 
         /// <summary>

@@ -15,27 +15,9 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
     /// <seealso cref="ICriterionMatcher{TLink}"/>
     public class MarkedSequenceCriterionMatcher<TLink> : ICriterionMatcher<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
 
-        /// <summary>
-        /// <para>
-        /// The links.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly ILinks<TLink> _links;
-        /// <summary>
-        /// <para>
-        /// The sequence marker link.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly TLink _sequenceMarkerLink;
 
         /// <summary>

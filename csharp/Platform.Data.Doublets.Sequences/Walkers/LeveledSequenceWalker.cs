@@ -21,20 +21,8 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     /// <seealso cref="ISequenceWalker{TLink}"/>
     public class LeveledSequenceWalker<TLink> : LinksOperatorBase<TLink>, ISequenceWalker<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
 
-        /// <summary>
-        /// <para>
-        /// The is element.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly Func<TLink, bool> _isElement;
 
         /// <summary>

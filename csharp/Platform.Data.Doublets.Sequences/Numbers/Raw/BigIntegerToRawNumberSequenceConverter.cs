@@ -86,20 +86,6 @@ namespace Platform.Data.Doublets.Numbers.Raw
             NegativeNumberMarker = negativeNumberMarker;
         }
 
-        /// <summary>
-        /// <para>
-        /// Gets the raw number parts using the specified big integer.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <param name="bigInteger">
-        /// <para>The big integer.</para>
-        /// <para></para>
-        /// </param>
-        /// <returns>
-        /// <para>The raw numbers.</para>
-        /// <para></para>
-        /// </returns>
         private List<TLink> GetRawNumberParts(BigInteger bigInteger)
         {
             List<TLink> rawNumbers = new();

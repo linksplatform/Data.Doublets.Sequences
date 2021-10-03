@@ -15,12 +15,6 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// <seealso cref="ISequenceIndex{TLink}"/>
     public class SequenceIndex<TLink> : LinksOperatorBase<TLink>, ISequenceIndex<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
 
         /// <summary>

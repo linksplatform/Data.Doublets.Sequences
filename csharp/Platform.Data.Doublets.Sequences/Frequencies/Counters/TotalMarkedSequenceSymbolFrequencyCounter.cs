@@ -14,19 +14,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// <seealso cref="ICounter{TLink, TLink}"/>
     public class TotalMarkedSequenceSymbolFrequencyCounter<TLink> : ICounter<TLink, TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The links.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly ILinks<TLink> _links;
-        /// <summary>
-        /// <para>
-        /// The marked sequence matcher.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly ICriterionMatcher<TLink> _markedSequenceMatcher;
 
         /// <summary>
