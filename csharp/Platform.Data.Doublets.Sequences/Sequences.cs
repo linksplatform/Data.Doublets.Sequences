@@ -66,6 +66,12 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </summary>
         public SynchronizedLinks<LinkIndex> Links { get; }
+        /// <summary>
+        /// <para>
+        /// The sync.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ISynchronization _sync;
 
         /// <summary>
@@ -1067,12 +1073,54 @@ namespace Platform.Data.Doublets.Sequences
         /// <seealso cref="RightSequenceWalker{LinkIndex}"/>
         public class Matcher : RightSequenceWalker<LinkIndex>
         {
+            /// <summary>
+            /// <para>
+            /// The sequences.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly Sequences _sequences;
+            /// <summary>
+            /// <para>
+            /// The pattern sequence.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly IList<LinkIndex> _patternSequence;
+            /// <summary>
+            /// <para>
+            /// The links in sequence.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _linksInSequence;
+            /// <summary>
+            /// <para>
+            /// The results.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _results;
+            /// <summary>
+            /// <para>
+            /// The stopable handler.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly Func<IList<LinkIndex>, LinkIndex> _stopableHandler;
+            /// <summary>
+            /// <para>
+            /// The read as elements.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _readAsElements;
+            /// <summary>
+            /// <para>
+            /// The filter position.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private int _filterPosition;
 
             /// <summary>

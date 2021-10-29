@@ -17,13 +17,55 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// <seealso cref="IConverter{TLink}"/>
     public class UnaryNumberToAddressAddOperationConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<TLink, ulong> _addressToUInt64Converter = UncheckedConverter<TLink, ulong>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<ulong, TLink> _uInt64ToAddressConverter = UncheckedConverter<ulong, TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _zero = default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _one = Arithmetic.Increment(_zero);
 
+        /// <summary>
+        /// <para>
+        /// The unary to int 64.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly Dictionary<TLink, TLink> _unaryToUInt64;
+        /// <summary>
+        /// <para>
+        /// The unary one.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLink _unaryOne;
 
         /// <summary>

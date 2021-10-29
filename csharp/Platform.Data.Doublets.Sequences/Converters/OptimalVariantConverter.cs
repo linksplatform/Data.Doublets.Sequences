@@ -18,9 +18,27 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// <seealso cref="LinksListToSequenceConverterBase{TLink}"/>
     public class OptimalVariantConverter<TLink> : LinksListToSequenceConverterBase<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The sequence to its local element levels converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<IList<TLink>> _sequenceToItsLocalElementLevelsConverter;
 
         /// <summary>

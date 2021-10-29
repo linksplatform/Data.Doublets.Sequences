@@ -16,12 +16,48 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
     /// <seealso cref="ISequenceHeightProvider{TLink}"/>
     public class CachedSequenceHeightProvider<TLink> : ISequenceHeightProvider<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The height property marker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLink _heightPropertyMarker;
+        /// <summary>
+        /// <para>
+        /// The base height provider.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ISequenceHeightProvider<TLink> _baseHeightProvider;
+        /// <summary>
+        /// <para>
+        /// The address to unary number converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<TLink> _addressToUnaryNumberConverter;
+        /// <summary>
+        /// <para>
+        /// The unary number to address converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<TLink> _unaryNumberToAddressConverter;
+        /// <summary>
+        /// <para>
+        /// The property operator.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IProperties<TLink, TLink, TLink> _propertyOperator;
 
         /// <summary>

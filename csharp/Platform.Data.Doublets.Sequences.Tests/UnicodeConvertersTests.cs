@@ -64,6 +64,28 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Tests the char and unicode symbol converters using the specified links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>The links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="meaningRoot">
+        /// <para>The meaning root.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="addressToNumberConverter">
+        /// <para>The address to number converter.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="numberToAddressConverter">
+        /// <para>The number to address converter.</para>
+        /// <para></para>
+        /// </param>
         private static void TestCharAndUnicodeSymbolConverters(ILinks<ulong> links, ulong meaningRoot, IConverter<ulong> addressToNumberConverter, IConverter<ulong> numberToAddressConverter)
         {
             var unicodeSymbolMarker = links.CreateAndUpdate(meaningRoot, links.Constants.Itself);

@@ -20,9 +20,27 @@ namespace Platform.Data.Doublets.Numbers.Raw
     /// <seealso cref="IConverter{TSource, TTarget}"/>
     public class LongRawNumberSequenceToNumberConverter<TSource, TTarget> : LinksDecoratorBase<TSource>, IConverter<TSource, TTarget>
     {
+        /// <summary>
+        /// <para>
+        /// The bits size.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly int _bitsPerRawNumber = NumericType<TSource>.BitsSize - 1;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<TSource, TTarget> _sourceToTargetConverter = UncheckedConverter<TSource, TTarget>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The number to address converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<TSource> _numberToAddressConverter;
 
         /// <summary>

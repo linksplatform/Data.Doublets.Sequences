@@ -19,8 +19,26 @@ namespace Platform.Data.Doublets.Unicode
     /// <seealso cref="IConverter{TLink, string}"/>
     public class UnicodeSequenceToStringConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink, string>
     {
+        /// <summary>
+        /// <para>
+        /// The unicode sequence criterion matcher.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ICriterionMatcher<TLink> _unicodeSequenceCriterionMatcher;
+        /// <summary>
+        /// <para>
+        /// The sequence walker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ISequenceWalker<TLink> _sequenceWalker;
+        /// <summary>
+        /// <para>
+        /// The unicode symbol to char converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<TLink, char> _unicodeSymbolToCharConverter;
 
         /// <summary>

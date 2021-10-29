@@ -25,17 +25,72 @@ namespace Platform.Data.Doublets.Sequences
     /// <seealso cref="IProvider{IList{KeyValuePair{IList{TLink}, IList{TLink}}}}"/>
     public class DuplicateSegmentsProvider<TLink> : DictionaryBasedDuplicateSegmentsWalkerBase<TLink>, IProvider<IList<KeyValuePair<IList<TLink>, IList<TLink>>>>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<TLink, long> _addressToInt64Converter = UncheckedConverter<TLink, long>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<TLink, ulong> _addressToUInt64Converter = UncheckedConverter<TLink, ulong>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<ulong, TLink> _uInt64ToAddressConverter = UncheckedConverter<ulong, TLink>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ILinks<TLink> _links;
+        /// <summary>
+        /// <para>
+        /// The sequences.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ILinks<TLink> _sequences;
+        /// <summary>
+        /// <para>
+        /// The groups.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private HashSet<KeyValuePair<IList<TLink>, IList<TLink>>> _groups;
+        /// <summary>
+        /// <para>
+        /// The visited.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private BitString _visited;
 
+        /// <summary>
+        /// <para>
+        /// Represents the item equility comparer.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <seealso cref="IEqualityComparer{KeyValuePair{IList{TLink}, IList{TLink}}}"/>
         private class ItemEquilityComparer : IEqualityComparer<KeyValuePair<IList<TLink>, IList<TLink>>>
         {
+            /// <summary>
+            /// <para>
+            /// The list comparer.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly IListEqualityComparer<TLink> _listComparer;
 
             /// <summary>
@@ -85,8 +140,21 @@ namespace Platform.Data.Doublets.Sequences
             public int GetHashCode(KeyValuePair<IList<TLink>, IList<TLink>> pair) => (_listComparer.GetHashCode(pair.Key), _listComparer.GetHashCode(pair.Value)).GetHashCode();
         }
 
+        /// <summary>
+        /// <para>
+        /// Represents the item comparer.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <seealso cref="IComparer{KeyValuePair{IList{TLink}, IList{TLink}}}"/>
         private class ItemComparer : IComparer<KeyValuePair<IList<TLink>, IList<TLink>>>
         {
+            /// <summary>
+            /// <para>
+            /// The list comparer.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly IListComparer<TLink> _listComparer;
 
             /// <summary>

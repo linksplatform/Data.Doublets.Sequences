@@ -17,9 +17,27 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// <seealso cref="ISequenceIndex{TLink}"/>
     public class FrequencyIncrementingSequenceIndex<TLink> : SequenceIndex<TLink>, ISequenceIndex<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The frequency property operator.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IProperty<TLink, TLink> _frequencyPropertyOperator;
+        /// <summary>
+        /// <para>
+        /// The frequency incrementer.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IIncrementer<TLink> _frequencyIncrementer;
 
         /// <summary>

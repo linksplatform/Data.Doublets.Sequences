@@ -18,20 +18,92 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// </remarks>
     public class CompressingConverter<TLink> : LinksListToSequenceConverterBase<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly LinksConstants<TLink> _constants = Default<LinksConstants<TLink>>.Instance;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
 
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _zero = default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _one = Arithmetic.Increment(_zero);
 
+        /// <summary>
+        /// <para>
+        /// The base converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<IList<TLink>, TLink> _baseConverter;
+        /// <summary>
+        /// <para>
+        /// The doublet frequencies cache.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly LinkFrequenciesCache<TLink> _doubletFrequenciesCache;
+        /// <summary>
+        /// <para>
+        /// The min frequency to compress.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLink _minFrequencyToCompress;
+        /// <summary>
+        /// <para>
+        /// The do initial frequencies increment.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly bool _doInitialFrequenciesIncrement;
+        /// <summary>
+        /// <para>
+        /// The max doublet.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private Doublet<TLink> _maxDoublet;
+        /// <summary>
+        /// <para>
+        /// The max doublet data.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private LinkFrequency<TLink> _maxDoubletData;
 
+        /// <summary>
+        /// <para>
+        /// The half doublet.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private struct HalfDoublet
         {
             /// <summary>

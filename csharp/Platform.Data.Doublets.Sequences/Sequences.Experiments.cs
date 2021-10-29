@@ -1680,9 +1680,27 @@ namespace Platform.Data.Doublets.Sequences
             calculator.Calculate();
         }
 
+        /// <summary>
+        /// <para>
+        /// Represents the all usages calculator.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCalculator
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly SynchronizedLinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The totals.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ulong[] _totals;
 
             /// <summary>
@@ -1753,9 +1771,27 @@ namespace Platform.Data.Doublets.Sequences
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Represents the all usages calculator.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCalculator2
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly SynchronizedLinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The totals.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ulong[] _totals;
 
             /// <summary>
@@ -1888,9 +1924,27 @@ namespace Platform.Data.Doublets.Sequences
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Represents the all usages collector.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCollector
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ILinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The usages.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _usages;
 
             /// <summary>
@@ -1940,10 +1994,34 @@ namespace Platform.Data.Doublets.Sequences
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Represents the all usages collector.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCollector1
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ILinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The usages.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _usages;
+            /// <summary>
+            /// <para>
+            /// The continue.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ulong _continue;
 
             /// <summary>
@@ -1994,9 +2072,27 @@ namespace Platform.Data.Doublets.Sequences
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Represents the all usages collector.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCollector2
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ILinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The usages.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly BitString _usages;
 
             /// <summary>
@@ -2046,11 +2142,41 @@ namespace Platform.Data.Doublets.Sequences
             }
         }
 
+        /// <summary>
+        /// <para>
+        /// Represents the all usages intersecting collector.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesIntersectingCollector
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly SynchronizedLinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The intersect with.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _intersectWith;
+            /// <summary>
+            /// <para>
+            /// The usages.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _usages;
+            /// <summary>
+            /// <para>
+            /// The enter.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _enter;
 
             /// <summary>
@@ -2909,9 +3035,33 @@ namespace Platform.Data.Doublets.Sequences
         /// <seealso cref="RightSequenceWalker{ulong}"/>
         public class PatternMatcher : RightSequenceWalker<ulong>
         {
+            /// <summary>
+            /// <para>
+            /// The sequences.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly Sequences _sequences;
+            /// <summary>
+            /// <para>
+            /// The pattern sequence.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ulong[] _patternSequence;
+            /// <summary>
+            /// <para>
+            /// The links in sequence.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _linksInSequence;
+            /// <summary>
+            /// <para>
+            /// The results.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _results;
 
             #region Pattern Match
@@ -2978,8 +3128,26 @@ namespace Platform.Data.Doublets.Sequences
                 public long Stop;
             }
 
+            /// <summary>
+            /// <para>
+            /// The pattern.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly List<PatternBlock> _pattern;
+            /// <summary>
+            /// <para>
+            /// The pattern position.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private int _patternPosition;
+            /// <summary>
+            /// <para>
+            /// The sequence position.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private long _sequencePosition;
 
             #endregion

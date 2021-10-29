@@ -18,10 +18,34 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// <seealso cref="IConverter{TLink}"/>
     public class AddressToUnaryNumberConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _zero = default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _one = Arithmetic.Increment(_zero);
 
+        /// <summary>
+        /// <para>
+        /// The power of to unary number converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<int, TLink> _powerOf2ToUnaryNumberConverter;
 
         /// <summary>

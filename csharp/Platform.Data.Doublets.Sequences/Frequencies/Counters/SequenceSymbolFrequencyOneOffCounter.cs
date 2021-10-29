@@ -17,7 +17,19 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// <seealso cref="ICounter{TLink}"/>
     public class SequenceSymbolFrequencyOneOffCounter<TLink> : ICounter<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
 
         /// <summary>
