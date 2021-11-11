@@ -14,12 +14,6 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
     /// <seealso cref="IConverter{Doublet{TLink}, TLink}"/>
     public class FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<TLink> : IConverter<Doublet<TLink>, TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The cache.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly LinkFrequenciesCache<TLink> _cache;
 
         /// <summary>

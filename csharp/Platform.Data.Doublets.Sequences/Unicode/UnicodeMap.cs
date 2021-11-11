@@ -38,20 +38,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </summary>
         public static readonly ulong MapSize = 1 + char.MaxValue;
-
-        /// <summary>
-        /// <para>
-        /// The links.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly ILinks<ulong> _links;
-        /// <summary>
-        /// <para>
-        /// The initialized.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private bool _initialized;
 
         /// <summary>

@@ -16,34 +16,9 @@ namespace Platform.Data.Doublets.Incrementers
     /// <seealso cref="IIncrementer{TLink}"/>
     public class FrequencyIncrementer<TLink> : LinksOperatorBase<TLink>, IIncrementer<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-
-        /// <summary>
-        /// <para>
-        /// The frequency marker.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly TLink _frequencyMarker;
-        /// <summary>
-        /// <para>
-        /// The unary one.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly TLink _unaryOne;
-        /// <summary>
-        /// <para>
-        /// The unary number incrementer.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly IIncrementer<TLink> _unaryNumberIncrementer;
 
         /// <summary>

@@ -17,19 +17,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// <seealso cref="ICounter{TLink}"/>
     public class SequenceSymbolFrequencyOneOffCounter<TLink> : ICounter<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
 
         /// <summary>
@@ -108,39 +96,9 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
             StopableSequenceWalker.WalkRight(_sequenceLink, _links.GetSource, _links.GetTarget, IsElement, VisitElement);
             return _total;
         }
-
-        /// <summary>
-        /// <para>
-        /// Determines whether this instance is element.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <param name="x">
-        /// <para>The .</para>
-        /// <para></para>
-        /// </param>
-        /// <returns>
-        /// <para>The bool</para>
-        /// <para></para>
-        /// </returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsElement(TLink x) => _equalityComparer.Equals(x, _symbol) || _links.IsPartialPoint(x); // TODO: Use SequenceElementCreteriaMatcher instead of IsPartialPoint
-
-        /// <summary>
-        /// <para>
-        /// Determines whether this instance visit element.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <param name="element">
-        /// <para>The element.</para>
-        /// <para></para>
-        /// </param>
-        /// <returns>
-        /// <para>The bool</para>
-        /// <para></para>
-        /// </returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool VisitElement(TLink element)
         {
             if (_equalityComparer.Equals(element, _symbol))

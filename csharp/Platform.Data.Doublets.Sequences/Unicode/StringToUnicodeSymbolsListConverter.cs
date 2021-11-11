@@ -15,12 +15,6 @@ namespace Platform.Data.Doublets.Unicode
     /// <seealso cref="IConverter{string, IList{TLink}}"/>
     public class StringToUnicodeSymbolsListConverter<TLink> : IConverter<string, IList<TLink>>
     {
-        /// <summary>
-        /// <para>
-        /// The char to unicode symbol converter.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly IConverter<char, TLink> _charToUnicodeSymbolConverter;
 
         /// <summary>

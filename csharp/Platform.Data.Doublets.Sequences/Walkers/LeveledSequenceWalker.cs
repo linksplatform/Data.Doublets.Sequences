@@ -21,20 +21,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     /// <seealso cref="ISequenceWalker{TLink}"/>
     public class LeveledSequenceWalker<TLink> : LinksOperatorBase<TLink>, ISequenceWalker<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-
-        /// <summary>
-        /// <para>
-        /// The is element.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly Func<TLink, bool> _isElement;
 
         /// <summary>
@@ -163,26 +150,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
                 return CopyFilledElements(array, filledElementsCount);
             }
         }
-
-        /// <summary>
-        /// <para>
-        /// Copies the filled elements using the specified array.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <param name="array">
-        /// <para>The array.</para>
-        /// <para></para>
-        /// </param>
-        /// <param name="filledElementsCount">
-        /// <para>The filled elements count.</para>
-        /// <para></para>
-        /// </param>
-        /// <returns>
-        /// <para>The final array.</para>
-        /// <para></para>
-        /// </returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static TLink[] CopyFilledElements(TLink[] array, int filledElementsCount)
         {
             var finalArray = new TLink[filledElementsCount];
@@ -199,22 +167,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
 #endif
             return finalArray;
         }
-
-        /// <summary>
-        /// <para>
-        /// Counts the filled elements using the specified array.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <param name="array">
-        /// <para>The array.</para>
-        /// <para></para>
-        /// </param>
-        /// <returns>
-        /// <para>The count.</para>
-        /// <para></para>
-        /// </returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+[MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int CountFilledElements(TLink[] array)
         {
             var count = 0;

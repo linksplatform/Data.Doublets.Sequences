@@ -22,12 +22,6 @@ namespace Platform.Data.Doublets.Sequences.Tests
     /// </summary>
     public class DefaultSequenceAppenderTests
     {
-        /// <summary>
-        /// <para>
-        /// The output.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly ITestOutputHelper _output;
 
         /// <summary>
