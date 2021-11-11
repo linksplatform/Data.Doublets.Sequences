@@ -17,19 +17,7 @@ namespace Platform.Data.Doublets.Unicode
     /// <seealso cref="IConverter{string, TLink}"/>
     public class StringToUnicodeSequenceConverter<TLink> : LinksOperatorBase<TLink>, IConverter<string, TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The string to unicode symbol list converter.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly IConverter<string, IList<TLink>> _stringToUnicodeSymbolListConverter;
-        /// <summary>
-        /// <para>
-        /// The unicode symbol list to sequence converter.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly IConverter<IList<TLink>, TLink> _unicodeSymbolListToSequenceConverter;
 
         /// <summary>

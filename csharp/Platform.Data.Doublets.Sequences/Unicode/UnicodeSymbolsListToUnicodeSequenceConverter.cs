@@ -17,26 +17,8 @@ namespace Platform.Data.Doublets.Unicode
     /// <seealso cref="IConverter{IList{TLink}, TLink}"/>
     public class UnicodeSymbolsListToUnicodeSequenceConverter<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>, TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The index.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly ISequenceIndex<TLink> _index;
-        /// <summary>
-        /// <para>
-        /// The list to sequence link converter.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly IConverter<IList<TLink>, TLink> _listToSequenceLinkConverter;
-        /// <summary>
-        /// <para>
-        /// The unicode sequence marker.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly TLink _unicodeSequenceMarker;
 
         /// <summary>

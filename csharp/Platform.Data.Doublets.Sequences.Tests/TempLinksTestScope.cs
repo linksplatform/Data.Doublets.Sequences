@@ -52,12 +52,6 @@ namespace Platform.Data.Doublets.Sequences.Tests
         /// <para></para>
         /// </summary>
         public string TempTransactionLogFilename { get; }
-        /// <summary>
-        /// <para>
-        /// The delete files.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly bool _deleteFiles;
 
         /// <summary>

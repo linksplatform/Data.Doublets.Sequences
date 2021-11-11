@@ -18,20 +18,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// <seealso cref="IConverter{int, TLink}"/>
     public class PowerOf2ToUnaryNumberConverter<TLink> : LinksOperatorBase<TLink>, IConverter<int, TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-
-        /// <summary>
-        /// <para>
-        /// The unary number powers of.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly TLink[] _unaryNumberPowersOf2;
 
         /// <summary>

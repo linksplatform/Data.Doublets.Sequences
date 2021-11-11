@@ -24,12 +24,6 @@ namespace Platform.Data.Doublets.Sequences.Tests
     /// </summary>
     public static class SequencesTests
     {
-        /// <summary>
-        /// <para>
-        /// The instance.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly LinksConstants<ulong> _constants = Default<LinksConstants<ulong>>.Instance;
 
         /// <summary>
@@ -435,8 +429,6 @@ namespace Platform.Data.Doublets.Sequences.Tests
                 Assert.True(index.MightContain(sequence));
             }
         }
-
-        /// <summary>Imported from https://raw.githubusercontent.com/wiki/Konard/LinksPlatform/%D0%9E-%D1%82%D0%BE%D0%BC%2C-%D0%BA%D0%B0%D0%BA-%D0%B2%D1%81%D1%91-%D0%BD%D0%B0%D1%87%D0%B8%D0%BD%D0%B0%D0%BB%D0%BE%D1%81%D1%8C.md</summary>
         private static readonly string _exampleText =
             @"([english version](https://github.com/Konard/LinksPlatform/wiki/About-the-beginning))
 
@@ -491,13 +483,6 @@ namespace Platform.Data.Doublets.Sequences.Tests
 ...
 
 [![анимация](https://raw.githubusercontent.com/Konard/LinksPlatform/master/doc/Intro/intro-animation-500.gif ""анимация"")](https://raw.githubusercontent.com/Konard/LinksPlatform/master/doc/Intro/intro-animation-500.gif)";
-
-        /// <summary>
-        /// <para>
-        /// The example lorem ipsum text.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly string _exampleLoremIpsumText =
             @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";

@@ -16,20 +16,7 @@ namespace Platform.Data.Doublets.Incrementers
     /// <seealso cref="IIncrementer{TLink}"/>
     public class UnaryNumberIncrementer<TLink> : LinksOperatorBase<TLink>, IIncrementer<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-
-        /// <summary>
-        /// <para>
-        /// The unary one.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly TLink _unaryOne;
 
         /// <summary>

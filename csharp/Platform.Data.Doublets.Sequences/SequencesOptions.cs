@@ -23,12 +23,6 @@ namespace Platform.Data.Doublets.Sequences
     /// </summary>
     public class SequencesOptions<TLink> // TODO: To use type parameter <TLink> the ILinks<TLink> must contain GetConstants function.
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
 
         /// <summary>

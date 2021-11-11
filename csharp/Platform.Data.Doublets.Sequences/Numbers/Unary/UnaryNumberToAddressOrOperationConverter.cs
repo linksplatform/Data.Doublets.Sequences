@@ -18,34 +18,9 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// <seealso cref="IConverter{TLink}"/>
     public class UnaryNumberToAddressOrOperationConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        /// <summary>
-        /// <para>
-        /// The zero.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly TLink _zero = default;
-        /// <summary>
-        /// <para>
-        /// The zero.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly TLink _one = Arithmetic.Increment(_zero);
-
-        /// <summary>
-        /// <para>
-        /// The unary number power of indicies.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly IDictionary<TLink, int> _unaryNumberPowerOf2Indicies;
 
         /// <summary>
@@ -105,21 +80,6 @@ namespace Platform.Data.Doublets.Numbers.Unary
             }
             return target;
         }
-
-        /// <summary>
-        /// <para>
-        /// Creates the unary number power of 2 indicies dictionary using the specified power of 2 to unary number converter.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <param name="powerOf2ToUnaryNumberConverter">
-        /// <para>The power of to unary number converter.</para>
-        /// <para></para>
-        /// </param>
-        /// <returns>
-        /// <para>The unary number power of indicies.</para>
-        /// <para></para>
-        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Dictionary<TLink, int> CreateUnaryNumberPowerOf2IndiciesDictionary(IConverter<int, TLink> powerOf2ToUnaryNumberConverter)
         {
@@ -130,21 +90,6 @@ namespace Platform.Data.Doublets.Numbers.Unary
             }
             return unaryNumberPowerOf2Indicies;
         }
-
-        /// <summary>
-        /// <para>
-        /// Sets the bit using the specified target.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <param name="target">
-        /// <para>The target.</para>
-        /// <para></para>
-        /// </param>
-        /// <param name="powerOf2Index">
-        /// <para>The power of index.</para>
-        /// <para></para>
-        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void SetBit(ref TLink target, int powerOf2Index) => target = Bit.Or(target, Bit.ShiftLeft(_one, powerOf2Index));
     }

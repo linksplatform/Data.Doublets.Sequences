@@ -16,19 +16,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// <seealso cref="ICounter{TLink}"/>
     public class TotalSequenceSymbolFrequencyOneOffCounter<TLink> : ICounter<TLink>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
 
         /// <summary>
@@ -103,17 +91,6 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
             CountCore(_symbol);
             return _total;
         }
-
-        /// <summary>
-        /// <para>
-        /// Counts the core using the specified link.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <param name="link">
-        /// <para>The link.</para>
-        /// <para></para>
-        /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void CountCore(TLink link)
         {
@@ -144,21 +121,6 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
             var symbolFrequencyCounter = new SequenceSymbolFrequencyOneOffCounter<TLink>(_links, link, _symbol);
             _total = Arithmetic.Add(_total, symbolFrequencyCounter.Count());
         }
-
-        /// <summary>
-        /// <para>
-        /// Eaches the element handler using the specified doublet.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        /// <param name="doublet">
-        /// <para>The doublet.</para>
-        /// <para></para>
-        /// </param>
-        /// <returns>
-        /// <para>The link</para>
-        /// <para></para>
-        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private TLink EachElementHandler(IList<TLink> doublet)
         {

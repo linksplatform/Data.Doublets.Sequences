@@ -16,20 +16,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// <seealso cref="IConverter{IList{TLink}}"/>
     public class SequenceToItsLocalElementLevelsConverter<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
-
-        /// <summary>
-        /// <para>
-        /// The link to its frequency to number conveter.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         private readonly IConverter<Doublet<TLink>, TLink> _linkToItsFrequencyToNumberConveter;
 
         /// <summary>
