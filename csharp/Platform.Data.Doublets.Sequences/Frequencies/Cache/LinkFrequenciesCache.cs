@@ -14,11 +14,49 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
     /// </remarks>
     public class LinkFrequenciesCache<TLink> : LinksOperatorBase<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
+
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _zero = default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _one = Arithmetic.Increment(_zero);
+
+        /// <summary>
+        /// <para>
+        /// The doublets cache.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly Dictionary<Doublet<TLink>, LinkFrequency<TLink>> _doubletsCache;
+        /// <summary>
+        /// <para>
+        /// The frequency counter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ICounter<TLink, TLink> _frequencyCounter;
 
         /// <summary>

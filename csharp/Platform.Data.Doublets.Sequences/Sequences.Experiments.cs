@@ -48,7 +48,34 @@ namespace Platform.Data.Doublets.Sequences
                 return CreateAllVariants2Core(sequence, 0, (ulong)sequence.Length - 1);
             });
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Creates the all variants 2 core using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="startAt">
+        /// <para>The start at.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="stopAt">
+        /// <para>The stop at.</para>
+        /// <para></para>
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// <para>Creation cancellation is not implemented.</para>
+        /// <para></para>
+        /// </exception>
+        /// <returns>
+        /// <para>The variants.</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private ulong[] CreateAllVariants2Core(ulong[] sequence, ulong startAt, ulong stopAt)
         {
             if ((stopAt - startAt) == 0)
@@ -113,7 +140,34 @@ namespace Platform.Data.Doublets.Sequences
                 return CreateAllVariants1Core(sequence, results);
             });
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Creates the all variants 1 core using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="results">
+        /// <para>The results.</para>
+        /// <para></para>
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// <para>Creation cancellation is not implemented.</para>
+        /// <para></para>
+        /// </exception>
+        /// <exception cref="NotImplementedException">
+        /// <para>Creation cancellation is not implemented.</para>
+        /// <para></para>
+        /// </exception>
+        /// <returns>
+        /// <para>The results.</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private List<ulong> CreateAllVariants1Core(ulong[] sequence, List<ulong> results)
         {
             if (sequence.Length == 2)
@@ -179,7 +233,22 @@ namespace Platform.Data.Doublets.Sequences
             }, sequence);
             return visitedLinks;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Eaches the 1 using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Each1(Func<ulong, bool> handler, params ulong[] sequence)
         {
             if (sequence.Length == 2)
@@ -280,7 +349,26 @@ namespace Platform.Data.Doublets.Sequences
                 return Constants.Continue;
             }, sequence);
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Eaches the part core using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// <para></para>
+        /// <para></para>
+        /// </exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void EachPartCore(Func<IList<LinkIndex>, LinkIndex> handler, params ulong[] sequence)
         {
             if (sequence.IsNullOrEmpty())
@@ -334,7 +422,26 @@ namespace Platform.Data.Doublets.Sequences
                 throw new NotImplementedException();
             }
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Partials the step right using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PartialStepRight(Action<IList<LinkIndex>> handler, ulong left, ulong right)
         {
             Links.Unsync.Each(Constants.Any, left, doublet =>
@@ -347,7 +454,26 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             });
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Steps the right using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void StepRight(Action<IList<LinkIndex>> handler, ulong left, ulong right)
         {
             Links.Unsync.Each(left, Constants.Any, rightStep =>
@@ -356,7 +482,26 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             });
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Tries the step right up using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="stepFrom">
+        /// <para>The step from.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void TryStepRightUp(Action<IList<LinkIndex>> handler, ulong right, ulong stepFrom)
         {
             var upStep = stepFrom;
@@ -373,7 +518,25 @@ namespace Platform.Data.Doublets.Sequences
         }
 
         // TODO: Test
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <summary>
+        /// <para>
+        /// Partials the step left using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void PartialStepLeft(Action<IList<LinkIndex>> handler, ulong left, ulong right)
         {
             Links.Unsync.Each(right, Constants.Any, doublet =>
@@ -386,7 +549,26 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             });
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Steps the left using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void StepLeft(Action<IList<LinkIndex>> handler, ulong left, ulong right)
         {
             Links.Unsync.Each(Constants.Any, right, leftStep =>
@@ -395,7 +577,26 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             });
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Tries the step left up using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="stepFrom">
+        /// <para>The step from.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void TryStepLeftUp(Action<IList<LinkIndex>> handler, ulong left, ulong stepFrom)
         {
             var upStep = stepFrom;
@@ -410,7 +611,26 @@ namespace Platform.Data.Doublets.Sequences
                 handler(new LinkAddress<LinkIndex>(stepFrom));
             }
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance starts with.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The bool</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool StartsWith(ulong sequence, ulong link)
         {
             var upStep = sequence;
@@ -422,7 +642,26 @@ namespace Platform.Data.Doublets.Sequences
             }
             return firstSource == link;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance ends with.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The bool</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool EndsWith(ulong sequence, ulong link)
         {
             var upStep = sequence;
@@ -632,7 +871,38 @@ namespace Platform.Data.Doublets.Sequences
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public string FormatSequence(LinkIndex sequenceLink, Action<StringBuilder, LinkIndex> elementToString, bool insertComma, params LinkIndex[] knownElements) => Links.SyncRoot.ExecuteReadOperation(() => FormatSequence(Links.Unsync, sequenceLink, elementToString, insertComma, knownElements));
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Formats the sequence using the specified links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>The links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="sequenceLink">
+        /// <para>The sequence link.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="elementToString">
+        /// <para>The element to string.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="insertComma">
+        /// <para>The insert comma.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="knownElements">
+        /// <para>The known elements.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The string</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private string FormatSequence(ILinks<LinkIndex> links, LinkIndex sequenceLink, Action<StringBuilder, LinkIndex> elementToString, bool insertComma, params LinkIndex[] knownElements)
         {
             var linksInSequence = new HashSet<ulong>(knownElements);
@@ -717,7 +987,38 @@ namespace Platform.Data.Doublets.Sequences
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public string SafeFormatSequence(LinkIndex sequenceLink, Action<StringBuilder, LinkIndex> elementToString, bool insertComma, params LinkIndex[] knownElements) => Links.SyncRoot.ExecuteReadOperation(() => SafeFormatSequence(Links.Unsync, sequenceLink, elementToString, insertComma, knownElements));
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Safes the format sequence using the specified links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>The links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="sequenceLink">
+        /// <para>The sequence link.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="elementToString">
+        /// <para>The element to string.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="insertComma">
+        /// <para>The insert comma.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="knownElements">
+        /// <para>The known elements.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The string</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private string SafeFormatSequence(ILinks<LinkIndex> links, LinkIndex sequenceLink, Action<StringBuilder, LinkIndex> elementToString, bool insertComma, params LinkIndex[] knownElements)
         {
             var linksInSequence = new HashSet<ulong>(knownElements);
@@ -1177,7 +1478,21 @@ namespace Platform.Data.Doublets.Sequences
 
         // При сборе всех использований (последовательностей) можно сохранять обратный путь к той связи с которой начинался поиск (STTTSSSTT),
         // причём достаточно одного бита для хранения перехода влево или вправо
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <summary>
+        /// <para>
+        /// Alls the usages core using the specified link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="usages">
+        /// <para>The usages.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void AllUsagesCore(ulong link, HashSet<ulong> usages)
         {
             bool handler(ulong doublet)
@@ -1217,7 +1532,26 @@ namespace Platform.Data.Doublets.Sequences
                 return usages;
             });
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Alls the bottom usages core using the specified link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="visits">
+        /// <para>The visits.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="usages">
+        /// <para>The usages.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void AllBottomUsagesCore(ulong link, HashSet<ulong> visits, HashSet<ulong> usages)
         {
             bool handler(ulong doublet)
@@ -1267,7 +1601,30 @@ namespace Platform.Data.Doublets.Sequences
                 return counter.Count();
             }
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance all usages core 1.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="usages">
+        /// <para>The usages.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="outerHandler">
+        /// <para>The outer handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The bool</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool AllUsagesCore1(ulong link, HashSet<ulong> usages, Func<IList<LinkIndex>, LinkIndex> outerHandler)
         {
             bool handler(ulong doublet)
@@ -1322,9 +1679,28 @@ namespace Platform.Data.Doublets.Sequences
             var calculator = new AllUsagesCalculator2(Links, totals);
             calculator.Calculate();
         }
+
+        /// <summary>
+        /// <para>
+        /// Represents the all usages calculator.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCalculator
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly SynchronizedLinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The totals.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ulong[] _totals;
 
             /// <summary>
@@ -1356,7 +1732,22 @@ namespace Platform.Data.Doublets.Sequences
             /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Calculate() => _links.Each(_links.Constants.Any, _links.Constants.Any, CalculateCore);
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+            /// <summary>
+            /// <para>
+            /// Determines whether this instance calculate core.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="link">
+            /// <para>The link.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The bool</para>
+            /// <para></para>
+            /// </returns>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private bool CalculateCore(ulong link)
             {
                 if (_totals[link] == 0)
@@ -1379,9 +1770,28 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             }
         }
+
+        /// <summary>
+        /// <para>
+        /// Represents the all usages calculator.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCalculator2
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly SynchronizedLinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The totals.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ulong[] _totals;
 
             /// <summary>
@@ -1413,13 +1823,43 @@ namespace Platform.Data.Doublets.Sequences
             /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public void Calculate() => _links.Each(_links.Constants.Any, _links.Constants.Any, CalculateCore);
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+            /// <summary>
+            /// <para>
+            /// Determines whether this instance is element.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="link">
+            /// <para>The link.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The bool</para>
+            /// <para></para>
+            /// </returns>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private bool IsElement(ulong link)
             {
                 //_linksInSequence.Contains(link) || 
                 return _links.Unsync.GetTarget(link) == link || _links.Unsync.GetSource(link) == link;
             }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+            /// <summary>
+            /// <para>
+            /// Determines whether this instance calculate core.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="link">
+            /// <para>The link.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The bool</para>
+            /// <para></para>
+            /// </returns>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private bool CalculateCore(ulong link)
             {
                 // TODO: Проработать защиту от зацикливания
@@ -1483,9 +1923,28 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             }
         }
+
+        /// <summary>
+        /// <para>
+        /// Represents the all usages collector.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCollector
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ILinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The usages.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _usages;
 
             /// <summary>
@@ -1534,10 +1993,35 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             }
         }
+
+        /// <summary>
+        /// <para>
+        /// Represents the all usages collector.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCollector1
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ILinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The usages.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _usages;
+            /// <summary>
+            /// <para>
+            /// The continue.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ulong _continue;
 
             /// <summary>
@@ -1587,9 +2071,28 @@ namespace Platform.Data.Doublets.Sequences
                 return _continue;
             }
         }
+
+        /// <summary>
+        /// <para>
+        /// Represents the all usages collector.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesCollector2
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ILinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The usages.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly BitString _usages;
 
             /// <summary>
@@ -1638,11 +2141,42 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             }
         }
+
+        /// <summary>
+        /// <para>
+        /// Represents the all usages intersecting collector.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private class AllUsagesIntersectingCollector
         {
+            /// <summary>
+            /// <para>
+            /// The links.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly SynchronizedLinks<ulong> _links;
+            /// <summary>
+            /// <para>
+            /// The intersect with.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _intersectWith;
+            /// <summary>
+            /// <para>
+            /// The usages.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _usages;
+            /// <summary>
+            /// <para>
+            /// The enter.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<ulong> _enter;
 
             /// <summary>
@@ -1701,13 +2235,51 @@ namespace Platform.Data.Doublets.Sequences
                 return true;
             }
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Closes the inner connections using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void CloseInnerConnections(Action<IList<LinkIndex>> handler, ulong left, ulong right)
         {
             TryStepLeftUp(handler, left, right);
             TryStepRightUp(handler, right, left);
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Alls the close connections using the specified handler.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="handler">
+        /// <para>The handler.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="left">
+        /// <para>The left.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="right">
+        /// <para>The right.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void AllCloseConnections(Action<IList<LinkIndex>> handler, ulong left, ulong right)
         {
             // Direct
@@ -1728,7 +2300,30 @@ namespace Platform.Data.Doublets.Sequences
             PartialStepRight(handler, left, right);
             PartialStepLeft(handler, left, right);
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Gets the all partially matching sequences core using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="previousMatchings">
+        /// <para>The previous matchings.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="startAt">
+        /// <para>The start at.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>A hash set of ulong</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private HashSet<ulong> GetAllPartiallyMatchingSequencesCore(ulong[] sequence, HashSet<ulong> previousMatchings, long startAt)
         {
             if (startAt >= sequence.Length) // ?
@@ -1758,7 +2353,26 @@ namespace Platform.Data.Doublets.Sequences
             }
             return GetAllPartiallyMatchingSequencesCore(sequence, matchings, startAt + 1); // ??
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Ensures the each link is any or zero or many or exists using the specified links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>The links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <exception cref="ArgumentLinkDoesNotExistsException{ulong}">
+        /// <para>patternSequence[{i}]</para>
+        /// <para></para>
+        /// </exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void EnsureEachLinkIsAnyOrZeroOrManyOrExists(SynchronizedLinks<ulong> links, params ulong[] sequence)
         {
             if (sequence == null)
@@ -1972,7 +2586,22 @@ namespace Platform.Data.Doublets.Sequences
                 return results.GetSetUInt64Indices();
             });
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Simplifies the sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The new sequence.</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static ulong[] Simplify(ulong[] sequence)
         {
             // Считаем новый размер последовательности
@@ -2105,7 +2734,38 @@ namespace Platform.Data.Doublets.Sequences
             CollectMatchingSequences(left, leftBound, links, right, rightBound, ref results);
             return results;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Collects the matching sequences using the specified left link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="leftLink">
+        /// <para>The left link.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="leftBound">
+        /// <para>The left bound.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="middleLinks">
+        /// <para>The middle links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="rightLink">
+        /// <para>The right link.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="rightBound">
+        /// <para>The right bound.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="results">
+        /// <para>The results.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void CollectMatchingSequences(ulong leftLink, int leftBound, ulong[] middleLinks, ulong rightLink, int rightBound, ref List<ulong> results)
         {
             var leftLinkTotalReferers = Links.Unsync.Count(leftLink);
@@ -2375,9 +3035,33 @@ namespace Platform.Data.Doublets.Sequences
         /// <seealso cref="RightSequenceWalker{ulong}"/>
         public class PatternMatcher : RightSequenceWalker<ulong>
         {
+            /// <summary>
+            /// <para>
+            /// The sequences.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly Sequences _sequences;
+            /// <summary>
+            /// <para>
+            /// The pattern sequence.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly ulong[] _patternSequence;
+            /// <summary>
+            /// <para>
+            /// The links in sequence.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _linksInSequence;
+            /// <summary>
+            /// <para>
+            /// The results.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly HashSet<LinkIndex> _results;
 
             #region Pattern Match
@@ -2443,8 +3127,27 @@ namespace Platform.Data.Doublets.Sequences
                 /// </summary>
                 public long Stop;
             }
+
+            /// <summary>
+            /// <para>
+            /// The pattern.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private readonly List<PatternBlock> _pattern;
+            /// <summary>
+            /// <para>
+            /// The pattern position.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private int _patternPosition;
+            /// <summary>
+            /// <para>
+            /// The sequence position.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             private long _sequencePosition;
 
             #endregion
@@ -2523,7 +3226,18 @@ namespace Platform.Data.Doublets.Sequences
                 }
                 return _patternPosition == _pattern.Count || (_patternPosition == _pattern.Count - 1 && _pattern[_patternPosition].Start == 0);
             }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+            /// <summary>
+            /// <para>
+            /// Creates the detailed pattern.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <returns>
+            /// <para>The pattern.</para>
+            /// <para></para>
+            /// </returns>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private List<PatternBlock> CreateDetailedPattern()
             {
                 var pattern = new List<PatternBlock>();
@@ -2663,7 +3377,22 @@ namespace Platform.Data.Doublets.Sequences
             //    if (maximumGap < mininumGap)
             //        maximumGap = mininumGap;
             //}
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+            /// <summary>
+            /// <para>
+            /// Determines whether this instance pattern match core.
+            /// </para>
+            /// <para></para>
+            /// </summary>
+            /// <param name="element">
+            /// <para>The element.</para>
+            /// <para></para>
+            /// </param>
+            /// <returns>
+            /// <para>The bool</para>
+            /// <para></para>
+            /// </returns>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private bool PatternMatchCore(LinkIndex element)
             {
                 if (_patternPosition >= _pattern.Count)

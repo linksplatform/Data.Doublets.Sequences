@@ -16,6 +16,12 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
     /// <seealso cref="ISequenceHeightProvider{TLink}"/>
     public class DefaultSequenceRightHeightProvider<TLink> : LinksOperatorBase<TLink>, ISequenceHeightProvider<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The element matcher.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ICriterionMatcher<TLink> _elementMatcher;
 
         /// <summary>

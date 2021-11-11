@@ -17,7 +17,19 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     /// <seealso cref="ISequenceWalker{TLink}"/>
     public abstract class SequenceWalkerBase<TLink> : LinksOperatorBase<TLink>, ISequenceWalker<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The stack.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IStack<TLink> _stack;
+        /// <summary>
+        /// <para>
+        /// The is element.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly Func<TLink, bool> _isElement;
 
         /// <summary>

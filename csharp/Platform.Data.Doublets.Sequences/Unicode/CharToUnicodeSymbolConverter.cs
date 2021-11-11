@@ -15,8 +15,27 @@ namespace Platform.Data.Doublets.Unicode
     /// <seealso cref="IConverter{char, TLink}"/>
     public class CharToUnicodeSymbolConverter<TLink> : LinksOperatorBase<TLink>, IConverter<char, TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<char, TLink> _charToAddressConverter = UncheckedConverter<char, TLink>.Default;
+
+        /// <summary>
+        /// <para>
+        /// The address to number converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<TLink> _addressToNumberConverter;
+        /// <summary>
+        /// <para>
+        /// The unicode symbol marker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLink _unicodeSymbolMarker;
 
         /// <summary>

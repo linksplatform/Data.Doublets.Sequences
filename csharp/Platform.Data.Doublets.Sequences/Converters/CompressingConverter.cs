@@ -18,17 +18,92 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// </remarks>
     public class CompressingConverter<TLink> : LinksListToSequenceConverterBase<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly LinksConstants<TLink> _constants = Default<LinksConstants<TLink>>.Instance;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
+
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _zero = default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _one = Arithmetic.Increment(_zero);
+
+        /// <summary>
+        /// <para>
+        /// The base converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<IList<TLink>, TLink> _baseConverter;
+        /// <summary>
+        /// <para>
+        /// The doublet frequencies cache.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly LinkFrequenciesCache<TLink> _doubletFrequenciesCache;
+        /// <summary>
+        /// <para>
+        /// The min frequency to compress.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLink _minFrequencyToCompress;
+        /// <summary>
+        /// <para>
+        /// The do initial frequencies increment.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly bool _doInitialFrequenciesIncrement;
+        /// <summary>
+        /// <para>
+        /// The max doublet.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private Doublet<TLink> _maxDoublet;
+        /// <summary>
+        /// <para>
+        /// The max doublet data.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private LinkFrequency<TLink> _maxDoubletData;
+
+        /// <summary>
+        /// <para>
+        /// The half doublet.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private struct HalfDoublet
         {
             /// <summary>
@@ -185,7 +260,12 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override TLink Convert(IList<TLink> source) => _baseConverter.Convert(Compress(source));
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <remarks>
+        /// Original algorithm idea: https://en.wikipedia.org/wiki/Byte_pair_encoding .
+        /// Faster version (doublets' frequencies dictionary is not recreated).
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private IList<TLink> Compress(IList<TLink> sequence)
         {
             if (sequence.IsNullOrEmpty())
@@ -236,7 +316,11 @@ namespace Platform.Data.Doublets.Sequences.Converters
             }
             return sequence;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <remarks>
+        /// Original algorithm idea: https://en.wikipedia.org/wiki/Byte_pair_encoding
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private int ReplaceDoublets(HalfDoublet[] copy)
         {
             var oldLength = copy.Length;
@@ -289,13 +373,35 @@ namespace Platform.Data.Doublets.Sequences.Converters
             }
             return newLength;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Resets the max doublet.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ResetMaxDoublet()
         {
             _maxDoublet = new Doublet<TLink>();
             _maxDoubletData = new LinkFrequency<TLink>();
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Updates the max doublet using the specified copy.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="copy">
+        /// <para>The copy.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="length">
+        /// <para>The length.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void UpdateMaxDoublet(HalfDoublet[] copy, int length)
         {
             Doublet<TLink> doublet = default;
@@ -305,7 +411,22 @@ namespace Platform.Data.Doublets.Sequences.Converters
                 UpdateMaxDoublet(ref doublet, copy[i - 1].DoubletData);
             }
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Updates the max doublet using the specified doublet.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="doublet">
+        /// <para>The doublet.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="data">
+        /// <para>The data.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void UpdateMaxDoublet(ref Doublet<TLink> doublet, LinkFrequency<TLink> data)
         {
             var frequency = data.Frequency;

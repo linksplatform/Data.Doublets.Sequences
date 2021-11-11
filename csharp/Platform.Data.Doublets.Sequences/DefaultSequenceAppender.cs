@@ -18,8 +18,27 @@ namespace Platform.Data.Doublets.Sequences
     /// <seealso cref="ISequenceAppender{TLink}"/>
     public class DefaultSequenceAppender<TLink> : LinksOperatorBase<TLink>, ISequenceAppender<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+
+        /// <summary>
+        /// <para>
+        /// The stack.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IStack<TLink> _stack;
+        /// <summary>
+        /// <para>
+        /// The height provider.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ISequenceHeightProvider<TLink> _heightProvider;
 
         /// <summary>

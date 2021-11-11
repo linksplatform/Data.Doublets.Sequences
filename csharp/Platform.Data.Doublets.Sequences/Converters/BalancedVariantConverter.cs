@@ -70,7 +70,26 @@ namespace Platform.Data.Doublets.Sequences.Converters
             }
             return _links.GetOrCreate(sequence[0], sequence[1]);
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Halves the sequence using the specified destination.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="destination">
+        /// <para>The destination.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="length">
+        /// <para>The length.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void HalveSequence(IList<TLink> destination, IList<TLink> source, int length)
         {
             var loopedLength = length - (length % 2);

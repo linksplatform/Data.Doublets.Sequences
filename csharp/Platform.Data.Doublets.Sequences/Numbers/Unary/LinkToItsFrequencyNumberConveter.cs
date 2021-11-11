@@ -18,8 +18,27 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// <seealso cref="IConverter{Doublet{TLink}, TLink}"/>
     public class LinkToItsFrequencyNumberConveter<TLink> : LinksOperatorBase<TLink>, IConverter<Doublet<TLink>, TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+
+        /// <summary>
+        /// <para>
+        /// The frequency property operator.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IProperty<TLink, TLink> _frequencyPropertyOperator;
+        /// <summary>
+        /// <para>
+        /// The unary number to address converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<TLink> _unaryNumberToAddressConverter;
 
         /// <summary>

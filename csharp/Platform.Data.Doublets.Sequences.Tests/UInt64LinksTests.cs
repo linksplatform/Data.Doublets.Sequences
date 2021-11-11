@@ -30,7 +30,20 @@ namespace Platform.Data.Doublets.Sequences.Tests
     /// </summary>
     public static class UInt64LinksTests
     {
+        /// <summary>
+        /// <para>
+        /// The instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly LinksConstants<ulong> _constants = Default<LinksConstants<ulong>>.Instance;
+
+        /// <summary>
+        /// <para>
+        /// The iterations.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private const long Iterations = 10 * 1024;
 
         #region Concept
@@ -414,6 +427,13 @@ namespace Platform.Data.Doublets.Sequences.Tests
             File.Delete(tempDatabaseFilename);
             File.Delete(tempTransactionLogFilename);
         }
+
+        /// <summary>
+        /// <para>
+        /// Exceptions the thrower.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static void ExceptionThrower() => throw new InvalidOperationException();
 
         /// <summary>
@@ -480,6 +500,21 @@ namespace Platform.Data.Doublets.Sequences.Tests
                 Assert.True(sequences.SafeFormatSequence(ab, DefaultFormatter, false) == "{{4}{5}{4}{6}}");
             }
         }
+
+        /// <summary>
+        /// <para>
+        /// Defaults the formatter using the specified sb.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sb">
+        /// <para>The sb.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
         private static void DefaultFormatter(StringBuilder sb, ulong link)
         {
             sb.Append(link.ToString());

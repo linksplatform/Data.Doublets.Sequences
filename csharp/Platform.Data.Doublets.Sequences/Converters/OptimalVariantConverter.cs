@@ -18,8 +18,27 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// <seealso cref="LinksListToSequenceConverterBase{TLink}"/>
     public class OptimalVariantConverter<TLink> : LinksListToSequenceConverterBase<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
+
+        /// <summary>
+        /// <para>
+        /// The sequence to its local element levels converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<IList<TLink>> _sequenceToItsLocalElementLevelsConverter;
 
         /// <summary>
@@ -161,16 +180,77 @@ namespace Platform.Data.Doublets.Sequences.Converters
             }
             return _links.GetOrCreate(sequence[0], sequence[1]);
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Gets the greatest neigbour lower than current or current using the specified previous.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="previous">
+        /// <para>The previous.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="current">
+        /// <para>The current.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="next">
+        /// <para>The next.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static TLink GetGreatestNeigbourLowerThanCurrentOrCurrent(TLink previous, TLink current, TLink next)
         {
             return _comparer.Compare(previous, next) > 0
                 ? _comparer.Compare(previous, current) < 0 ? previous : current
                 : _comparer.Compare(next, current) < 0 ? next : current;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Gets the next lower than current or current using the specified current.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="current">
+        /// <para>The current.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="next">
+        /// <para>The next.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static TLink GetNextLowerThanCurrentOrCurrent(TLink current, TLink next) => _comparer.Compare(next, current) < 0 ? next : current;
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Gets the previous lower than current or current using the specified previous.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="previous">
+        /// <para>The previous.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="current">
+        /// <para>The current.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static TLink GetPreviousLowerThanCurrentOrCurrent(TLink previous, TLink current) => _comparer.Compare(previous, current) < 0 ? previous : current;
     }
 }

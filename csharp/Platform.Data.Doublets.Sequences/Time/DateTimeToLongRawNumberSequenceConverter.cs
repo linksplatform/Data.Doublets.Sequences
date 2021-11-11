@@ -15,6 +15,12 @@ namespace Platform.Data.Doublets.Time
     /// <seealso cref="IConverter{DateTime, TLink}"/>
     public class DateTimeToLongRawNumberSequenceConverter<TLink> : IConverter<DateTime, TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The int 64 to long raw number converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<long, TLink> _int64ToLongRawNumberConverter;
 
         /// <summary>

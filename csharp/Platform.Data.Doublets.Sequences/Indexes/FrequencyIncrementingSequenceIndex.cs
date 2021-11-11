@@ -17,8 +17,27 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// <seealso cref="ISequenceIndex{TLink}"/>
     public class FrequencyIncrementingSequenceIndex<TLink> : SequenceIndex<TLink>, ISequenceIndex<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+
+        /// <summary>
+        /// <para>
+        /// The frequency property operator.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IProperty<TLink, TLink> _frequencyPropertyOperator;
+        /// <summary>
+        /// <para>
+        /// The frequency incrementer.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IIncrementer<TLink> _frequencyIncrementer;
 
         /// <summary>
@@ -73,7 +92,26 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             }
             return indexed;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance is indexed with increment.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="target">
+        /// <para>The target.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The indexed.</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsIndexedWithIncrement(TLink source, TLink target)
         {
             var link = _links.SearchOrDefault(source, target);
@@ -84,7 +122,18 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             }
             return indexed;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Increments the link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void Increment(TLink link)
         {
             var previousFrequency = _frequencyPropertyOperator.Get(link);

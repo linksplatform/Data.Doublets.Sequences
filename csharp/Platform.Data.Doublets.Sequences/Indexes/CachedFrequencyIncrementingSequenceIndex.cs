@@ -15,7 +15,20 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// <seealso cref="ISequenceIndex{TLink}"/>
     public class CachedFrequencyIncrementingSequenceIndex<TLink> : ISequenceIndex<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+
+        /// <summary>
+        /// <para>
+        /// The cache.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly LinkFrequenciesCache<TLink> _cache;
 
         /// <summary>
@@ -57,7 +70,26 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             }
             return indexed;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance is indexed with increment.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="target">
+        /// <para>The target.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The indexed.</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsIndexedWithIncrement(TLink source, TLink target)
         {
             var frequency = _cache.GetFrequency(source, target);
@@ -95,7 +127,26 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             while (--i >= 1 && (indexed = IsIndexed(sequence[i - 1], sequence[i]))) { }
             return indexed;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Determines whether this instance is indexed.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="source">
+        /// <para>The source.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="target">
+        /// <para>The target.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The bool</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsIndexed(TLink source, TLink target)
         {
             var frequency = _cache.GetFrequency(source, target);

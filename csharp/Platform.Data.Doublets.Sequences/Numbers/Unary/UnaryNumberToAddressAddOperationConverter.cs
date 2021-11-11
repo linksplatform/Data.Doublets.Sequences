@@ -17,12 +17,55 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// <seealso cref="IConverter{TLink}"/>
     public class UnaryNumberToAddressAddOperationConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink>
     {
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<TLink, ulong> _addressToUInt64Converter = UncheckedConverter<TLink, ulong>.Default;
+        /// <summary>
+        /// <para>
+        /// The default.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly UncheckedConverter<ulong, TLink> _uInt64ToAddressConverter = UncheckedConverter<ulong, TLink>.Default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _zero = default;
+        /// <summary>
+        /// <para>
+        /// The zero.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static readonly TLink _one = Arithmetic.Increment(_zero);
+
+        /// <summary>
+        /// <para>
+        /// The unary to int 64.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly Dictionary<TLink, TLink> _unaryToUInt64;
+        /// <summary>
+        /// <para>
+        /// The unary one.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLink _unaryOne;
 
         /// <summary>
@@ -93,7 +136,26 @@ namespace Platform.Data.Doublets.Numbers.Unary
                 return result;
             }
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Creates the unary to u int 64 dictionary using the specified links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="links">
+        /// <para>The links.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="unaryOne">
+        /// <para>The unary one.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The unary to int 64.</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Dictionary<TLink, TLink> CreateUnaryToUInt64Dictionary(ILinks<TLink> links, TLink unaryOne)
         {
             var unaryToUInt64 = new Dictionary<TLink, TLink>
@@ -110,7 +172,22 @@ namespace Platform.Data.Doublets.Numbers.Unary
             }
             return unaryToUInt64;
         }
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+        /// <summary>
+        /// <para>
+        /// Doubles the number.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="number">
+        /// <para>The number.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link</para>
+        /// <para></para>
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static TLink Double(TLink number) => _uInt64ToAddressConverter.Convert(_addressToUInt64Converter.Convert(number) * 2UL);
     }
 }
