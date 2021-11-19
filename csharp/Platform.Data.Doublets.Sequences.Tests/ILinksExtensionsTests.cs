@@ -2,20 +2,8 @@ using Xunit;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
-    /// <summary>
-    /// <para>
-    /// Represents the links extensions tests.
-    /// </para>
-    /// <para></para>
-    /// </summary>
     public class ILinksExtensionsTests
     {
-        /// <summary>
-        /// <para>
-        /// Tests that format test.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         [Fact]
         public void FormatTest()
         {

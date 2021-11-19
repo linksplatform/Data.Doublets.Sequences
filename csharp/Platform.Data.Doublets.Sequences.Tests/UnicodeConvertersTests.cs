@@ -16,20 +16,8 @@ using Platform.Data.Doublets.CriterionMatchers;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
-    /// <summary>
-    /// <para>
-    /// Represents the unicode converters tests.
-    /// </para>
-    /// <para></para>
-    /// </summary>
     public static class UnicodeConvertersTests
     {
-        /// <summary>
-        /// <para>
-        /// Tests that char and unary number unicode symbol converters test.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         [Fact]
         public static void CharAndUnaryNumberUnicodeSymbolConvertersTest()
         {
@@ -45,12 +33,6 @@ namespace Platform.Data.Doublets.Sequences.Tests
             }
         }
 
-        /// <summary>
-        /// <para>
-        /// Tests that char and raw number unicode symbol converters test.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         [Fact]
         public static void CharAndRawNumberUnicodeSymbolConvertersTest()
         {
@@ -75,12 +57,6 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Assert.Equal(originalCharacter, resultingCharacter);
         }
 
-        /// <summary>
-        /// <para>
-        /// Tests that string and unicode sequence converters test.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         [Fact]
         public static void StringAndUnicodeSequenceConvertersTest()
         {

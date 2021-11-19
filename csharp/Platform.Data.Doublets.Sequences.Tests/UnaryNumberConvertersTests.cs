@@ -4,20 +4,8 @@ using Platform.Data.Doublets.Numbers.Unary;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
-    /// <summary>
-    /// <para>
-    /// Represents the unary number converters tests.
-    /// </para>
-    /// <para></para>
-    /// </summary>
     public static class UnaryNumberConvertersTests
     {
-        /// <summary>
-        /// <para>
-        /// Tests that converters test.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         [Fact]
         public static void ConvertersTest()
         {

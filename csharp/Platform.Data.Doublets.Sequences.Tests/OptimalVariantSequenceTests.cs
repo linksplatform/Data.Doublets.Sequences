@@ -21,12 +21,6 @@ using Platform.Data.Doublets.Memory;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
-    /// <summary>
-    /// <para>
-    /// Represents the optimal variant sequence tests.
-    /// </para>
-    /// <para></para>
-    /// </summary>
     public static class OptimalVariantSequenceTests
     {
         private static readonly string _sequenceExample = "зеленела зелёная зелень";
@@ -81,12 +75,6 @@ Eget lorem dolor sed viverra ipsum nunc.
 Leo a diam sollicitudin tempor id eu.
 Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
 
-        /// <summary>
-        /// <para>
-        /// Tests that links based frequency stored optimal variant sequence test.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         [Fact]
         public static void LinksBasedFrequencyStoredOptimalVariantSequenceTest()
         {
@@ -119,12 +107,6 @@ Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
             }
         }
 
-        /// <summary>
-        /// <para>
-        /// Tests that dictionary based frequency stored optimal variant sequence test.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         [Fact]
         public static void DictionaryBasedFrequencyStoredOptimalVariantSequenceTest()
         {
@@ -162,12 +144,6 @@ Interdum consectetur libero id faucibus nisl tincidunt eget nullam non.";
             Assert.True(sequence.SequenceEqual(readSequence1));
         }
 
-        /// <summary>
-        /// <para>
-        /// Tests that saved sequences optimization test.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         [Fact]
         public static void SavedSequencesOptimizationTest()
         {

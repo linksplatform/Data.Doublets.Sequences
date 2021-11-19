@@ -10,20 +10,8 @@ using Platform.Data.Doublets.Sequences;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
-    /// <summary>
-    /// <para>
-    /// Represents the read sequence tests.
-    /// </para>
-    /// <para></para>
-    /// </summary>
     public static class ReadSequenceTests
     {
-        /// <summary>
-        /// <para>
-        /// Tests that read sequence test.
-        /// </para>
-        /// <para></para>
-        /// </summary>
         [Fact]
         public static void ReadSequenceTest()
         {
