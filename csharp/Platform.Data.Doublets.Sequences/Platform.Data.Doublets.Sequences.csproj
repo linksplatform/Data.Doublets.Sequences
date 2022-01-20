@@ -34,7 +34,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="Platform.Data.Doublets" Version="0.7.0" />
+    <PackageReference Include="Platform.Data.Doublets" Version="0.8.0" />
   </ItemGroup>
 
 </Project>
