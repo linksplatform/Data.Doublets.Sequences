@@ -5,6 +5,7 @@ using Platform.Collections.Stacks;
 using Platform.Converters;
 using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.Sequences.Walkers;
+using Platform.Reflection;
 using Platform.Unsafe;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -112,7 +113,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
             BigInteger currentBigInt = new(nextPart.ToBytes());
             while (enumerator.MoveNext())
             {
-                currentBigInt <<= 63;
+                currentBigInt <<= NumericType<TLink>.BitsSize - 1;
                 nextPart = NumberToAddressConverter.Convert(enumerator.Current);
                 currentBigInt |= new BigInteger(nextPart.ToBytes());
             }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using Platform.Converters;
 using Platform.Data.Doublets.Decorators;
 using Platform.Numbers;
@@ -95,7 +96,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
                 var bigIntWithBitMask = Bit.And(bigIntBytes.ToStructure<TLink>(), BitMask);
                 var rawNumber = AddressToNumberConverter.Convert(bigIntWithBitMask);
                 rawNumbers.Add(rawNumber);
-                currentBigInt >>= 63;
+                currentBigInt >>= NumericType<TLink>.BitsSize - 1;
             }
             while (currentBigInt > 0);
             return rawNumbers;
