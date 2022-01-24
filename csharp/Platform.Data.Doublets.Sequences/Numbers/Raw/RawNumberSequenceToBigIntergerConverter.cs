@@ -113,7 +113,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
             BigInteger currentBigInt = new(nextPart.ToBytes());
             while (enumerator.MoveNext())
             {
-                currentBigInt <<= NumericType<TLink>.BitsSize - 1;
+                currentBigInt <<= (NumericType<TLink>.BitsSize - 1);
                 nextPart = NumberToAddressConverter.Convert(enumerator.Current);
                 currentBigInt |= new BigInteger(nextPart.ToBytes());
             }

@@ -96,7 +96,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
                 var bigIntWithBitMask = Bit.And(bigIntBytes.ToStructure<TLink>(), BitMask);
                 var rawNumber = AddressToNumberConverter.Convert(bigIntWithBitMask);
                 rawNumbers.Add(rawNumber);
-                currentBigInt >>= NumericType<TLink>.BitsSize - 1;
+                currentBigInt >>= (NumericType<TLink>.BitsSize - 1);
             }
             while (currentBigInt > 0);
             return rawNumbers;
