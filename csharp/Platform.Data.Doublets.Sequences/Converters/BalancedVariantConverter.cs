@@ -42,7 +42,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override TLink Convert(IList<TLink> sequence)
+        public override TLink Convert(IList<TLink>? sequence)
         {
             var length = sequence.Count;
             if (length < 1)

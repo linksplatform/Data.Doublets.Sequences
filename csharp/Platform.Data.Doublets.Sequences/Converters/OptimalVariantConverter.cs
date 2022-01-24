@@ -20,7 +20,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
     {
         private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
-        private readonly IConverter<IList<TLink>> _sequenceToItsLocalElementLevelsConverter;
+        private readonly IConverter<IList<TLink>?> _sequenceToItsLocalElementLevelsConverter;
 
         /// <summary>
         /// <para>

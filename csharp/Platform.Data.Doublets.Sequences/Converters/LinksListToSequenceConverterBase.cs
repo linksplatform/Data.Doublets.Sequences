@@ -14,7 +14,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLink}"/>
     /// <seealso cref="IConverter{IList{TLink}, TLink}"/>
-    public abstract class LinksListToSequenceConverterBase<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>, TLink>
+    public abstract class LinksListToSequenceConverterBase<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>?, TLink>
     {
         /// <summary>
         /// <para>

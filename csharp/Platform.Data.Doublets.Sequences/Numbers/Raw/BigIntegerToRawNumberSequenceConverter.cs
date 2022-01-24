@@ -49,7 +49,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly IConverter<IList<TLink>, TLink> ListToSequenceConverter;
+        public readonly IConverter<IList<TLink>?, TLink> ListToSequenceConverter;
         /// <summary>
         /// <para>
         /// The negative number marker.

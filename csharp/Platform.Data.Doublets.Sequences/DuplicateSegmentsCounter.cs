@@ -16,7 +16,7 @@ namespace Platform.Data.Doublets.Sequences
     /// <seealso cref="ICounter{int}"/>
     public class DuplicateSegmentsCounter<TLink> : ICounter<int>
     {
-        private readonly IProvider<IList<KeyValuePair<IList<TLink>, IList<TLink>>>> _duplicateFragmentsProvider;
+        private readonly IProvider<IList<KeyValuePair<IList<TLink>?, IList<TLink>>>> _duplicateFragmentsProvider;
 
         /// <summary>
         /// <para>

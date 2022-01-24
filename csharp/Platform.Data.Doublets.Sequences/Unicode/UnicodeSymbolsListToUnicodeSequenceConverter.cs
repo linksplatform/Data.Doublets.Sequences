@@ -15,7 +15,7 @@ namespace Platform.Data.Doublets.Unicode
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLink}"/>
     /// <seealso cref="IConverter{IList{TLink}, TLink}"/>
-    public class UnicodeSymbolsListToUnicodeSequenceConverter<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>, TLink>
+    public class UnicodeSymbolsListToUnicodeSequenceConverter<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>?, TLink>
     {
         private readonly ISequenceIndex<TLink> _index;
         private readonly IConverter<IList<TLink>, TLink> _listToSequenceLinkConverter;

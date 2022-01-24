@@ -29,7 +29,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual bool Add(IList<TLink> sequence) => false;
+        public virtual bool Add(IList<TLink>? sequence) => false;
 
         /// <summary>
         /// <para>

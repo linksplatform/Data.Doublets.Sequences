@@ -100,7 +100,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void IncrementFrequencies(IList<TLink> sequence)
+        public void IncrementFrequencies(IList<TLink>? sequence)
         {
             for (var i = 1; i < sequence.Count; i++)
             {

@@ -62,7 +62,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Add(IList<TLink> sequence)
+        public override bool Add(IList<TLink>? sequence)
         {
             var indexed = true;
             var i = sequence.Count;

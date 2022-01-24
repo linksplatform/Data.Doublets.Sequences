@@ -23,7 +23,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
         private static readonly TLink _zero = default;
         private static readonly TLink _one = Arithmetic.Increment(_zero);
-        private readonly IConverter<IList<TLink>, TLink> _baseConverter;
+        private readonly IConverter<IList<TLink>?, TLink> _baseConverter;
         private readonly LinkFrequenciesCache<TLink> _doubletFrequenciesCache;
         private readonly TLink _minFrequencyToCompress;
         private readonly bool _doInitialFrequenciesIncrement;

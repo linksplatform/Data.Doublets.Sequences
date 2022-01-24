@@ -13,7 +13,7 @@ namespace Platform.Data.Doublets.Unicode
     /// <para></para>
     /// </summary>
     /// <seealso cref="IConverter{string, IList{TLink}}"/>
-    public class StringToUnicodeSymbolsListConverter<TLink> : IConverter<string, IList<TLink>>
+    public class StringToUnicodeSymbolsListConverter<TLink> : IConverter<string, IList<TLink>?>
     {
         private readonly IConverter<char, TLink> _charToUnicodeSymbolConverter;
 

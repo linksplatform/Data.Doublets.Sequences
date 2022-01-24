@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// </summary>
         /// <param name="sequence">Последовательность для индексации.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        bool Add(IList<TLink> sequence);
+        bool Add(IList<TLink>? sequence);
 
         /// <summary>
         /// <para>
