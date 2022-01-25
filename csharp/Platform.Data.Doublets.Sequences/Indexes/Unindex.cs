@@ -46,6 +46,6 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual bool MightContain(IList<TLink> sequence) => true;
+        public virtual bool MightContain(IList<TLink>? sequence) => true;
     }
 }

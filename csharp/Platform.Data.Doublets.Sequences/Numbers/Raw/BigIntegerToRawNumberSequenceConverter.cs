@@ -80,7 +80,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
         /// <para>A negative number marker.</para>
         /// <para></para>
         /// </param>
-        public BigIntegerToRawNumberSequenceConverter(ILinks<TLink> links, IConverter<TLink> addressToNumberConverter, IConverter<IList<TLink>,TLink> listToSequenceConverter, TLink negativeNumberMarker) : base(links)
+        public BigIntegerToRawNumberSequenceConverter(ILinks<TLink> links, IConverter<TLink> addressToNumberConverter, IConverter<IList<TLink>?,TLink> listToSequenceConverter, TLink negativeNumberMarker) : base(links)
         {
             AddressToNumberConverter = addressToNumberConverter;
             ListToSequenceConverter = listToSequenceConverter;

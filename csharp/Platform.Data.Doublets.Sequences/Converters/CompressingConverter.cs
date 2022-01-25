@@ -99,7 +99,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CompressingConverter(ILinks<TLink> links, IConverter<IList<TLink>, TLink> baseConverter, LinkFrequenciesCache<TLink> doubletFrequenciesCache)
+        public CompressingConverter(ILinks<TLink> links, IConverter<IList<TLink>?, TLink> baseConverter, LinkFrequenciesCache<TLink> doubletFrequenciesCache)
             : this(links, baseConverter, doubletFrequenciesCache, _one, true) { }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CompressingConverter(ILinks<TLink> links, IConverter<IList<TLink>, TLink> baseConverter, LinkFrequenciesCache<TLink> doubletFrequenciesCache, bool doInitialFrequenciesIncrement)
+        public CompressingConverter(ILinks<TLink> links, IConverter<IList<TLink>?, TLink> baseConverter, LinkFrequenciesCache<TLink> doubletFrequenciesCache, bool doInitialFrequenciesIncrement)
             : this(links, baseConverter, doubletFrequenciesCache, _one, doInitialFrequenciesIncrement) { }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CompressingConverter(ILinks<TLink> links, IConverter<IList<TLink>, TLink> baseConverter, LinkFrequenciesCache<TLink> doubletFrequenciesCache, TLink minFrequencyToCompress, bool doInitialFrequenciesIncrement)
+        public CompressingConverter(ILinks<TLink> links, IConverter<IList<TLink>?, TLink> baseConverter, LinkFrequenciesCache<TLink> doubletFrequenciesCache, TLink minFrequencyToCompress, bool doInitialFrequenciesIncrement)
             : base(links)
         {
             _baseConverter = baseConverter;
@@ -184,9 +184,9 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override TLink Convert(IList<TLink> source) => _baseConverter.Convert(Compress(source));
+        public override TLink Convert(IList<TLink>? source) => _baseConverter.Convert(Compress(source));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IList<TLink> Compress(IList<TLink> sequence)
+        private IList<TLink>? Compress(IList<TLink>? sequence)
         {
             if (sequence.IsNullOrEmpty())
             {

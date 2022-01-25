@@ -45,7 +45,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public IList<TLink> Convert(string source)
+        public IList<TLink>? Convert(string source)
         {
             var elements = new TLink[source.Length];
             for (var i = 0; i < elements.Length; i++)

@@ -71,7 +71,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
             return _links.GetOrCreate(sequence[0], sequence[1]);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void HalveSequence(IList<TLink> destination, IList<TLink> source, int length)
+        private void HalveSequence(IList<TLink>? destination, IList<TLink>? source, int length)
         {
             var loopedLength = length - (length % 2);
             for (var i = 0; i < loopedLength; i += 2)

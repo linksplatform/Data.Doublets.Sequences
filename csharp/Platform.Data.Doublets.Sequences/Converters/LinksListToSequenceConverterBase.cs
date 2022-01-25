@@ -44,6 +44,6 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public abstract TLink Convert(IList<TLink> source);
+        public abstract TLink Convert(IList<TLink>? source);
     }
 }

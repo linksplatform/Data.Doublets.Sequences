@@ -16,7 +16,7 @@ namespace Platform.Data.Doublets.Sequences
     /// <seealso cref="ICounter{int}"/>
     public class DuplicateSegmentsCounter<TLink> : ICounter<int>
     {
-        private readonly IProvider<IList<KeyValuePair<IList<TLink>?, IList<TLink>>>> _duplicateFragmentsProvider;
+        private readonly IProvider<IList<KeyValuePair<IList<TLink>?, IList<TLink>?>>> _duplicateFragmentsProvider;
 
         /// <summary>
         /// <para>
@@ -29,7 +29,7 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public DuplicateSegmentsCounter(IProvider<IList<KeyValuePair<IList<TLink>, IList<TLink>>>> duplicateFragmentsProvider) => _duplicateFragmentsProvider = duplicateFragmentsProvider;
+        public DuplicateSegmentsCounter(IProvider<IList<KeyValuePair<IList<TLink>?, IList<TLink>?>>> duplicateFragmentsProvider) => _duplicateFragmentsProvider = duplicateFragmentsProvider;
 
         /// <summary>
         /// <para>

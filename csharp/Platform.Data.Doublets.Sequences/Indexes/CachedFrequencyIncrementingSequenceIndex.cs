@@ -88,7 +88,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool MightContain(IList<TLink> sequence)
+        public bool MightContain(IList<TLink>? sequence)
         {
             var indexed = true;
             var i = sequence.Count;

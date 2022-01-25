@@ -37,7 +37,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public OptimalVariantConverter(ILinks<TLink> links, IConverter<IList<TLink>> sequenceToItsLocalElementLevelsConverter) : base(links)
+        public OptimalVariantConverter(ILinks<TLink> links, IConverter<IList<TLink>?> sequenceToItsLocalElementLevelsConverter) : base(links)
             => _sequenceToItsLocalElementLevelsConverter = sequenceToItsLocalElementLevelsConverter;
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override TLink Convert(IList<TLink> sequence)
+        public override TLink Convert(IList<TLink>? sequence)
         {
             var length = sequence.Count;
             if (length == 1)

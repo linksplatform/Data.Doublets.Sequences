@@ -144,7 +144,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void PrintFrequencies(IList<TLink> sequence)
+        public void PrintFrequencies(IList<TLink>? sequence)
         {
             for (var i = 1; i < sequence.Count; i++)
             {

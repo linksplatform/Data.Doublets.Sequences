@@ -18,7 +18,7 @@ namespace Platform.Data.Doublets.Unicode
     public class UnicodeSymbolsListToUnicodeSequenceConverter<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>?, TLink>
     {
         private readonly ISequenceIndex<TLink> _index;
-        private readonly IConverter<IList<TLink>, TLink> _listToSequenceLinkConverter;
+        private readonly IConverter<IList<TLink>?, TLink> _listToSequenceLinkConverter;
         private readonly TLink _unicodeSequenceMarker;
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLink> links, ISequenceIndex<TLink> index, IConverter<IList<TLink>, TLink> listToSequenceLinkConverter, TLink unicodeSequenceMarker) : base(links)
+        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLink> links, ISequenceIndex<TLink> index, IConverter<IList<TLink>?, TLink> listToSequenceLinkConverter, TLink unicodeSequenceMarker) : base(links)
         {
             _index = index;
             _listToSequenceLinkConverter = listToSequenceLinkConverter;
@@ -70,7 +70,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLink> links, IConverter<IList<TLink>, TLink> listToSequenceLinkConverter, TLink unicodeSequenceMarker)
+        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLink> links, IConverter<IList<TLink>?, TLink> listToSequenceLinkConverter, TLink unicodeSequenceMarker)
             : this(links, new Unindex<TLink>(), listToSequenceLinkConverter, unicodeSequenceMarker) { }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Convert(IList<TLink> list)
+        public TLink Convert(IList<TLink>? list)
         {
             _index.Add(list);
             var sequence = _listToSequenceLinkConverter.Convert(list);
