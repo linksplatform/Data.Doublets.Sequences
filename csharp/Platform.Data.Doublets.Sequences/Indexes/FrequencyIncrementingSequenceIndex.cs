@@ -13,13 +13,13 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="SequenceIndex{TLink}"/>
-    /// <seealso cref="ISequenceIndex{TLink}"/>
-    public class FrequencyIncrementingSequenceIndex<TLink> : SequenceIndex<TLink>, ISequenceIndex<TLink>
+    /// <seealso cref="SequenceIndex{TLinkAddress}"/>
+    /// <seealso cref="ISequenceIndex{TLinkAddress}"/>
+    public class FrequencyIncrementingSequenceIndex<TLinkAddress> : SequenceIndex<TLinkAddress>, ISequenceIndex<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly IProperty<TLink, TLink> _frequencyPropertyOperator;
-        private readonly IIncrementer<TLink> _frequencyIncrementer;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly IProperty<TLinkAddress, TLinkAddress> _frequencyPropertyOperator;
+        private readonly IIncrementer<TLinkAddress> _frequencyIncrementer;
 
         /// <summary>
         /// <para>
@@ -40,7 +40,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public FrequencyIncrementingSequenceIndex(ILinks<TLink> links, IProperty<TLink, TLink> frequencyPropertyOperator, IIncrementer<TLink> frequencyIncrementer)
+        public FrequencyIncrementingSequenceIndex(ILinks<TLinkAddress> links, IProperty<TLinkAddress, TLinkAddress> frequencyPropertyOperator, IIncrementer<TLinkAddress> frequencyIncrementer)
             : base(links)
         {
             _frequencyPropertyOperator = frequencyPropertyOperator;
@@ -62,7 +62,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Add(IList<TLink>? sequence)
+        public override bool Add(IList<TLinkAddress>? sequence)
         {
             var indexed = true;
             var i = sequence.Count;
@@ -74,7 +74,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             return indexed;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsIndexedWithIncrement(TLink source, TLink target)
+        private bool IsIndexedWithIncrement(TLinkAddress source, TLinkAddress target)
         {
             var link = _links.SearchOrDefault(source, target);
             var indexed = !_equalityComparer.Equals(link, default);
@@ -85,7 +85,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             return indexed;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void Increment(TLink link)
+        private void Increment(TLinkAddress link)
         {
             var previousFrequency = _frequencyPropertyOperator.Get(link);
             var frequency = _frequencyIncrementer.Increment(previousFrequency);

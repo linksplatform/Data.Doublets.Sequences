@@ -13,17 +13,17 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{TLink}"/>
-    public class UnaryNumberToAddressAddOperationConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{TLinkAddress}"/>
+    public class UnaryNumberToAddressAddOperationConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private static readonly UncheckedConverter<TLink, ulong> _addressToUInt64Converter = UncheckedConverter<TLink, ulong>.Default;
-        private static readonly UncheckedConverter<ulong, TLink> _uInt64ToAddressConverter = UncheckedConverter<ulong, TLink>.Default;
-        private static readonly TLink _zero = default;
-        private static readonly TLink _one = Arithmetic.Increment(_zero);
-        private readonly Dictionary<TLink, TLink> _unaryToUInt64;
-        private readonly TLink _unaryOne;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private static readonly UncheckedConverter<TLinkAddress, ulong> _addressToUInt64Converter = UncheckedConverter<TLinkAddress, ulong>.Default;
+        private static readonly UncheckedConverter<ulong, TLinkAddress> _uInt64ToAddressConverter = UncheckedConverter<ulong, TLinkAddress>.Default;
+        private static readonly TLinkAddress _zero = default;
+        private static readonly TLinkAddress _one = Arithmetic.Increment(_zero);
+        private readonly Dictionary<TLinkAddress, TLinkAddress> _unaryToUInt64;
+        private readonly TLinkAddress _unaryOne;
 
         /// <summary>
         /// <para>
@@ -40,7 +40,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnaryNumberToAddressAddOperationConverter(ILinks<TLink> links, TLink unaryOne)
+        public UnaryNumberToAddressAddOperationConverter(ILinks<TLinkAddress> links, TLinkAddress unaryOne)
             : base(links)
         {
             _unaryOne = unaryOne;
@@ -62,7 +62,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Convert(TLink unaryNumber)
+        public TLinkAddress Convert(TLinkAddress unaryNumber)
         {
             if (_equalityComparer.Equals(unaryNumber, default))
             {
@@ -82,21 +82,21 @@ namespace Platform.Data.Doublets.Numbers.Unary
             else
             {
                 var result = _unaryToUInt64[source];
-                TLink lastValue;
+                TLinkAddress lastValue;
                 while (!_unaryToUInt64.TryGetValue(target, out lastValue))
                 {
                     source = links.GetSource(target);
-                    result = Arithmetic<TLink>.Add(result, _unaryToUInt64[source]);
+                    result = Arithmetic<TLinkAddress>.Add(result, _unaryToUInt64[source]);
                     target = links.GetTarget(target);
                 }
-                result = Arithmetic<TLink>.Add(result, lastValue);
+                result = Arithmetic<TLinkAddress>.Add(result, lastValue);
                 return result;
             }
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Dictionary<TLink, TLink> CreateUnaryToUInt64Dictionary(ILinks<TLink> links, TLink unaryOne)
+        private static Dictionary<TLinkAddress, TLinkAddress> CreateUnaryToUInt64Dictionary(ILinks<TLinkAddress> links, TLinkAddress unaryOne)
         {
-            var unaryToUInt64 = new Dictionary<TLink, TLink>
+            var unaryToUInt64 = new Dictionary<TLinkAddress, TLinkAddress>
             {
                 { unaryOne, _one }
             };
@@ -111,6 +111,6 @@ namespace Platform.Data.Doublets.Numbers.Unary
             return unaryToUInt64;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static TLink Double(TLink number) => _uInt64ToAddressConverter.Convert(_addressToUInt64Converter.Convert(number) * 2UL);
+        private static TLinkAddress Double(TLinkAddress number) => _uInt64ToAddressConverter.Convert(_addressToUInt64Converter.Convert(number) * 2UL);
     }
 }

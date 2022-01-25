@@ -11,8 +11,8 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksListToSequenceConverterBase{TLink}"/>
-    public class BalancedVariantConverter<TLink> : LinksListToSequenceConverterBase<TLink>
+    /// <seealso cref="LinksListToSequenceConverterBase{TLinkAddress}"/>
+    public class BalancedVariantConverter<TLinkAddress> : LinksListToSequenceConverterBase<TLinkAddress>
     {
         /// <summary>
         /// <para>
@@ -25,7 +25,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public BalancedVariantConverter(ILinks<TLink> links) : base(links) { }
+        public BalancedVariantConverter(ILinks<TLinkAddress> links) : base(links) { }
 
         /// <summary>
         /// <para>
@@ -42,7 +42,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override TLink Convert(IList<TLink>? sequence)
+        public override TLinkAddress Convert(IList<TLinkAddress>? sequence)
         {
             var length = sequence.Count;
             if (length < 1)
@@ -57,7 +57,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
             if (length > 2)
             {
                 // TODO: Try to use stackalloc (which at the moment is not working with generics) but will be possible with Sigil
-                var halvedSequence = new TLink[(length / 2) + (length % 2)];
+                var halvedSequence = new TLinkAddress[(length / 2) + (length % 2)];
                 HalveSequence(halvedSequence, sequence, length);
                 sequence = halvedSequence;
                 length = halvedSequence.Length;
@@ -71,7 +71,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
             return _links.GetOrCreate(sequence[0], sequence[1]);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void HalveSequence(IList<TLink>? destination, IList<TLink>? source, int length)
+        private void HalveSequence(IList<TLinkAddress>? destination, IList<TLinkAddress>? source, int length)
         {
             var loopedLength = length - (length % 2);
             for (var i = 0; i < loopedLength; i += 2)

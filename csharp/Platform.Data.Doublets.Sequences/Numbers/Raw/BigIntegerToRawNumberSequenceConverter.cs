@@ -17,10 +17,10 @@ namespace Platform.Data.Doublets.Numbers.Raw
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksDecoratorBase{TLink}"/>
-    /// <seealso cref="IConverter{BigInteger, TLink}"/>
-    public class BigIntegerToRawNumberSequenceConverter<TLink> : LinksDecoratorBase<TLink>, IConverter<BigInteger, TLink>
-        where TLink : struct
+    /// <seealso cref="LinksDecoratorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{BigInteger, TLinkAddress}"/>
+    public class BigIntegerToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<BigInteger, TLinkAddress>
+        where TLinkAddress : struct
     {
         /// <summary>
         /// <para>
@@ -28,35 +28,35 @@ namespace Platform.Data.Doublets.Numbers.Raw
         /// </para>
         /// <para></para>
         /// </summary>
-        public static readonly TLink MaximumValue = NumericType<TLink>.MaxValue;
+        public static readonly TLinkAddress MaximumValue = NumericType<TLinkAddress>.MaxValue;
         /// <summary>
         /// <para>
         /// The maximum value.
         /// </para>
         /// <para></para>
         /// </summary>
-        public static readonly TLink BitMask = Bit.ShiftRight(MaximumValue, 1);
+        public static readonly TLinkAddress BitMask = Bit.ShiftRight(MaximumValue, 1);
         /// <summary>
         /// <para>
         /// The address to number converter.
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly IConverter<TLink> AddressToNumberConverter;
+        public readonly IConverter<TLinkAddress> AddressToNumberConverter;
         /// <summary>
         /// <para>
         /// The list to sequence converter.
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly IConverter<IList<TLink>?, TLink> ListToSequenceConverter;
+        public readonly IConverter<IList<TLinkAddress>?, TLinkAddress> ListToSequenceConverter;
         /// <summary>
         /// <para>
         /// The negative number marker.
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly TLink NegativeNumberMarker;
+        public readonly TLinkAddress NegativeNumberMarker;
 
         /// <summary>
         /// <para>
@@ -80,23 +80,23 @@ namespace Platform.Data.Doublets.Numbers.Raw
         /// <para>A negative number marker.</para>
         /// <para></para>
         /// </param>
-        public BigIntegerToRawNumberSequenceConverter(ILinks<TLink> links, IConverter<TLink> addressToNumberConverter, IConverter<IList<TLink>?,TLink> listToSequenceConverter, TLink negativeNumberMarker) : base(links)
+        public BigIntegerToRawNumberSequenceConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> addressToNumberConverter, IConverter<IList<TLinkAddress>?,TLinkAddress> listToSequenceConverter, TLinkAddress negativeNumberMarker) : base(links)
         {
             AddressToNumberConverter = addressToNumberConverter;
             ListToSequenceConverter = listToSequenceConverter;
             NegativeNumberMarker = negativeNumberMarker;
         }
-        private List<TLink> GetRawNumberParts(BigInteger bigInteger)
+        private List<TLinkAddress> GetRawNumberParts(BigInteger bigInteger)
         {
-            List<TLink> rawNumbers = new();
+            List<TLinkAddress> rawNumbers = new();
             BigInteger currentBigInt = bigInteger;
             do
             {
                 var bigIntBytes = currentBigInt.ToByteArray();
-                var bigIntWithBitMask = Bit.And(bigIntBytes.ToStructure<TLink>(), BitMask);
+                var bigIntWithBitMask = Bit.And(bigIntBytes.ToStructure<TLinkAddress>(), BitMask);
                 var rawNumber = AddressToNumberConverter.Convert(bigIntWithBitMask);
                 rawNumbers.Add(rawNumber);
-                currentBigInt >>= (NumericType<TLink>.BitsSize - 1);
+                currentBigInt >>= (NumericType<TLinkAddress>.BitsSize - 1);
             }
             while (currentBigInt > 0);
             return rawNumbers;
@@ -116,7 +116,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
         /// <para>The link</para>
         /// <para></para>
         /// </returns>
-        public TLink Convert(BigInteger bigInteger)
+        public TLinkAddress Convert(BigInteger bigInteger)
         {
             var sign = bigInteger.Sign;
             var number = GetRawNumberParts(sign == -1 ? BigInteger.Negate(bigInteger) : bigInteger);

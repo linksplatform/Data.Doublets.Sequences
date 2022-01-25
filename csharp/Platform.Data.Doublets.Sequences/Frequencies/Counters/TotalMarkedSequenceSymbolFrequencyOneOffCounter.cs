@@ -12,10 +12,10 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="TotalSequenceSymbolFrequencyOneOffCounter{TLink}"/>
-    public class TotalMarkedSequenceSymbolFrequencyOneOffCounter<TLink> : TotalSequenceSymbolFrequencyOneOffCounter<TLink>
+    /// <seealso cref="TotalSequenceSymbolFrequencyOneOffCounter{TLinkAddress}"/>
+    public class TotalMarkedSequenceSymbolFrequencyOneOffCounter<TLinkAddress> : TotalSequenceSymbolFrequencyOneOffCounter<TLinkAddress>
     {
-        private readonly ICriterionMatcher<TLink> _markedSequenceMatcher;
+        private readonly ICriterionMatcher<TLinkAddress> _markedSequenceMatcher;
 
         /// <summary>
         /// <para>
@@ -36,7 +36,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TotalMarkedSequenceSymbolFrequencyOneOffCounter(ILinks<TLink> links, ICriterionMatcher<TLink> markedSequenceMatcher, TLink symbol) 
+        public TotalMarkedSequenceSymbolFrequencyOneOffCounter(ILinks<TLinkAddress> links, ICriterionMatcher<TLinkAddress> markedSequenceMatcher, TLinkAddress symbol) 
             : base(links, symbol)
             => _markedSequenceMatcher = markedSequenceMatcher;
 
@@ -51,9 +51,9 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected override void CountSequenceSymbolFrequency(TLink link)
+        protected override void CountSequenceSymbolFrequency(TLinkAddress link)
         {
-            var symbolFrequencyCounter = new MarkedSequenceSymbolFrequencyOneOffCounter<TLink>(_links, _markedSequenceMatcher, link, _symbol);
+            var symbolFrequencyCounter = new MarkedSequenceSymbolFrequencyOneOffCounter<TLinkAddress>(_links, _markedSequenceMatcher, link, _symbol);
             _total = Arithmetic.Add(_total, symbolFrequencyCounter.Count());
         }
     }

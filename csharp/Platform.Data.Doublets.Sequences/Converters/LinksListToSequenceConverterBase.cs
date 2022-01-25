@@ -12,9 +12,9 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{IList{TLink}, TLink}"/>
-    public abstract class LinksListToSequenceConverterBase<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>?, TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{IList{TLinkAddress}, TLinkAddress}"/>
+    public abstract class LinksListToSequenceConverterBase<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<IList<TLinkAddress>?, TLinkAddress>
     {
         /// <summary>
         /// <para>
@@ -27,7 +27,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected LinksListToSequenceConverterBase(ILinks<TLink> links) : base(links) { }
+        protected LinksListToSequenceConverterBase(ILinks<TLinkAddress> links) : base(links) { }
 
         /// <summary>
         /// <para>
@@ -44,6 +44,6 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public abstract TLink Convert(IList<TLink>? source);
+        public abstract TLinkAddress Convert(IList<TLinkAddress>? source);
     }
 }

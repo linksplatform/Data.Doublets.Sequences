@@ -14,13 +14,13 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{Doublet{TLink}, TLink}"/>
-    public class LinkToItsFrequencyNumberConveter<TLink> : LinksOperatorBase<TLink>, IConverter<Doublet<TLink>, TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{Doublet{TLinkAddress}, TLinkAddress}"/>
+    public class LinkToItsFrequencyNumberConveter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<Doublet<TLinkAddress>, TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly IProperty<TLink, TLink> _frequencyPropertyOperator;
-        private readonly IConverter<TLink> _unaryNumberToAddressConverter;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly IProperty<TLinkAddress, TLinkAddress> _frequencyPropertyOperator;
+        private readonly IConverter<TLinkAddress> _unaryNumberToAddressConverter;
 
         /// <summary>
         /// <para>
@@ -42,9 +42,9 @@ namespace Platform.Data.Doublets.Numbers.Unary
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LinkToItsFrequencyNumberConveter(
-            ILinks<TLink> links,
-            IProperty<TLink, TLink> frequencyPropertyOperator,
-            IConverter<TLink> unaryNumberToAddressConverter)
+            ILinks<TLinkAddress> links,
+            IProperty<TLinkAddress, TLinkAddress> frequencyPropertyOperator,
+            IConverter<TLinkAddress> unaryNumberToAddressConverter)
             : base(links)
         {
             _frequencyPropertyOperator = frequencyPropertyOperator;
@@ -70,7 +70,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Convert(Doublet<TLink> doublet)
+        public TLinkAddress Convert(Doublet<TLinkAddress> doublet)
         {
             var links = _links;
             var link = links.SearchOrDefault(doublet.Source, doublet.Target);

@@ -12,12 +12,12 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{IList{TLink}}"/>
-    public class SequenceToItsLocalElementLevelsConverter<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>?>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{IList{TLinkAddress}}"/>
+    public class SequenceToItsLocalElementLevelsConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<IList<TLinkAddress>?>
     {
-        private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
-        private readonly IConverter<Doublet<TLink>, TLink> _linkToItsFrequencyToNumberConveter;
+        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
+        private readonly IConverter<Doublet<TLinkAddress>, TLinkAddress> _linkToItsFrequencyToNumberConveter;
 
         /// <summary>
         /// <para>
@@ -34,7 +34,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public SequenceToItsLocalElementLevelsConverter(ILinks<TLink> links, IConverter<Doublet<TLink>, TLink> linkToItsFrequencyToNumberConveter) : base(links) => _linkToItsFrequencyToNumberConveter = linkToItsFrequencyToNumberConveter;
+        public SequenceToItsLocalElementLevelsConverter(ILinks<TLinkAddress> links, IConverter<Doublet<TLinkAddress>, TLinkAddress> linkToItsFrequencyToNumberConveter) : base(links) => _linkToItsFrequencyToNumberConveter = linkToItsFrequencyToNumberConveter;
 
         /// <summary>
         /// <para>
@@ -51,9 +51,9 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public IList<TLink>? Convert(IList<TLink>? sequence)
+        public IList<TLinkAddress>? Convert(IList<TLinkAddress>? sequence)
         {
-            var levels = new TLink[sequence.Count];
+            var levels = new TLinkAddress[sequence.Count];
             levels[0] = GetFrequencyNumber(sequence[0], sequence[1]);
             for (var i = 1; i < sequence.Count - 1; i++)
             {
@@ -84,6 +84,6 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink GetFrequencyNumber(TLink source, TLink target) => _linkToItsFrequencyToNumberConveter.Convert(new Doublet<TLink>(source, target));
+        public TLinkAddress GetFrequencyNumber(TLinkAddress source, TLinkAddress target) => _linkToItsFrequencyToNumberConveter.Convert(new Doublet<TLinkAddress>(source, target));
     }
 }

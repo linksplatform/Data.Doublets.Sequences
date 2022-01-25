@@ -13,13 +13,13 @@ namespace Platform.Data.Doublets.Unicode
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{IList{TLink}, TLink}"/>
-    public class UnicodeSymbolsListToUnicodeSequenceConverter<TLink> : LinksOperatorBase<TLink>, IConverter<IList<TLink>?, TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{IList{TLinkAddress}, TLinkAddress}"/>
+    public class UnicodeSymbolsListToUnicodeSequenceConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<IList<TLinkAddress>?, TLinkAddress>
     {
-        private readonly ISequenceIndex<TLink> _index;
-        private readonly IConverter<IList<TLink>?, TLink> _listToSequenceLinkConverter;
-        private readonly TLink _unicodeSequenceMarker;
+        private readonly ISequenceIndex<TLinkAddress> _index;
+        private readonly IConverter<IList<TLinkAddress>?, TLinkAddress> _listToSequenceLinkConverter;
+        private readonly TLinkAddress _unicodeSequenceMarker;
 
         /// <summary>
         /// <para>
@@ -44,7 +44,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLink> links, ISequenceIndex<TLink> index, IConverter<IList<TLink>?, TLink> listToSequenceLinkConverter, TLink unicodeSequenceMarker) : base(links)
+        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLinkAddress> links, ISequenceIndex<TLinkAddress> index, IConverter<IList<TLinkAddress>?, TLinkAddress> listToSequenceLinkConverter, TLinkAddress unicodeSequenceMarker) : base(links)
         {
             _index = index;
             _listToSequenceLinkConverter = listToSequenceLinkConverter;
@@ -70,8 +70,8 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLink> links, IConverter<IList<TLink>?, TLink> listToSequenceLinkConverter, TLink unicodeSequenceMarker)
-            : this(links, new Unindex<TLink>(), listToSequenceLinkConverter, unicodeSequenceMarker) { }
+        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>?, TLinkAddress> listToSequenceLinkConverter, TLinkAddress unicodeSequenceMarker)
+            : this(links, new Unindex<TLinkAddress>(), listToSequenceLinkConverter, unicodeSequenceMarker) { }
 
         /// <summary>
         /// <para>
@@ -88,7 +88,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Convert(IList<TLink>? list)
+        public TLinkAddress Convert(IList<TLinkAddress>? list)
         {
             _index.Add(list);
             var sequence = _listToSequenceLinkConverter.Convert(list);

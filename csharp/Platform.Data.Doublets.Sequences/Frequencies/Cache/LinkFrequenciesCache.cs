@@ -12,14 +12,14 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
     /// Can be used to operate with many CompressingConverters (to keep global frequencies data between them).
     /// TODO: Extract interface to implement frequencies storage inside Links storage
     /// </remarks>
-    public class LinkFrequenciesCache<TLink> : LinksOperatorBase<TLink>
+    public class LinkFrequenciesCache<TLinkAddress> : LinksOperatorBase<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
-        private static readonly TLink _zero = default;
-        private static readonly TLink _one = Arithmetic.Increment(_zero);
-        private readonly Dictionary<Doublet<TLink>, LinkFrequency<TLink>> _doubletsCache;
-        private readonly ICounter<TLink, TLink> _frequencyCounter;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
+        private static readonly TLinkAddress _zero = default;
+        private static readonly TLinkAddress _one = Arithmetic.Increment(_zero);
+        private readonly Dictionary<Doublet<TLinkAddress>, LinkFrequency<TLinkAddress>> _doubletsCache;
+        private readonly ICounter<TLinkAddress, TLinkAddress> _frequencyCounter;
 
         /// <summary>
         /// <para>
@@ -36,10 +36,10 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LinkFrequenciesCache(ILinks<TLink> links, ICounter<TLink, TLink> frequencyCounter)
+        public LinkFrequenciesCache(ILinks<TLinkAddress> links, ICounter<TLinkAddress, TLinkAddress> frequencyCounter)
             : base(links)
         {
-            _doubletsCache = new Dictionary<Doublet<TLink>, LinkFrequency<TLink>>(4096, DoubletComparer<TLink>.Default);
+            _doubletsCache = new Dictionary<Doublet<TLinkAddress>, LinkFrequency<TLinkAddress>>(4096, DoubletComparer<TLinkAddress>.Default);
             _frequencyCounter = frequencyCounter;
         }
 
@@ -62,9 +62,9 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LinkFrequency<TLink> GetFrequency(TLink source, TLink target)
+        public LinkFrequency<TLinkAddress> GetFrequency(TLinkAddress source, TLinkAddress target)
         {
-            var doublet = new Doublet<TLink>(source, target);
+            var doublet = new Doublet<TLinkAddress>(source, target);
             return GetFrequency(ref doublet);
         }
 
@@ -83,9 +83,9 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LinkFrequency<TLink> GetFrequency(ref Doublet<TLink> doublet)
+        public LinkFrequency<TLinkAddress> GetFrequency(ref Doublet<TLinkAddress> doublet)
         {
-            _doubletsCache.TryGetValue(doublet, out LinkFrequency<TLink> data);
+            _doubletsCache.TryGetValue(doublet, out LinkFrequency<TLinkAddress> data);
             return data;
         }
 
@@ -100,7 +100,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void IncrementFrequencies(IList<TLink>? sequence)
+        public void IncrementFrequencies(IList<TLinkAddress>? sequence)
         {
             for (var i = 1; i < sequence.Count; i++)
             {
@@ -127,9 +127,9 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LinkFrequency<TLink> IncrementFrequency(TLink source, TLink target)
+        public LinkFrequency<TLinkAddress> IncrementFrequency(TLinkAddress source, TLinkAddress target)
         {
-            var doublet = new Doublet<TLink>(source, target);
+            var doublet = new Doublet<TLinkAddress>(source, target);
             return IncrementFrequency(ref doublet);
         }
 
@@ -144,7 +144,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void PrintFrequencies(IList<TLink>? sequence)
+        public void PrintFrequencies(IList<TLinkAddress>? sequence)
         {
             for (var i = 1; i < sequence.Count; i++)
             {
@@ -167,7 +167,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void PrintFrequency(TLink source, TLink target)
+        public void PrintFrequency(TLinkAddress source, TLinkAddress target)
         {
             var number = GetFrequency(source, target).Frequency;
             Console.WriteLine("({0},{1}) - {2}", source, target, number);
@@ -188,16 +188,16 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LinkFrequency<TLink> IncrementFrequency(ref Doublet<TLink> doublet)
+        public LinkFrequency<TLinkAddress> IncrementFrequency(ref Doublet<TLinkAddress> doublet)
         {
-            if (_doubletsCache.TryGetValue(doublet, out LinkFrequency<TLink> data))
+            if (_doubletsCache.TryGetValue(doublet, out LinkFrequency<TLinkAddress> data))
             {
                 data.IncrementFrequency();
             }
             else
             {
                 var link = _links.SearchOrDefault(doublet.Source, doublet.Target);
-                data = new LinkFrequency<TLink>(_one, link);
+                data = new LinkFrequency<TLinkAddress>(_one, link);
                 if (!_equalityComparer.Equals(link, default))
                 {
                     data.Frequency = Arithmetic.Add(data.Frequency, _frequencyCounter.Count(link));

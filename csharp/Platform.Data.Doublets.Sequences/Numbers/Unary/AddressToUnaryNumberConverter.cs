@@ -14,14 +14,14 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{TLink}"/>
-    public class AddressToUnaryNumberConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{TLinkAddress}"/>
+    public class AddressToUnaryNumberConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private static readonly TLink _zero = default;
-        private static readonly TLink _one = Arithmetic.Increment(_zero);
-        private readonly IConverter<int, TLink> _powerOf2ToUnaryNumberConverter;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private static readonly TLinkAddress _zero = default;
+        private static readonly TLinkAddress _one = Arithmetic.Increment(_zero);
+        private readonly IConverter<int, TLinkAddress> _powerOf2ToUnaryNumberConverter;
 
         /// <summary>
         /// <para>
@@ -38,7 +38,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public AddressToUnaryNumberConverter(ILinks<TLink> links, IConverter<int, TLink> powerOf2ToUnaryNumberConverter) : base(links) => _powerOf2ToUnaryNumberConverter = powerOf2ToUnaryNumberConverter;
+        public AddressToUnaryNumberConverter(ILinks<TLinkAddress> links, IConverter<int, TLinkAddress> powerOf2ToUnaryNumberConverter) : base(links) => _powerOf2ToUnaryNumberConverter = powerOf2ToUnaryNumberConverter;
 
         /// <summary>
         /// <para>
@@ -55,12 +55,12 @@ namespace Platform.Data.Doublets.Numbers.Unary
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Convert(TLink number)
+        public TLinkAddress Convert(TLinkAddress number)
         {
             var links = _links;
             var nullConstant = links.Constants.Null;
             var target = nullConstant;
-            for (var i = 0; !_equalityComparer.Equals(number, _zero) && i < NumericType<TLink>.BitsSize; i++)
+            for (var i = 0; !_equalityComparer.Equals(number, _zero) && i < NumericType<TLinkAddress>.BitsSize; i++)
             {
                 if (_equalityComparer.Equals(Bit.And(number, _one), _one))
                 {

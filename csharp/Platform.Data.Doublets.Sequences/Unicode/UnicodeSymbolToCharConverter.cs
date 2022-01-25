@@ -13,13 +13,13 @@ namespace Platform.Data.Doublets.Unicode
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{TLink, char}"/>
-    public class UnicodeSymbolToCharConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink, char>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{TLinkAddress, char}"/>
+    public class UnicodeSymbolToCharConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress, char>
     {
-        private static readonly UncheckedConverter<TLink, char> _addressToCharConverter = UncheckedConverter<TLink, char>.Default;
-        private readonly IConverter<TLink> _numberToAddressConverter;
-        private readonly ICriterionMatcher<TLink> _unicodeSymbolCriterionMatcher;
+        private static readonly UncheckedConverter<TLinkAddress, char> _addressToCharConverter = UncheckedConverter<TLinkAddress, char>.Default;
+        private readonly IConverter<TLinkAddress> _numberToAddressConverter;
+        private readonly ICriterionMatcher<TLinkAddress> _unicodeSymbolCriterionMatcher;
 
         /// <summary>
         /// <para>
@@ -40,7 +40,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSymbolToCharConverter(ILinks<TLink> links, IConverter<TLink> numberToAddressConverter, ICriterionMatcher<TLink> unicodeSymbolCriterionMatcher) : base(links)
+        public UnicodeSymbolToCharConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> numberToAddressConverter, ICriterionMatcher<TLinkAddress> unicodeSymbolCriterionMatcher) : base(links)
         {
             _numberToAddressConverter = numberToAddressConverter;
             _unicodeSymbolCriterionMatcher = unicodeSymbolCriterionMatcher;
@@ -65,7 +65,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public char Convert(TLink source)
+        public char Convert(TLinkAddress source)
         {
             if (!_unicodeSymbolCriterionMatcher.IsMatched(source))
             {

@@ -14,13 +14,13 @@ namespace Platform.Data.Doublets.Sequences
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="ISequenceAppender{TLink}"/>
-    public class DefaultSequenceAppender<TLink> : LinksOperatorBase<TLink>, ISequenceAppender<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="ISequenceAppender{TLinkAddress}"/>
+    public class DefaultSequenceAppender<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceAppender<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly IStack<TLink> _stack;
-        private readonly ISequenceHeightProvider<TLink> _heightProvider;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly IStack<TLinkAddress> _stack;
+        private readonly ISequenceHeightProvider<TLinkAddress> _heightProvider;
 
         /// <summary>
         /// <para>
@@ -41,7 +41,7 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public DefaultSequenceAppender(ILinks<TLink> links, IStack<TLink> stack, ISequenceHeightProvider<TLink> heightProvider)
+        public DefaultSequenceAppender(ILinks<TLinkAddress> links, IStack<TLinkAddress> stack, ISequenceHeightProvider<TLinkAddress> heightProvider)
             : base(links)
         {
             _stack = stack;
@@ -67,7 +67,7 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Append(TLink sequence, TLink appendant)
+        public TLinkAddress Append(TLinkAddress sequence, TLinkAddress appendant)
         {
             var cursor = sequence;
             var links = _links;

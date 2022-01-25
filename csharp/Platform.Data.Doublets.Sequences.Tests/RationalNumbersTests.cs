@@ -6,18 +6,18 @@ using Platform.Data.Doublets.Sequences.Converters;
 using Platform.Data.Numbers.Raw;
 using Platform.Memory;
 using Xunit;
-using TLink = System.UInt64;
+using TLinkAddress = System.UInt64;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
     public class RationalNumbersTests
     {
-        public ILinks<TLink> CreateLinks() => CreateLinks<TLink>(new IO.TemporaryFile());
+        public ILinks<TLinkAddress> CreateLinks() => CreateLinks<TLinkAddress>(new IO.TemporaryFile());
 
-        public ILinks<TLink> CreateLinks<TLink>(string dataDbFilename)
+        public ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDbFilename)
         {
-            var linksConstants = new LinksConstants<TLink>(enableExternalReferencesSupport: true);
-            return new UnitedMemoryLinks<TLink>(new FileMappedResizableDirectMemory(dataDbFilename), UnitedMemoryLinks<TLink>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
+            var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
+            return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDbFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
 
         [Fact]
@@ -25,14 +25,14 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             const decimal @decimal = decimal.MinValue;
             var links = CreateLinks();
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> balancedVariantConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
-            DecimalToRationalConverter<TLink> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
-            RationalToDecimalConverter<TLink> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> balancedVariantConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            DecimalToRationalConverter<TLinkAddress> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
+            RationalToDecimalConverter<TLinkAddress> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
             var rationalNumber = decimalToRationalConverter.Convert(@decimal);
             var decimalFromRational = rationalToDecimalConverter.Convert(rationalNumber);
            Assert.Equal(@decimal, decimalFromRational);
@@ -43,14 +43,14 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             const decimal @decimal = decimal.MaxValue;
             var links = CreateLinks();
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> balancedVariantConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
-            DecimalToRationalConverter<TLink> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
-            RationalToDecimalConverter<TLink> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> balancedVariantConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            DecimalToRationalConverter<TLinkAddress> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
+            RationalToDecimalConverter<TLinkAddress> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
             var rationalNumber = decimalToRationalConverter.Convert(@decimal);
             var decimalFromRational = rationalToDecimalConverter.Convert(rationalNumber);
             Assert.Equal(@decimal, decimalFromRational);
@@ -61,14 +61,14 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             const decimal @decimal = 0.5M;
             var links = CreateLinks();
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> balancedVariantConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
-            DecimalToRationalConverter<TLink> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
-            RationalToDecimalConverter<TLink> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> balancedVariantConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            DecimalToRationalConverter<TLinkAddress> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
+            RationalToDecimalConverter<TLinkAddress> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
             var rationalNumber = decimalToRationalConverter.Convert(@decimal);
             var decimalFromRational = rationalToDecimalConverter.Convert(rationalNumber);
             Assert.Equal(@decimal, decimalFromRational);
@@ -79,14 +79,14 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             const decimal @decimal = -0.5M;
             var links = CreateLinks();
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> balancedVariantConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
-            DecimalToRationalConverter<TLink> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
-            RationalToDecimalConverter<TLink> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> balancedVariantConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            DecimalToRationalConverter<TLinkAddress> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
+            RationalToDecimalConverter<TLinkAddress> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
             var rationalNumber = decimalToRationalConverter.Convert(@decimal);
             var decimalFromRational = rationalToDecimalConverter.Convert(rationalNumber);
             Assert.Equal(@decimal, decimalFromRational);
@@ -97,14 +97,14 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             const decimal @decimal = 1;
             var links = CreateLinks();
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> balancedVariantConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
-            DecimalToRationalConverter<TLink> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
-            RationalToDecimalConverter<TLink> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> balancedVariantConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            DecimalToRationalConverter<TLinkAddress> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
+            RationalToDecimalConverter<TLinkAddress> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
             var rationalNumber = decimalToRationalConverter.Convert(@decimal);
             var decimalFromRational = rationalToDecimalConverter.Convert(rationalNumber);
             Assert.Equal(@decimal, decimalFromRational);
@@ -115,14 +115,14 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             const decimal @decimal = -1;
             var links = CreateLinks();
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> balancedVariantConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
-            DecimalToRationalConverter<TLink> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
-            RationalToDecimalConverter<TLink> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> balancedVariantConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, balancedVariantConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            DecimalToRationalConverter<TLinkAddress> decimalToRationalConverter = new(links, bigIntegerToRawNumberSequenceConverter);
+            RationalToDecimalConverter<TLinkAddress> rationalToDecimalConverter = new(links, rawNumberSequenceToBigIntegerConverter);
             var rationalNumber = decimalToRationalConverter.Convert(@decimal);
             var decimalFromRational = rationalToDecimalConverter.Convert(rationalNumber);
             Assert.Equal(@decimal, decimalFromRational);

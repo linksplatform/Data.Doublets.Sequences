@@ -12,10 +12,10 @@ namespace Platform.Data.Doublets.Unicode
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="IConverter{string, IList{TLink}}"/>
-    public class StringToUnicodeSymbolsListConverter<TLink> : IConverter<string, IList<TLink>?>
+    /// <seealso cref="IConverter{string, IList{TLinkAddress}}"/>
+    public class StringToUnicodeSymbolsListConverter<TLinkAddress> : IConverter<string, IList<TLinkAddress>?>
     {
-        private readonly IConverter<char, TLink> _charToUnicodeSymbolConverter;
+        private readonly IConverter<char, TLinkAddress> _charToUnicodeSymbolConverter;
 
         /// <summary>
         /// <para>
@@ -28,7 +28,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public StringToUnicodeSymbolsListConverter(IConverter<char, TLink> charToUnicodeSymbolConverter) => _charToUnicodeSymbolConverter = charToUnicodeSymbolConverter;
+        public StringToUnicodeSymbolsListConverter(IConverter<char, TLinkAddress> charToUnicodeSymbolConverter) => _charToUnicodeSymbolConverter = charToUnicodeSymbolConverter;
 
         /// <summary>
         /// <para>
@@ -45,9 +45,9 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public IList<TLink>? Convert(string source)
+        public IList<TLinkAddress>? Convert(string source)
         {
-            var elements = new TLink[source.Length];
+            var elements = new TLinkAddress[source.Length];
             for (var i = 0; i < elements.Length; i++)
             {
                 elements[i] = _charToUnicodeSymbolConverter.Convert(source[i]);

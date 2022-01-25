@@ -10,7 +10,7 @@ using Platform.Memory;
 using Platform.Numbers;
 using Xunit;
 using Xunit.Abstractions;
-using TLink = System.UInt64;
+using TLinkAddress = System.UInt64;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
@@ -22,41 +22,41 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             _output = output;
         }
-        public static ILinks<TLink> CreateLinks() => CreateLinks<TLink>(new IO.TemporaryFile());
+        public static ILinks<TLinkAddress> CreateLinks() => CreateLinks<TLinkAddress>(new IO.TemporaryFile());
 
-        public static ILinks<TLink> CreateLinks<TLink>(string dataDBFilename)
+        public static ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDBFilename)
         {
-            var linksConstants = new LinksConstants<TLink>(enableExternalReferencesSupport: true);
-            return new UnitedMemoryLinks<TLink>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLink>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
+            var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
+            return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
         
-        public class ValueCriterionMatcher<TLink> : ICriterionMatcher<TLink>
+        public class ValueCriterionMatcher<TLinkAddress> : ICriterionMatcher<TLinkAddress>
         {
-            public readonly ILinks<TLink> Links;
-            public readonly TLink Marker;
-            public ValueCriterionMatcher(ILinks<TLink> links, TLink marker)
+            public readonly ILinks<TLinkAddress> Links;
+            public readonly TLinkAddress Marker;
+            public ValueCriterionMatcher(ILinks<TLinkAddress> links, TLinkAddress marker)
             {
                 Links = links;
                 Marker = marker;
             }
 
-            public bool IsMatched(TLink link) => EqualityComparer<TLink>.Default.Equals(Links.GetSource(link), Marker);
+            public bool IsMatched(TLinkAddress link) => EqualityComparer<TLinkAddress>.Default.Equals(Links.GetSource(link), Marker);
         }
 
         [Fact]
         public void AppendArrayBug()
         {
-            ILinks<TLink> links = CreateLinks();
-            TLink zero = default;
+            ILinks<TLinkAddress> links = CreateLinks();
+            TLinkAddress zero = default;
             var markerIndex = Arithmetic.Increment(zero);
             var meaningRoot = links.GetOrCreate(markerIndex, markerIndex);
             var sequence = links.Create();
             sequence = links.Update(sequence, meaningRoot, sequence);
             var appendant = links.Create();
             appendant = links.Update(appendant, meaningRoot, appendant);
-            ValueCriterionMatcher<TLink> valueCriterionMatcher = new(links, meaningRoot);
+            ValueCriterionMatcher<TLinkAddress> valueCriterionMatcher = new(links, meaningRoot);
             DefaultSequenceRightHeightProvider<ulong> defaultSequenceRightHeightProvider = new(links, valueCriterionMatcher);
-            DefaultSequenceAppender<TLink> defaultSequenceAppender = new(links, new DefaultStack<ulong>(), defaultSequenceRightHeightProvider);
+            DefaultSequenceAppender<TLinkAddress> defaultSequenceAppender = new(links, new DefaultStack<ulong>(), defaultSequenceRightHeightProvider);
             var newArray = defaultSequenceAppender.Append(sequence, appendant);
             var output = links.FormatStructure(newArray, link => link.IsFullPoint(), true);
             Assert.Equal("(4:(2:1 2) (3:1 3))", output);

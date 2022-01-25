@@ -12,10 +12,10 @@ namespace Platform.Data.Doublets.Numbers.Rational
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksDecoratorBase{TLink}"/>
-    /// <seealso cref="IConverter{TLink, decimal}"/>
-    public class RationalToDecimalConverter<TLink> : LinksDecoratorBase<TLink>, IConverter<TLink, decimal>
-        where TLink: struct
+    /// <seealso cref="LinksDecoratorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{TLinkAddress, decimal}"/>
+    public class RationalToDecimalConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, decimal>
+        where TLinkAddress: struct
     {
         /// <summary>
         /// <para>
@@ -23,7 +23,7 @@ namespace Platform.Data.Doublets.Numbers.Rational
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly RawNumberSequenceToBigIntegerConverter<TLink> RawNumberSequenceToBigIntegerConverter;
+        public readonly RawNumberSequenceToBigIntegerConverter<TLinkAddress> RawNumberSequenceToBigIntegerConverter;
 
         /// <summary>
         /// <para>
@@ -39,7 +39,7 @@ namespace Platform.Data.Doublets.Numbers.Rational
         /// <para>A raw number sequence to big integer converter.</para>
         /// <para></para>
         /// </param>
-        public RationalToDecimalConverter(ILinks<TLink> links, RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter) : base(links)
+        public RationalToDecimalConverter(ILinks<TLinkAddress> links, RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter) : base(links)
         {
             RawNumberSequenceToBigIntegerConverter = rawNumberSequenceToBigIntegerConverter;
         }
@@ -58,7 +58,7 @@ namespace Platform.Data.Doublets.Numbers.Rational
         /// <para>The decimal</para>
         /// <para></para>
         /// </returns>
-        public decimal Convert(TLink rationalNumber)
+        public decimal Convert(TLinkAddress rationalNumber)
         {
             var numerator = (decimal)RawNumberSequenceToBigIntegerConverter.Convert(_links.GetSource(rationalNumber));
             var denominator = (decimal)RawNumberSequenceToBigIntegerConverter.Convert(_links.GetTarget(rationalNumber));

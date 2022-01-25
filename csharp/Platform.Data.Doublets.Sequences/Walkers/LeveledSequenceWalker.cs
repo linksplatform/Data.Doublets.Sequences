@@ -17,12 +17,12 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="ISequenceWalker{TLink}"/>
-    public class LeveledSequenceWalker<TLink> : LinksOperatorBase<TLink>, ISequenceWalker<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="ISequenceWalker{TLinkAddress}"/>
+    public class LeveledSequenceWalker<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceWalker<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly Func<TLink, bool> _isElement;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly Func<TLinkAddress, bool> _isElement;
 
         /// <summary>
         /// <para>
@@ -39,7 +39,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LeveledSequenceWalker(ILinks<TLink> links, Func<TLink, bool> isElement) : base(links) => _isElement = isElement;
+        public LeveledSequenceWalker(ILinks<TLinkAddress> links, Func<TLinkAddress, bool> isElement) : base(links) => _isElement = isElement;
 
         /// <summary>
         /// <para>
@@ -52,7 +52,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LeveledSequenceWalker(ILinks<TLink> links) : base(links) => _isElement = _links.IsPartialPoint;
+        public LeveledSequenceWalker(ILinks<TLinkAddress> links) : base(links) => _isElement = _links.IsPartialPoint;
 
         /// <summary>
         /// <para>
@@ -69,7 +69,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public IEnumerable<TLink> Walk(TLink sequence) => ToArray(sequence);
+        public IEnumerable<TLinkAddress> Walk(TLinkAddress sequence) => ToArray(sequence);
 
         /// <summary>
         /// <para>
@@ -86,10 +86,10 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink[] ToArray(TLink sequence)
+        public TLinkAddress[] ToArray(TLinkAddress sequence)
         {
             var length = 1;
-            var array = new TLink[length];
+            var array = new TLinkAddress[length];
             array[0] = sequence;
             if (_isElement(sequence))
             {
@@ -102,7 +102,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
 #if USEARRAYPOOL
                 var nextArray = ArrayPool.Allocate<ulong>(length);
 #else
-                var nextArray = new TLink[length];
+                var nextArray = new TLinkAddress[length];
 #endif
                 hasElements = false;
                 for (var i = 0; i < array.Length; i++)
@@ -151,9 +151,9 @@ namespace Platform.Data.Doublets.Sequences.Walkers
             }
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static TLink[] CopyFilledElements(TLink[] array, int filledElementsCount)
+        private static TLinkAddress[] CopyFilledElements(TLinkAddress[] array, int filledElementsCount)
         {
-            var finalArray = new TLink[filledElementsCount];
+            var finalArray = new TLinkAddress[filledElementsCount];
             for (int i = 0, j = 0; i < array.Length; i++)
             {
                 if (!_equalityComparer.Equals(array[i], default))
@@ -168,7 +168,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
             return finalArray;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int CountFilledElements(TLink[] array)
+        private static int CountFilledElements(TLinkAddress[] array)
         {
             var count = 0;
             for (var i = 0; i < array.Length; i++)

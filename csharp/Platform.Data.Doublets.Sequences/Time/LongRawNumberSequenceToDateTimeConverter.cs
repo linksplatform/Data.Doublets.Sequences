@@ -12,10 +12,10 @@ namespace Platform.Data.Doublets.Time
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="IConverter{TLink, DateTime}"/>
-    public class LongRawNumberSequenceToDateTimeConverter<TLink> : IConverter<TLink, DateTime>
+    /// <seealso cref="IConverter{TLinkAddress, DateTime}"/>
+    public class LongRawNumberSequenceToDateTimeConverter<TLinkAddress> : IConverter<TLinkAddress, DateTime>
     {
-        private readonly IConverter<TLink, long> _longRawNumberConverterToInt64;
+        private readonly IConverter<TLinkAddress, long> _longRawNumberConverterToInt64;
 
         /// <summary>
         /// <para>
@@ -28,7 +28,7 @@ namespace Platform.Data.Doublets.Time
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LongRawNumberSequenceToDateTimeConverter(IConverter<TLink, long> longRawNumberConverterToInt64) => _longRawNumberConverterToInt64 = longRawNumberConverterToInt64;
+        public LongRawNumberSequenceToDateTimeConverter(IConverter<TLinkAddress, long> longRawNumberConverterToInt64) => _longRawNumberConverterToInt64 = longRawNumberConverterToInt64;
 
         /// <summary>
         /// <para>
@@ -45,6 +45,6 @@ namespace Platform.Data.Doublets.Time
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public DateTime Convert(TLink source) => DateTime.FromFileTimeUtc(_longRawNumberConverterToInt64.Convert(source));
+        public DateTime Convert(TLinkAddress source) => DateTime.FromFileTimeUtc(_longRawNumberConverterToInt64.Convert(source));
     }
 }

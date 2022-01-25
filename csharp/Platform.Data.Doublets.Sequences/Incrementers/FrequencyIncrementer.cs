@@ -12,14 +12,14 @@ namespace Platform.Data.Doublets.Incrementers
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IIncrementer{TLink}"/>
-    public class FrequencyIncrementer<TLink> : LinksOperatorBase<TLink>, IIncrementer<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IIncrementer{TLinkAddress}"/>
+    public class FrequencyIncrementer<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IIncrementer<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly TLink _frequencyMarker;
-        private readonly TLink _unaryOne;
-        private readonly IIncrementer<TLink> _unaryNumberIncrementer;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly TLinkAddress _frequencyMarker;
+        private readonly TLinkAddress _unaryOne;
+        private readonly IIncrementer<TLinkAddress> _unaryNumberIncrementer;
 
         /// <summary>
         /// <para>
@@ -44,7 +44,7 @@ namespace Platform.Data.Doublets.Incrementers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public FrequencyIncrementer(ILinks<TLink> links, TLink frequencyMarker, TLink unaryOne, IIncrementer<TLink> unaryNumberIncrementer)
+        public FrequencyIncrementer(ILinks<TLinkAddress> links, TLinkAddress frequencyMarker, TLinkAddress unaryOne, IIncrementer<TLinkAddress> unaryNumberIncrementer)
             : base(links)
         {
             _frequencyMarker = frequencyMarker;
@@ -67,7 +67,7 @@ namespace Platform.Data.Doublets.Incrementers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Increment(TLink frequency)
+        public TLinkAddress Increment(TLinkAddress frequency)
         {
             var links = _links;
             if (_equalityComparer.Equals(frequency, default))

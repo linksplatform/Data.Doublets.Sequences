@@ -13,8 +13,8 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="SequenceWalkerBase{TLink}"/>
-    public class RightSequenceWalker<TLink> : SequenceWalkerBase<TLink>
+    /// <seealso cref="SequenceWalkerBase{TLinkAddress}"/>
+    public class RightSequenceWalker<TLinkAddress> : SequenceWalkerBase<TLinkAddress>
     {
         /// <summary>
         /// <para>
@@ -35,7 +35,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public RightSequenceWalker(ILinks<TLink> links, IStack<TLink> stack, Func<TLink, bool> isElement) : base(links, stack, isElement) { }
+        public RightSequenceWalker(ILinks<TLinkAddress> links, IStack<TLinkAddress> stack, Func<TLinkAddress, bool> isElement) : base(links, stack, isElement) { }
 
         /// <summary>
         /// <para>
@@ -52,7 +52,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public RightSequenceWalker(ILinks<TLink> links, IStack<TLink> stack) : base(links, stack, links.IsPartialPoint) { }
+        public RightSequenceWalker(ILinks<TLinkAddress> links, IStack<TLinkAddress> stack) : base(links, stack, links.IsPartialPoint) { }
 
         /// <summary>
         /// <para>
@@ -69,7 +69,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected override TLink GetNextElementAfterPop(TLink element) => _links.GetTarget(element);
+        protected override TLinkAddress GetNextElementAfterPop(TLinkAddress element) => _links.GetTarget(element);
 
         /// <summary>
         /// <para>
@@ -86,7 +86,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected override TLink GetNextElementAfterPush(TLink element) => _links.GetSource(element);
+        protected override TLinkAddress GetNextElementAfterPush(TLinkAddress element) => _links.GetSource(element);
 
         /// <summary>
         /// <para>
@@ -103,7 +103,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected override IEnumerable<TLink> WalkContents(TLink element)
+        protected override IEnumerable<TLinkAddress> WalkContents(TLinkAddress element)
         {
             var parts = _links.GetLink(element);
             for (var i = _links.Constants.SourcePart; i < parts.Count; i++)

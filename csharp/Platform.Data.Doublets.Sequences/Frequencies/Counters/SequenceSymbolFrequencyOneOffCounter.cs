@@ -14,11 +14,11 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="ICounter{TLink}"/>
-    public class SequenceSymbolFrequencyOneOffCounter<TLink> : ICounter<TLink>
+    /// <seealso cref="ICounter{TLinkAddress}"/>
+    public class SequenceSymbolFrequencyOneOffCounter<TLinkAddress> : ICounter<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
 
         /// <summary>
         /// <para>
@@ -26,28 +26,28 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// </para>
         /// <para></para>
         /// </summary>
-        protected readonly ILinks<TLink> _links;
+        protected readonly ILinks<TLinkAddress> _links;
         /// <summary>
         /// <para>
         /// The sequence link.
         /// </para>
         /// <para></para>
         /// </summary>
-        protected readonly TLink _sequenceLink;
+        protected readonly TLinkAddress _sequenceLink;
         /// <summary>
         /// <para>
         /// The symbol.
         /// </para>
         /// <para></para>
         /// </summary>
-        protected readonly TLink _symbol;
+        protected readonly TLinkAddress _symbol;
         /// <summary>
         /// <para>
         /// The total.
         /// </para>
         /// <para></para>
         /// </summary>
-        protected TLink _total;
+        protected TLinkAddress _total;
 
         /// <summary>
         /// <para>
@@ -68,7 +68,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public SequenceSymbolFrequencyOneOffCounter(ILinks<TLink> links, TLink sequenceLink, TLink symbol)
+        public SequenceSymbolFrequencyOneOffCounter(ILinks<TLinkAddress> links, TLinkAddress sequenceLink, TLinkAddress symbol)
         {
             _links = links;
             _sequenceLink = sequenceLink;
@@ -87,7 +87,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual TLink Count()
+        public virtual TLinkAddress Count()
         {
             if (_comparer.Compare(_total, default) > 0)
             {
@@ -97,9 +97,9 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
             return _total;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsElement(TLink x) => _equalityComparer.Equals(x, _symbol) || _links.IsPartialPoint(x); // TODO: Use SequenceElementCreteriaMatcher instead of IsPartialPoint
+        private bool IsElement(TLinkAddress x) => _equalityComparer.Equals(x, _symbol) || _links.IsPartialPoint(x); // TODO: Use SequenceElementCreteriaMatcher instead of IsPartialPoint
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool VisitElement(TLink element)
+        private bool VisitElement(TLinkAddress element)
         {
             if (_equalityComparer.Equals(element, _symbol))
             {

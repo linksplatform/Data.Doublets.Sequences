@@ -18,10 +18,10 @@ namespace Platform.Data.Doublets.Numbers.Raw
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksDecoratorBase{TLink}"/>
-    /// <seealso cref="IConverter{TLink, BigInteger}"/>
-    public class RawNumberSequenceToBigIntegerConverter<TLink> : LinksDecoratorBase<TLink>, IConverter<TLink, BigInteger>
-        where TLink : struct
+    /// <seealso cref="LinksDecoratorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{TLinkAddress, BigInteger}"/>
+    public class RawNumberSequenceToBigIntegerConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, BigInteger>
+        where TLinkAddress : struct
     {
         /// <summary>
         /// <para>
@@ -29,28 +29,28 @@ namespace Platform.Data.Doublets.Numbers.Raw
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly EqualityComparer<TLink> EqualityComparer = EqualityComparer<TLink>.Default;
+        public readonly EqualityComparer<TLinkAddress> EqualityComparer = EqualityComparer<TLinkAddress>.Default;
         /// <summary>
         /// <para>
         /// The number to address converter.
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly IConverter<TLink, TLink> NumberToAddressConverter;
+        public readonly IConverter<TLinkAddress, TLinkAddress> NumberToAddressConverter;
         /// <summary>
         /// <para>
         /// The left sequence walker.
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly LeftSequenceWalker<TLink> LeftSequenceWalker;
+        public readonly LeftSequenceWalker<TLinkAddress> LeftSequenceWalker;
         /// <summary>
         /// <para>
         /// The negative number marker.
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly TLink NegativeNumberMarker;
+        public readonly TLinkAddress NegativeNumberMarker;
 
         /// <summary>
         /// <para>
@@ -70,10 +70,10 @@ namespace Platform.Data.Doublets.Numbers.Raw
         /// <para>A negative number marker.</para>
         /// <para></para>
         /// </param>
-        public RawNumberSequenceToBigIntegerConverter(ILinks<TLink> links, IConverter<TLink, TLink> numberToAddressConverter, TLink negativeNumberMarker) : base(links)
+        public RawNumberSequenceToBigIntegerConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress, TLinkAddress> numberToAddressConverter, TLinkAddress negativeNumberMarker) : base(links)
         {
             NumberToAddressConverter = numberToAddressConverter;
-            LeftSequenceWalker = new(links, new DefaultStack<TLink>());
+            LeftSequenceWalker = new(links, new DefaultStack<TLinkAddress>());
             NegativeNumberMarker = negativeNumberMarker;
         }
 
@@ -95,7 +95,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
         /// <para>The big integer</para>
         /// <para></para>
         /// </returns>
-        public BigInteger Convert(TLink bigInteger)
+        public BigInteger Convert(TLinkAddress bigInteger)
         {
             var sign = 1;
             var bigIntegerSequence = bigInteger;
@@ -113,7 +113,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
             BigInteger currentBigInt = new(nextPart.ToBytes());
             while (enumerator.MoveNext())
             {
-                currentBigInt <<= (NumericType<TLink>.BitsSize - 1);
+                currentBigInt <<= (NumericType<TLinkAddress>.BitsSize - 1);
                 nextPart = NumberToAddressConverter.Convert(enumerator.Current);
                 currentBigInt |= new BigInteger(nextPart.ToBytes());
             }

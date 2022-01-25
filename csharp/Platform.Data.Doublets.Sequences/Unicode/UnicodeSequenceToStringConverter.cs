@@ -15,13 +15,13 @@ namespace Platform.Data.Doublets.Unicode
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{TLink, string}"/>
-    public class UnicodeSequenceToStringConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink, string>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{TLinkAddress, string}"/>
+    public class UnicodeSequenceToStringConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress, string>
     {
-        private readonly ICriterionMatcher<TLink> _unicodeSequenceCriterionMatcher;
-        private readonly ISequenceWalker<TLink> _sequenceWalker;
-        private readonly IConverter<TLink, char> _unicodeSymbolToCharConverter;
+        private readonly ICriterionMatcher<TLinkAddress> _unicodeSequenceCriterionMatcher;
+        private readonly ISequenceWalker<TLinkAddress> _sequenceWalker;
+        private readonly IConverter<TLinkAddress, char> _unicodeSymbolToCharConverter;
 
         /// <summary>
         /// <para>
@@ -46,7 +46,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSequenceToStringConverter(ILinks<TLink> links, ICriterionMatcher<TLink> unicodeSequenceCriterionMatcher, ISequenceWalker<TLink> sequenceWalker, IConverter<TLink, char> unicodeSymbolToCharConverter) : base(links)
+        public UnicodeSequenceToStringConverter(ILinks<TLinkAddress> links, ICriterionMatcher<TLinkAddress> unicodeSequenceCriterionMatcher, ISequenceWalker<TLinkAddress> sequenceWalker, IConverter<TLinkAddress, char> unicodeSymbolToCharConverter) : base(links)
         {
             _unicodeSequenceCriterionMatcher = unicodeSequenceCriterionMatcher;
             _sequenceWalker = sequenceWalker;
@@ -72,7 +72,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public string Convert(TLink source)
+        public string Convert(TLinkAddress source)
         {
             if (!_unicodeSequenceCriterionMatcher.IsMatched(source))
             {

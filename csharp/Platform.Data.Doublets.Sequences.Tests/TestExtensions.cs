@@ -154,11 +154,11 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Assert.True(equalityComparer.Equals(setter3.Result, linkAddress2));
         }
 
-        public static void TestMultipleRandomCreationsAndDeletions<TLink>(this ILinks<TLink> links, int maximumOperationsPerCycle)
+        public static void TestMultipleRandomCreationsAndDeletions<TLinkAddress>(this ILinks<TLinkAddress> links, int maximumOperationsPerCycle)
         {
-            var comparer = Comparer<TLink>.Default;
-            var addressToUInt64Converter = CheckedConverter<TLink, ulong>.Default;
-            var uInt64ToAddressConverter = CheckedConverter<ulong, TLink>.Default;
+            var comparer = Comparer<TLinkAddress>.Default;
+            var addressToUInt64Converter = CheckedConverter<TLinkAddress, ulong>.Default;
+            var uInt64ToAddressConverter = CheckedConverter<ulong, TLinkAddress>.Default;
             for (var N = 1; N < maximumOperationsPerCycle; N++)
             {
                 var random = new System.Random(N);
@@ -171,8 +171,8 @@ namespace Platform.Data.Doublets.Sequences.Tests
                     if (linksCount >= 2 && createPoint)
                     {
                         var linksAddressRange = new Range<ulong>(1, linksCount);
-                        TLink source = uInt64ToAddressConverter.Convert(random.NextUInt64(linksAddressRange));
-                        TLink target = uInt64ToAddressConverter.Convert(random.NextUInt64(linksAddressRange)); //-V3086
+                        TLinkAddress source = uInt64ToAddressConverter.Convert(random.NextUInt64(linksAddressRange));
+                        TLinkAddress target = uInt64ToAddressConverter.Convert(random.NextUInt64(linksAddressRange)); //-V3086
                         var resultLink = links.GetOrCreate(source, target);
                         if (comparer.Compare(resultLink, uInt64ToAddressConverter.Convert(linksCount)) > 0)
                         {
@@ -188,7 +188,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
                 Assert.True(created == addressToUInt64Converter.Convert(links.Count()));
                 for (var i = 0; i < N; i++)
                 {
-                    TLink link = uInt64ToAddressConverter.Convert((ulong)i + 1UL);
+                    TLinkAddress link = uInt64ToAddressConverter.Convert((ulong)i + 1UL);
                     if (links.Exists(link))
                     {
                         links.Delete(link);

@@ -11,11 +11,11 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="ICounter{TLink, TLink}"/>
-    public class TotalMarkedSequenceSymbolFrequencyCounter<TLink> : ICounter<TLink, TLink>
+    /// <seealso cref="ICounter{TLinkAddress, TLinkAddress}"/>
+    public class TotalMarkedSequenceSymbolFrequencyCounter<TLinkAddress> : ICounter<TLinkAddress, TLinkAddress>
     {
-        private readonly ILinks<TLink> _links;
-        private readonly ICriterionMatcher<TLink> _markedSequenceMatcher;
+        private readonly ILinks<TLinkAddress> _links;
+        private readonly ICriterionMatcher<TLinkAddress> _markedSequenceMatcher;
 
         /// <summary>
         /// <para>
@@ -32,7 +32,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TotalMarkedSequenceSymbolFrequencyCounter(ILinks<TLink> links, ICriterionMatcher<TLink> markedSequenceMatcher)
+        public TotalMarkedSequenceSymbolFrequencyCounter(ILinks<TLinkAddress> links, ICriterionMatcher<TLinkAddress> markedSequenceMatcher)
         {
             _links = links;
             _markedSequenceMatcher = markedSequenceMatcher;
@@ -53,6 +53,6 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Count(TLink argument) => new TotalMarkedSequenceSymbolFrequencyOneOffCounter<TLink>(_links, _markedSequenceMatcher, argument).Count();
+        public TLinkAddress Count(TLinkAddress argument) => new TotalMarkedSequenceSymbolFrequencyOneOffCounter<TLinkAddress>(_links, _markedSequenceMatcher, argument).Count();
     }
 }

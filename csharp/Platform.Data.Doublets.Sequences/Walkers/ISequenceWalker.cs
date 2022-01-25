@@ -11,7 +11,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     /// </para>
     /// <para></para>
     /// </summary>
-    public interface ISequenceWalker<TLink>
+    public interface ISequenceWalker<TLinkAddress>
     {
         /// <summary>
         /// <para>
@@ -28,6 +28,6 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        IEnumerable<TLink> Walk(TLink sequence);
+        IEnumerable<TLinkAddress> Walk(TLinkAddress sequence);
     }
 }

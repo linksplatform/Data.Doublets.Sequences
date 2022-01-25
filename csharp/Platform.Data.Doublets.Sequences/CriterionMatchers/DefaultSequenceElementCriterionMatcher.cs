@@ -11,9 +11,9 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="ICriterionMatcher{TLink}"/>
-    public class DefaultSequenceElementCriterionMatcher<TLink> : LinksOperatorBase<TLink>, ICriterionMatcher<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="ICriterionMatcher{TLinkAddress}"/>
+    public class DefaultSequenceElementCriterionMatcher<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ICriterionMatcher<TLinkAddress>
     {
         /// <summary>
         /// <para>
@@ -26,7 +26,7 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public DefaultSequenceElementCriterionMatcher(ILinks<TLink> links) : base(links) { }
+        public DefaultSequenceElementCriterionMatcher(ILinks<TLinkAddress> links) : base(links) { }
 
         /// <summary>
         /// <para>
@@ -43,6 +43,6 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool IsMatched(TLink argument) => _links.IsPartialPoint(argument);
+        public bool IsMatched(TLinkAddress argument) => _links.IsPartialPoint(argument);
     }
 }

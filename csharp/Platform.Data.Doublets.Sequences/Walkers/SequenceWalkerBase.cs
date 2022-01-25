@@ -13,12 +13,12 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="ISequenceWalker{TLink}"/>
-    public abstract class SequenceWalkerBase<TLink> : LinksOperatorBase<TLink>, ISequenceWalker<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="ISequenceWalker{TLinkAddress}"/>
+    public abstract class SequenceWalkerBase<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceWalker<TLinkAddress>
     {
-        private readonly IStack<TLink> _stack;
-        private readonly Func<TLink, bool> _isElement;
+        private readonly IStack<TLinkAddress> _stack;
+        private readonly Func<TLinkAddress, bool> _isElement;
 
         /// <summary>
         /// <para>
@@ -39,7 +39,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected SequenceWalkerBase(ILinks<TLink> links, IStack<TLink> stack, Func<TLink, bool> isElement) : base(links)
+        protected SequenceWalkerBase(ILinks<TLinkAddress> links, IStack<TLinkAddress> stack, Func<TLinkAddress, bool> isElement) : base(links)
         {
             _stack = stack;
             _isElement = isElement;
@@ -60,7 +60,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected SequenceWalkerBase(ILinks<TLink> links, IStack<TLink> stack) : this(links, stack, links.IsPartialPoint) { }
+        protected SequenceWalkerBase(ILinks<TLinkAddress> links, IStack<TLinkAddress> stack) : this(links, stack, links.IsPartialPoint) { }
 
         /// <summary>
         /// <para>
@@ -77,7 +77,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public IEnumerable<TLink> Walk(TLink sequence)
+        public IEnumerable<TLinkAddress> Walk(TLinkAddress sequence)
         {
             _stack.Clear();
             var element = sequence;
@@ -126,7 +126,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected virtual bool IsElement(TLink elementLink) => _isElement(elementLink);
+        protected virtual bool IsElement(TLinkAddress elementLink) => _isElement(elementLink);
 
         /// <summary>
         /// <para>
@@ -143,7 +143,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected abstract TLink GetNextElementAfterPop(TLink element);
+        protected abstract TLinkAddress GetNextElementAfterPop(TLinkAddress element);
 
         /// <summary>
         /// <para>
@@ -160,7 +160,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected abstract TLink GetNextElementAfterPush(TLink element);
+        protected abstract TLinkAddress GetNextElementAfterPush(TLinkAddress element);
 
         /// <summary>
         /// <para>
@@ -177,6 +177,6 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected abstract IEnumerable<TLink> WalkContents(TLink element);
+        protected abstract IEnumerable<TLinkAddress> WalkContents(TLinkAddress element);
     }
 }

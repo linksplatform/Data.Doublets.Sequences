@@ -11,11 +11,11 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="ISequenceIndex{TLink}"/>
-    public class SequenceIndex<TLink> : LinksOperatorBase<TLink>, ISequenceIndex<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="ISequenceIndex{TLinkAddress}"/>
+    public class SequenceIndex<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceIndex<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
 
         /// <summary>
         /// <para>
@@ -28,7 +28,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public SequenceIndex(ILinks<TLink> links) : base(links) { }
+        public SequenceIndex(ILinks<TLinkAddress> links) : base(links) { }
 
         /// <summary>
         /// <para>
@@ -45,7 +45,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual bool Add(IList<TLink>? sequence)
+        public virtual bool Add(IList<TLinkAddress>? sequence)
         {
             var indexed = true;
             var i = sequence.Count;
@@ -72,7 +72,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual bool MightContain(IList<TLink>? sequence)
+        public virtual bool MightContain(IList<TLinkAddress>? sequence)
         {
             var indexed = true;
             var i = sequence.Count;

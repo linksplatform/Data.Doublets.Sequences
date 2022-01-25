@@ -12,11 +12,11 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="ISequenceIndex{TLink}"/>
-    public class CachedFrequencyIncrementingSequenceIndex<TLink> : ISequenceIndex<TLink>
+    /// <seealso cref="ISequenceIndex{TLinkAddress}"/>
+    public class CachedFrequencyIncrementingSequenceIndex<TLinkAddress> : ISequenceIndex<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly LinkFrequenciesCache<TLink> _cache;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly LinkFrequenciesCache<TLinkAddress> _cache;
 
         /// <summary>
         /// <para>
@@ -29,7 +29,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CachedFrequencyIncrementingSequenceIndex(LinkFrequenciesCache<TLink> cache) => _cache = cache;
+        public CachedFrequencyIncrementingSequenceIndex(LinkFrequenciesCache<TLinkAddress> cache) => _cache = cache;
 
         /// <summary>
         /// <para>
@@ -46,7 +46,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Add(IList<TLink>? sequence)
+        public bool Add(IList<TLinkAddress>? sequence)
         {
             var indexed = true;
             var i = sequence.Count;
@@ -58,7 +58,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             return indexed;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsIndexedWithIncrement(TLink source, TLink target)
+        private bool IsIndexedWithIncrement(TLinkAddress source, TLinkAddress target)
         {
             var frequency = _cache.GetFrequency(source, target);
             if (frequency == null)
@@ -88,7 +88,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool MightContain(IList<TLink>? sequence)
+        public bool MightContain(IList<TLinkAddress>? sequence)
         {
             var indexed = true;
             var i = sequence.Count;
@@ -96,7 +96,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             return indexed;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsIndexed(TLink source, TLink target)
+        private bool IsIndexed(TLinkAddress source, TLinkAddress target)
         {
             var frequency = _cache.GetFrequency(source, target);
             if (frequency == null)

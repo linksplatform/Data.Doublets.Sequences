@@ -11,8 +11,8 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="ISequenceIndex{TLink}"/>
-    public class Unindex<TLink> : ISequenceIndex<TLink>
+    /// <seealso cref="ISequenceIndex{TLinkAddress}"/>
+    public class Unindex<TLinkAddress> : ISequenceIndex<TLinkAddress>
     {
         /// <summary>
         /// <para>
@@ -29,7 +29,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual bool Add(IList<TLink>? sequence) => false;
+        public virtual bool Add(IList<TLinkAddress>? sequence) => false;
 
         /// <summary>
         /// <para>
@@ -46,6 +46,6 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual bool MightContain(IList<TLink>? sequence) => true;
+        public virtual bool MightContain(IList<TLinkAddress>? sequence) => true;
     }
 }

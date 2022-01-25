@@ -21,9 +21,9 @@ namespace Platform.Data.Doublets.Sequences
     /// </para>
     /// <para></para>
     /// </summary>
-    public class SequencesOptions<TLink> // TODO: To use type parameter <TLink> the ILinks<TLink> must contain GetConstants function.
+    public class SequencesOptions<TLinkAddress> // TODO: To use type parameter <TLinkAddress> the ILinks<TLinkAddress> must contain GetConstants function.
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
 
         /// <summary>
         /// <para>
@@ -31,7 +31,7 @@ namespace Platform.Data.Doublets.Sequences
         /// </para>
         /// <para></para>
         /// </summary>
-        public TLink SequenceMarkerLink
+        public TLinkAddress SequenceMarkerLink
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
@@ -157,7 +157,7 @@ namespace Platform.Data.Doublets.Sequences
         /// </para>
         /// <para></para>
         /// </summary>
-        public MarkedSequenceCriterionMatcher<TLink> MarkedSequenceMatcher
+        public MarkedSequenceCriterionMatcher<TLinkAddress> MarkedSequenceMatcher
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
@@ -171,7 +171,7 @@ namespace Platform.Data.Doublets.Sequences
         /// </para>
         /// <para></para>
         /// </summary>
-        public IConverter<IList<TLink>?, TLink> LinksToSequenceConverter
+        public IConverter<IList<TLinkAddress>?, TLinkAddress> LinksToSequenceConverter
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
@@ -185,7 +185,7 @@ namespace Platform.Data.Doublets.Sequences
         /// </para>
         /// <para></para>
         /// </summary>
-        public ISequenceIndex<TLink> Index
+        public ISequenceIndex<TLinkAddress> Index
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
@@ -199,7 +199,7 @@ namespace Platform.Data.Doublets.Sequences
         /// </para>
         /// <para></para>
         /// </summary>
-        public ISequenceWalker<TLink> Walker
+        public ISequenceWalker<TLinkAddress> Walker
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;
@@ -241,7 +241,7 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void InitOptions(ISynchronizedLinks<TLink> links)
+        public void InitOptions(ISynchronizedLinks<TLinkAddress> links)
         {
             if (UseSequenceMarker)
             {
@@ -262,25 +262,25 @@ namespace Platform.Data.Doublets.Sequences
                 }
                 if (MarkedSequenceMatcher == null)
                 {
-                    MarkedSequenceMatcher = new MarkedSequenceCriterionMatcher<TLink>(links, SequenceMarkerLink);
+                    MarkedSequenceMatcher = new MarkedSequenceCriterionMatcher<TLinkAddress>(links, SequenceMarkerLink);
                 }
             }
-            var balancedVariantConverter = new BalancedVariantConverter<TLink>(links);
+            var balancedVariantConverter = new BalancedVariantConverter<TLinkAddress>(links);
             if (UseCompression)
             {
                 if (LinksToSequenceConverter == null)
                 {
-                    ICounter<TLink, TLink> totalSequenceSymbolFrequencyCounter;
+                    ICounter<TLinkAddress, TLinkAddress> totalSequenceSymbolFrequencyCounter;
                     if (UseSequenceMarker)
                     {
-                        totalSequenceSymbolFrequencyCounter = new TotalMarkedSequenceSymbolFrequencyCounter<TLink>(links, MarkedSequenceMatcher);
+                        totalSequenceSymbolFrequencyCounter = new TotalMarkedSequenceSymbolFrequencyCounter<TLinkAddress>(links, MarkedSequenceMatcher);
                     }
                     else
                     {
-                        totalSequenceSymbolFrequencyCounter = new TotalSequenceSymbolFrequencyCounter<TLink>(links);
+                        totalSequenceSymbolFrequencyCounter = new TotalSequenceSymbolFrequencyCounter<TLinkAddress>(links);
                     }
-                    var doubletFrequenciesCache = new LinkFrequenciesCache<TLink>(links, totalSequenceSymbolFrequencyCounter);
-                    var compressingConverter = new CompressingConverter<TLink>(links, balancedVariantConverter, doubletFrequenciesCache);
+                    var doubletFrequenciesCache = new LinkFrequenciesCache<TLinkAddress>(links, totalSequenceSymbolFrequencyCounter);
+                    var compressingConverter = new CompressingConverter<TLinkAddress>(links, balancedVariantConverter, doubletFrequenciesCache);
                     LinksToSequenceConverter = compressingConverter;
                 }
             }
@@ -293,11 +293,11 @@ namespace Platform.Data.Doublets.Sequences
             }
             if (UseIndex && Index == null)
             {
-                Index = new SequenceIndex<TLink>(links);
+                Index = new SequenceIndex<TLinkAddress>(links);
             }
             if (Walker == null)
             {
-                Walker = new RightSequenceWalker<TLink>(links, new DefaultStack<TLink>());
+                Walker = new RightSequenceWalker<TLinkAddress>(links, new DefaultStack<TLinkAddress>());
             }
         }
 

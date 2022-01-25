@@ -20,7 +20,7 @@ namespace Platform.Data.Doublets.Sequences
         /// </para>
         /// <para></para>
         /// </summary>
-        /// <typeparam name="TLink">
+        /// <typeparam name="TLinkAddress">
         /// <para>The link.</para>
         /// <para></para>
         /// </typeparam>
@@ -37,9 +37,9 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TLink Create<TLink>(this ILinks<TLink> sequences, IList<TLink[]> groupedSequence)
+        public static TLinkAddress Create<TLinkAddress>(this ILinks<TLinkAddress> sequences, IList<TLinkAddress[]> groupedSequence)
         {
-            var finalSequence = new TLink[groupedSequence.Count];
+            var finalSequence = new TLinkAddress[groupedSequence.Count];
             for (var i = 0; i < finalSequence.Length; i++)
             {
                 var part = groupedSequence[i];
@@ -54,7 +54,7 @@ namespace Platform.Data.Doublets.Sequences
         /// </para>
         /// <para></para>
         /// </summary>
-        /// <typeparam name="TLink">
+        /// <typeparam name="TLinkAddress">
         /// <para>The link.</para>
         /// <para></para>
         /// </typeparam>
@@ -71,11 +71,11 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IList<TLink>? ToList<TLink>(this ILinks<TLink> sequences, TLink sequence)
+        public static IList<TLinkAddress>? ToList<TLinkAddress>(this ILinks<TLinkAddress> sequences, TLinkAddress sequence)
         {
-            var list = new List<TLink>();
-            var filler = new ListFiller<TLink, TLink>(list, sequences.Constants.Break);
-            sequences.Each(filler.AddSkipFirstAndReturnConstant, new LinkAddress<TLink>(sequence));
+            var list = new List<TLinkAddress>();
+            var filler = new ListFiller<TLinkAddress, TLinkAddress>(list, sequences.Constants.Break);
+            sequences.Each(filler.AddSkipFirstAndReturnConstant, new LinkAddress<TLinkAddress>(sequence));
             return list;
         }
     }

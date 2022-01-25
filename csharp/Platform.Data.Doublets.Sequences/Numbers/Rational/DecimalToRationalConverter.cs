@@ -14,10 +14,10 @@ namespace Platform.Data.Doublets.Numbers.Rational
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksDecoratorBase{TLink}"/>
-    /// <seealso cref="IConverter{decimal, TLink}"/>
-    public class DecimalToRationalConverter<TLink> : LinksDecoratorBase<TLink>, IConverter<decimal, TLink>
-        where TLink: struct
+    /// <seealso cref="LinksDecoratorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{decimal, TLinkAddress}"/>
+    public class DecimalToRationalConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<decimal, TLinkAddress>
+        where TLinkAddress: struct
     {
         /// <summary>
         /// <para>
@@ -25,7 +25,7 @@ namespace Platform.Data.Doublets.Numbers.Rational
         /// </para>
         /// <para></para>
         /// </summary>
-        public readonly BigIntegerToRawNumberSequenceConverter<TLink> BigIntegerToRawNumberSequenceConverter;
+        public readonly BigIntegerToRawNumberSequenceConverter<TLinkAddress> BigIntegerToRawNumberSequenceConverter;
 
         /// <summary>
         /// <para>
@@ -41,7 +41,7 @@ namespace Platform.Data.Doublets.Numbers.Rational
         /// <para>A big integer to raw number sequence converter.</para>
         /// <para></para>
         /// </param>
-        public DecimalToRationalConverter(ILinks<TLink> links, BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter) : base(links)
+        public DecimalToRationalConverter(ILinks<TLinkAddress> links, BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter) : base(links)
         {
             BigIntegerToRawNumberSequenceConverter = bigIntegerToRawNumberSequenceConverter;
         }
@@ -60,7 +60,7 @@ namespace Platform.Data.Doublets.Numbers.Rational
         /// <para>The link</para>
         /// <para></para>
         /// </returns>
-        public TLink Convert(decimal @decimal)
+        public TLinkAddress Convert(decimal @decimal)
         {
             var decimalAsString = @decimal.ToString(CultureInfo.InvariantCulture);
             var dotPosition = decimalAsString.IndexOf('.');

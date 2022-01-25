@@ -11,7 +11,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
     /// </para>
     /// <para></para>
     /// </summary>
-    public class LinkFrequency<TLink>
+    public class LinkFrequency<TLinkAddress>
     {
         /// <summary>
         /// <para>
@@ -19,14 +19,14 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// </para>
         /// <para></para>
         /// </summary>
-        public TLink Frequency { get; set; }
+        public TLinkAddress Frequency { get; set; }
         /// <summary>
         /// <para>
         /// Gets or sets the link value.
         /// </para>
         /// <para></para>
         /// </summary>
-        public TLink Link { get; set; }
+        public TLinkAddress Link { get; set; }
 
         /// <summary>
         /// <para>
@@ -43,7 +43,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LinkFrequency(TLink frequency, TLink link)
+        public LinkFrequency(TLinkAddress frequency, TLinkAddress link)
         {
             Frequency = frequency;
             Link = link;
@@ -65,7 +65,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void IncrementFrequency() => Frequency = Arithmetic<TLink>.Increment(Frequency);
+        public void IncrementFrequency() => Frequency = Arithmetic<TLinkAddress>.Increment(Frequency);
 
         /// <summary>
         /// <para>
@@ -74,7 +74,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void DecrementFrequency() => Frequency = Arithmetic<TLink>.Decrement(Frequency);
+        public void DecrementFrequency() => Frequency = Arithmetic<TLinkAddress>.Decrement(Frequency);
 
         /// <summary>
         /// <para>

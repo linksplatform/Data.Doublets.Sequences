@@ -10,8 +10,8 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="IProvider{TLink, TLink}"/>
-    public interface ISequenceHeightProvider<TLink> : IProvider<TLink, TLink>
+    /// <seealso cref="IProvider{TLinkAddress, TLinkAddress}"/>
+    public interface ISequenceHeightProvider<TLinkAddress> : IProvider<TLinkAddress, TLinkAddress>
     {
     }
 }

@@ -12,11 +12,11 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="ISequenceHeightProvider{TLink}"/>
-    public class DefaultSequenceRightHeightProvider<TLink> : LinksOperatorBase<TLink>, ISequenceHeightProvider<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="ISequenceHeightProvider{TLinkAddress}"/>
+    public class DefaultSequenceRightHeightProvider<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceHeightProvider<TLinkAddress>
     {
-        private readonly ICriterionMatcher<TLink> _elementMatcher;
+        private readonly ICriterionMatcher<TLinkAddress> _elementMatcher;
 
         /// <summary>
         /// <para>
@@ -33,7 +33,7 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public DefaultSequenceRightHeightProvider(ILinks<TLink> links, ICriterionMatcher<TLink> elementMatcher) : base(links) => _elementMatcher = elementMatcher;
+        public DefaultSequenceRightHeightProvider(ILinks<TLinkAddress> links, ICriterionMatcher<TLinkAddress> elementMatcher) : base(links) => _elementMatcher = elementMatcher;
 
         /// <summary>
         /// <para>
@@ -50,9 +50,9 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Get(TLink sequence)
+        public TLinkAddress Get(TLinkAddress sequence)
         {
-            var height = default(TLink);
+            var height = default(TLinkAddress);
             var pairOrElement = sequence;
             while (!_elementMatcher.IsMatched(pairOrElement))
             {

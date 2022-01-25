@@ -11,7 +11,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// </para>
     /// <para></para>
     /// </summary>
-    public interface ISequenceIndex<TLink>
+    public interface ISequenceIndex<TLinkAddress>
     {
         /// <summary>
         /// Индексирует последовательность глобально, и возвращает значение,
@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// </summary>
         /// <param name="sequence">Последовательность для индексации.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        bool Add(IList<TLink>? sequence);
+        bool Add(IList<TLinkAddress>? sequence);
 
         /// <summary>
         /// <para>
@@ -36,6 +36,6 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        bool MightContain(IList<TLink>? sequence);
+        bool MightContain(IList<TLinkAddress>? sequence);
     }
 }

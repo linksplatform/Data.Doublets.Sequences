@@ -13,11 +13,11 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="ICounter{TLink}"/>
-    public class TotalSequenceSymbolFrequencyOneOffCounter<TLink> : ICounter<TLink>
+    /// <seealso cref="ICounter{TLinkAddress}"/>
+    public class TotalSequenceSymbolFrequencyOneOffCounter<TLinkAddress> : ICounter<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
 
         /// <summary>
         /// <para>
@@ -25,28 +25,28 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// </para>
         /// <para></para>
         /// </summary>
-        protected readonly ILinks<TLink> _links;
+        protected readonly ILinks<TLinkAddress> _links;
         /// <summary>
         /// <para>
         /// The symbol.
         /// </para>
         /// <para></para>
         /// </summary>
-        protected readonly TLink _symbol;
+        protected readonly TLinkAddress _symbol;
         /// <summary>
         /// <para>
         /// The visits.
         /// </para>
         /// <para></para>
         /// </summary>
-        protected readonly HashSet<TLink> _visits;
+        protected readonly HashSet<TLinkAddress> _visits;
         /// <summary>
         /// <para>
         /// The total.
         /// </para>
         /// <para></para>
         /// </summary>
-        protected TLink _total;
+        protected TLinkAddress _total;
 
         /// <summary>
         /// <para>
@@ -63,11 +63,11 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TotalSequenceSymbolFrequencyOneOffCounter(ILinks<TLink> links, TLink symbol)
+        public TotalSequenceSymbolFrequencyOneOffCounter(ILinks<TLinkAddress> links, TLinkAddress symbol)
         {
             _links = links;
             _symbol = symbol;
-            _visits = new HashSet<TLink>();
+            _visits = new HashSet<TLinkAddress>();
             _total = default;
         }
 
@@ -82,7 +82,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Count()
+        public TLinkAddress Count()
         {
             if (_comparer.Compare(_total, default) > 0 || _visits.Count > 0)
             {
@@ -92,7 +92,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
             return _total;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CountCore(TLink link)
+        private void CountCore(TLinkAddress link)
         {
             var any = _links.Constants.Any;
             if (_equalityComparer.Equals(_links.Count(any, link), default))
@@ -116,13 +116,13 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected virtual void CountSequenceSymbolFrequency(TLink link)
+        protected virtual void CountSequenceSymbolFrequency(TLinkAddress link)
         {
-            var symbolFrequencyCounter = new SequenceSymbolFrequencyOneOffCounter<TLink>(_links, link, _symbol);
+            var symbolFrequencyCounter = new SequenceSymbolFrequencyOneOffCounter<TLinkAddress>(_links, link, _symbol);
             _total = Arithmetic.Add(_total, symbolFrequencyCounter.Count());
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private TLink EachElementHandler(IList<TLink>? doublet)
+        private TLinkAddress EachElementHandler(IList<TLinkAddress>? doublet)
         {
             var constants = _links.Constants;
             var doubletIndex = doublet[constants.IndexPart];

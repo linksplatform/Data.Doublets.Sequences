@@ -21,20 +21,20 @@ namespace Platform.Data.Doublets.Sequences
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="DictionaryBasedDuplicateSegmentsWalkerBase{TLink}"/>
-    /// <seealso cref="IProvider{IList{KeyValuePair{IList{TLink}, IList{TLink}}}}"/>
-    public class DuplicateSegmentsProvider<TLink> : DictionaryBasedDuplicateSegmentsWalkerBase<TLink>, IProvider<IList<KeyValuePair<IList<TLink>?, IList<TLink>?>>>
+    /// <seealso cref="DictionaryBasedDuplicateSegmentsWalkerBase{TLinkAddress}"/>
+    /// <seealso cref="IProvider{IList{KeyValuePair{IList{TLinkAddress}, IList{TLinkAddress}}}}"/>
+    public class DuplicateSegmentsProvider<TLinkAddress> : DictionaryBasedDuplicateSegmentsWalkerBase<TLinkAddress>, IProvider<IList<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>>>
     {
-        private static readonly UncheckedConverter<TLink, long> _addressToInt64Converter = UncheckedConverter<TLink, long>.Default;
-        private static readonly UncheckedConverter<TLink, ulong> _addressToUInt64Converter = UncheckedConverter<TLink, ulong>.Default;
-        private static readonly UncheckedConverter<ulong, TLink> _uInt64ToAddressConverter = UncheckedConverter<ulong, TLink>.Default;
-        private readonly ILinks<TLink> _links;
-        private readonly ILinks<TLink> _sequences;
-        private HashSet<KeyValuePair<IList<TLink>?, IList<TLink>?>> _groups;
+        private static readonly UncheckedConverter<TLinkAddress, long> _addressToInt64Converter = UncheckedConverter<TLinkAddress, long>.Default;
+        private static readonly UncheckedConverter<TLinkAddress, ulong> _addressToUInt64Converter = UncheckedConverter<TLinkAddress, ulong>.Default;
+        private static readonly UncheckedConverter<ulong, TLinkAddress> _uInt64ToAddressConverter = UncheckedConverter<ulong, TLinkAddress>.Default;
+        private readonly ILinks<TLinkAddress> _links;
+        private readonly ILinks<TLinkAddress> _sequences;
+        private HashSet<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>> _groups;
         private BitString _visited;
-        private class ItemEquilityComparer : IEqualityComparer<KeyValuePair<IList<TLink>?, IList<TLink>?>>
+        private class ItemEquilityComparer : IEqualityComparer<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>>
         {
-            private readonly IListEqualityComparer<TLink> _listComparer;
+            private readonly IListEqualityComparer<TLinkAddress> _listComparer;
 
             /// <summary>
             /// <para>
@@ -42,7 +42,7 @@ namespace Platform.Data.Doublets.Sequences
             /// </para>
             /// <para></para>
             /// </summary>
-            public ItemEquilityComparer() => _listComparer = Default<IListEqualityComparer<TLink>>.Instance;
+            public ItemEquilityComparer() => _listComparer = Default<IListEqualityComparer<TLinkAddress>>.Instance;
 
             /// <summary>
             /// <para>
@@ -63,7 +63,7 @@ namespace Platform.Data.Doublets.Sequences
             /// <para></para>
             /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool Equals(KeyValuePair<IList<TLink>?, IList<TLink>?> left, KeyValuePair<IList<TLink>?, IList<TLink>?> right) => _listComparer.Equals(left.Key, right.Key) && _listComparer.Equals(left.Value, right.Value);
+            public bool Equals(KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> left, KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> right) => _listComparer.Equals(left.Key, right.Key) && _listComparer.Equals(left.Value, right.Value);
 
             /// <summary>
             /// <para>
@@ -80,11 +80,11 @@ namespace Platform.Data.Doublets.Sequences
             /// <para></para>
             /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int GetHashCode(KeyValuePair<IList<TLink>?, IList<TLink>?> pair) => (_listComparer.GetHashCode(pair.Key), _listComparer.GetHashCode(pair.Value)).GetHashCode();
+            public int GetHashCode(KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> pair) => (_listComparer.GetHashCode(pair.Key), _listComparer.GetHashCode(pair.Value)).GetHashCode();
         }
-        private class ItemComparer : IComparer<KeyValuePair<IList<TLink>?, IList<TLink>?>>
+        private class ItemComparer : IComparer<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>>
         {
-            private readonly IListComparer<TLink> _listComparer;
+            private readonly IListComparer<TLinkAddress> _listComparer;
 
             /// <summary>
             /// <para>
@@ -93,7 +93,7 @@ namespace Platform.Data.Doublets.Sequences
             /// <para></para>
             /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public ItemComparer() => _listComparer = Default<IListComparer<TLink>>.Instance;
+            public ItemComparer() => _listComparer = Default<IListComparer<TLinkAddress>>.Instance;
 
             /// <summary>
             /// <para>
@@ -114,7 +114,7 @@ namespace Platform.Data.Doublets.Sequences
             /// <para></para>
             /// </returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public int Compare(KeyValuePair<IList<TLink>?, IList<TLink>?> left, KeyValuePair<IList<TLink>?, IList<TLink>?> right)
+            public int Compare(KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> left, KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> right)
             {
                 var intermediateResult = _listComparer.Compare(left.Key, right.Key);
                 if (intermediateResult == 0)
@@ -140,7 +140,7 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public DuplicateSegmentsProvider(ILinks<TLink> links, ILinks<TLink> sequences)
+        public DuplicateSegmentsProvider(ILinks<TLinkAddress> links, ILinks<TLinkAddress> sequences)
             : base(minimumStringSegmentLength: 2)
         {
             _links = links;
@@ -158,9 +158,9 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public IList<KeyValuePair<IList<TLink>?, IList<TLink>?>> Get()
+        public IList<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>> Get()
         {
-            _groups = new HashSet<KeyValuePair<IList<TLink>?, IList<TLink>?>>(Default<ItemEquilityComparer>.Instance);
+            _groups = new HashSet<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>>(Default<ItemEquilityComparer>.Instance);
             var links = _links;
             var count = links.Count();
             _visited = new BitString(_addressToInt64Converter.Convert(count) + 1L);
@@ -171,9 +171,9 @@ namespace Platform.Data.Doublets.Sequences
                 var constants = links.Constants;
                 if (!_visited.Get(linkBitIndex))
                 {
-                    var sequenceElements = new List<TLink>();
-                    var filler = new ListFiller<TLink, TLink>(sequenceElements, constants.Break);
-                    _sequences.Each(filler.AddSkipFirstAndReturnConstant, new LinkAddress<TLink>(linkIndex));
+                    var sequenceElements = new List<TLinkAddress>();
+                    var filler = new ListFiller<TLinkAddress, TLinkAddress>(sequenceElements, constants.Break);
+                    _sequences.Each(filler.AddSkipFirstAndReturnConstant, new LinkAddress<TLinkAddress>(linkIndex));
                     if (sequenceElements.Count > 2)
                     {
                         WalkAll(sequenceElements);
@@ -216,7 +216,7 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected override Segment<TLink> CreateSegment(IList<TLink>? elements, int offset, int length) => new Segment<TLink>(elements, offset, length);
+        protected override Segment<TLinkAddress> CreateSegment(IList<TLinkAddress>? elements, int offset, int length) => new Segment<TLinkAddress>(elements, offset, length);
 
         /// <summary>
         /// <para>
@@ -229,19 +229,19 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected override void OnDublicateFound(Segment<TLink> segment)
+        protected override void OnDublicateFound(Segment<TLinkAddress> segment)
         {
             var duplicates = CollectDuplicatesForSegment(segment);
             if (duplicates.Count > 1)
             {
-                _groups.Add(new KeyValuePair<IList<TLink>?, IList<TLink>?>(segment.ToArray(), duplicates));
+                _groups.Add(new KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>(segment.ToArray(), duplicates));
             }
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private List<TLink> CollectDuplicatesForSegment(Segment<TLink> segment)
+        private List<TLinkAddress> CollectDuplicatesForSegment(Segment<TLinkAddress> segment)
         {
-            var duplicates = new List<TLink>();
-            var readAsElement = new HashSet<TLink>();
+            var duplicates = new List<TLinkAddress>();
+            var readAsElement = new HashSet<TLinkAddress>();
             var restrictions = segment.ShiftRight();
             var constants = _links.Constants;
             restrictions[0] = constants.Any;
@@ -254,7 +254,7 @@ namespace Platform.Data.Doublets.Sequences
             }, restrictions);
             if (duplicates.Any(x => _visited.Get(_addressToInt64Converter.Convert(x))))
             {
-                return new List<TLink>();
+                return new List<TLinkAddress>();
             }
             foreach (var duplicate in duplicates)
             {
@@ -274,7 +274,7 @@ namespace Platform.Data.Doublets.Sequences
             return duplicates;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void PrintDuplicates(KeyValuePair<IList<TLink>?, IList<TLink>?> duplicatesItem)
+        private void PrintDuplicates(KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> duplicatesItem)
         {
             if (!(_links is ILinks<ulong> ulongLinks))
             {

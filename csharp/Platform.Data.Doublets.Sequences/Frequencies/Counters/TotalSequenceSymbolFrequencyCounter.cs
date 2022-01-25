@@ -11,10 +11,10 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="ICounter{TLink, TLink}"/>
-    public class TotalSequenceSymbolFrequencyCounter<TLink> : ICounter<TLink, TLink>
+    /// <seealso cref="ICounter{TLinkAddress, TLinkAddress}"/>
+    public class TotalSequenceSymbolFrequencyCounter<TLinkAddress> : ICounter<TLinkAddress, TLinkAddress>
     {
-        private readonly ILinks<TLink> _links;
+        private readonly ILinks<TLinkAddress> _links;
 
         /// <summary>
         /// <para>
@@ -27,7 +27,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TotalSequenceSymbolFrequencyCounter(ILinks<TLink> links) => _links = links;
+        public TotalSequenceSymbolFrequencyCounter(ILinks<TLinkAddress> links) => _links = links;
 
         /// <summary>
         /// <para>
@@ -44,6 +44,6 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Count(TLink symbol) => new TotalSequenceSymbolFrequencyOneOffCounter<TLink>(_links, symbol).Count();
+        public TLinkAddress Count(TLinkAddress symbol) => new TotalSequenceSymbolFrequencyOneOffCounter<TLinkAddress>(_links, symbol).Count();
     }
 }

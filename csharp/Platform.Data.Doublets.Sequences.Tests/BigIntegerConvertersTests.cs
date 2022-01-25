@@ -7,18 +7,18 @@ using Platform.Data.Doublets.Sequences.Converters;
 using Platform.Data.Numbers.Raw;
 using Platform.Memory;
 using Xunit;
-using TLink = System.UInt64;
+using TLinkAddress = System.UInt64;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {
     public class BigIntegerConvertersTests
     {
-        public ILinks<TLink> CreateLinks() => CreateLinks<TLink>(new IO.TemporaryFile());
+        public ILinks<TLinkAddress> CreateLinks() => CreateLinks<TLinkAddress>(new IO.TemporaryFile());
 
-        public ILinks<TLink> CreateLinks<TLink>(string dataDbFilename)
+        public ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDbFilename)
         {
-            var linksConstants = new LinksConstants<TLink>(enableExternalReferencesSupport: true);
-            return new UnitedMemoryLinks<TLink>(new FileMappedResizableDirectMemory(dataDbFilename), UnitedMemoryLinks<TLink>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
+            var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
+            return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDbFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
         
         [Fact]
@@ -26,12 +26,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             var links = CreateLinks();
             BigInteger bigInteger = new(decimal.MaxValue);
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> listToSequenceConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, listToSequenceConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> listToSequenceConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, listToSequenceConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
             var bigIntSequence = bigIntegerToRawNumberSequenceConverter.Convert(bigInteger);
             var bigIntFromSequence = rawNumberSequenceToBigIntegerConverter.Convert(bigIntSequence);
             Assert.Equal(bigInteger, bigIntFromSequence);
@@ -42,12 +42,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             var links = CreateLinks();
             BigInteger bigInteger = new(decimal.MinValue);
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> listToSequenceConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, listToSequenceConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> listToSequenceConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, listToSequenceConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
             var bigIntSequence = bigIntegerToRawNumberSequenceConverter.Convert(bigInteger);
             var bigIntFromSequence = rawNumberSequenceToBigIntegerConverter.Convert(bigIntSequence);
             Assert.Equal(bigInteger, bigIntFromSequence);
@@ -58,12 +58,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             var links = CreateLinks();
             BigInteger bigInteger = new(0);
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> listToSequenceConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, listToSequenceConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> listToSequenceConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, listToSequenceConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
             var bigIntSequence = bigIntegerToRawNumberSequenceConverter.Convert(bigInteger);
             var bigIntFromSequence = rawNumberSequenceToBigIntegerConverter.Convert(bigIntSequence);
             Assert.Equal(bigInteger, bigIntFromSequence);
@@ -74,12 +74,12 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             var links = CreateLinks();
             BigInteger bigInteger = new(1);
-            TLink negativeNumberMarker = links.Create();
-            AddressToRawNumberConverter<TLink> addressToRawNumberConverter = new();
-            RawNumberToAddressConverter<TLink> numberToAddressConverter = new();
-            BalancedVariantConverter<TLink> listToSequenceConverter = new(links);
-            BigIntegerToRawNumberSequenceConverter<TLink> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, listToSequenceConverter, negativeNumberMarker);
-            RawNumberSequenceToBigIntegerConverter<TLink> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
+            TLinkAddress negativeNumberMarker = links.Create();
+            AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
+            RawNumberToAddressConverter<TLinkAddress> numberToAddressConverter = new();
+            BalancedVariantConverter<TLinkAddress> listToSequenceConverter = new(links);
+            BigIntegerToRawNumberSequenceConverter<TLinkAddress> bigIntegerToRawNumberSequenceConverter = new(links, addressToRawNumberConverter, listToSequenceConverter, negativeNumberMarker);
+            RawNumberSequenceToBigIntegerConverter<TLinkAddress> rawNumberSequenceToBigIntegerConverter = new(links, numberToAddressConverter, negativeNumberMarker);
             var bigIntSequence = bigIntegerToRawNumberSequenceConverter.Convert(bigInteger);
             var bigIntFromSequence = rawNumberSequenceToBigIntegerConverter.Convert(bigIntSequence);
             Assert.Equal(bigInteger, bigIntFromSequence);

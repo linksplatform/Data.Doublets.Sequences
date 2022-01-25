@@ -14,14 +14,14 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{TLink}"/>
-    public class UnaryNumberToAddressOrOperationConverter<TLink> : LinksOperatorBase<TLink>, IConverter<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{TLinkAddress}"/>
+    public class UnaryNumberToAddressOrOperationConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private static readonly TLink _zero = default;
-        private static readonly TLink _one = Arithmetic.Increment(_zero);
-        private readonly IDictionary<TLink, int> _unaryNumberPowerOf2Indicies;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private static readonly TLinkAddress _zero = default;
+        private static readonly TLinkAddress _one = Arithmetic.Increment(_zero);
+        private readonly IDictionary<TLinkAddress, int> _unaryNumberPowerOf2Indicies;
 
         /// <summary>
         /// <para>
@@ -38,7 +38,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnaryNumberToAddressOrOperationConverter(ILinks<TLink> links, IConverter<int, TLink> powerOf2ToUnaryNumberConverter) : base(links) => _unaryNumberPowerOf2Indicies = CreateUnaryNumberPowerOf2IndiciesDictionary(powerOf2ToUnaryNumberConverter);
+        public UnaryNumberToAddressOrOperationConverter(ILinks<TLinkAddress> links, IConverter<int, TLinkAddress> powerOf2ToUnaryNumberConverter) : base(links) => _unaryNumberPowerOf2Indicies = CreateUnaryNumberPowerOf2IndiciesDictionary(powerOf2ToUnaryNumberConverter);
 
         /// <summary>
         /// <para>
@@ -55,7 +55,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Convert(TLink sourceNumber)
+        public TLinkAddress Convert(TLinkAddress sourceNumber)
         {
             var links = _links;
             var nullConstant = links.Constants.Null;
@@ -81,16 +81,16 @@ namespace Platform.Data.Doublets.Numbers.Unary
             return target;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Dictionary<TLink, int> CreateUnaryNumberPowerOf2IndiciesDictionary(IConverter<int, TLink> powerOf2ToUnaryNumberConverter)
+        private static Dictionary<TLinkAddress, int> CreateUnaryNumberPowerOf2IndiciesDictionary(IConverter<int, TLinkAddress> powerOf2ToUnaryNumberConverter)
         {
-            var unaryNumberPowerOf2Indicies = new Dictionary<TLink, int>();
-            for (int i = 0; i < NumericType<TLink>.BitsSize; i++)
+            var unaryNumberPowerOf2Indicies = new Dictionary<TLinkAddress, int>();
+            for (int i = 0; i < NumericType<TLinkAddress>.BitsSize; i++)
             {
                 unaryNumberPowerOf2Indicies.Add(powerOf2ToUnaryNumberConverter.Convert(i), i);
             }
             return unaryNumberPowerOf2Indicies;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SetBit(ref TLink target, int powerOf2Index) => target = Bit.Or(target, Bit.ShiftLeft(_one, powerOf2Index));
+        private static void SetBit(ref TLinkAddress target, int powerOf2Index) => target = Bit.Or(target, Bit.ShiftLeft(_one, powerOf2Index));
     }
 }

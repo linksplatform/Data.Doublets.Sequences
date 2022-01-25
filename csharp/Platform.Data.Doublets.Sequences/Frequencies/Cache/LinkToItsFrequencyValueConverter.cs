@@ -11,10 +11,10 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="IConverter{Doublet{TLink}, TLink}"/>
-    public class FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<TLink> : IConverter<Doublet<TLink>, TLink>
+    /// <seealso cref="IConverter{Doublet{TLinkAddress}, TLinkAddress}"/>
+    public class FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<TLinkAddress> : IConverter<Doublet<TLinkAddress>, TLinkAddress>
     {
-        private readonly LinkFrequenciesCache<TLink> _cache;
+        private readonly LinkFrequenciesCache<TLinkAddress> _cache;
 
         /// <summary>
         /// <para>
@@ -27,7 +27,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public FrequenciesCacheBasedLinkToItsFrequencyNumberConverter(LinkFrequenciesCache<TLink> cache) => _cache = cache;
+        public FrequenciesCacheBasedLinkToItsFrequencyNumberConverter(LinkFrequenciesCache<TLinkAddress> cache) => _cache = cache;
 
         /// <summary>
         /// <para>
@@ -44,6 +44,6 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Convert(Doublet<TLink> source) => _cache.GetFrequency(ref source).Frequency;
+        public TLinkAddress Convert(Doublet<TLinkAddress> source) => _cache.GetFrequency(ref source).Frequency;
     }
 }

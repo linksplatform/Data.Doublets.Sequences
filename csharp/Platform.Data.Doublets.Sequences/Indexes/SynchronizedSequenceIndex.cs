@@ -11,11 +11,11 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="ISequenceIndex{TLink}"/>
-    public class SynchronizedSequenceIndex<TLink> : ISequenceIndex<TLink>
+    /// <seealso cref="ISequenceIndex{TLinkAddress}"/>
+    public class SynchronizedSequenceIndex<TLinkAddress> : ISequenceIndex<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly ISynchronizedLinks<TLink> _links;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly ISynchronizedLinks<TLinkAddress> _links;
 
         /// <summary>
         /// <para>
@@ -28,7 +28,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public SynchronizedSequenceIndex(ISynchronizedLinks<TLink> links) => _links = links;
+        public SynchronizedSequenceIndex(ISynchronizedLinks<TLinkAddress> links) => _links = links;
 
         /// <summary>
         /// <para>
@@ -45,7 +45,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Add(IList<TLink>? sequence)
+        public bool Add(IList<TLinkAddress>? sequence)
         {
             var indexed = true;
             var i = sequence.Count;
@@ -82,7 +82,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool MightContain(IList<TLink>? sequence)
+        public bool MightContain(IList<TLinkAddress>? sequence)
         {
             var links = _links.Unsync;
             return _links.SyncRoot.ExecuteReadOperation(() =>

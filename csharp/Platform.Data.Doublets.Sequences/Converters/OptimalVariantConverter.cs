@@ -15,12 +15,12 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksListToSequenceConverterBase{TLink}"/>
-    public class OptimalVariantConverter<TLink> : LinksListToSequenceConverterBase<TLink>
+    /// <seealso cref="LinksListToSequenceConverterBase{TLinkAddress}"/>
+    public class OptimalVariantConverter<TLinkAddress> : LinksListToSequenceConverterBase<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private static readonly Comparer<TLink> _comparer = Comparer<TLink>.Default;
-        private readonly IConverter<IList<TLink>?> _sequenceToItsLocalElementLevelsConverter;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
+        private readonly IConverter<IList<TLinkAddress>?> _sequenceToItsLocalElementLevelsConverter;
 
         /// <summary>
         /// <para>
@@ -37,7 +37,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public OptimalVariantConverter(ILinks<TLink> links, IConverter<IList<TLink>?> sequenceToItsLocalElementLevelsConverter) : base(links)
+        public OptimalVariantConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>?> sequenceToItsLocalElementLevelsConverter) : base(links)
             => _sequenceToItsLocalElementLevelsConverter = sequenceToItsLocalElementLevelsConverter;
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public OptimalVariantConverter(ILinks<TLink> links, LinkFrequenciesCache<TLink> linkFrequenciesCache) 
-            : this(links, new SequenceToItsLocalElementLevelsConverter<TLink>(links, new FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<TLink>(linkFrequenciesCache))) { }
+        public OptimalVariantConverter(ILinks<TLinkAddress> links, LinkFrequenciesCache<TLinkAddress> linkFrequenciesCache) 
+            : this(links, new SequenceToItsLocalElementLevelsConverter<TLinkAddress>(links, new FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<TLinkAddress>(linkFrequenciesCache))) { }
 
         /// <summary>
         /// <para>
@@ -69,8 +69,8 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public OptimalVariantConverter(ILinks<TLink> links)
-            : this(links, new LinkFrequenciesCache<TLink>(links, new TotalSequenceSymbolFrequencyCounter<TLink>(links))) { }
+        public OptimalVariantConverter(ILinks<TLinkAddress> links)
+            : this(links, new LinkFrequenciesCache<TLinkAddress>(links, new TotalSequenceSymbolFrequencyCounter<TLinkAddress>(links))) { }
 
         /// <summary>
         /// <para>
@@ -87,7 +87,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override TLink Convert(IList<TLink>? sequence)
+        public override TLinkAddress Convert(IList<TLinkAddress>? sequence)
         {
             var length = sequence.Count;
             if (length == 1)
@@ -162,15 +162,15 @@ namespace Platform.Data.Doublets.Sequences.Converters
             return _links.GetOrCreate(sequence[0], sequence[1]);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static TLink GetGreatestNeigbourLowerThanCurrentOrCurrent(TLink previous, TLink current, TLink next)
+        private static TLinkAddress GetGreatestNeigbourLowerThanCurrentOrCurrent(TLinkAddress previous, TLinkAddress current, TLinkAddress next)
         {
             return _comparer.Compare(previous, next) > 0
                 ? _comparer.Compare(previous, current) < 0 ? previous : current
                 : _comparer.Compare(next, current) < 0 ? next : current;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static TLink GetNextLowerThanCurrentOrCurrent(TLink current, TLink next) => _comparer.Compare(next, current) < 0 ? next : current;
+        private static TLinkAddress GetNextLowerThanCurrentOrCurrent(TLinkAddress current, TLinkAddress next) => _comparer.Compare(next, current) < 0 ? next : current;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static TLink GetPreviousLowerThanCurrentOrCurrent(TLink previous, TLink current) => _comparer.Compare(previous, current) < 0 ? previous : current;
+        private static TLinkAddress GetPreviousLowerThanCurrentOrCurrent(TLinkAddress previous, TLinkAddress current) => _comparer.Compare(previous, current) < 0 ? previous : current;
     }
 }

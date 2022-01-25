@@ -12,12 +12,12 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="ICriterionMatcher{TLink}"/>
-    public class MarkedSequenceCriterionMatcher<TLink> : ICriterionMatcher<TLink>
+    /// <seealso cref="ICriterionMatcher{TLinkAddress}"/>
+    public class MarkedSequenceCriterionMatcher<TLinkAddress> : ICriterionMatcher<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly ILinks<TLink> _links;
-        private readonly TLink _sequenceMarkerLink;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly ILinks<TLinkAddress> _links;
+        private readonly TLinkAddress _sequenceMarkerLink;
 
         /// <summary>
         /// <para>
@@ -34,7 +34,7 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public MarkedSequenceCriterionMatcher(ILinks<TLink> links, TLink sequenceMarkerLink)
+        public MarkedSequenceCriterionMatcher(ILinks<TLinkAddress> links, TLinkAddress sequenceMarkerLink)
         {
             _links = links;
             _sequenceMarkerLink = sequenceMarkerLink;
@@ -55,7 +55,7 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool IsMatched(TLink sequenceCandidate)
+        public bool IsMatched(TLinkAddress sequenceCandidate)
             => _equalityComparer.Equals(_links.GetSource(sequenceCandidate), _sequenceMarkerLink)
             || !_equalityComparer.Equals(_links.SearchOrDefault(_sequenceMarkerLink, sequenceCandidate), _links.Constants.Null);
     }

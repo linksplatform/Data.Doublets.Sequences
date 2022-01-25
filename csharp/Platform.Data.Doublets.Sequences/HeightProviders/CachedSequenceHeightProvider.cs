@@ -13,15 +13,15 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="ISequenceHeightProvider{TLink}"/>
-    public class CachedSequenceHeightProvider<TLink> : ISequenceHeightProvider<TLink>
+    /// <seealso cref="ISequenceHeightProvider{TLinkAddress}"/>
+    public class CachedSequenceHeightProvider<TLinkAddress> : ISequenceHeightProvider<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly TLink _heightPropertyMarker;
-        private readonly ISequenceHeightProvider<TLink> _baseHeightProvider;
-        private readonly IConverter<TLink> _addressToUnaryNumberConverter;
-        private readonly IConverter<TLink> _unaryNumberToAddressConverter;
-        private readonly IProperties<TLink, TLink, TLink> _propertyOperator;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly TLinkAddress _heightPropertyMarker;
+        private readonly ISequenceHeightProvider<TLinkAddress> _baseHeightProvider;
+        private readonly IConverter<TLinkAddress> _addressToUnaryNumberConverter;
+        private readonly IConverter<TLinkAddress> _unaryNumberToAddressConverter;
+        private readonly IProperties<TLinkAddress, TLinkAddress, TLinkAddress> _propertyOperator;
 
         /// <summary>
         /// <para>
@@ -51,11 +51,11 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CachedSequenceHeightProvider(
-            ISequenceHeightProvider<TLink> baseHeightProvider,
-            IConverter<TLink> addressToUnaryNumberConverter,
-            IConverter<TLink> unaryNumberToAddressConverter,
-            TLink heightPropertyMarker,
-            IProperties<TLink, TLink, TLink> propertyOperator)
+            ISequenceHeightProvider<TLinkAddress> baseHeightProvider,
+            IConverter<TLinkAddress> addressToUnaryNumberConverter,
+            IConverter<TLinkAddress> unaryNumberToAddressConverter,
+            TLinkAddress heightPropertyMarker,
+            IProperties<TLinkAddress, TLinkAddress, TLinkAddress> propertyOperator)
         {
             _heightPropertyMarker = heightPropertyMarker;
             _baseHeightProvider = baseHeightProvider;
@@ -79,9 +79,9 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Get(TLink sequence)
+        public TLinkAddress Get(TLinkAddress sequence)
         {
-            TLink height;
+            TLinkAddress height;
             var heightValue = _propertyOperator.GetValue(sequence, _heightPropertyMarker);
             if (_equalityComparer.Equals(heightValue, default))
             {

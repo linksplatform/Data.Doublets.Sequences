@@ -11,13 +11,13 @@ namespace Platform.Data.Doublets.Unicode
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IConverter{char, TLink}"/>
-    public class CharToUnicodeSymbolConverter<TLink> : LinksOperatorBase<TLink>, IConverter<char, TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IConverter{char, TLinkAddress}"/>
+    public class CharToUnicodeSymbolConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<char, TLinkAddress>
     {
-        private static readonly UncheckedConverter<char, TLink> _charToAddressConverter = UncheckedConverter<char, TLink>.Default;
-        private readonly IConverter<TLink> _addressToNumberConverter;
-        private readonly TLink _unicodeSymbolMarker;
+        private static readonly UncheckedConverter<char, TLinkAddress> _charToAddressConverter = UncheckedConverter<char, TLinkAddress>.Default;
+        private readonly IConverter<TLinkAddress> _addressToNumberConverter;
+        private readonly TLinkAddress _unicodeSymbolMarker;
 
         /// <summary>
         /// <para>
@@ -38,7 +38,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CharToUnicodeSymbolConverter(ILinks<TLink> links, IConverter<TLink> addressToNumberConverter, TLink unicodeSymbolMarker) : base(links)
+        public CharToUnicodeSymbolConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> addressToNumberConverter, TLinkAddress unicodeSymbolMarker) : base(links)
         {
             _addressToNumberConverter = addressToNumberConverter;
             _unicodeSymbolMarker = unicodeSymbolMarker;
@@ -59,7 +59,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Convert(char source)
+        public TLinkAddress Convert(char source)
         {
             var unaryNumber = _addressToNumberConverter.Convert(_charToAddressConverter.Convert(source));
             return _links.GetOrCreate(unaryNumber, _unicodeSymbolMarker);

@@ -12,12 +12,12 @@ namespace Platform.Data.Doublets.Incrementers
     /// </para>
     /// <para></para>
     /// </summary>
-    /// <seealso cref="LinksOperatorBase{TLink}"/>
-    /// <seealso cref="IIncrementer{TLink}"/>
-    public class UnaryNumberIncrementer<TLink> : LinksOperatorBase<TLink>, IIncrementer<TLink>
+    /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
+    /// <seealso cref="IIncrementer{TLinkAddress}"/>
+    public class UnaryNumberIncrementer<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IIncrementer<TLinkAddress>
     {
-        private static readonly EqualityComparer<TLink> _equalityComparer = EqualityComparer<TLink>.Default;
-        private readonly TLink _unaryOne;
+        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
+        private readonly TLinkAddress _unaryOne;
 
         /// <summary>
         /// <para>
@@ -34,7 +34,7 @@ namespace Platform.Data.Doublets.Incrementers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnaryNumberIncrementer(ILinks<TLink> links, TLink unaryOne) : base(links) => _unaryOne = unaryOne;
+        public UnaryNumberIncrementer(ILinks<TLinkAddress> links, TLinkAddress unaryOne) : base(links) => _unaryOne = unaryOne;
 
         /// <summary>
         /// <para>
@@ -51,7 +51,7 @@ namespace Platform.Data.Doublets.Incrementers
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Increment(TLink unaryNumber)
+        public TLinkAddress Increment(TLinkAddress unaryNumber)
         {
             var links = _links;
             if (_equalityComparer.Equals(unaryNumber, _unaryOne))
