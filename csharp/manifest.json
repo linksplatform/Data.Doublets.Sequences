@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Incrementers.FrequencyIncrementer-1.html",
-          "hash": "U0EQGFEjVV/8ZD38OkJwyA=="
+          "hash": "FWvVS4GfeYEYpYEAB+oF0w=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Incrementers.UnaryNumberIncrementer-1.html",
-          "hash": "IDUkWarC/B8Qj6VzdY8lcA=="
+          "hash": "qmwOzMlHV54wJWXcWDocPw=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Rational.DecimalToRationalConverter-1.html",
-          "hash": "d31f4RfuvIOxTTT+IcXkOQ=="
+          "hash": "kCnjTOvAmkbOkCb3CN6DkQ=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Rational.RationalToDecimalConverter-1.html",
-          "hash": "rEkNWj+7teAhpVw6y9S39w=="
+          "hash": "uv/vUiEdEu6/nbQe5c/BtA=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Raw.BigIntegerToRawNumberSequenceConverter-1.html",
-          "hash": "ImACmiAHtWzmXFteMs+jgg=="
+          "hash": "yurfMEQANcWJByrEP6Q26Q=="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Raw.LongRawNumberSequenceToNumberConverter-2.html",
-          "hash": "uEs1ipxfflGW6zMQ5t42NQ=="
+          "hash": "GyoPGR3Fnz0b+MQrb0AHtA=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Raw.NumberToLongRawNumberSequenceConverter-2.html",
-          "hash": "RGbhAvBqo5ELL+8FDy+OAw=="
+          "hash": "y+GCHxEWvKV+ZP5aM5kZYg=="
         }
       },
       "is_incremental": false,
@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Raw.RawNumberSequenceToBigIntegerConverter-1.html",
-          "hash": "UGdfQVK4yeIgHP92eEpuIg=="
+          "hash": "MoXFSyDNWgPDKwtsfJDtjA=="
         }
       },
       "is_incremental": false,
@@ -162,7 +162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Unary.AddressToUnaryNumberConverter-1.html",
-          "hash": "tC1rxnD/MO/sbNq/ua9p9g=="
+          "hash": "Wk3ulurSG30WbJ4HpaNyQA=="
         }
       },
       "is_incremental": false,
@@ -174,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Unary.LinkToItsFrequencyNumberConveter-1.html",
-          "hash": "tg8RrwfIFs3FcqXkMY7wOA=="
+          "hash": "72t3Vj9wCgf+U9CyyNTKUw=="
         }
       },
       "is_incremental": false,
@@ -186,7 +186,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Unary.PowerOf2ToUnaryNumberConverter-1.html",
-          "hash": "oDGU7FcAUaS3HpINQ1L7rQ=="
+          "hash": "0nmZsFeyA7Kf9ZCX7eI8XA=="
         }
       },
       "is_incremental": false,
@@ -198,7 +198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Unary.UnaryNumberToAddressAddOperationConverter-1.html",
-          "hash": "eG5Y2h/Y034bAdE2LQ1jCQ=="
+          "hash": "3gbio+EWjk7ybb+mZfERKw=="
         }
       },
       "is_incremental": false,
@@ -210,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Numbers.Unary.UnaryNumberToAddressOrOperationConverter-1.html",
-          "hash": "IsskV1/4RFwejKp6z3jhaw=="
+          "hash": "5DGehWYNxRBnFHDEWeNbrg=="
         }
       },
       "is_incremental": false,
@@ -234,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Converters.BalancedVariantConverter-1.html",
-          "hash": "Cz02dq7IG+0oDU2ZitZCBA=="
+          "hash": "SRtegPRqqCtkxvb9eKC5Ag=="
         }
       },
       "is_incremental": false,
@@ -246,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Converters.CompressingConverter-1.html",
-          "hash": "yu5YLr3AXX3aBtD12yfnMA=="
+          "hash": "jVR1w18KeNatOdolVnU5sQ=="
         }
       },
       "is_incremental": false,
@@ -258,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Converters.LinksListToSequenceConverterBase-1.html",
-          "hash": "qICGdZEwycfasvyLXb9Iew=="
+          "hash": "/k8WJPI1KkBm+5az1w3rGg=="
         }
       },
       "is_incremental": false,
@@ -270,7 +270,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Converters.OptimalVariantConverter-1.html",
-          "hash": "aC+xyddNQQ9U9aRsM5MsHw=="
+          "hash": "osNvVO7jmPUMn5ZY9qEdrQ=="
         }
       },
       "is_incremental": false,
@@ -282,7 +282,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Converters.SequenceToItsLocalElementLevelsConverter-1.html",
-          "hash": "15RyU2Xq6VdjpzK2PGYN9w=="
+          "hash": "17Z+JhbJqxTrmufsP3VDkg=="
         }
       },
       "is_incremental": false,
@@ -306,7 +306,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.CriterionMatchers.DefaultSequenceElementCriterionMatcher-1.html",
-          "hash": "rPxZYyfbogpROduTzLzivQ=="
+          "hash": "a0ZCyc118VG4ROCFBDfo5w=="
         }
       },
       "is_incremental": false,
@@ -318,7 +318,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.CriterionMatchers.MarkedSequenceCriterionMatcher-1.html",
-          "hash": "cyKDkLQ04twT/OzSiG5BCw=="
+          "hash": "kp55Rat3OQpCTivwPG/SZQ=="
         }
       },
       "is_incremental": false,
@@ -342,7 +342,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.DefaultSequenceAppender-1.html",
-          "hash": "+OT+vYhJ1RLFq6IadW2SXA=="
+          "hash": "H5r4cTavz7GL9igDKCuRjQ=="
         }
       },
       "is_incremental": false,
@@ -354,7 +354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.DuplicateSegmentsCounter-1.html",
-          "hash": "p2Adg0im7n44WIyHeZjHGA=="
+          "hash": "yYXAVrWEXhTC6ONJOHKvgQ=="
         }
       },
       "is_incremental": false,
@@ -366,7 +366,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.DuplicateSegmentsProvider-1.html",
-          "hash": "4QDLzbT4LO4IxYqVgQ6mYQ=="
+          "hash": "QnSIO623Bxdb20dF/lLq1w=="
         }
       },
       "is_incremental": false,
@@ -378,7 +378,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Frequencies.Cache.FrequenciesCacheBasedLinkToItsFrequencyNumberConverter-1.html",
-          "hash": "kRMLJMFXT7CdIVgAxhqnQA=="
+          "hash": "TM/ydLUBogubEefNR99hhA=="
         }
       },
       "is_incremental": false,
@@ -390,7 +390,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Frequencies.Cache.LinkFrequenciesCache-1.html",
-          "hash": "JXwcVYaelX5SS1l06+g+PA=="
+          "hash": "BZ/jabdvjNK3wOZggTXCdA=="
         }
       },
       "is_incremental": false,
@@ -402,7 +402,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Frequencies.Cache.LinkFrequency-1.html",
-          "hash": "3C3XLUL69gze8QF8Qw1JqA=="
+          "hash": "+yCh9UHOU/hBVAvH7LadYQ=="
         }
       },
       "is_incremental": false,
@@ -426,7 +426,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Frequencies.Counters.MarkedSequenceSymbolFrequencyOneOffCounter-1.html",
-          "hash": "6trlhvR/VBhtpjn9Za1jDA=="
+          "hash": "reFkzI99WGPs3LVVSoCPLw=="
         }
       },
       "is_incremental": false,
@@ -438,7 +438,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Frequencies.Counters.SequenceSymbolFrequencyOneOffCounter-1.html",
-          "hash": "HUrQr+QwN3wSX96vJWuiVw=="
+          "hash": "bHGcrTRwUndlxwRBT/SS3Q=="
         }
       },
       "is_incremental": false,
@@ -450,7 +450,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Frequencies.Counters.TotalMarkedSequenceSymbolFrequencyCounter-1.html",
-          "hash": "LcOdzEhv5EesUcLEZnPlqw=="
+          "hash": "nLRknFrENHGXw+B7OwX3Ow=="
         }
       },
       "is_incremental": false,
@@ -462,7 +462,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Frequencies.Counters.TotalMarkedSequenceSymbolFrequencyOneOffCounter-1.html",
-          "hash": "0ZSxld6uWBcK2iOHikHnrw=="
+          "hash": "QHG+PDhP2+X6ug5NYQbRSg=="
         }
       },
       "is_incremental": false,
@@ -474,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Frequencies.Counters.TotalSequenceSymbolFrequencyCounter-1.html",
-          "hash": "mKtQx5V/cg6Bb/4/r75nYA=="
+          "hash": "V/H9HimJOxksGqAQMeHl/A=="
         }
       },
       "is_incremental": false,
@@ -486,7 +486,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Frequencies.Counters.TotalSequenceSymbolFrequencyOneOffCounter-1.html",
-          "hash": "sDFcfRqI4zWMXcFsQALztw=="
+          "hash": "cHHRj5Xh3STs6XXM4yxCzg=="
         }
       },
       "is_incremental": false,
@@ -510,7 +510,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.HeightProviders.CachedSequenceHeightProvider-1.html",
-          "hash": "AZrQgiYBYcZd0SGVbH8tZg=="
+          "hash": "8AucB6OJxdgBSA3hRe3hGQ=="
         }
       },
       "is_incremental": false,
@@ -522,7 +522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.HeightProviders.DefaultSequenceRightHeightProvider-1.html",
-          "hash": "ubIRhOOSO44WifMUD0gnvA=="
+          "hash": "rLr1Xp3Ok5+dtK5+ju18GA=="
         }
       },
       "is_incremental": false,
@@ -534,7 +534,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.HeightProviders.ISequenceHeightProvider-1.html",
-          "hash": "8eUO/nkBDAFcq17PpxCzmQ=="
+          "hash": "iKu20ujYX2Tk8NxGBqCiIA=="
         }
       },
       "is_incremental": false,
@@ -558,7 +558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Indexes.CachedFrequencyIncrementingSequenceIndex-1.html",
-          "hash": "u5J5uF8BZ08sh2JRbAGFnw=="
+          "hash": "rWPuw5k69u3i0GI62Yic1g=="
         }
       },
       "is_incremental": false,
@@ -570,7 +570,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Indexes.FrequencyIncrementingSequenceIndex-1.html",
-          "hash": "4aWA6/RcQVcJDUtXQEzbRQ=="
+          "hash": "9x3mR+Z3VO28qB+QsppYBg=="
         }
       },
       "is_incremental": false,
@@ -582,7 +582,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Indexes.ISequenceIndex-1.html",
-          "hash": "fCihhXq7yDUhS8MO8c+5fA=="
+          "hash": "x0ncijxfPGz0y253meeSmQ=="
         }
       },
       "is_incremental": false,
@@ -594,7 +594,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Indexes.SequenceIndex-1.html",
-          "hash": "To6YG/LifIZ/c9u/XiDueA=="
+          "hash": "MPwmB4+OuowzRd2LjKKAZA=="
         }
       },
       "is_incremental": false,
@@ -606,7 +606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Indexes.SynchronizedSequenceIndex-1.html",
-          "hash": "+pOWUEMfv3PuOjoe67Zy+A=="
+          "hash": "MfmXMMhqnQ30b4ermZrdhw=="
         }
       },
       "is_incremental": false,
@@ -618,7 +618,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Indexes.Unindex-1.html",
-          "hash": "IQHLs77/hNWgco/letxufA=="
+          "hash": "BnLrvPXDM7lmkTluQaKnuA=="
         }
       },
       "is_incremental": false,
@@ -642,7 +642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Sequences.Matcher.html",
-          "hash": "r74FJbT2IgloOoNn/AyylA=="
+          "hash": "Zuh65k5gg1Qi4z2Ni/EDvw=="
         }
       },
       "is_incremental": false,
@@ -654,7 +654,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Sequences.PatternMatcher.html",
-          "hash": "hWI5EPATOqY+xXfk0goMPg=="
+          "hash": "NK4Tzk/U1LZ2LjOF5mwWwg=="
         }
       },
       "is_incremental": false,
@@ -666,7 +666,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Sequences.html",
-          "hash": "AFiOiPS0Ddvsv6bgzLUQtg=="
+          "hash": "TlBaCnAmtvU38Zji5l/LLg=="
         }
       },
       "is_incremental": false,
@@ -678,7 +678,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.SequencesExtensions.html",
-          "hash": "udLWr6ZeH2LpRnxAE9pkLg=="
+          "hash": "6z9HUx/xmTcUPfJzrmRGZg=="
         }
       },
       "is_incremental": false,
@@ -690,7 +690,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.SequencesOptions-1.html",
-          "hash": "l13bedAdjP3X7odoOBfdJQ=="
+          "hash": "MdWYKFN9hWk3RH9J/6t4yA=="
         }
       },
       "is_incremental": false,
@@ -702,7 +702,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker-1.html",
-          "hash": "qjIiYtztjT/eIkuI4JfQag=="
+          "hash": "L0r12jgxyxT/dy1cu+vgXA=="
         }
       },
       "is_incremental": false,
@@ -714,7 +714,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Walkers.LeftSequenceWalker-1.html",
-          "hash": "QCQWDSVqRGtLSRIlCfaG3w=="
+          "hash": "wMH8Y6qwy849qLHIWmqIig=="
         }
       },
       "is_incremental": false,
@@ -726,7 +726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Walkers.LeveledSequenceWalker-1.html",
-          "hash": "HdjtYR1B3ePzIhsXJsK4LA=="
+          "hash": "xNgIsecTc1v7SPwxdRWLYQ=="
         }
       },
       "is_incremental": false,
@@ -738,7 +738,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Walkers.RightSequenceWalker-1.html",
-          "hash": "E4WkD9+nKemLDYFBHHlk8w=="
+          "hash": "lCMrJWZofhFPtcH8+iy7MQ=="
         }
       },
       "is_incremental": false,
@@ -750,7 +750,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Sequences.Walkers.SequenceWalkerBase-1.html",
-          "hash": "9h48e5qIHQJXfKbwXsF8cA=="
+          "hash": "zCZO1SX6z/lTDxyY6OeSuQ=="
         }
       },
       "is_incremental": false,
@@ -786,7 +786,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Time.DateTimeToLongRawNumberSequenceConverter-1.html",
-          "hash": "ht9O4XgxVHdjZWqo8swYCQ=="
+          "hash": "QeoSeaGA/bfhHmVR7gyXYw=="
         }
       },
       "is_incremental": false,
@@ -798,7 +798,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Time.LongRawNumberSequenceToDateTimeConverter-1.html",
-          "hash": "GXzQs3w3Eat+dUZ6gfS/nA=="
+          "hash": "1on0YTZh9vqzYpkAgInJ0w=="
         }
       },
       "is_incremental": false,
@@ -822,7 +822,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.UInt64LinksExtensions.html",
-          "hash": "OrZ3ZNWGDiSXGFmRdr+0aw=="
+          "hash": "9R9WJdfQkERx1+PITyE+/w=="
         }
       },
       "is_incremental": false,
@@ -834,7 +834,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Unicode.CharToUnicodeSymbolConverter-1.html",
-          "hash": "DlIBZWwPOhfSQA8f1x32SQ=="
+          "hash": "LGURbw9SWBU8Ijt+YGX/hA=="
         }
       },
       "is_incremental": false,
@@ -846,7 +846,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Unicode.StringToUnicodeSequenceConverter-1.html",
-          "hash": "PiNfJhKa0zyveZDUl0WvFg=="
+          "hash": "xV6TnAEfcbbqAtuWksdm6Q=="
         }
       },
       "is_incremental": false,
@@ -858,7 +858,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Unicode.StringToUnicodeSymbolsListConverter-1.html",
-          "hash": "rAiRF2RAmR7dVZWlXvVllw=="
+          "hash": "AsFRxUYP2gKi/2O4ITPCFg=="
         }
       },
       "is_incremental": false,
@@ -870,7 +870,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Unicode.UnicodeMap.html",
-          "hash": "T1RzDNOaiDKF2uyJJHoVIQ=="
+          "hash": "65PAKpv0bEVxRFk2vcDbTw=="
         }
       },
       "is_incremental": false,
@@ -882,7 +882,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter-1.html",
-          "hash": "VdeLMNcYFQuusQtKQYg9HA=="
+          "hash": "bUo2IWN5b9dRimQTOkbs7Q=="
         }
       },
       "is_incremental": false,
@@ -894,7 +894,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Unicode.UnicodeSymbolToCharConverter-1.html",
-          "hash": "vqhSXSiKdzd1JV/+aEIfwQ=="
+          "hash": "twf2J0yBNg79sb+kzPcRtw=="
         }
       },
       "is_incremental": false,
@@ -906,7 +906,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Platform.Data.Doublets.Unicode.UnicodeSymbolsListToUnicodeSequenceConverter-1.html",
-          "hash": "FQSqmij9I8wFHeVp3Q/exw=="
+          "hash": "gEzL8Hy9IB5aHWHWYxlEjQ=="
         }
       },
       "is_incremental": false,
