@@ -4,7 +4,7 @@
     <Description>LinksPlatform's Platform.Data.Doublets.Sequences Class Library</Description>
     <Copyright>konard, FreePhoenix888</Copyright>
     <AssemblyTitle>Platform.Data.Doublets.Sequences</AssemblyTitle>
-    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionPrefix>0.1.0</VersionPrefix>
     <Authors>konard, FreePhoenix888</Authors>
     <TargetFrameworks>net472;netstandard2.0;netstandard2.1;net5;net6</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -25,7 +25,13 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PackageReleaseNotes>IList<TLinkAddress> is made nullable everywhere except in IConverter typed parameters.
+.NET 6 support is added.
+BigInteger converters bug is fixed. Now any type can be used as typed parameter.
+Platform.Data.Doublets dependency is updated from 0.7.0 to 0.13.1.
+Microsoft.SourceLink.GitHub dependency is updated from 1.0.0 to 1.1.1.
+Platform.Data.Sequences dependency with version 0.2.1 is added.
+</PackageReleaseNotes>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -35,7 +41,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="Platform.Data.Doublets" Version="0.7.0" />
+    <PackageReference Include="Platform.Data.Doublets" Version="0.13.1" />
+    <PackageReference Include="Platform.Data.Sequences" Version="0.2.1" />
   </ItemGroup>
 
 </Project>
