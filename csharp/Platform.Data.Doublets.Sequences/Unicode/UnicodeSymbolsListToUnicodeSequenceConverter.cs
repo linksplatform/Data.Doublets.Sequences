@@ -15,10 +15,10 @@ namespace Platform.Data.Doublets.Unicode
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{IList{TLinkAddress}, TLinkAddress}"/>
-    public class UnicodeSymbolsListToUnicodeSequenceConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<IList<TLinkAddress>?, TLinkAddress>
+    public class UnicodeSymbolsListToUnicodeSequenceConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<IList<TLinkAddress>, TLinkAddress>
     {
         private readonly ISequenceIndex<TLinkAddress> _index;
-        private readonly IConverter<IList<TLinkAddress>?, TLinkAddress> _listToSequenceLinkConverter;
+        private readonly IConverter<IList<TLinkAddress>, TLinkAddress> _listToSequenceLinkConverter;
         private readonly TLinkAddress _unicodeSequenceMarker;
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLinkAddress> links, ISequenceIndex<TLinkAddress> index, IConverter<IList<TLinkAddress>?, TLinkAddress> listToSequenceLinkConverter, TLinkAddress unicodeSequenceMarker) : base(links)
+        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLinkAddress> links, ISequenceIndex<TLinkAddress> index, IConverter<IList<TLinkAddress>, TLinkAddress> listToSequenceLinkConverter, TLinkAddress unicodeSequenceMarker) : base(links)
         {
             _index = index;
             _listToSequenceLinkConverter = listToSequenceLinkConverter;
@@ -70,7 +70,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>?, TLinkAddress> listToSequenceLinkConverter, TLinkAddress unicodeSequenceMarker)
+        public UnicodeSymbolsListToUnicodeSequenceConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>, TLinkAddress> listToSequenceLinkConverter, TLinkAddress unicodeSequenceMarker)
             : this(links, new Unindex<TLinkAddress>(), listToSequenceLinkConverter, unicodeSequenceMarker) { }
 
         /// <summary>

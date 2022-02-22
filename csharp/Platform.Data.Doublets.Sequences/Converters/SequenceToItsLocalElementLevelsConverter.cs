@@ -14,7 +14,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{IList{TLinkAddress}}"/>
-    public class SequenceToItsLocalElementLevelsConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<IList<TLinkAddress>?>
+    public class SequenceToItsLocalElementLevelsConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<IList<TLinkAddress>>
     {
         private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
         private readonly IConverter<Doublet<TLinkAddress>, TLinkAddress> _linkToItsFrequencyToNumberConveter;

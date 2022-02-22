@@ -20,7 +20,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
     {
         private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
-        private readonly IConverter<IList<TLinkAddress>?> _sequenceToItsLocalElementLevelsConverter;
+        private readonly IConverter<IList<TLinkAddress>> _sequenceToItsLocalElementLevelsConverter;
 
         /// <summary>
         /// <para>
@@ -37,7 +37,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public OptimalVariantConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>?> sequenceToItsLocalElementLevelsConverter) : base(links)
+        public OptimalVariantConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>> sequenceToItsLocalElementLevelsConverter) : base(links)
             => _sequenceToItsLocalElementLevelsConverter = sequenceToItsLocalElementLevelsConverter;
 
         /// <summary>

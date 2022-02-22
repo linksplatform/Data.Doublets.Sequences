@@ -171,7 +171,7 @@ namespace Platform.Data.Doublets.Sequences
         /// </para>
         /// <para></para>
         /// </summary>
-        public IConverter<IList<TLinkAddress>?, TLinkAddress> LinksToSequenceConverter
+        public IConverter<IList<TLinkAddress>, TLinkAddress> LinksToSequenceConverter
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get;

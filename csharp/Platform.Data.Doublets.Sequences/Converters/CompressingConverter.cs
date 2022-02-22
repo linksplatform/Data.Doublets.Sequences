@@ -23,7 +23,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
         private static readonly TLinkAddress _zero = default;
         private static readonly TLinkAddress _one = Arithmetic.Increment(_zero);
-        private readonly IConverter<IList<TLinkAddress>?, TLinkAddress> _baseConverter;
+        private readonly IConverter<IList<TLinkAddress>, TLinkAddress> _baseConverter;
         private readonly LinkFrequenciesCache<TLinkAddress> _doubletFrequenciesCache;
         private readonly TLinkAddress _minFrequencyToCompress;
         private readonly bool _doInitialFrequenciesIncrement;
@@ -99,7 +99,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CompressingConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>?, TLinkAddress> baseConverter, LinkFrequenciesCache<TLinkAddress> doubletFrequenciesCache)
+        public CompressingConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>, TLinkAddress> baseConverter, LinkFrequenciesCache<TLinkAddress> doubletFrequenciesCache)
             : this(links, baseConverter, doubletFrequenciesCache, _one, true) { }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CompressingConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>?, TLinkAddress> baseConverter, LinkFrequenciesCache<TLinkAddress> doubletFrequenciesCache, bool doInitialFrequenciesIncrement)
+        public CompressingConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>, TLinkAddress> baseConverter, LinkFrequenciesCache<TLinkAddress> doubletFrequenciesCache, bool doInitialFrequenciesIncrement)
             : this(links, baseConverter, doubletFrequenciesCache, _one, doInitialFrequenciesIncrement) { }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CompressingConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>?, TLinkAddress> baseConverter, LinkFrequenciesCache<TLinkAddress> doubletFrequenciesCache, TLinkAddress minFrequencyToCompress, bool doInitialFrequenciesIncrement)
+        public CompressingConverter(ILinks<TLinkAddress> links, IConverter<IList<TLinkAddress>, TLinkAddress> baseConverter, LinkFrequenciesCache<TLinkAddress> doubletFrequenciesCache, TLinkAddress minFrequencyToCompress, bool doInitialFrequenciesIncrement)
             : base(links)
         {
             _baseConverter = baseConverter;
