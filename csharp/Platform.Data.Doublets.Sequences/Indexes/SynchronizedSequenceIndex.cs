@@ -50,13 +50,13 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             var indexed = true;
             var i = sequence.Count;
             var links = _links.Unsync;
-            _links.SyncRoot.ExecuteReadOperation(() =>
+            _links.SyncRoot.DoRead(() =>
             {
                 while (--i >= 1 && (indexed = !_equalityComparer.Equals(links.SearchOrDefault(sequence[i - 1], sequence[i]), default))) { }
             });
             if (!indexed)
             {
-                _links.SyncRoot.ExecuteWriteOperation(() =>
+                _links.SyncRoot.DoWrite(() =>
                 {
                     for (; i >= 1; i--)
                     {
@@ -85,7 +85,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         public bool MightContain(IList<TLinkAddress>? sequence)
         {
             var links = _links.Unsync;
-            return _links.SyncRoot.ExecuteReadOperation(() =>
+            return _links.SyncRoot.DoRead(() =>
             {
                 var indexed = true;
                 var i = sequence.Count;
