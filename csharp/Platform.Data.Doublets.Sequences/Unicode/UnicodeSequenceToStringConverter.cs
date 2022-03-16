@@ -82,7 +82,7 @@ namespace Platform.Data.Doublets.Unicode
             {
                 throw new ArgumentOutOfRangeException(nameof(source), source, "Specified link is not a unicode sequence.");
             }
-            if(EqualityComparer<TLinkAddress>.Default.Equals(_unicodeSequenceMarker, source))
+            if (EqualityComparer<TLinkAddress>.Default.Equals(_unicodeSequenceMarker, source))
             {
                 return String.Empty;
             }
