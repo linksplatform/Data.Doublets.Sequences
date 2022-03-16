@@ -55,7 +55,6 @@ namespace Platform.Data.Doublets.Unicode
             _sequenceWalker = sequenceWalker;
             _unicodeSymbolToCharConverter = unicodeSymbolToCharConverter;
             _unicodeSequenceMarker = unicodeSequenceMarker;
-
         }
 
         /// <summary>
