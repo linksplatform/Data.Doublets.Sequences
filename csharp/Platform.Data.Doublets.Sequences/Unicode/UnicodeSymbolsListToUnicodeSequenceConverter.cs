@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Platform.Collections;
 using Platform.Converters;
 using Platform.Data.Doublets.Sequences.Indexes;
 
@@ -90,12 +91,12 @@ namespace Platform.Data.Doublets.Unicode
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TLinkAddress Convert(IList<TLinkAddress>? list)
         {
-            _index.Add(list);
-            var sequence = _listToSequenceLinkConverter.Convert(list);
-            if (EqualityComparer<TLinkAddress>.Default.Equals(default, sequence))
+            if (list.IsNullOrEmpty())
             {
                 return _unicodeSequenceMarker;
             }
+            _index.Add(list);
+            var sequence = _listToSequenceLinkConverter.Convert(list);
             return _links.GetOrCreate(sequence, _unicodeSequenceMarker);
         }
     }
