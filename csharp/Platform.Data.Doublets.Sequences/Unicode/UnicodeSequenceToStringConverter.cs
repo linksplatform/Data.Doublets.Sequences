@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Converters;
@@ -78,6 +79,10 @@ namespace Platform.Data.Doublets.Unicode
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public string Convert(TLinkAddress source)
         {
+            if(EqualityComparer<TLinkAddress>.Default.Equals(_unicodeSequenceMarker, source))
+            {
+                return String.Empty;
+            }
             if (!_unicodeSequenceCriterionMatcher.IsMatched(source))
             {
                 throw new ArgumentOutOfRangeException(nameof(source), source, "Specified link is not a unicode sequence.");
