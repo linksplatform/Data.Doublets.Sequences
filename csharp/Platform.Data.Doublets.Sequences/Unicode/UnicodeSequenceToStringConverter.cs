@@ -79,13 +79,13 @@ namespace Platform.Data.Doublets.Unicode
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public string Convert(TLinkAddress source)
         {
-            if(EqualityComparer<TLinkAddress>.Default.Equals(_unicodeSequenceMarker, source))
-            {
-                return String.Empty;
-            }
             if (!_unicodeSequenceCriterionMatcher.IsMatched(source))
             {
                 throw new ArgumentOutOfRangeException(nameof(source), source, "Specified link is not a unicode sequence.");
+            }
+            if(EqualityComparer<TLinkAddress>.Default.Equals(_unicodeSequenceMarker, source))
+            {
+                return String.Empty;
             }
             var sequence = _links.GetSource(source);
             var sb = new StringBuilder();
