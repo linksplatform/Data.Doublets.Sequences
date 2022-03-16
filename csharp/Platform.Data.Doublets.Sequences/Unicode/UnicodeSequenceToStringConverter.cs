@@ -22,6 +22,8 @@ namespace Platform.Data.Doublets.Unicode
         private readonly ICriterionMatcher<TLinkAddress> _unicodeSequenceCriterionMatcher;
         private readonly ISequenceWalker<TLinkAddress> _sequenceWalker;
         private readonly IConverter<TLinkAddress, char> _unicodeSymbolToCharConverter;
+        private readonly TLinkAddress _unicodeSequenceMarker;
+
 
         /// <summary>
         /// <para>
@@ -46,11 +48,13 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSequenceToStringConverter(ILinks<TLinkAddress> links, ICriterionMatcher<TLinkAddress> unicodeSequenceCriterionMatcher, ISequenceWalker<TLinkAddress> sequenceWalker, IConverter<TLinkAddress, char> unicodeSymbolToCharConverter) : base(links)
+        public UnicodeSequenceToStringConverter(ILinks<TLinkAddress> links, ICriterionMatcher<TLinkAddress> unicodeSequenceCriterionMatcher, ISequenceWalker<TLinkAddress> sequenceWalker, IConverter<TLinkAddress, char> unicodeSymbolToCharConverter, TLinkAddress unicodeSequenceMarker) : base(links)
         {
             _unicodeSequenceCriterionMatcher = unicodeSequenceCriterionMatcher;
             _sequenceWalker = sequenceWalker;
             _unicodeSymbolToCharConverter = unicodeSymbolToCharConverter;
+            _unicodeSequenceMarker = unicodeSequenceMarker;
+
         }
 
         /// <summary>
