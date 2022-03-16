@@ -92,6 +92,10 @@ namespace Platform.Data.Doublets.Unicode
         {
             _index.Add(list);
             var sequence = _listToSequenceLinkConverter.Convert(list);
+            if (EqualityComparer<TLinkAddress>.Default.Equals(default, sequence))
+            {
+                return _unicodeSequenceMarker;
+            }
             return _links.GetOrCreate(sequence, _unicodeSequenceMarker);
         }
     }
