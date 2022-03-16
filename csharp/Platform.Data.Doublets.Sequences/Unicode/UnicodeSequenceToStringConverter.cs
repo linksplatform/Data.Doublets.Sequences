@@ -25,7 +25,6 @@ namespace Platform.Data.Doublets.Unicode
         private readonly IConverter<TLinkAddress, char> _unicodeSymbolToCharConverter;
         private readonly TLinkAddress _unicodeSequenceMarker;
 
-
         /// <summary>
         /// <para>
         /// Initializes a new <see cref="UnicodeSequenceToStringConverter"/> instance.
