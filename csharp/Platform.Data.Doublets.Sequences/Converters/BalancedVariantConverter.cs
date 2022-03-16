@@ -42,7 +42,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override TLinkAddress Convert(IList<TLinkAddress>? sequence)
+        public override TLinkAddress Convert(IList<TLinkAddress> sequence)
         {
             var length = sequence.Count;
             if (length < 1)
@@ -71,7 +71,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
             return _links.GetOrCreate(sequence[0], sequence[1]);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void HalveSequence(IList<TLinkAddress>? destination, IList<TLinkAddress>? source, int length)
+        private void HalveSequence(IList<TLinkAddress> destination, IList<TLinkAddress> source, int length)
         {
             var loopedLength = length - (length % 2);
             for (var i = 0; i < loopedLength; i += 2)

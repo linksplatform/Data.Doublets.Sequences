@@ -13,7 +13,7 @@ namespace Platform.Data.Doublets.Unicode
     /// <para></para>
     /// </summary>
     /// <seealso cref="IConverter{string, IList{TLinkAddress}}"/>
-    public class StringToUnicodeSymbolsListConverter<TLinkAddress> : IConverter<string, IList<TLinkAddress>?>
+    public class StringToUnicodeSymbolsListConverter<TLinkAddress> : IConverter<string, IList<TLinkAddress>>
     {
         private readonly IConverter<char, TLinkAddress> _charToUnicodeSymbolConverter;
 
@@ -45,7 +45,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public IList<TLinkAddress>? Convert(string source)
+        public IList<TLinkAddress> Convert(string source)
         {
             var elements = new TLinkAddress[source.Length];
             for (var i = 0; i < elements.Length; i++)

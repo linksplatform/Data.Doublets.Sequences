@@ -71,7 +71,7 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IList<TLinkAddress>? ToList<TLinkAddress>(this ILinks<TLinkAddress> sequences, TLinkAddress sequence)
+        public static IList<TLinkAddress> ToList<TLinkAddress>(this ILinks<TLinkAddress> sequences, TLinkAddress sequence)
         {
             var list = new List<TLinkAddress>();
             var filler = new ListFiller<TLinkAddress, TLinkAddress>(list, sequences.Constants.Break);
