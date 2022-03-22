@@ -25,7 +25,6 @@ namespace Platform.Data.Doublets.Unicode
         private readonly IConverter<TLinkAddress, char> _unicodeSymbolToCharConverter;
         private readonly TLinkAddress _unicodeSequenceMarker;
 
-        // public UnicodeSequenceToStringConverter(ILinks<TLinkAddress> links, ICriterionMatcher<TLinkAddress> unicodeSequenceCriterionMatcher, ISequenceWalker<TLinkAddress> sequenceWalker, IConverter<TLinkAddress, char> unicodeSymbolToCharConverter, TLinkAddress unicodeSequenceMarker) : this(links, )
 
         /// <summary>
         /// <para>
