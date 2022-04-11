@@ -42,7 +42,7 @@ Platform.Data.Sequences dependency with version 0.2.1 is added.
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="Platform.Data.Doublets" Version="0.13.2" />
+    <PackageReference Include="Platform.Data.Doublets" Version="0.13.4" />
     <PackageReference Include="Platform.Data.Sequences" Version="0.2.1" />
   </ItemGroup>
 
