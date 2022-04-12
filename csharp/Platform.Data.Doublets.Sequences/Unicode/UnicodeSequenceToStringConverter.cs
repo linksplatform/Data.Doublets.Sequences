@@ -5,6 +5,7 @@ using Platform.Interfaces;
 using Platform.Converters;
 using Platform.Data.Doublets.Sequences.Walkers;
 using System.Text;
+using Platform.Data.Doublets.Sequences.CriterionMatchers;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
@@ -55,10 +56,12 @@ namespace Platform.Data.Doublets.Unicode
             _sequenceWalker = sequenceWalker;
             _unicodeSymbolToCharConverter = unicodeSymbolToCharConverter;
             _unicodeSequenceMarker = unicodeSequenceMarker;
-
         }
 
-        /// <summary>
+        public UnicodeSequenceToStringConverter(ILinks<TLinkAddress> links, ISequenceWalker<TLinkAddress> sequenceWalker, IConverter<TLinkAddress, char> unicodeSymbolToCharConverter, TLinkAddress unicodeSequenceMarker): this(links, new UnicodeSequenceMatcher<TLinkAddress>(links, unicodeSequenceMarker), sequenceWalker, unicodeSymbolToCharConverter, unicodeSequenceMarker){}
+
+
+            /// <summary>
         /// <para>
         /// Converts the source.
         /// </para>
