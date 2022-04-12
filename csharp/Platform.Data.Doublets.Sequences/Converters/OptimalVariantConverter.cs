@@ -87,7 +87,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override TLinkAddress Convert(IList<TLinkAddress> sequence)
+        public override TLinkAddress Convert(IList<TLinkAddress>? sequence)
         {
             var length = sequence.Count;
             if (length == 1)

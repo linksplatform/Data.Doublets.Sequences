@@ -51,7 +51,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public IList<TLinkAddress> Convert(IList<TLinkAddress> sequence)
+        public IList<TLinkAddress>? Convert(IList<TLinkAddress>? sequence)
         {
             var levels = new TLinkAddress[sequence.Count];
             levels[0] = GetFrequencyNumber(sequence[0], sequence[1]);

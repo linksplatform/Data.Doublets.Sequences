@@ -29,7 +29,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual bool Add(IList<TLinkAddress> sequence) => false;
+        public virtual bool Add(IList<TLinkAddress>? sequence) => false;
 
         /// <summary>
         /// <para>
@@ -46,6 +46,6 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual bool MightContain(IList<TLinkAddress> sequence) => true;
+        public virtual bool MightContain(IList<TLinkAddress>? sequence) => true;
     }
 }

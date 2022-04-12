@@ -62,7 +62,7 @@
 //         /// <para></para>
 //         /// </returns>
 //         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//         public override bool Add(IList<TLinkAddress> sequence)
+//         public override bool Add(IList<TLinkAddress>? sequence)
 //         {
 //             var indexed = true;
 //             var i = sequence.Count;

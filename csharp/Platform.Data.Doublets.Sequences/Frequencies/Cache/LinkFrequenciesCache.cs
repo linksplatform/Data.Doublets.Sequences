@@ -100,7 +100,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void IncrementFrequencies(IList<TLinkAddress> sequence)
+        public void IncrementFrequencies(IList<TLinkAddress>? sequence)
         {
             for (var i = 1; i < sequence.Count; i++)
             {
@@ -144,7 +144,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void PrintFrequencies(IList<TLinkAddress> sequence)
+        public void PrintFrequencies(IList<TLinkAddress>? sequence)
         {
             for (var i = 1; i < sequence.Count; i++)
             {

@@ -184,9 +184,9 @@ namespace Platform.Data.Doublets.Sequences.Converters
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override TLinkAddress Convert(IList<TLinkAddress> source) => _baseConverter.Convert(Compress(source));
+        public override TLinkAddress Convert(IList<TLinkAddress>? source) => _baseConverter.Convert(Compress(source));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private IList<TLinkAddress> Compress(IList<TLinkAddress> sequence)
+        private IList<TLinkAddress>? Compress(IList<TLinkAddress>? sequence)
         {
             if (sequence.IsNullOrEmpty())
             {

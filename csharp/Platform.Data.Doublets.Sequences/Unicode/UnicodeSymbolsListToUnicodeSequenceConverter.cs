@@ -89,7 +89,7 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLinkAddress Convert(IList<TLinkAddress> list)
+        public TLinkAddress Convert(IList<TLinkAddress>? list)
         {
             if (list.IsNullOrEmpty())
             {

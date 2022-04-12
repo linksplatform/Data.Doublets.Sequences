@@ -122,7 +122,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
             _total = Arithmetic.Add(_total, symbolFrequencyCounter.Count());
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private TLinkAddress EachElementHandler(IList<TLinkAddress> doublet)
+        private TLinkAddress EachElementHandler(IList<TLinkAddress>? doublet)
         {
             var constants = _links.Constants;
             var doubletIndex = doublet[constants.IndexPart];
