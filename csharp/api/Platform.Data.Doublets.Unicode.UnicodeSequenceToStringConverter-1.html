@@ -123,13 +123,13 @@ Represents the unicode sequence to string converter.
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/new/master/apiSpec/new?filename=Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_ILinks__0__ICriterionMatcher__0__Platform_Data_Doublets_Sequences_Walkers_ISequenceWalker__0__IConverter__0_System_Char__.md&amp;value=---%0Auid%3A%20Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter%601.%23ctor(ILinks%7B%600%7D%2CICriterionMatcher%7B%600%7D%2CPlatform.Data.Doublets.Sequences.Walkers.ISequenceWalker%7B%600%7D%2CIConverter%7B%600%2CSystem.Char%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/new/master/apiSpec/new?filename=Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_ILinks__0__ICriterionMatcher__0__Platform_Data_Doublets_Sequences_Walkers_ISequenceWalker__0__IConverter__0_System_Char___0_.md&amp;value=---%0Auid%3A%20Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter%601.%23ctor(ILinks%7B%600%7D%2CICriterionMatcher%7B%600%7D%2CPlatform.Data.Doublets.Sequences.Walkers.ISequenceWalker%7B%600%7D%2CIConverter%7B%600%2CSystem.Char%7D%2C%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/blob/89a69d99241ea91c20ab406ff51d4473e17e5a32/csharp/Platform.Data.Doublets.Sequences/Unicode/UnicodeSequenceToStringConverter.cs/#L48">View Source</a>
+    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/blob/bd14e17e81ce8e3a0d74c2fb0c1022b17c54becc/csharp/Platform.Data.Doublets.Sequences/Unicode/UnicodeSequenceToStringConverter.cs/#L52">View Source</a>
   </span>
   <a id="Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_" data-uid="Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor*"></a>
-  <h4 id="Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_ILinks__0__ICriterionMatcher__0__Platform_Data_Doublets_Sequences_Walkers_ISequenceWalker__0__IConverter__0_System_Char__" data-uid="Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor(ILinks{`0},ICriterionMatcher{`0},Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker{`0},IConverter{`0,System.Char})">UnicodeSequenceToStringConverter(ILinks&lt;TLinkAddress&gt;, ICriterionMatcher&lt;TLinkAddress&gt;, ISequenceWalker&lt;TLinkAddress&gt;, IConverter&lt;TLinkAddress, Char&gt;)</h4>
+  <h4 id="Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_ILinks__0__ICriterionMatcher__0__Platform_Data_Doublets_Sequences_Walkers_ISequenceWalker__0__IConverter__0_System_Char___0_" data-uid="Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor(ILinks{`0},ICriterionMatcher{`0},Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker{`0},IConverter{`0,System.Char},`0)">UnicodeSequenceToStringConverter(ILinks&lt;TLinkAddress&gt;, ICriterionMatcher&lt;TLinkAddress&gt;, ISequenceWalker&lt;TLinkAddress&gt;, IConverter&lt;TLinkAddress, Char&gt;, TLinkAddress)</h4>
   <div class="markdown level1 summary"><p>
 Initializes a new <see cref="!:UnicodeSequenceToStringConverter"></see> instance.
 </p>
@@ -138,7 +138,7 @@ Initializes a new <see cref="!:UnicodeSequenceToStringConverter"></see> instance
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UnicodeSequenceToStringConverter(ILinks&lt;TLinkAddress&gt; links, ICriterionMatcher&lt;TLinkAddress&gt; unicodeSequenceCriterionMatcher, ISequenceWalker&lt;TLinkAddress&gt; sequenceWalker, IConverter&lt;TLinkAddress, char&gt; unicodeSymbolToCharConverter)</code></pre>
+    <pre><code class="lang-csharp hljs">public UnicodeSequenceToStringConverter(ILinks&lt;TLinkAddress&gt; links, ICriterionMatcher&lt;TLinkAddress&gt; unicodeSequenceCriterionMatcher, ISequenceWalker&lt;TLinkAddress&gt; sequenceWalker, IConverter&lt;TLinkAddress, char&gt; unicodeSymbolToCharConverter, TLinkAddress unicodeSequenceMarker)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -178,6 +178,58 @@ Initializes a new <see cref="!:UnicodeSequenceToStringConverter"></see> instance
 <p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">TLinkAddress</span></td>
+        <td><span class="parametername">unicodeSequenceMarker</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/new/master/apiSpec/new?filename=Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_ILinks__0__Platform_Data_Doublets_Sequences_Walkers_ISequenceWalker__0__IConverter__0_System_Char___0_.md&amp;value=---%0Auid%3A%20Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter%601.%23ctor(ILinks%7B%600%7D%2CPlatform.Data.Doublets.Sequences.Walkers.ISequenceWalker%7B%600%7D%2CIConverter%7B%600%2CSystem.Char%7D%2C%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/blob/bd14e17e81ce8e3a0d74c2fb0c1022b17c54becc/csharp/Platform.Data.Doublets.Sequences/Unicode/UnicodeSequenceToStringConverter.cs/#L61">View Source</a>
+  </span>
+  <a id="Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_" data-uid="Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor*"></a>
+  <h4 id="Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_ILinks__0__Platform_Data_Doublets_Sequences_Walkers_ISequenceWalker__0__IConverter__0_System_Char___0_" data-uid="Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor(ILinks{`0},Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker{`0},IConverter{`0,System.Char},`0)">UnicodeSequenceToStringConverter(ILinks&lt;TLinkAddress&gt;, ISequenceWalker&lt;TLinkAddress&gt;, IConverter&lt;TLinkAddress, Char&gt;, TLinkAddress)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UnicodeSequenceToStringConverter(ILinks&lt;TLinkAddress&gt; links, ISequenceWalker&lt;TLinkAddress&gt; sequenceWalker, IConverter&lt;TLinkAddress, char&gt; unicodeSymbolToCharConverter, TLinkAddress unicodeSequenceMarker)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ILinks</span>&lt;TLinkAddress&gt;</td>
+        <td><span class="parametername">links</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker-1.html">ISequenceWalker</a>&lt;TLinkAddress&gt;</td>
+        <td><span class="parametername">sequenceWalker</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IConverter</span>&lt;TLinkAddress, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.char">Char</a>&gt;</td>
+        <td><span class="parametername">unicodeSymbolToCharConverter</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">TLinkAddress</span></td>
+        <td><span class="parametername">unicodeSequenceMarker</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <h3 id="methods">Methods
@@ -187,7 +239,7 @@ Initializes a new <see cref="!:UnicodeSequenceToStringConverter"></see> instance
     <a href="https://github.com/linksplatform/Data.Doublets.Sequences/new/master/apiSpec/new?filename=Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1_Convert__0_.md&amp;value=---%0Auid%3A%20Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter%601.Convert(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/blob/89a69d99241ea91c20ab406ff51d4473e17e5a32/csharp/Platform.Data.Doublets.Sequences/Unicode/UnicodeSequenceToStringConverter.cs/#L74">View Source</a>
+    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/blob/bd14e17e81ce8e3a0d74c2fb0c1022b17c54becc/csharp/Platform.Data.Doublets.Sequences/Unicode/UnicodeSequenceToStringConverter.cs/#L82">View Source</a>
   </span>
   <a id="Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1_Convert_" data-uid="Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.Convert*"></a>
   <h4 id="Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1_Convert__0_" data-uid="Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.Convert(`0)">Convert(TLinkAddress)</h4>
@@ -269,7 +321,7 @@ Converts the source.
                     <a href="https://github.com/linksplatform/Data.Doublets.Sequences/new/master/apiSpec/new?filename=Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1.md&amp;value=---%0Auid%3A%20Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/blob/89a69d99241ea91c20ab406ff51d4473e17e5a32/csharp/Platform.Data.Doublets.Sequences/Unicode/UnicodeSequenceToStringConverter.cs/#L20" class="contribution-link">View Source</a>
+                    <a href="https://github.com/linksplatform/Data.Doublets.Sequences/blob/bd14e17e81ce8e3a0d74c2fb0c1022b17c54becc/csharp/Platform.Data.Doublets.Sequences/Unicode/UnicodeSequenceToStringConverter.cs/#L22" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -982,6 +982,74 @@ references:
   fullName.vb: Platform.Data.Doublets.Sequences.CriterionMatchers.MarkedSequenceCriterionMatcher(Of TLinkAddress).IsMatched
   nameWithType: MarkedSequenceCriterionMatcher<TLinkAddress>.IsMatched
   nameWithType.vb: MarkedSequenceCriterionMatcher(Of TLinkAddress).IsMatched
+- uid: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1
+  name: UnicodeSequenceMatcher<TLinkAddress>
+  href: api/Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher-1.html
+  commentId: T:Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1
+  name.vb: UnicodeSequenceMatcher(Of TLinkAddress)
+  fullName: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher<TLinkAddress>
+  fullName.vb: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher(Of TLinkAddress)
+  nameWithType: UnicodeSequenceMatcher<TLinkAddress>
+  nameWithType.vb: UnicodeSequenceMatcher(Of TLinkAddress)
+- uid: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.#ctor(ILinks{`0},`0)
+  name: UnicodeSequenceMatcher(ILinks<TLinkAddress>, TLinkAddress)
+  href: api/Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher-1.html#Platform_Data_Doublets_Sequences_CriterionMatchers_UnicodeSequenceMatcher_1__ctor_ILinks__0___0_
+  commentId: M:Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.#ctor(ILinks{`0},`0)
+  name.vb: UnicodeSequenceMatcher(ILinks(Of TLinkAddress), TLinkAddress)
+  fullName: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher<TLinkAddress>.UnicodeSequenceMatcher(ILinks<TLinkAddress>, TLinkAddress)
+  fullName.vb: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher(Of TLinkAddress).UnicodeSequenceMatcher(ILinks(Of TLinkAddress), TLinkAddress)
+  nameWithType: UnicodeSequenceMatcher<TLinkAddress>.UnicodeSequenceMatcher(ILinks<TLinkAddress>, TLinkAddress)
+  nameWithType.vb: UnicodeSequenceMatcher(Of TLinkAddress).UnicodeSequenceMatcher(ILinks(Of TLinkAddress), TLinkAddress)
+- uid: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.#ctor*
+  name: UnicodeSequenceMatcher
+  href: api/Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher-1.html#Platform_Data_Doublets_Sequences_CriterionMatchers_UnicodeSequenceMatcher_1__ctor_
+  commentId: Overload:Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.#ctor
+  isSpec: "True"
+  fullName: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher<TLinkAddress>.UnicodeSequenceMatcher
+  fullName.vb: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher(Of TLinkAddress).UnicodeSequenceMatcher
+  nameWithType: UnicodeSequenceMatcher<TLinkAddress>.UnicodeSequenceMatcher
+  nameWithType.vb: UnicodeSequenceMatcher(Of TLinkAddress).UnicodeSequenceMatcher
+- uid: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.EqualityComparer
+  name: EqualityComparer
+  href: api/Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher-1.html#Platform_Data_Doublets_Sequences_CriterionMatchers_UnicodeSequenceMatcher_1_EqualityComparer
+  commentId: F:Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.EqualityComparer
+  fullName: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher<TLinkAddress>.EqualityComparer
+  fullName.vb: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher(Of TLinkAddress).EqualityComparer
+  nameWithType: UnicodeSequenceMatcher<TLinkAddress>.EqualityComparer
+  nameWithType.vb: UnicodeSequenceMatcher(Of TLinkAddress).EqualityComparer
+- uid: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.IsMatched(`0)
+  name: IsMatched(TLinkAddress)
+  href: api/Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher-1.html#Platform_Data_Doublets_Sequences_CriterionMatchers_UnicodeSequenceMatcher_1_IsMatched__0_
+  commentId: M:Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.IsMatched(`0)
+  fullName: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher<TLinkAddress>.IsMatched(TLinkAddress)
+  fullName.vb: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher(Of TLinkAddress).IsMatched(TLinkAddress)
+  nameWithType: UnicodeSequenceMatcher<TLinkAddress>.IsMatched(TLinkAddress)
+  nameWithType.vb: UnicodeSequenceMatcher(Of TLinkAddress).IsMatched(TLinkAddress)
+- uid: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.IsMatched*
+  name: IsMatched
+  href: api/Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher-1.html#Platform_Data_Doublets_Sequences_CriterionMatchers_UnicodeSequenceMatcher_1_IsMatched_
+  commentId: Overload:Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.IsMatched
+  isSpec: "True"
+  fullName: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher<TLinkAddress>.IsMatched
+  fullName.vb: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher(Of TLinkAddress).IsMatched
+  nameWithType: UnicodeSequenceMatcher<TLinkAddress>.IsMatched
+  nameWithType.vb: UnicodeSequenceMatcher(Of TLinkAddress).IsMatched
+- uid: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.Storage
+  name: Storage
+  href: api/Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher-1.html#Platform_Data_Doublets_Sequences_CriterionMatchers_UnicodeSequenceMatcher_1_Storage
+  commentId: F:Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.Storage
+  fullName: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher<TLinkAddress>.Storage
+  fullName.vb: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher(Of TLinkAddress).Storage
+  nameWithType: UnicodeSequenceMatcher<TLinkAddress>.Storage
+  nameWithType.vb: UnicodeSequenceMatcher(Of TLinkAddress).Storage
+- uid: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.UnicodeSequenceMarker
+  name: UnicodeSequenceMarker
+  href: api/Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher-1.html#Platform_Data_Doublets_Sequences_CriterionMatchers_UnicodeSequenceMatcher_1_UnicodeSequenceMarker
+  commentId: F:Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher`1.UnicodeSequenceMarker
+  fullName: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher<TLinkAddress>.UnicodeSequenceMarker
+  fullName.vb: Platform.Data.Doublets.Sequences.CriterionMatchers.UnicodeSequenceMatcher(Of TLinkAddress).UnicodeSequenceMarker
+  nameWithType: UnicodeSequenceMatcher<TLinkAddress>.UnicodeSequenceMarker
+  nameWithType.vb: UnicodeSequenceMatcher(Of TLinkAddress).UnicodeSequenceMarker
 - uid: Platform.Data.Doublets.Sequences.DefaultSequenceAppender`1
   name: DefaultSequenceAppender<TLinkAddress>
   href: api/Platform.Data.Doublets.Sequences.DefaultSequenceAppender-1.html
@@ -3351,15 +3419,24 @@ references:
   fullName.vb: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter(Of TLinkAddress)
   nameWithType: UnicodeSequenceToStringConverter<TLinkAddress>
   nameWithType.vb: UnicodeSequenceToStringConverter(Of TLinkAddress)
-- uid: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor(ILinks{`0},ICriterionMatcher{`0},Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker{`0},IConverter{`0,System.Char})
-  name: UnicodeSequenceToStringConverter(ILinks<TLinkAddress>, ICriterionMatcher<TLinkAddress>, ISequenceWalker<TLinkAddress>, IConverter<TLinkAddress, Char>)
-  href: api/Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter-1.html#Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_ILinks__0__ICriterionMatcher__0__Platform_Data_Doublets_Sequences_Walkers_ISequenceWalker__0__IConverter__0_System_Char__
-  commentId: M:Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor(ILinks{`0},ICriterionMatcher{`0},Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker{`0},IConverter{`0,System.Char})
-  name.vb: UnicodeSequenceToStringConverter(ILinks(Of TLinkAddress), ICriterionMatcher(Of TLinkAddress), ISequenceWalker(Of TLinkAddress), IConverter(Of TLinkAddress, Char))
-  fullName: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter<TLinkAddress>.UnicodeSequenceToStringConverter(ILinks<TLinkAddress>, ICriterionMatcher<TLinkAddress>, Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker<TLinkAddress>, IConverter<TLinkAddress, System.Char>)
-  fullName.vb: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter(Of TLinkAddress).UnicodeSequenceToStringConverter(ILinks(Of TLinkAddress), ICriterionMatcher(Of TLinkAddress), Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker(Of TLinkAddress), IConverter(Of TLinkAddress, System.Char))
-  nameWithType: UnicodeSequenceToStringConverter<TLinkAddress>.UnicodeSequenceToStringConverter(ILinks<TLinkAddress>, ICriterionMatcher<TLinkAddress>, ISequenceWalker<TLinkAddress>, IConverter<TLinkAddress, Char>)
-  nameWithType.vb: UnicodeSequenceToStringConverter(Of TLinkAddress).UnicodeSequenceToStringConverter(ILinks(Of TLinkAddress), ICriterionMatcher(Of TLinkAddress), ISequenceWalker(Of TLinkAddress), IConverter(Of TLinkAddress, Char))
+- uid: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor(ILinks{`0},ICriterionMatcher{`0},Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker{`0},IConverter{`0,System.Char},`0)
+  name: UnicodeSequenceToStringConverter(ILinks<TLinkAddress>, ICriterionMatcher<TLinkAddress>, ISequenceWalker<TLinkAddress>, IConverter<TLinkAddress, Char>, TLinkAddress)
+  href: api/Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter-1.html#Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_ILinks__0__ICriterionMatcher__0__Platform_Data_Doublets_Sequences_Walkers_ISequenceWalker__0__IConverter__0_System_Char___0_
+  commentId: M:Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor(ILinks{`0},ICriterionMatcher{`0},Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker{`0},IConverter{`0,System.Char},`0)
+  name.vb: UnicodeSequenceToStringConverter(ILinks(Of TLinkAddress), ICriterionMatcher(Of TLinkAddress), ISequenceWalker(Of TLinkAddress), IConverter(Of TLinkAddress, Char), TLinkAddress)
+  fullName: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter<TLinkAddress>.UnicodeSequenceToStringConverter(ILinks<TLinkAddress>, ICriterionMatcher<TLinkAddress>, Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker<TLinkAddress>, IConverter<TLinkAddress, System.Char>, TLinkAddress)
+  fullName.vb: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter(Of TLinkAddress).UnicodeSequenceToStringConverter(ILinks(Of TLinkAddress), ICriterionMatcher(Of TLinkAddress), Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker(Of TLinkAddress), IConverter(Of TLinkAddress, System.Char), TLinkAddress)
+  nameWithType: UnicodeSequenceToStringConverter<TLinkAddress>.UnicodeSequenceToStringConverter(ILinks<TLinkAddress>, ICriterionMatcher<TLinkAddress>, ISequenceWalker<TLinkAddress>, IConverter<TLinkAddress, Char>, TLinkAddress)
+  nameWithType.vb: UnicodeSequenceToStringConverter(Of TLinkAddress).UnicodeSequenceToStringConverter(ILinks(Of TLinkAddress), ICriterionMatcher(Of TLinkAddress), ISequenceWalker(Of TLinkAddress), IConverter(Of TLinkAddress, Char), TLinkAddress)
+- uid: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor(ILinks{`0},Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker{`0},IConverter{`0,System.Char},`0)
+  name: UnicodeSequenceToStringConverter(ILinks<TLinkAddress>, ISequenceWalker<TLinkAddress>, IConverter<TLinkAddress, Char>, TLinkAddress)
+  href: api/Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter-1.html#Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_ILinks__0__Platform_Data_Doublets_Sequences_Walkers_ISequenceWalker__0__IConverter__0_System_Char___0_
+  commentId: M:Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor(ILinks{`0},Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker{`0},IConverter{`0,System.Char},`0)
+  name.vb: UnicodeSequenceToStringConverter(ILinks(Of TLinkAddress), ISequenceWalker(Of TLinkAddress), IConverter(Of TLinkAddress, Char), TLinkAddress)
+  fullName: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter<TLinkAddress>.UnicodeSequenceToStringConverter(ILinks<TLinkAddress>, Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker<TLinkAddress>, IConverter<TLinkAddress, System.Char>, TLinkAddress)
+  fullName.vb: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter(Of TLinkAddress).UnicodeSequenceToStringConverter(ILinks(Of TLinkAddress), Platform.Data.Doublets.Sequences.Walkers.ISequenceWalker(Of TLinkAddress), IConverter(Of TLinkAddress, System.Char), TLinkAddress)
+  nameWithType: UnicodeSequenceToStringConverter<TLinkAddress>.UnicodeSequenceToStringConverter(ILinks<TLinkAddress>, ISequenceWalker<TLinkAddress>, IConverter<TLinkAddress, Char>, TLinkAddress)
+  nameWithType.vb: UnicodeSequenceToStringConverter(Of TLinkAddress).UnicodeSequenceToStringConverter(ILinks(Of TLinkAddress), ISequenceWalker(Of TLinkAddress), IConverter(Of TLinkAddress, Char), TLinkAddress)
 - uid: Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter`1.#ctor*
   name: UnicodeSequenceToStringConverter
   href: api/Platform.Data.Doublets.Unicode.UnicodeSequenceToStringConverter-1.html#Platform_Data_Doublets_Unicode_UnicodeSequenceToStringConverter_1__ctor_
