@@ -45,7 +45,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Add(IList<TLinkAddress>? sequence)
+        public bool Add(IList<TLinkAddress> sequence)
         {
             var indexed = true;
             var i = sequence.Count;
@@ -82,7 +82,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool MightContain(IList<TLinkAddress>? sequence)
+        public bool MightContain(IList<TLinkAddress> sequence)
         {
             var links = _links.Unsync;
             return _links.SyncRoot.DoRead(() =>

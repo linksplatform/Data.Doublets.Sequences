@@ -23,16 +23,16 @@
 //     /// </summary>
 //     /// <seealso cref="DictionaryBasedDuplicateSegmentsWalkerBase{TLinkAddress}"/>
 //     /// <seealso cref="IProvider{IList{KeyValuePair{IList{TLinkAddress}, IList{TLinkAddress}}}}"/>
-//     public class DuplicateSegmentsProvider<TLinkAddress> : DictionaryBasedDuplicateSegmentsWalkerBase<TLinkAddress>, IProvider<IList<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>>>
+//     public class DuplicateSegmentsProvider<TLinkAddress> : DictionaryBasedDuplicateSegmentsWalkerBase<TLinkAddress>, IProvider<IList<KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>>>>
 //     {
 //         private static readonly UncheckedConverter<TLinkAddress, long> _addressToInt64Converter = UncheckedConverter<TLinkAddress, long>.Default;
 //         private static readonly UncheckedConverter<TLinkAddress, ulong> _addressToUInt64Converter = UncheckedConverter<TLinkAddress, ulong>.Default;
 //         private static readonly UncheckedConverter<ulong, TLinkAddress> _uInt64ToAddressConverter = UncheckedConverter<ulong, TLinkAddress>.Default;
 //         private readonly ILinks<TLinkAddress> _links;
 //         private readonly ILinks<TLinkAddress> _sequences;
-//         private HashSet<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>> _groups;
+//         private HashSet<KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>>> _groups;
 //         private BitString _visited;
-//         private class ItemEquilityComparer : IEqualityComparer<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>>
+//         private class ItemEquilityComparer : IEqualityComparer<KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>>>
 //         {
 //             private readonly IListEqualityComparer<TLinkAddress> _listComparer;
 //
@@ -63,7 +63,7 @@
 //             /// <para></para>
 //             /// </returns>
 //             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//             public bool Equals(KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> left, KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> right) => _listComparer.Equals(left.Key, right.Key) && _listComparer.Equals(left.Value, right.Value);
+//             public bool Equals(KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>> left, KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>> right) => _listComparer.Equals(left.Key, right.Key) && _listComparer.Equals(left.Value, right.Value);
 //
 //             /// <summary>
 //             /// <para>
@@ -80,9 +80,9 @@
 //             /// <para></para>
 //             /// </returns>
 //             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//             public int GetHashCode(KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> pair) => (_listComparer.GetHashCode(pair.Key), _listComparer.GetHashCode(pair.Value)).GetHashCode();
+//             public int GetHashCode(KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>> pair) => (_listComparer.GetHashCode(pair.Key), _listComparer.GetHashCode(pair.Value)).GetHashCode();
 //         }
-//         private class ItemComparer : IComparer<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>>
+//         private class ItemComparer : IComparer<KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>>>
 //         {
 //             private readonly IListComparer<TLinkAddress> _listComparer;
 //
@@ -114,7 +114,7 @@
 //             /// <para></para>
 //             /// </returns>
 //             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//             public int Compare(KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> left, KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> right)
+//             public int Compare(KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>> left, KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>> right)
 //             {
 //                 var intermediateResult = _listComparer.Compare(left.Key, right.Key);
 //                 if (intermediateResult == 0)
@@ -158,9 +158,9 @@
 //         /// <para></para>
 //         /// </returns>
 //         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//         public IList<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>> Get()
+//         public IList<KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>>> Get()
 //         {
-//             _groups = new HashSet<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>>(Default<ItemEquilityComparer>.Instance);
+//             _groups = new HashSet<KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>>>(Default<ItemEquilityComparer>.Instance);
 //             var links = _links;
 //             var count = links.Count();
 //             _visited = new BitString(_addressToInt64Converter.Convert(count) + 1L);
@@ -216,7 +216,7 @@
 //         /// <para></para>
 //         /// </returns>
 //         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//         protected override Segment<TLinkAddress> CreateSegment(IList<TLinkAddress>? elements, int offset, int length) => new Segment<TLinkAddress>(elements, offset, length);
+//         protected override Segment<TLinkAddress> CreateSegment(IList<TLinkAddress> elements, int offset, int length) => new Segment<TLinkAddress>(elements, offset, length);
 //
 //         /// <summary>
 //         /// <para>
@@ -234,7 +234,7 @@
 //             var duplicates = CollectDuplicatesForSegment(segment);
 //             if (duplicates.Count > 1)
 //             {
-//                 _groups.Add(new KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>(segment.ToArray(), duplicates));
+//                 _groups.Add(new KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>>(segment.ToArray(), duplicates));
 //             }
 //         }
 //         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -274,7 +274,7 @@
 //             return duplicates;
 //         }
 //         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//         private void PrintDuplicates(KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?> duplicatesItem)
+//         private void PrintDuplicates(KeyValuePair<IList<TLinkAddress>, IList<TLinkAddress>> duplicatesItem)
 //         {
 //             if (!(_links is ILinks<ulong> ulongLinks))
 //             {

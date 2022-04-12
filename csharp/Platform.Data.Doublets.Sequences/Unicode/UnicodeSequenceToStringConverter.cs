@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Converters;
 using Platform.Data.Doublets.Sequences.Walkers;
 using System.Text;
+using Platform.Data.Doublets.Sequences.CriterionMatchers;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
@@ -22,6 +24,8 @@ namespace Platform.Data.Doublets.Unicode
         private readonly ICriterionMatcher<TLinkAddress> _unicodeSequenceCriterionMatcher;
         private readonly ISequenceWalker<TLinkAddress> _sequenceWalker;
         private readonly IConverter<TLinkAddress, char> _unicodeSymbolToCharConverter;
+        private readonly TLinkAddress _unicodeSequenceMarker;
+
 
         /// <summary>
         /// <para>
@@ -46,14 +50,18 @@ namespace Platform.Data.Doublets.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeSequenceToStringConverter(ILinks<TLinkAddress> links, ICriterionMatcher<TLinkAddress> unicodeSequenceCriterionMatcher, ISequenceWalker<TLinkAddress> sequenceWalker, IConverter<TLinkAddress, char> unicodeSymbolToCharConverter) : base(links)
+        public UnicodeSequenceToStringConverter(ILinks<TLinkAddress> links, ICriterionMatcher<TLinkAddress> unicodeSequenceCriterionMatcher, ISequenceWalker<TLinkAddress> sequenceWalker, IConverter<TLinkAddress, char> unicodeSymbolToCharConverter, TLinkAddress unicodeSequenceMarker) : base(links)
         {
             _unicodeSequenceCriterionMatcher = unicodeSequenceCriterionMatcher;
             _sequenceWalker = sequenceWalker;
             _unicodeSymbolToCharConverter = unicodeSymbolToCharConverter;
+            _unicodeSequenceMarker = unicodeSequenceMarker;
         }
 
-        /// <summary>
+        public UnicodeSequenceToStringConverter(ILinks<TLinkAddress> links, ISequenceWalker<TLinkAddress> sequenceWalker, IConverter<TLinkAddress, char> unicodeSymbolToCharConverter, TLinkAddress unicodeSequenceMarker): this(links, new UnicodeSequenceMatcher<TLinkAddress>(links, unicodeSequenceMarker), sequenceWalker, unicodeSymbolToCharConverter, unicodeSequenceMarker){}
+
+
+            /// <summary>
         /// <para>
         /// Converts the source.
         /// </para>
@@ -77,6 +85,10 @@ namespace Platform.Data.Doublets.Unicode
             if (!_unicodeSequenceCriterionMatcher.IsMatched(source))
             {
                 throw new ArgumentOutOfRangeException(nameof(source), source, "Specified link is not a unicode sequence.");
+            }
+            if(EqualityComparer<TLinkAddress>.Default.Equals(_unicodeSequenceMarker, source))
+            {
+                return String.Empty;
             }
             var sequence = _links.GetSource(source);
             var sb = new StringBuilder();
