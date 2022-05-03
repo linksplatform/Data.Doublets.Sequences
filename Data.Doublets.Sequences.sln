@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Doublets.Sequences", "csharp\Platform.Data.Doublets.Sequences\Platform.Data.Doublets.Sequences.csproj", "{1AAE3521-D8D6-4C7A-8233-923F9C9DE6A4}"
 EndProject
