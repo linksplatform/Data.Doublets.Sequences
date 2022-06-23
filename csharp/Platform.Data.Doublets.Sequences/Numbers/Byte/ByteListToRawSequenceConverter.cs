@@ -45,6 +45,7 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
     public static readonly UncheckedConverter<TLinkAddress, byte> TLinkAddressToByteConverter = UncheckedConverter<TLinkAddress, byte>.Default;
     public ArraySegment<byte> CurrentByteArray;
     public static readonly int BytesInRawNumberCount = BitsSize / 8;
+    private UncheckedConverter<byte, TLinkAddress> ByteToTLinkAddressConverter = UncheckedConverter<byte, TLinkAddress>.Default;
 
 
     public ByteListToRawSequenceConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> addressToNumberConverter, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>,TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter) : base(links)
@@ -79,11 +80,14 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
             else
             {
                 var rawNumberWithoutBitMask = byteArray.ToStructure<TLinkAddress>();
-                var byteToPutAtStart = lastByte;
+                var cutBitsFromPrevRawNumberCount = i;
+                var cutBitsFromPrevRawNumber = Bit.ShiftRight(lastByte, 8 - cutBitsFromPrevRawNumberCount);
                 lastByte = TLinkAddressToByteConverter.Convert(Bit.ShiftRight(rawNumberWithoutBitMask,BitsSize - 8));
-                // Shift left to put last byte bits from previous raw number to the start of this raw number
+                // Shift left to put cut bits from previous raw number to the start of this raw number
                 rawNumberWithoutBitMask = Bit.ShiftLeft(rawNumberWithoutBitMask, i);
                 var rawNumberWithBitMask = Bit.And(rawNumberWithoutBitMask, BitMask);
+                // Put cut bits to the start
+                rawNumberWithBitMask = Bit.Or(rawNumberWithBitMask, ByteToTLinkAddressConverter.Convert(cutBitsFromPrevRawNumber));
                 var rawNumber = AddressToNumberConverter.Convert(rawNumberWithBitMask);
                 rawNumberWithBitMaskList.Add(rawNumber);
                 byteArray = byteArray.Skip(BytesInRawNumberCount).ToArray();
