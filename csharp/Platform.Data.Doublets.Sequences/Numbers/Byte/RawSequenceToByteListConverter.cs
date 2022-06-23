@@ -25,6 +25,9 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
 
     public static readonly TLinkAddress BitMask = Bit.ShiftRight(MaximumValue, 1);
     
+    public static readonly int BitsSize = NumericType<TLinkAddress>.BitsSize;
+
+    
     public readonly IConverter<TLinkAddress> NumberToAddressConverter;
 
     public readonly IConverter<IList<TLinkAddress>, TLinkAddress> ListToSequenceConverter;
@@ -34,7 +37,8 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
     public readonly IConverter<TLinkAddress, string> UnicodeSequenceToStringConverteer;
 
     public readonly BalancedVariantConverter<TLinkAddress> BalancedVariantConverter;
-    
+    public static readonly UncheckedConverter<TLinkAddress, byte> TLinkAddressToByteConverter = UncheckedConverter<TLinkAddress, byte>.Default;
+    public static readonly int BytesInRawNumberCount = BitsSize / 8;
 
 
     public RawSequenceToByteListConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>,TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter) : base(links)
@@ -81,28 +85,69 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         var byteArrayLengthAddress = _links.GetSource(source);
         var byteArrayLength = GetByteArrayLength(byteArrayLengthAddress);
         List<byte> byteList = new(byteArrayLength);
-        List<bool> currentByteBitList = new(8);
         RightSequenceWalker<TLinkAddress> rightSequenceWalker = new(_links, new DefaultStack<TLinkAddress>());
-        var sequenceAddress = _links.GetTarget(source);
-        var sequence = rightSequenceWalker.Walk(sequenceAddress);
-        CheckedConverter<TLinkAddress, byte> checkedConverter = CheckedConverter<TLinkAddress, byte>.Default;
-        foreach (var currentByteAddress in sequence)
+        var rawNumberSequenceAddress = _links.GetTarget(source);
+        var rawNumberSequence = rightSequenceWalker.Walk(rawNumberSequenceAddress);
+        using var rawNumberSequenceEnumerator = rawNumberSequence.GetEnumerator();
+        var i = 0;
+        while (rawNumberSequenceEnumerator.MoveNext())
         {
-            var a = NumberToAddressConverter.Convert(currentByteAddress);
-            var bitArray = new BitArray(a.ToBytes());
-            for (var i = 0; i < bitArray.Count - 1 && i <= byteArrayLength * 8; i++)
+            var currentRawNumber = rawNumberSequenceEnumerator.Current;
+            if (i != 0)
             {
-                if (currentByteBitList.Count == 8)
+                // Get last byte bits and add its last bits to it
+                var byteWithLastByteLastBits = GetByteWithLastByteLastBits(currentRawNumber, i);
+                var lastByte = Bit.Or(byteList.Last(), byteWithLastByteLastBits);
+                byteList[byteList.Count - 1] = lastByte;
+                // Shift bits from last byte
+                currentRawNumber = Bit.ShiftRight(currentRawNumber, i);
+                // Count how many bytes in raw number 
+                int bytesInRawNumberCount = i % 7 == 0 ? 3 : 4;
+                for (int j = 0; j < bytesInRawNumberCount; j++)
                 {
-                    var currentByteBitArray = new BitArray(currentByteBitList.ToArray());
-                    var currentByte = GetByteFromBitArray(currentByteBitArray);
+                    var currentByte = TLinkAddressToByteConverter.Convert(currentRawNumber);
                     byteList.Add(currentByte);
-                    currentByteBitList.Clear();
+                    // Shift current byte from raw number to get other bytes
+                    currentRawNumber = Bit.ShiftRight(currentRawNumber, 8);
                 }
-                var currentBit = bitArray[i];
-                currentByteBitList.Add(currentBit);
             }
+            i++;
         }
         return byteList;
+        // var byteArrayLengthAddress = _links.GetSource(source);
+        // var byteArrayLength = GetByteArrayLength(byteArrayLengthAddress);
+        // List<byte> byteList = new(byteArrayLength);
+        // List<bool> currentByteBitList = new(8);
+        // RightSequenceWalker<TLinkAddress> rightSequenceWalker = new(_links, new DefaultStack<TLinkAddress>());
+        // var sequenceAddress = _links.GetTarget(source);
+        // var sequence = rightSequenceWalker.Walk(sequenceAddress);
+        // CheckedConverter<TLinkAddress, byte> checkedConverter = CheckedConverter<TLinkAddress, byte>.Default;
+        // var j = 0;
+        // foreach (var currentByteAddress in sequence)
+        // {
+        //     var a = NumberToAddressConverter.Convert(currentByteAddress);
+        //     var bitArray = new BitArray(a.ToBytes());
+        //     for (var j = 0; j < bitArray.Count - 1 && j <= byteArrayLength * 8; j++)
+        //     {
+        //         j++;
+        //         if (currentByteBitList.Count == 8)
+        //         {
+        //             var currentByteBitArray = new BitArray(currentByteBitList.ToArray());
+        //             var currentByte = GetByteFromBitArray(currentByteBitArray);
+        //             byteList.Add(currentByte);
+        //             currentByteBitList.Clear();
+        //         }
+        //         var currentBit = bitArray[j];
+        //         currentByteBitList.Add(currentBit);
+        //     }
+        // }
+        // return byteList;
+    }
+
+    private static byte GetByteWithLastByteLastBits(TLinkAddress currentRawNumber, int i)
+    {
+        var currentRawNumberWithLastByteBitsAtEndOfByte = Bit.ShiftLeft(currentRawNumber, 8 - i);
+        var byteWithLastByteBitsAtEnd = TLinkAddressToByteConverter.Convert(currentRawNumberWithLastByteBitsAtEndOfByte);
+        return byteWithLastByteBitsAtEnd;
     }
 }

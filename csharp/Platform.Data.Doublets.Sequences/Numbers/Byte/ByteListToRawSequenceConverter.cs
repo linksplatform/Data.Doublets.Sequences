@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
+using Platform.Collections.Stacks;
 using Platform.Converters;
 using Platform.Data.Doublets.CriterionMatchers;
 using Platform.Data.Doublets.Decorators;
@@ -41,6 +42,9 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
     public readonly TLinkAddress ByteArraySequenceType;
 
     public static readonly UncheckedConverter<Int32, TLinkAddress> IntToTLinkAddressConverter = UncheckedConverter<int, TLinkAddress>.Default;
+    public static readonly UncheckedConverter<TLinkAddress, byte> TLinkAddressToByteConverter = UncheckedConverter<TLinkAddress, byte>.Default;
+    public ArraySegment<byte> CurrentByteArray;
+    public static readonly int BytesInRawNumberCount = BitsSize / 8;
 
 
     public ByteListToRawSequenceConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> addressToNumberConverter, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>,TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter) : base(links)
@@ -57,11 +61,39 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
     
     public TLinkAddress Convert(IList<byte> source)
     {
-        var bigIntWithBitMask = Bit.And(source.ToArray().ToStructure<TLinkAddress>(), BitMask);
-        var rawNumber = AddressToNumberConverter.Convert(bigIntWithBitMask);
+        List<TLinkAddress> rawNumberList = new(BitsSize / source.Count);
+        CurrentByteArray = new ArraySegment<byte>(source.ToArray());
+        while (CurrentByteArray.Count > BytesInRawNumberCount)
+        {
+            rawNumberList.Add(GetRawNumber());
+            SetNewCurrentByteArrayOffset();
+        }
+        var byteArrayLengthAddress = GetByteArrayLengthAddress(source);
+        var byteArraySequenceAddress = ListToSequenceConverter.Convert(rawNumberList);
+        return _links.GetOrCreate(byteArrayLengthAddress, byteArraySequenceAddress);
+    }
+
+    private TLinkAddress GetByteArrayLengthAddress(IList<byte> source)
+    {
         var length = IntToTLinkAddressConverter.Convert(source.Count);
         var byteArrayLength = _links.GetOrCreate(ByteArrayLengthType, AddressToNumberConverter.Convert(length));
-        var byteArraySequence = ListToSequenceConverter.Convert(new List<TLinkAddress>{rawNumber});
-        return _links.GetOrCreate(byteArrayLength, byteArraySequence);
+        return byteArrayLength;
+    }
+
+    private void SetNewCurrentByteArrayOffset()
+    {
+        var newOffset = CurrentByteArray.Offset + BytesInRawNumberCount;
+        if (newOffset > CurrentByteArray.Count)
+        {
+            CurrentByteArray = new ArraySegment<byte>(CurrentByteArray.Array, newOffset, 0);
+        }
+        CurrentByteArray = new ArraySegment<byte>(CurrentByteArray.Array, newOffset, CurrentByteArray.Count - newOffset);
+    }
+
+    private TLinkAddress GetRawNumber()
+    {
+        var rawNumber = CurrentByteArray.ToArray().ToStructure<TLinkAddress>();
+        var rawNumberWithBitMask = Bit.And(rawNumber, BitMask);
+        return AddressToNumberConverter.Convert(rawNumberWithBitMask);
     }
 }
