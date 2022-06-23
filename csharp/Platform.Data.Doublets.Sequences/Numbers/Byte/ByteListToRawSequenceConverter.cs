@@ -86,11 +86,11 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
             else
             {
                 var rawNumberWithoutBitMask = byteArray.ToStructure<TLinkAddress>();
-                var cutBitsFromPrevRawNumberCount = i;
+                var cutBitsFromPrevRawNumberCount = i % 8;
                 var cutBitsFromPrevRawNumber = Bit.ShiftRight(lastByte, 8 - cutBitsFromPrevRawNumberCount);
                 lastByte = TLinkAddressToByteConverter.Convert(Bit.ShiftRight(rawNumberWithoutBitMask,BitsSize - 8));
                 // Shift left to put cut bits from previous raw number to the start of this raw number
-                rawNumberWithoutBitMask = Bit.ShiftLeft(rawNumberWithoutBitMask, i);
+                rawNumberWithoutBitMask = Bit.ShiftLeft(rawNumberWithoutBitMask, cutBitsFromPrevRawNumberCount);
                 var rawNumberWithBitMask = Bit.And(rawNumberWithoutBitMask, BitMask);
                 // Put cut bits to the start
                 rawNumberWithBitMask = Bit.Or(rawNumberWithBitMask, ByteToTLinkAddressConverter.Convert(cutBitsFromPrevRawNumber));
