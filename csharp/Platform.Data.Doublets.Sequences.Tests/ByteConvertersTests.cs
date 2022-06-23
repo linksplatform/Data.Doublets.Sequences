@@ -71,7 +71,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             var byteListRawSequence = _byteListToRawSequenceConverter.Convert(byteArray);
             var byteListFromConverter = _rawSequenceToByteListConverter.Convert(byteListRawSequence);
-            Assert.Equal(byteListFromConverter.ToArray(), byteArray);
+            Assert.Equal(byteArray, byteListFromConverter.ToArray());
         }
     }
 }
