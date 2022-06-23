@@ -61,39 +61,38 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
     
     public TLinkAddress Convert(IList<byte> source)
     {
-        List<TLinkAddress> rawNumberList = new(BitsSize / source.Count);
-        CurrentByteArray = new ArraySegment<byte>(source.ToArray());
-        while (CurrentByteArray.Count > BytesInRawNumberCount)
+        List<TLinkAddress> rawNumberWithBitMaskList = new(source.Count / BytesInRawNumberCount + source.Count);
+        var byteArray = source.ToArray();
+        var i = 0;
+        byte lastByte = default;
+        while (byteArray.Length != 0)
         {
-            rawNumberList.Add(GetRawNumber());
-            SetNewCurrentByteArrayOffset();
+            if (i == 0)
+            {
+                var rawNumberWithoutBitMask = byteArray.ToStructure<TLinkAddress>();
+                lastByte = TLinkAddressToByteConverter.Convert(Bit.ShiftRight(rawNumberWithoutBitMask, BitsSize - 8));
+                var rawNumberWithBitMask = Bit.And(rawNumberWithoutBitMask, BitMask);
+                rawNumberWithBitMask = AddressToNumberConverter.Convert(rawNumberWithBitMask);
+                rawNumberWithBitMaskList.Add(rawNumberWithBitMask);
+                byteArray = byteArray.Skip(BytesInRawNumberCount).ToArray();
+            }
+            else
+            {
+                var rawNumberWithoutBitMask = byteArray.ToStructure<TLinkAddress>();
+                var byteToPutAtStart = lastByte;
+                lastByte = TLinkAddressToByteConverter.Convert(Bit.ShiftRight(rawNumberWithoutBitMask,BitsSize - 8));
+                // Shift left to put last byte bits from previous raw number to the start of this raw number
+                rawNumberWithoutBitMask = Bit.ShiftLeft(rawNumberWithoutBitMask, i);
+                var rawNumberWithBitMask = Bit.And(rawNumberWithoutBitMask, BitMask);
+                var rawNumber = AddressToNumberConverter.Convert(rawNumberWithBitMask);
+                rawNumberWithBitMaskList.Add(rawNumber);
+                byteArray = byteArray.Skip(BytesInRawNumberCount).ToArray();
+            }
+            i++;
         }
-        var byteArrayLengthAddress = GetByteArrayLengthAddress(source);
-        var byteArraySequenceAddress = ListToSequenceConverter.Convert(rawNumberList);
-        return _links.GetOrCreate(byteArrayLengthAddress, byteArraySequenceAddress);
-    }
-
-    private TLinkAddress GetByteArrayLengthAddress(IList<byte> source)
-    {
         var length = IntToTLinkAddressConverter.Convert(source.Count);
-        var byteArrayLength = _links.GetOrCreate(ByteArrayLengthType, AddressToNumberConverter.Convert(length));
-        return byteArrayLength;
-    }
-
-    private void SetNewCurrentByteArrayOffset()
-    {
-        var newOffset = CurrentByteArray.Offset + BytesInRawNumberCount;
-        if (newOffset > CurrentByteArray.Count)
-        {
-            CurrentByteArray = new ArraySegment<byte>(CurrentByteArray.Array, newOffset, 0);
-        }
-        CurrentByteArray = new ArraySegment<byte>(CurrentByteArray.Array, newOffset, CurrentByteArray.Count - newOffset);
-    }
-
-    private TLinkAddress GetRawNumber()
-    {
-        var rawNumber = CurrentByteArray.ToArray().ToStructure<TLinkAddress>();
-        var rawNumberWithBitMask = Bit.And(rawNumber, BitMask);
-        return AddressToNumberConverter.Convert(rawNumberWithBitMask);
+        var byteArrayLengthAddress = _links.GetOrCreate(ByteArrayLengthType, AddressToNumberConverter.Convert(length));
+        var byteArraySequenceAddress = ListToSequenceConverter.Convert(rawNumberWithBitMaskList);
+        return _links.GetOrCreate(byteArrayLengthAddress, byteArraySequenceAddress);
     }
 }
