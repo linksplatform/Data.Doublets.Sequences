@@ -46,6 +46,7 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
     public ArraySegment<byte> CurrentByteArray;
     public static readonly int BytesInRawNumberCount = BitsSize / 8;
     private UncheckedConverter<byte, TLinkAddress> ByteToTLinkAddressConverter = UncheckedConverter<byte, TLinkAddress>.Default;
+    private TLinkAddress EmptyArrayType;
 
 
     public ByteListToRawSequenceConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> addressToNumberConverter, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>,TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter) : base(links)
@@ -58,10 +59,15 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         Type = Arithmetic.Increment(Zero);
         ByteArrayLengthType = _links.GetOrCreate(Type, stringToUnicodeSequenceConverter.Convert(nameof(ByteArrayLengthType)));
         ByteArraySequenceType = _links.GetOrCreate(Type, stringToUnicodeSequenceConverter.Convert(nameof(ByteArraySequenceType)));
+        EmptyArrayType = _links.GetOrCreate(Type, stringToUnicodeSequenceConverter.Convert(nameof(EmptyArrayType)));
     }
     
     public TLinkAddress Convert(IList<byte> source)
     {
+        if (source.Count == 0)
+        {
+            return EmptyArrayType;
+        }
         List<TLinkAddress> rawNumberWithBitMaskList = new(source.Count / BytesInRawNumberCount + source.Count);
         var byteArray = source.ToArray();
         var i = 0;
