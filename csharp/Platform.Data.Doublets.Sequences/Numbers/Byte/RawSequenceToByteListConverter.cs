@@ -92,7 +92,7 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         var i = 0;
         while (rawNumberSequenceEnumerator.MoveNext())
         {
-            var currentRawNumber = rawNumberSequenceEnumerator.Current;
+            var currentRawNumber = NumberToAddressConverter.Convert(rawNumberSequenceEnumerator.Current);
             if (i != 0)
             {
                 // Get last byte bits and add its last bits to it
@@ -106,7 +106,7 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
             int bytesInRawNumberCount = i == 0 ? BytesInRawNumberCount : i % 7 == 0 ? 3 : 4;
             for (int j = 0; j < bytesInRawNumberCount && byteList.Count != byteArrayLength; j++)
             {
-                var currentByte = TLinkAddressToByteConverter.Convert(NumberToAddressConverter.Convert(currentRawNumber));
+                var currentByte = TLinkAddressToByteConverter.Convert(currentRawNumber);
                 byteList.Add(currentByte);
                 // Shift current byte from raw number to get other bytes
                 currentRawNumber = Bit.ShiftRight(currentRawNumber, 8);
