@@ -104,9 +104,9 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
             }
             // Count how many bytes in raw number 
             int bytesInRawNumberCount = i == 0 ? BytesInRawNumberCount : i % 7 == 0 ? 3 : 4;
-            for (int j = 0; j < bytesInRawNumberCount; j++)
+            for (int j = 0; j < bytesInRawNumberCount && byteList.Count != byteArrayLength; j++)
             {
-                var currentByte = TLinkAddressToByteConverter.Convert(currentRawNumber);
+                var currentByte = TLinkAddressToByteConverter.Convert(NumberToAddressConverter.Convert(currentRawNumber));
                 byteList.Add(currentByte);
                 // Shift current byte from raw number to get other bytes
                 currentRawNumber = Bit.ShiftRight(currentRawNumber, 8);
