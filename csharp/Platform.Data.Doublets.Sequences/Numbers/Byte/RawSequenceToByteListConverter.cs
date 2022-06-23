@@ -24,16 +24,16 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
     public static readonly TLinkAddress MaximumValue = NumericType<TLinkAddress>.MaxValue;
 
     public static readonly TLinkAddress BitMask = Bit.ShiftRight(MaximumValue, 1);
-    
+
     public static readonly int BitsSize = NumericType<TLinkAddress>.BitsSize;
 
-    
+
     public readonly IConverter<TLinkAddress> NumberToAddressConverter;
 
     public readonly IConverter<IList<TLinkAddress>, TLinkAddress> ListToSequenceConverter;
 
     public readonly IConverter<string, TLinkAddress> StringToUnicodeSequenceConverteer;
-    
+
     public readonly IConverter<TLinkAddress, string> UnicodeSequenceToStringConverteer;
 
     public readonly BalancedVariantConverter<TLinkAddress> BalancedVariantConverter;
@@ -41,7 +41,7 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
     public static readonly int BytesInRawNumberCount = BitsSize / 8;
 
 
-    public RawSequenceToByteListConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>,TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter) : base(links)
+    public RawSequenceToByteListConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>, TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter) : base(links)
     {
         NumberToAddressConverter = numberToAddressConverter;
         ListToSequenceConverter = listToSequenceConverter;
@@ -73,7 +73,7 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         return checkedConverter.Convert(NumberToAddressConverter.Convert(target));
     }
 
-    private byte GetByteFromBitArray(BitArray bitArray ) 
+    private byte GetByteFromBitArray(BitArray bitArray)
     {
         byte[] currentByte = new byte[1];
         bitArray.CopyTo(currentByte, 0);
@@ -101,15 +101,15 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
                 byteList[byteList.Count - 1] = lastByte;
                 // Shift bits from last byte
                 currentRawNumber = Bit.ShiftRight(currentRawNumber, i);
-                // Count how many bytes in raw number 
-                int bytesInRawNumberCount = i % 7 == 0 ? 3 : 4;
-                for (int j = 0; j < bytesInRawNumberCount; j++)
-                {
-                    var currentByte = TLinkAddressToByteConverter.Convert(currentRawNumber);
-                    byteList.Add(currentByte);
-                    // Shift current byte from raw number to get other bytes
-                    currentRawNumber = Bit.ShiftRight(currentRawNumber, 8);
-                }
+            }
+            // Count how many bytes in raw number 
+            int bytesInRawNumberCount = i == 0 ? BytesInRawNumberCount : i % 7 == 0 ? 3 : 4;
+            for (int j = 0; j < bytesInRawNumberCount; j++)
+            {
+                var currentByte = TLinkAddressToByteConverter.Convert(currentRawNumber);
+                byteList.Add(currentByte);
+                // Shift current byte from raw number to get other bytes
+                currentRawNumber = Bit.ShiftRight(currentRawNumber, 8);
             }
             i++;
         }
