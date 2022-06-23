@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Platform.Collections.Lists;
 using Platform.Converters;
@@ -26,7 +27,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
         private readonly BalancedVariantConverter<TLinkAddress> _listToSequenceConverter;
         private readonly ByteListToRawSequenceConverter<TLinkAddress> _byteListToRawSequenceConverter;
         private readonly RawSequenceToByteListConverter<TLinkAddress> _rawSequenceToByteListConverter;
-
+        
         public ByteConvertersTests()
         {
             var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
@@ -54,8 +55,15 @@ namespace Platform.Data.Doublets.Sequences.Tests
             _byteListToRawSequenceConverter = new ByteListToRawSequenceConverter<TLinkAddress>(Storage, _addressToRawNumberConverter, _rawNumberToAddressConverter, _listToSequenceConverter, stringToUnicodeSequenceConverter);
             _rawSequenceToByteListConverter = new RawSequenceToByteListConverter<TLinkAddress>(Storage, _rawNumberToAddressConverter, _listToSequenceConverter, stringToUnicodeSequenceConverter);
         }
-        
-        // [InlineData(new byte[]{})]
+
+        private static byte[] GetRandomArray(int length)
+        {
+            byte[] array = new byte[length];
+            new System.Random().NextBytes(array);
+            return array;
+        }
+
+        [InlineData(new byte[]{})]
         [InlineData(new byte[]{0})]
         [InlineData(new byte[]{0, 0})]
         [InlineData(new byte[]{0, 0, 0, 0})]
@@ -67,11 +75,24 @@ namespace Platform.Data.Doublets.Sequences.Tests
         [InlineData(new byte[]{255, 255})]
         [InlineData(new byte[]{255, 255, 255, 255, 255})]
         [Theory]
+        public void FixedArraysTest(byte[] byteArray)
+        {
+            Test(byteArray);
+        }
+        
+        [InlineData(100)]
+        [Theory]
+        public void RandomArrayTest(int length)
+        {
+            var byteArray = GetRandomArray(length);
+            Test(byteArray);
+        }
+
         public void Test(byte[] byteArray)
         {
             var byteListRawSequence = _byteListToRawSequenceConverter.Convert(byteArray);
             var byteListFromConverter = _rawSequenceToByteListConverter.Convert(byteListRawSequence);
-            Assert.Equal(byteArray, byteListFromConverter.ToArray());
+            Assert.Equal(byteArray, byteListFromConverter.ToArray());                
         }
     }
 }
