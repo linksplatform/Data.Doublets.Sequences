@@ -49,6 +49,12 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         StringToUnicodeSequenceConverteer = stringToUnicodeSequenceConverter;
     }
 
+    private bool IsEmptyArray(TLinkAddress array)
+    {
+        var emptyArrayType = StringToUnicodeSequenceConverteer.Convert("EmptyArrayType");
+        return EqualityComparer.Equals(emptyArrayType, array);
+    }
+    
     private void EnsureIsByteArrayLength(TLinkAddress byteArrayLengthAddress)
     {
         var source = _links.GetSource(byteArrayLengthAddress);
@@ -82,6 +88,10 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
 
     public IList<byte> Convert(TLinkAddress source)
     {
+        if (IsEmptyArray(source))
+        {
+            return new List<byte>();
+        }
         var byteArrayLengthAddress = _links.GetSource(source);
         var byteArrayLength = GetByteArrayLength(byteArrayLengthAddress);
         List<byte> byteList = new(byteArrayLength);
