@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using Platform.Collections.Lists;
 using Platform.Converters;
 using Platform.Data.Doublets.CriterionMatchers;
@@ -14,6 +16,7 @@ using Platform.Data.Doublets.Unicode;
 using Platform.Data.Numbers.Raw;
 using Platform.Memory;
 using Platform.Numbers;
+using Platform.Reflection;
 using Xunit;
 using TLinkAddress = System.UInt32;
 
@@ -80,7 +83,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Test(byteArray);
         }
         
-        [InlineData(100)]
+        [InlineData(1000)]
         [Theory]
         public void RandomArrayTest(int length)
         {
@@ -92,7 +95,20 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             var byteListRawSequence = _byteListToRawSequenceConverter.Convert(byteArray);
             var byteListFromConverter = _rawSequenceToByteListConverter.Convert(byteListRawSequence);
+            // Console.WriteLine("Original");
+            // foreach (var b in byteArray)
+            // {
+            //     Console.WriteLine(TestExtensions.PrettifyBinary<byte>(Convert.ToString(b, 2)));
+            // }
+            // Console.WriteLine();
+            // Console.WriteLine("From converter:");
+            // foreach (var b in byteListFromConverter)
+            // {
+            //     Console.WriteLine(TestExtensions.PrettifyBinary<byte>(Convert.ToString(b, 2)));
+            // }
             Assert.Equal(byteArray, byteListFromConverter.ToArray());                
         }
+        
+
     }
 }
