@@ -78,21 +78,19 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         List<TLinkAddress> rawNumberList = new(source.Count / BytesInRawNumberCount + source.Count);
         var byteArray = source.ToArray();
         var i = 0;
-        TLinkAddress notSavedBits = default;
+        TLinkAddress rawNumberWithNonSavedBitsAtTheStart = default;
         List<TLinkAddress> rawNumberWithoutBitMaskList = new();
         while (byteArray.Length != 0)
         {
-            var nonSavedBitsCount = i % 8;
-            if (nonSavedBitsCount == 0)
+            var lastNotSavedBitsCount = i % 8;
+            if (lastNotSavedBitsCount == 0)
             {
-                nonSavedBitsCount = 1;
+                lastNotSavedBitsCount = 1;
             }
             if (i == 0)
             {
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
-                notSavedBits = Bit.ShiftRight(rawNumber, BitsSize - 1);
-                // Console.WriteLine($"Not saved bits: {System.Convert.ToString(TLinkAddressToByteConverter.Convert(notSavedBits), 2)}");
-                // Console.WriteLine($"Raw number (not converted): {TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((uint)(object)rawNumber, 2))}");
+                rawNumberWithNonSavedBitsAtTheStart = Bit.ShiftRight(rawNumber, BitsSize - 1);
                 rawNumber = Bit.And(rawNumber, BitMask);
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);
                 rawNumberList.Add(rawNumber);
@@ -101,15 +99,12 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
             else
             {
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
-                var newNotSavedBits = Bit.ShiftRight(rawNumber, BitsSize - nonSavedBitsCount);
-                // Console.WriteLine($"Not saved bits: {System.Convert.ToString(TLinkAddressToByteConverter.Convert(notSavedBits), 2)}");
+                var newNotSavedBits = Bit.ShiftRight(rawNumber, BitsSize - lastNotSavedBitsCount - 1);
                 // Shift left for non saved bits from previoys raw number
-                rawNumber = Bit.ShiftLeft(rawNumber, nonSavedBitsCount);
-                // Console.WriteLine($"Raw number (not converted): {TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((uint)(object)rawNumber, 2))}");
+                rawNumber = Bit.ShiftLeft(rawNumber, lastNotSavedBitsCount);
                 // Put non saved bits at the start
-                rawNumber = Bit.Or(rawNumber, notSavedBits);
-                notSavedBits = newNotSavedBits;
-                // Console.WriteLine($"Raw number with non saved bits at the start (not converted): {TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((uint)(object)rawNumber, 2))}");
+                rawNumber = Bit.Or(rawNumber, rawNumberWithNonSavedBitsAtTheStart);
+                rawNumberWithNonSavedBitsAtTheStart = newNotSavedBits;
                 // Mask last bit
                 rawNumber = Bit.And(rawNumber, BitMask);
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);

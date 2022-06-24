@@ -82,13 +82,6 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         return checkedConverter.Convert(NumberToAddressConverter.Convert(target));
     }
 
-    private byte GetByteFromBitArray(BitArray bitArray)
-    {
-        byte[] currentByte = new byte[1];
-        bitArray.CopyTo(currentByte, 0);
-        return currentByte[0];
-    }
-
     public IList<byte> Convert(TLinkAddress source)
     {
         if (IsEmptyArray(source))
@@ -111,15 +104,12 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
             {
                 nonSavedBitsCount = 1;
             }
-            // Console.WriteLine($"Raw number in raw sequence to byte list converter: {TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((uint)(object)currentRawNumber, 2))}");
             if (i != 0)
             {
                 // Get last byte bits and add its last bits to it
                 var nonSavedBits = GetByteWithLastByteLastBits(currentRawNumber, nonSavedBitsCount);
-                // Console.WriteLine($"Last byte before putting non saved bits in: {TestExtensions.PrettifyBinary<byte>(System.Convert.ToString(byteList.Last(), 2))}");
                 var lastByte = Bit.Or(byteList.Last(), nonSavedBits);
                 byteList[byteList.Count - 1] = lastByte;
-                // Console.WriteLine($"Last byte after putting non saved bits in: {TestExtensions.PrettifyBinary<byte>(System.Convert.ToString(byteList.Last(), 2))}");
                 // Shift bits from last byte
                 currentRawNumber = Bit.ShiftRight(currentRawNumber, nonSavedBitsCount);
             }
@@ -135,34 +125,6 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
             i++;
         }
         return byteList;
-        // var byteArrayLengthAddress = _links.GetSource(source);
-        // var byteArrayLength = GetByteArrayLength(byteArrayLengthAddress);
-        // List<byte> byteList = new(byteArrayLength);
-        // List<bool> currentByteBitList = new(8);
-        // RightSequenceWalker<TLinkAddress> rightSequenceWalker = new(_links, new DefaultStack<TLinkAddress>());
-        // var sequenceAddress = _links.GetTarget(source);
-        // var sequence = rightSequenceWalker.Walk(sequenceAddress);
-        // CheckedConverter<TLinkAddress, byte> checkedConverter = CheckedConverter<TLinkAddress, byte>.Default;
-        // var j = 0;
-        // foreach (var currentByteAddress in sequence)
-        // {
-        //     var a = NumberToAddressConverter.Convert(currentByteAddress);
-        //     var bitArray = new BitArray(a.ToBytes());
-        //     for (var j = 0; j < bitArray.Count - 1 && j <= byteArrayLength * 8; j++)
-        //     {
-        //         j++;
-        //         if (currentByteBitList.Count == 8)
-        //         {
-        //             var currentByteBitArray = new BitArray(currentByteBitList.ToArray());
-        //             var currentByte = GetByteFromBitArray(currentByteBitArray);
-        //             byteList.Add(currentByte);
-        //             currentByteBitList.Clear();
-        //         }
-        //         var currentBit = bitArray[j];
-        //         currentByteBitList.Add(currentBit);
-        //     }
-        // }
-        // return byteList;
     }
 
     private static byte GetByteWithLastByteLastBits(TLinkAddress currentRawNumber, int nonSavedBits)
