@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using Platform.Collections.Stacks;
 using Platform.Converters;
 using Platform.Data.Doublets.CriterionMatchers;
@@ -18,6 +19,8 @@ namespace Platform.Data.Doublets.Sequences.Numbers.Byte;
 
 public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<IList<byte>, TLinkAddress> where TLinkAddress : struct
 {
+    
+
     public static readonly TLinkAddress MaximumValue = NumericType<TLinkAddress>.MaxValue;
 
     public static readonly TLinkAddress BitMask = Bit.ShiftRight(MaximumValue, 1);
@@ -64,6 +67,10 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
     
     public TLinkAddress Convert(IList<byte> source)
     {
+        foreach (var b in source)
+        {
+            TestExtensions.PrettifyBinary<byte>(System.Convert.ToString(b));
+        }        
         if (source.Count == 0)
         {
             return EmptyArrayType;
@@ -71,7 +78,8 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         List<TLinkAddress> rawNumberList = new(source.Count / BytesInRawNumberCount + source.Count);
         var byteArray = source.ToArray();
         var i = 0;
-        TLinkAddress nonSavedBits = default;
+        TLinkAddress notSavedBits = default;
+        List<TLinkAddress> rawNumberWithoutBitMaskList = new();
         while (byteArray.Length != 0)
         {
             var nonSavedBitsCount = i % 8;
@@ -82,7 +90,9 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
             if (i == 0)
             {
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
-                nonSavedBits = Bit.ShiftRight(rawNumber, BitsSize - 1);
+                notSavedBits = Bit.ShiftRight(rawNumber, BitsSize - 1);
+                // Console.WriteLine($"Not saved bits: {System.Convert.ToString(TLinkAddressToByteConverter.Convert(notSavedBits), 2)}");
+                // Console.WriteLine($"Raw number (not converted): {TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((uint)(object)rawNumber, 2))}");
                 rawNumber = Bit.And(rawNumber, BitMask);
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);
                 rawNumberList.Add(rawNumber);
@@ -91,10 +101,15 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
             else
             {
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
+                var newNotSavedBits = Bit.ShiftRight(rawNumber, BitsSize - nonSavedBitsCount);
+                // Console.WriteLine($"Not saved bits: {System.Convert.ToString(TLinkAddressToByteConverter.Convert(notSavedBits), 2)}");
                 // Shift left for non saved bits from previoys raw number
                 rawNumber = Bit.ShiftLeft(rawNumber, nonSavedBitsCount);
+                // Console.WriteLine($"Raw number (not converted): {TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((uint)(object)rawNumber, 2))}");
                 // Put non saved bits at the start
-                rawNumber = Bit.Or(rawNumber, nonSavedBits);
+                rawNumber = Bit.Or(rawNumber, notSavedBits);
+                notSavedBits = newNotSavedBits;
+                // Console.WriteLine($"Raw number with non saved bits at the start (not converted): {TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((uint)(object)rawNumber, 2))}");
                 // Mask last bit
                 rawNumber = Bit.And(rawNumber, BitMask);
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);
@@ -111,6 +126,11 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         var length = IntToTLinkAddressConverter.Convert(source.Count);
         var byteArrayLengthAddress = _links.GetOrCreate(ByteArrayLengthType, AddressToNumberConverter.Convert(length));
         var byteArraySequenceAddress = ListToSequenceConverter.Convert(rawNumberList);
+        Console.WriteLine("Raw numbers in byte list to raw sequence converter:");
+        foreach (var linkAddress in rawNumberList)
+        {
+            Console.WriteLine(TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((uint)(object)linkAddress, 2)));
+        }
         return _links.GetOrCreate(byteArrayLengthAddress, byteArraySequenceAddress);
     }
 }

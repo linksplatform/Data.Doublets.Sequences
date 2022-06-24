@@ -106,13 +106,20 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         while (rawNumberSequenceEnumerator.MoveNext())
         {
             var currentRawNumber = NumberToAddressConverter.Convert(rawNumberSequenceEnumerator.Current);
+            var nonSavedBitsCount = i % 8;
+            if (nonSavedBitsCount == 0)
+            {
+                nonSavedBitsCount = 1;
+            }
+            // Console.WriteLine($"Raw number in raw sequence to byte list converter: {TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((uint)(object)currentRawNumber, 2))}");
             if (i != 0)
             {
-                var nonSavedBitsCount = i % 8 == 0 ? 1 : i % 8;
                 // Get last byte bits and add its last bits to it
-                var byteWithLastByteLastBits = GetByteWithLastByteLastBits(currentRawNumber, nonSavedBitsCount);
-                var lastByte = Bit.Or(byteList.Last(), byteWithLastByteLastBits);
+                var nonSavedBits = GetByteWithLastByteLastBits(currentRawNumber, nonSavedBitsCount);
+                // Console.WriteLine($"Last byte before putting non saved bits in: {TestExtensions.PrettifyBinary<byte>(System.Convert.ToString(byteList.Last(), 2))}");
+                var lastByte = Bit.Or(byteList.Last(), nonSavedBits);
                 byteList[byteList.Count - 1] = lastByte;
+                // Console.WriteLine($"Last byte after putting non saved bits in: {TestExtensions.PrettifyBinary<byte>(System.Convert.ToString(byteList.Last(), 2))}");
                 // Shift bits from last byte
                 currentRawNumber = Bit.ShiftRight(currentRawNumber, nonSavedBitsCount);
             }
@@ -158,10 +165,10 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         // return byteList;
     }
 
-    private static byte GetByteWithLastByteLastBits(TLinkAddress currentRawNumber, int i)
+    private static byte GetByteWithLastByteLastBits(TLinkAddress currentRawNumber, int nonSavedBits)
     {
-        var currentRawNumberWithLastByteBitsAtEndOfByte = Bit.ShiftLeft(currentRawNumber, 8 - i);
-        var byteWithLastByteBitsAtEnd = TLinkAddressToByteConverter.Convert(currentRawNumberWithLastByteBitsAtEndOfByte);
-        return byteWithLastByteBitsAtEnd;
+        var @byte = TLinkAddressToByteConverter.Convert(currentRawNumber);
+        @byte = Bit.ShiftLeft(@byte, 8 - nonSavedBits);
+        return @byte;
     }
 }
