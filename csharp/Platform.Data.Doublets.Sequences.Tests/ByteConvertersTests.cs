@@ -62,7 +62,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
         private static byte[] GetRandomArray(int length)
         {
             byte[] array = new byte[length];
-            new System.Random().NextBytes(array);
+            new System.Random(61267).NextBytes(array);
             return array;
         }
 
@@ -83,7 +83,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Test(byteArray);
         }
         
-        [InlineData(1000)]
+        [InlineData(35)]
         [Theory]
         public void RandomArrayTest(int length)
         {
@@ -95,17 +95,17 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             var byteListRawSequence = _byteListToRawSequenceConverter.Convert(byteArray);
             var byteListFromConverter = _rawSequenceToByteListConverter.Convert(byteListRawSequence);
-            // Console.WriteLine("Original");
-            // foreach (var b in byteArray)
-            // {
-            //     Console.WriteLine(TestExtensions.PrettifyBinary<byte>(Convert.ToString(b, 2)));
-            // }
-            // Console.WriteLine();
-            // Console.WriteLine("From converter:");
-            // foreach (var b in byteListFromConverter)
-            // {
-            //     Console.WriteLine(TestExtensions.PrettifyBinary<byte>(Convert.ToString(b, 2)));
-            // }
+            Console.WriteLine("Original");
+            foreach (var b in byteArray)
+            {
+                Console.WriteLine(TestExtensions.PrettifyBinary<byte>(Convert.ToString(b, 2)));
+            }
+            Console.WriteLine();
+            Console.WriteLine("From converter:");
+            foreach (var b in byteListFromConverter)
+            {
+                Console.WriteLine(TestExtensions.PrettifyBinary<byte>(Convert.ToString(b, 2)));
+            }
             Assert.Equal(byteArray, byteListFromConverter.ToArray());                
         }
         
