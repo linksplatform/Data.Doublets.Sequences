@@ -78,19 +78,13 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         List<TLinkAddress> rawNumberList = new(source.Count / BytesInRawNumberCount + source.Count);
         var byteArray = source.ToArray();
         var i = 0;
-        TLinkAddress rawNumberWithNonSavedBitsAtTheStart = default;
-        List<TLinkAddress> rawNumberWithoutBitMaskList = new();
+        TLinkAddress rawNumberWithNonSavedBitsAtStart = default;
         while (byteArray.Length != 0)
         {
-            var lastNotSavedBitsCount = i % 8;
-            if (lastNotSavedBitsCount == 0)
-            {
-                lastNotSavedBitsCount = 1;
-            }
-            if (i == 0)
+            if (i % 8 == 0)
             {
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
-                rawNumberWithNonSavedBitsAtTheStart = Bit.ShiftRight(rawNumber, BitsSize - 1);
+                rawNumberWithNonSavedBitsAtStart = Bit.ShiftRight(rawNumber, BitsSize - 1);
                 rawNumber = Bit.And(rawNumber, BitMask);
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);
                 rawNumberList.Add(rawNumber);
@@ -98,19 +92,25 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
             }
             else
             {
+                var lastNotSavedBitsCount = i % 8;
+                if (lastNotSavedBitsCount == 0)
+                {
+                    lastNotSavedBitsCount = 1;
+                }
+                var newNotSavedBitsCount = lastNotSavedBitsCount + 1;
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
-                var newNotSavedBits = Bit.ShiftRight(rawNumber, BitsSize - lastNotSavedBitsCount - 1);
+                var newNotSavedBits = Bit.ShiftRight(rawNumber, BitsSize - newNotSavedBitsCount);
                 // Shift left for non saved bits from previoys raw number
                 rawNumber = Bit.ShiftLeft(rawNumber, lastNotSavedBitsCount);
                 // Put non saved bits at the start
-                rawNumber = Bit.Or(rawNumber, rawNumberWithNonSavedBitsAtTheStart);
-                rawNumberWithNonSavedBitsAtTheStart = newNotSavedBits;
+                rawNumber = Bit.Or(rawNumber, rawNumberWithNonSavedBitsAtStart);
                 // Mask last bit
                 rawNumber = Bit.And(rawNumber, BitMask);
+                rawNumberWithNonSavedBitsAtStart = newNotSavedBits;
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);
                 rawNumberList.Add(rawNumber);
                 var bytesInRawNumberCount = BytesInRawNumberCount;
-                if (i % 7 == 0)
+                if (newNotSavedBitsCount % 7 == 0)
                 {
                     bytesInRawNumberCount--;
                 }

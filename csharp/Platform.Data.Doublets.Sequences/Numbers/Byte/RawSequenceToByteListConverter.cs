@@ -100,21 +100,18 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         {
             var currentRawNumber = NumberToAddressConverter.Convert(rawNumberSequenceEnumerator.Current);
             var nonSavedBitsCount = i % 8;
-            if (nonSavedBitsCount == 0)
+            if (nonSavedBitsCount != 0)
             {
-                nonSavedBitsCount = 1;
-            }
-            if (i != 0)
-            {
+                int newNotSavedBitsCount = nonSavedBitsCount;
                 // Get last byte bits and add its last bits to it
-                var nonSavedBits = GetByteWithLastByteLastBits(currentRawNumber, nonSavedBitsCount);
+                var nonSavedBits = GetByteWithLastByteLastBits(currentRawNumber, newNotSavedBitsCount);
                 var lastByte = Bit.Or(byteList.Last(), nonSavedBits);
                 byteList[byteList.Count - 1] = lastByte;
                 // Shift bits from last byte
-                currentRawNumber = Bit.ShiftRight(currentRawNumber, nonSavedBitsCount);
+                currentRawNumber = Bit.ShiftRight(currentRawNumber, newNotSavedBitsCount);
             }
             // Count how many bytes in raw number 
-            int bytesInRawNumberCount = i == 0 ? BytesInRawNumberCount : i % 7 == 0 ? 3 : 4;
+            int bytesInRawNumberCount = nonSavedBitsCount != 7 ? BytesInRawNumberCount : BytesInRawNumberCount - 1;
             for (int j = 0; j < bytesInRawNumberCount && byteList.Count != byteArrayLength; j++)
             {
                 var currentByte = TLinkAddressToByteConverter.Convert(currentRawNumber);
