@@ -72,8 +72,6 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
             return EmptyArrayType;
         }
         List<TLinkAddress> rawNumberList = new(source.Count / BytesInRawNumberCount + source.Count);
-        List<TLinkAddress> notConvertedRawNumberList = new(source.Count / BytesInRawNumberCount + source.Count);
-        List<TLinkAddress> rawRawNumberList = new(source.Count / BytesInRawNumberCount + source.Count);
         var byteArray = source.ToArray();
         var i = 0;
         TLinkAddress rawNumberWithNonSavedBitsAtStart = default;
@@ -82,10 +80,8 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
             if (i % 8 == 0)
             {
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
-                rawRawNumberList.Add(rawNumber);
                 rawNumberWithNonSavedBitsAtStart = Bit.ShiftRight(rawNumber, BitsSize - 1);
                 rawNumber = Bit.And(rawNumber, BitMask);
-                notConvertedRawNumberList.Add(rawNumber);
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);
                 rawNumberList.Add(rawNumber);
                 byteArray = byteArray.Skip(BytesInRawNumberCount).ToArray();
@@ -99,7 +95,6 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
                 }
                 var newNotSavedBitsCount = lastNotSavedBitsCount + 1;
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
-                rawRawNumberList.Add(rawNumber);
                 var newNotSavedBits = Bit.ShiftRight(rawNumber, BitsSize - newNotSavedBitsCount);
                 // Shift left for non saved bits from previoys raw number
                 rawNumber = Bit.ShiftLeft(rawNumber, lastNotSavedBitsCount);
@@ -108,7 +103,6 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
                 // Mask last bit
                 rawNumber = Bit.And(rawNumber, BitMask);
                 rawNumberWithNonSavedBitsAtStart = newNotSavedBits;
-                notConvertedRawNumberList.Add(rawNumber);
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);
                 rawNumberList.Add(rawNumber);
                 var bytesInRawNumberCount = newNotSavedBitsCount % 7 != 0 ? BytesInRawNumberCount : BytesInRawNumberCount - 1;
@@ -119,16 +113,6 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         var length = IntToTLinkAddressConverter.Convert(source.Count);
         var byteArrayLengthAddress = _links.GetOrCreate(ByteArrayLengthType, AddressToNumberConverter.Convert(length));
         var byteArraySequenceAddress = ListToSequenceConverter.Convert(rawNumberList);
-        Console.WriteLine("Raw numbers in byte list to raw sequence converter:");
-        foreach (var linkAddress in notConvertedRawNumberList)
-        {
-            Console.Write(System.Convert.ToString((uint)(object)linkAddress, 2));
-        }
-        Console.WriteLine("Original Raw numbers");
-        foreach (var linkAddress in rawRawNumberList)
-        {
-            Console.Write(System.Convert.ToString((uint)(object)linkAddress, 2));
-        }
         return _links.GetOrCreate(byteArrayLengthAddress, byteArraySequenceAddress);
     }
 }
