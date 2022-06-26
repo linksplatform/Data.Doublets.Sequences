@@ -100,18 +100,22 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         {
             var currentRawNumber = NumberToAddressConverter.Convert(rawNumberSequenceEnumerator.Current);
             var nonSavedBitsCount = i % 8;
-            if (nonSavedBitsCount != 0)
+            if (nonSavedBitsCount == 0)
+            {
+                nonSavedBitsCount = 1;
+            }
+            if (i != 0)
             {
                 int newNotSavedBitsCount = nonSavedBitsCount;
                 // Get last byte bits and add its last bits to it
-                var nonSavedBits = GetByteWithLastByteLastBits(currentRawNumber, newNotSavedBitsCount);
-                var lastByte = Bit.Or(byteList.Last(), nonSavedBits);
+                var byteWithNonSavedBitsAtEnd = GetByteWithNotSavedBitsAtEnd(currentRawNumber, newNotSavedBitsCount);
+                var lastByte = Bit.Or(byteList.Last(), byteWithNonSavedBitsAtEnd);
                 byteList[byteList.Count - 1] = lastByte;
                 // Shift bits from last byte
                 currentRawNumber = Bit.ShiftRight(currentRawNumber, newNotSavedBitsCount);
             }
             // Count how many bytes in raw number 
-            int bytesInRawNumberCount = nonSavedBitsCount != 7 ? BytesInRawNumberCount : BytesInRawNumberCount - 1;
+            int bytesInRawNumberCount = nonSavedBitsCount % 7 != 0 ? BytesInRawNumberCount : BytesInRawNumberCount - 1;
             for (int j = 0; j < bytesInRawNumberCount && byteList.Count != byteArrayLength; j++)
             {
                 var currentByte = TLinkAddressToByteConverter.Convert(currentRawNumber);
@@ -124,7 +128,7 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         return byteList;
     }
 
-    private static byte GetByteWithLastByteLastBits(TLinkAddress currentRawNumber, int nonSavedBits)
+    private static byte GetByteWithNotSavedBitsAtEnd(TLinkAddress currentRawNumber, int nonSavedBits)
     {
         var @byte = TLinkAddressToByteConverter.Convert(currentRawNumber);
         @byte = Bit.ShiftLeft(@byte, 8 - nonSavedBits);
