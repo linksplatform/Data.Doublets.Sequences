@@ -75,40 +75,75 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         var byteArray = source.ToArray();
         var i = 0;
         TLinkAddress rawNumberWithNonSavedBitsAtStart = default;
+        int lastNotSavedBitsCount = 0;
         while (byteArray.Length != 0)
         {
             if (i % 8 == 0)
+            // if (i == 0)
             {
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
+                // var output = TestExtensions.PrettifyBinary<uint>(System.Convert.ToString((uint)(object)rawNumber, 2));
+                // Console.WriteLine(output);
                 rawNumberWithNonSavedBitsAtStart = Bit.ShiftRight(rawNumber, BitsSize - 1);
+                // lastNotSavedBitsCount = 1;
                 rawNumber = Bit.And(rawNumber, BitMask);
+                var output = TestExtensions.PrettifyBinary<uint>(System.Convert.ToString((uint)(object)rawNumber, 2));
+                Console.WriteLine(output);
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);
+                // output = TestExtensions.PrettifyBinary<uint>(System.Convert.ToString((uint)(object)rawNumber, 2));
+                // Console.WriteLine(output);
                 rawNumberList.Add(rawNumber);
                 byteArray = byteArray.Skip(BytesInRawNumberCount).ToArray();
             }
             else
             {
-                var lastNotSavedBitsCount = i % 8;
-                if (lastNotSavedBitsCount == 0)
+                // var lastNotSavedBitsCount = i % 8;
+                // if (lastNotSavedBitsCount == 0)
+                // {
+                //     lastNotSavedBitsCount = 1;
+                // }
+                lastNotSavedBitsCount++;
+                // // if (lastNotSavedBitsCount % BitsSize == 0)
+                // // {
+                // //     lastNotSavedBitsCount = 0;
+                // // }
+                //
+                if (lastNotSavedBitsCount % 8 == 0)
                 {
                     lastNotSavedBitsCount = 1;
                 }
+                
                 var newNotSavedBitsCount = lastNotSavedBitsCount + 1;
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
+                // TODO: Check for lastNotSavedBitsCount == 0
                 var newNotSavedBits = Bit.ShiftRight(rawNumber, BitsSize - newNotSavedBitsCount);
-                // Shift left for non saved bits from previoys raw number
+                // Shift left for non saved bits from previous raw number
                 rawNumber = Bit.ShiftLeft(rawNumber, lastNotSavedBitsCount);
                 // Put non saved bits at the start
                 rawNumber = Bit.Or(rawNumber, rawNumberWithNonSavedBitsAtStart);
                 // Mask last bit
                 rawNumber = Bit.And(rawNumber, BitMask);
                 rawNumberWithNonSavedBitsAtStart = newNotSavedBits;
+                var output = TestExtensions.PrettifyBinary<uint>(System.Convert.ToString((uint)(object)rawNumber, 2));
+                Console.WriteLine(output);
                 rawNumber = AddressToNumberConverter.Convert(rawNumber);
                 rawNumberList.Add(rawNumber);
                 var bytesInRawNumberCount = newNotSavedBitsCount % 7 != 0 ? BytesInRawNumberCount : BytesInRawNumberCount - 1;
+                Console.WriteLine(bytesInRawNumberCount);
+                Console.WriteLine(newNotSavedBitsCount);
+                Console.WriteLine(newNotSavedBitsCount % 7 != 0);
+                Console.WriteLine(newNotSavedBits);
                 byteArray = byteArray.Skip(bytesInRawNumberCount).ToArray();
             }
             i++;
+        }
+        // if(rawNumberWithNonSavedBitsAtStart)
+        // Console.WriteLine();
+        Console.WriteLine(lastNotSavedBitsCount);
+        if (lastNotSavedBitsCount > 0)
+        {
+            var lastRawNumber = AddressToNumberConverter.Convert(rawNumberWithNonSavedBitsAtStart);
+            rawNumberList.Add(lastRawNumber);
         }
         var length = IntToTLinkAddressConverter.Convert(source.Count);
         var byteArrayLengthAddress = _links.GetOrCreate(ByteArrayLengthType, AddressToNumberConverter.Convert(length));

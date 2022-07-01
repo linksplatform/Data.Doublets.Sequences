@@ -83,7 +83,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
             Test(byteArray);
         }
         
-        [InlineData(35)]
+        [InlineData(31)]
         [Theory]
         public void RandomArrayTest(int length)
         {
@@ -94,6 +94,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
         public void Test(byte[] byteArray)
         {
             var byteListRawSequence = _byteListToRawSequenceConverter.Convert(byteArray);
+            Console.WriteLine();
             var byteListFromConverter = _rawSequenceToByteListConverter.Convert(byteListRawSequence);
             Console.WriteLine("Original");
             foreach (var b in byteArray)

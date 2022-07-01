@@ -99,6 +99,8 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         while (rawNumberSequenceEnumerator.MoveNext())
         {
             var currentRawNumber = NumberToAddressConverter.Convert(rawNumberSequenceEnumerator.Current);
+            var output = TestExtensions.PrettifyBinary<uint>(System.Convert.ToString((uint)(object)currentRawNumber, 2));
+            Console.WriteLine(output);
             var nonSavedBitsCount = i % 8;
             if (nonSavedBitsCount == 0)
             {
@@ -110,15 +112,26 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
                 // Get last byte bits and add its last bits to it
                 var byteWithNonSavedBitsAtEnd = GetByteWithNotSavedBitsAtEnd(currentRawNumber, newNotSavedBitsCount);
                 var lastByte = Bit.Or(byteList.Last(), byteWithNonSavedBitsAtEnd);
+                Console.WriteLine($"lastByte {lastByte}");
                 byteList[byteList.Count - 1] = lastByte;
                 // Shift bits from last byte
                 currentRawNumber = Bit.ShiftRight(currentRawNumber, newNotSavedBitsCount);
             }
             // Count how many bytes in raw number 
-            int bytesInRawNumberCount = nonSavedBitsCount % 7 != 0 ? BytesInRawNumberCount : BytesInRawNumberCount - 1;
+            int bytesInRawNumberCount = nonSavedBitsCount % 7 != 0 ? BytesInRawNumberCount : BytesInRawNumberCount + 1;
+            // TODO: Temporary hack fix
+            if (nonSavedBitsCount % 7 == 0)
+            {
+                byteList.RemoveAt(byteList.Count - 1);
+            }
+            Console.WriteLine(nonSavedBitsCount);
+            Console.WriteLine(nonSavedBitsCount % 7 != 0);
             for (int j = 0; j < bytesInRawNumberCount && byteList.Count != byteArrayLength; j++)
             {
                 var currentByte = TLinkAddressToByteConverter.Convert(currentRawNumber);
+                output = TestExtensions.PrettifyBinary<byte>(System.Convert.ToString(currentByte, 2));
+                Console.WriteLine(j);
+                Console.WriteLine(output);
                 byteList.Add(currentByte);
                 // Shift current byte from raw number to get other bytes
                 currentRawNumber = Bit.ShiftRight(currentRawNumber, 8);
