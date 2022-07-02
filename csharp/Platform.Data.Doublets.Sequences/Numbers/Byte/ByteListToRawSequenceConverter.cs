@@ -85,7 +85,7 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
                 // var output = TestExtensions.PrettifyBinary<uint>(System.Convert.ToString((uint)(object)rawNumber, 2));
                 // Console.WriteLine(output);
                 rawNumberWithNonSavedBitsAtStart = Bit.ShiftRight(rawNumber, BitsSize - 1);
-                // lastNotSavedBitsCount = 1;
+                lastNotSavedBitsCount = 1;
                 rawNumber = Bit.And(rawNumber, BitMask);
                 var output = TestExtensions.PrettifyBinary<uint>(System.Convert.ToString((uint)(object)rawNumber, 2));
                 Console.WriteLine(output);
@@ -102,7 +102,6 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
                 // {
                 //     lastNotSavedBitsCount = 1;
                 // }
-                lastNotSavedBitsCount++;
                 // // if (lastNotSavedBitsCount % BitsSize == 0)
                 // // {
                 // //     lastNotSavedBitsCount = 0;
@@ -134,6 +133,8 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
                 Console.WriteLine(newNotSavedBitsCount % 7 != 0);
                 Console.WriteLine(newNotSavedBits);
                 byteArray = byteArray.Skip(bytesInRawNumberCount).ToArray();
+                
+                lastNotSavedBitsCount++;
             }
             i++;
         }
