@@ -117,13 +117,13 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
             {
                 nonSavedBitsCount = 1;
             }
-            // Count how many bytes in raw number 
-            int bytesInRawNumberCount = nonSavedBitsCount % 7 != 0 ? BytesInRawNumberCount : BytesInRawNumberCount + 1;
             // TODO: Temporary hack fix
             if (nonSavedBitsCount % 7 == 0)
             {
                 byteList.RemoveAt(byteList.Count - 1);
             }
+            // Count how many bytes in raw number 
+            int bytesInRawNumberCount = nonSavedBitsCount % 7 != 0 ? BytesInRawNumberCount : BytesInRawNumberCount + 1;
             Console.WriteLine(nonSavedBitsCount);
             Console.WriteLine(nonSavedBitsCount % 7 != 0);
             for (int j = 0; j < bytesInRawNumberCount && byteList.Count != byteArrayLength; j++)
