@@ -19,8 +19,6 @@ namespace Platform.Data.Doublets.Sequences.Numbers.Byte;
 
 public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<IList<byte>, TLinkAddress> where TLinkAddress : struct
 {
-    
-
     public static readonly TLinkAddress MaximumValue = NumericType<TLinkAddress>.MaxValue;
 
     public static readonly TLinkAddress BitMask = Bit.ShiftRight(MaximumValue, 1);
@@ -76,12 +74,14 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         var i = 0;
         TLinkAddress rawNumberWithNonSavedBitsAtStart = default;
         int lastNotSavedBitsCount = 0;
+        bool hasNotSavedBits = false;
         while (byteArray.Length != 0)
         {
-            if (i % 8 == 0)
-            // if (i == 0)
+            // if (i % 8 == 0)
+            if (i == 0)
             {
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
+                hasNotSavedBits = byteArray.Length >= BytesInRawNumberCount;
                 // var output = TestExtensions.PrettifyBinary<uint>(System.Convert.ToString((uint)(object)rawNumber, 2));
                 // Console.WriteLine(output);
                 rawNumberWithNonSavedBitsAtStart = Bit.ShiftRight(rawNumber, BitsSize - 1);
@@ -107,13 +107,10 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
                 // //     lastNotSavedBitsCount = 0;
                 // // }
                 //
-                if (lastNotSavedBitsCount % 8 == 0)
-                {
-                    lastNotSavedBitsCount = 1;
-                }
                 
                 var newNotSavedBitsCount = lastNotSavedBitsCount + 1;
                 var rawNumber = byteArray.ToStructure<TLinkAddress>();
+                hasNotSavedBits = byteArray.Length >= BytesInRawNumberCount;
                 // TODO: Check for lastNotSavedBitsCount == 0
                 var newNotSavedBits = Bit.ShiftRight(rawNumber, BitsSize - newNotSavedBitsCount);
                 // Shift left for non saved bits from previous raw number
@@ -134,6 +131,10 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
                 Console.WriteLine(newNotSavedBits);
                 byteArray = byteArray.Skip(bytesInRawNumberCount).ToArray();
                 
+                if (lastNotSavedBitsCount % 8 == 0)
+                {
+                    lastNotSavedBitsCount = 0;
+                }
                 lastNotSavedBitsCount++;
             }
             i++;
@@ -141,8 +142,10 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         // if(rawNumberWithNonSavedBitsAtStart)
         // Console.WriteLine();
         Console.WriteLine(lastNotSavedBitsCount);
-        if (lastNotSavedBitsCount > 0)
+        if (hasNotSavedBits && lastNotSavedBitsCount % 7 != 0)
         {
+            var output = TestExtensions.PrettifyBinary<uint>(System.Convert.ToString((uint)(object)rawNumberWithNonSavedBitsAtStart, 2));
+            Console.WriteLine(output);
             var lastRawNumber = AddressToNumberConverter.Convert(rawNumberWithNonSavedBitsAtStart);
             rawNumberList.Add(lastRawNumber);
         }
