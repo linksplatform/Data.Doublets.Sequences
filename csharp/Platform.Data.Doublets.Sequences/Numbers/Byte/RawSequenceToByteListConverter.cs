@@ -114,6 +114,7 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
 
     public IList<byte> Convert(TLinkAddress source)
     {
+        Console.WriteLine("RawSequenceToByteListConverter.Convert");
         if (IsEmptyArray(source))
         {
             return new List<byte>();
@@ -125,10 +126,12 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
         var i = 0;
         while (rawNumbersEnumerator.MoveNext())
         {
+            Console.WriteLine("Raw number: ");
             var rawNumber = NumberToAddressConverter.Convert(rawNumbersEnumerator.Current);
+            Console.WriteLine(TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((ushort)(object)rawNumber, 2)));
             var nonSavedBitsCount = i % 8;
             var isLastRawNumber = (byteArrayLength % BytesInRawNumberCount == 0) && (byteList.Count == byteArrayLength);
-            if(isLastRawNumber && (byteArrayLength != BytesInRawNumberCount))
+            if(isLastRawNumber)
             {
                 rawNumber = Bit.ShiftLeft(rawNumber, 8 - nonSavedBitsCount);
                 var @byte = TLinkAddressToByteConverter.Convert(rawNumber);
