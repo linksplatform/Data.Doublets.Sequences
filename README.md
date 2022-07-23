@@ -1,6 +1,6 @@
 [![NuGet Version and Downloads count](https://buildstats.info/nuget/Platform.Data.Doublets.Sequences)](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences)
-[![Actions Status](https://github.com/linksplatform/Data.Doublets.Sequences/workflows/csharpWorkflow/badge.svg)](https://github.com/linksplatform/Data.Doublets.Sequences/actions?workflow=csharpWorkflow)
-[![Actions Status](https://github.com/linksplatform/Data.Doublets.Sequences/workflows/cppWorkflow/badge.svg)](https://github.com/linksplatform/Data.Doublets.Sequences/actions?workflow=cppWorkflow)
+[![Actions Status](https://github.com/linksplatform/Data.Doublets.Sequences/workflows/csharp/badge.svg)](https://github.com/linksplatform/Data.Doublets.Sequences/actions?workflow=csharpWorkflow)
+[![Actions Status](https://github.com/linksplatform/Data.Doublets.Sequences/workflows/cpp/badge.svg)](https://github.com/linksplatform/Data.Doublets.Sequences/actions?workflow=cppWorkflow)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/20f94d1af10947d3bc5ee80d1bf08a0b)](https://www.codacy.com/gh/linksplatform/Data.Doublets.Sequences/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=linksplatform/Data.Doublets.Sequences&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/linksplatform/Data.Doublets.Sequences/badge)](https://www.codefactor.io/repository/github/linksplatform/Data.Doublets.Sequences)
 
