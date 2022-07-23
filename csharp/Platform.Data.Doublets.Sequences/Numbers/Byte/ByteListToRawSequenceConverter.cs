@@ -56,11 +56,12 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         NumberToAddressConverter = numberToAddressConverter;
         ListToSequenceConverter = listToSequenceConverter;
         BalancedVariantConverter = new BalancedVariantConverter<TLinkAddress>(_links);
+        StringToUnicodeSequenceConverter = stringToUnicodeSequenceConverter;
         TLinkAddress Zero = default;
         Type = Arithmetic.Increment(Zero);
-        ByteArrayLengthType = _links.GetOrCreate(Type, stringToUnicodeSequenceConverter.Convert(nameof(ByteArrayLengthType)));
-        ByteArrayType = _links.GetOrCreate(Type, stringToUnicodeSequenceConverter.Convert(nameof(ByteArrayType)));
-        EmptyByteArraySequenceType = _links.GetOrCreate(Type, stringToUnicodeSequenceConverter.Convert(nameof(EmptyByteArraySequenceType)));
+        ByteArrayLengthType = _links.GetOrCreate(Type, StringToUnicodeSequenceConverter.Convert(nameof(ByteArrayLengthType)));
+        ByteArrayType = _links.GetOrCreate(Type, StringToUnicodeSequenceConverter.Convert(nameof(ByteArrayType)));
+        EmptyByteArraySequenceType = _links.GetOrCreate(Type, StringToUnicodeSequenceConverter.Convert(nameof(EmptyByteArraySequenceType)));
     }
     
     private int GetNonSavedBitsCount(int i)
@@ -79,14 +80,7 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
     
     public TLinkAddress Convert(IList<byte> source)
     {
-        Console.WriteLine("Byte list to raw sequence conveters");
-        var rawNumbers = new List<TLinkAddress>();
-        var rawrawNumbers = new List<TLinkAddress>();
-        if (source.Count == 0)
-        {
-            return Links.GetOrCreate(ByteArrayType, EmptyByteArraySequenceType);
-        }
-        var byteArrayToSave = source.ToArray();
+        return ListToSequenceConverter.Convert(source.Select(b => AddressToNumberConverter.Convert(ByteToTLinkAddressConverter.Convert(b))).ToList());
         // while (byteArrayToSave.Length != 0)
         // {
         //     var rawNumber = byteArrayToSave.ToStructure<TLinkAddress>();
@@ -108,61 +102,61 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         //     processedRawNumber = AddressToNumberConverter.Convert(processedRawNumber);
         //     processedRawNumbers.Add(processedRawNumber);
         // }
-        TLinkAddress lastRawNumber = default;
-        var i = 0;
-        while (byteArrayToSave.Length != 0)
-        {
-            var rawNumber = byteArrayToSave.ToStructure<TLinkAddress>();
-            rawrawNumbers.Add(rawNumber);
-            Console.WriteLine("Raw number:");
-            Console.WriteLine(TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((ushort)(object)rawNumber, 2)));
-            var nonSavedBitsCount = GetNonSavedBitsCount(i);
-            var prevRawNumberWithNonSavedBitsAtStart = Bit.ShiftRight(lastRawNumber, BitsSize - nonSavedBitsCount);
-            var processedRawNumber = Bit.ShiftLeft(rawNumber, nonSavedBitsCount);
-            processedRawNumber = Bit.Or(processedRawNumber, prevRawNumberWithNonSavedBitsAtStart);
-            processedRawNumber = Bit.And(processedRawNumber, BitMask);
-            Console.WriteLine("Processed raw number:");
-            Console.WriteLine(TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((ushort)(object)processedRawNumber, 2)));
-            processedRawNumber = AddressToNumberConverter.Convert(processedRawNumber);
-            var bytesInRawNumberCount = nonSavedBitsCount == 7 ? BytesInRawNumberCount - 1 : BytesInRawNumberCount;
-            byteArrayToSave = byteArrayToSave.Skip(bytesInRawNumberCount).ToArray();
-            lastRawNumber = rawNumber;
-            i++;
-            rawNumbers.Add(processedRawNumber);
-        }
-        var notSavedBitsCount = GetNonSavedBitsCount(i);
-        if ((source.Count != BitsSize) && (source.Count % BytesInRawNumberCount == 0))
-        {
-            lastRawNumber = Bit.ShiftRight(lastRawNumber, BitsSize - notSavedBitsCount);
-            lastRawNumber = AddressToNumberConverter.Convert(lastRawNumber);
-            rawNumbers.Add(lastRawNumber);
-        }
-        Console.WriteLine("Raw numbers");
-        rawrawNumbers.Reverse();
-        StringBuilder rawrawNumbersSb = new StringBuilder();
-        foreach (var rawrawNumber in rawrawNumbers)
-        {
-            rawrawNumbersSb.Append(System.Convert.ToString((ushort)(object)rawrawNumber, 2));
-        }
-        Console.WriteLine(rawrawNumbersSb.ToString());
+        // TLinkAddress lastRawNumber = default;
+        // var i = 0;
+        // while (byteArrayToSave.Length != 0)
+        // {
+        //     var rawNumber = byteArrayToSave.ToStructure<TLinkAddress>();
+        //     rawrawNumbers.Add(rawNumber);
+        //     Console.WriteLine("Raw number:");
+        //     Console.WriteLine(TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((ushort)(object)rawNumber, 2)));
+        //     var nonSavedBitsCount = GetNonSavedBitsCount(i);
+        //     var prevRawNumberWithNonSavedBitsAtStart = Bit.ShiftRight(lastRawNumber, BitsSize - nonSavedBitsCount);
+        //     var processedRawNumber = Bit.ShiftLeft(rawNumber, nonSavedBitsCount);
+        //     processedRawNumber = Bit.Or(processedRawNumber, prevRawNumberWithNonSavedBitsAtStart);
+        //     processedRawNumber = Bit.And(processedRawNumber, BitMask);
+        //     Console.WriteLine("Processed raw number:");
+        //     Console.WriteLine(TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((ushort)(object)processedRawNumber, 2)));
+        //     processedRawNumber = AddressToNumberConverter.Convert(processedRawNumber);
+        //     var bytesInRawNumberCount = nonSavedBitsCount == 7 ? BytesInRawNumberCount - 1 : BytesInRawNumberCount;
+        //     byteArrayToSave = byteArrayToSave.Skip(bytesInRawNumberCount).ToArray();
+        //     lastRawNumber = rawNumber;
+        //     i++;
+        //     rawNumbers.Add(processedRawNumber);
+        // }
+        // var notSavedBitsCount = GetNonSavedBitsCount(i);
+        // if ((source.Count != BitsSize) && (source.Count % BytesInRawNumberCount == 0))
+        // {
+        //     lastRawNumber = Bit.ShiftRight(lastRawNumber, BitsSize - notSavedBitsCount);
+        //     lastRawNumber = AddressToNumberConverter.Convert(lastRawNumber);
+        //     rawNumbers.Add(lastRawNumber);
+        // }
+        // Console.WriteLine("Raw numbers");
+        // rawrawNumbers.Reverse();
+        // StringBuilder rawrawNumbersSb = new StringBuilder();
+        // foreach (var rawrawNumber in rawrawNumbers)
+        // {
+        //     rawrawNumbersSb.Append(System.Convert.ToString((ushort)(object)rawrawNumber, 2));
+        // }
+        // Console.WriteLine(rawrawNumbersSb.ToString());
+        //
+        // rawNumbers.Reverse();
+        // Console.WriteLine("Processed raw numbers");
+        // StringBuilder rawNumbersSb = new StringBuilder();
+        // foreach (var rawNumber in rawNumbers)
+        // {
+        //     rawNumbersSb.Append(System.Convert.ToString((ushort)(object)NumberToAddressConverter.Convert(rawNumber), 2));
+        // }
+        // for (int c = 31; c < rawNumbersSb.Length; c += 32)
+        // {
+        //     rawNumbersSb.Remove(c, 1);
+        // }
+        // Console.WriteLine(rawNumbersSb.ToString());
+        // var length = IntToTLinkAddressConverter.Convert(source.Count);
+        // var byteArrayLengthAddress = _links.GetOrCreate(ByteArrayLengthType, AddressToNumberConverter.Convert(length));
+        // var byteArraySequenceAddress = ListToSequenceConverter.Convert(rawNumbers);
+        // return _links.GetOrCreate(ByteArrayType, _links.GetOrCreate(byteArrayLengthAddress, byteArraySequenceAddress));
 
-        rawNumbers.Reverse();
-        Console.WriteLine("Processed raw numbers");
-        StringBuilder rawNumbersSb = new StringBuilder();
-        foreach (var rawNumber in rawNumbers)
-        {
-            rawNumbersSb.Append(System.Convert.ToString((ushort)(object)NumberToAddressConverter.Convert(rawNumber), 2));
-        }
-        for (int c = 31; c < rawNumbersSb.Length; c += 32)
-        {
-            rawNumbersSb.Remove(c, 1);
-        }
-        Console.WriteLine(rawNumbersSb.ToString());
-        var length = IntToTLinkAddressConverter.Convert(source.Count);
-        var byteArrayLengthAddress = _links.GetOrCreate(ByteArrayLengthType, AddressToNumberConverter.Convert(length));
-        var byteArraySequenceAddress = ListToSequenceConverter.Convert(rawNumbers);
-        return _links.GetOrCreate(ByteArrayType, _links.GetOrCreate(byteArrayLengthAddress, byteArraySequenceAddress));
-        
         // var processedRawNumbers = new List<TLinkAddress>();
         // if (source.Count == 0)
         // {
@@ -197,8 +191,8 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
         // var byteArrayLengthAddress = _links.GetOrCreate(ByteArrayLengthType, AddressToNumberConverter.Convert(length));
         // var byteArraySequenceAddress = ListToSequenceConverter.Convert(processedRawNumbers);
         // return _links.GetOrCreate(ByteArrayType, _links.GetOrCreate(byteArrayLengthAddress, byteArraySequenceAddress));
-        
-        
+
+
         // List<TLinkAddress> rawNumberList = new(source.Count / BytesInRawNumberCount + source.Count);
         // var byteArray = source.ToArray();
         // var i = 0;

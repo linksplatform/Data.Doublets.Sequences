@@ -5,6 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using Platform.Collections.Lists;
+using Platform.Collections.Stacks;
 using Platform.Converters;
 using Platform.Data.Doublets.CriterionMatchers;
 using Platform.Data.Doublets.Memory;
@@ -12,6 +13,7 @@ using Platform.Data.Doublets.Memory.United.Generic;
 using Platform.Data.Doublets.Numbers.Raw;
 using Platform.Data.Doublets.Sequences.Converters;
 using Platform.Data.Doublets.Sequences.Numbers.Byte;
+using Platform.Data.Doublets.Sequences.Walkers;
 using Platform.Data.Doublets.Unicode;
 using Platform.Data.Numbers.Raw;
 using Platform.Memory;
@@ -55,8 +57,10 @@ namespace Platform.Data.Doublets.Sequences.Tests
                 new(Storage, rawNumberToAddressConverter, unicodeSymbolCriterionMatcher);
             var stringToUnicodeSequenceConverter = new StringToUnicodeSequenceConverter<TLinkAddress>(Storage, charToUnicodeSymbolConverter,
                 balancedVariantConverter, unicodeSequenceType);
+            RightSequenceWalker<TLinkAddress> unicodeSymbolSequenceWalker = new(Storage, new DefaultStack<TLinkAddress>(), unicodeSymbolCriterionMatcher.IsMatched);
+            UnicodeSequenceToStringConverter<TLinkAddress> unicodeSequenceToStringConverter = new UnicodeSequenceToStringConverter<TLinkAddress>(Storage, unicodeSequenceCriterionMatcher, unicodeSymbolSequenceWalker, unicodeSymbolToCharConverter, unicodeSequenceType);
             _byteListToRawSequenceConverter = new ByteListToRawSequenceConverter<TLinkAddress>(Storage, _addressToRawNumberConverter, _rawNumberToAddressConverter, _listToSequenceConverter, stringToUnicodeSequenceConverter);
-            _rawSequenceToByteListConverter = new RawSequenceToByteListConverter<TLinkAddress>(Storage, _rawNumberToAddressConverter, _listToSequenceConverter, stringToUnicodeSequenceConverter);
+            _rawSequenceToByteListConverter = new RawSequenceToByteListConverter<TLinkAddress>(Storage, _rawNumberToAddressConverter, _listToSequenceConverter, stringToUnicodeSequenceConverter, unicodeSequenceToStringConverter);
         }
 
         private static byte[] GetRandomArray(int length)

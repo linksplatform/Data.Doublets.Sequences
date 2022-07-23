@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using Platform.Collections.Stacks;
 using Platform.Converters;
 using Platform.Data.Doublets.CriterionMatchers;
@@ -42,12 +43,13 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
 
     public readonly TLinkAddress Type;
 
-    public RawSequenceToByteListConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>, TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter) : base(links)
+    public RawSequenceToByteListConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>, TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter, UnicodeSequenceToStringConverter<TLinkAddress> unicodeSequenceToStringConverteer) : base(links)
     {
         NumberToAddressConverter = numberToAddressConverter;
         ListToSequenceConverter = listToSequenceConverter;
         BalancedVariantConverter = new BalancedVariantConverter<TLinkAddress>(links);
         StringToUnicodeSequenceConverteer = stringToUnicodeSequenceConverter;
+        UnicodeSequenceToStringConverteer = unicodeSequenceToStringConverteer;
         TLinkAddress Zero = default;
         Type = Arithmetic.Increment(Zero);
     }
@@ -114,50 +116,51 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
 
     public IList<byte> Convert(TLinkAddress source)
     {
-        Console.WriteLine("RawSequenceToByteListConverter.Convert");
-        if (IsEmptyArray(source))
-        {
-            return new List<byte>();
-        }
-        EnsureIsByteArray(source);
-        var byteArrayLength = GetByteArrayLength(source);
-        List<byte> byteList = new(byteArrayLength);
-        var rawNumbersEnumerator = GetRawNumbersEnumerator(source);
-        var i = 0;
-        while (rawNumbersEnumerator.MoveNext())
-        {
-            Console.WriteLine("Raw number: ");
-            var rawNumber = NumberToAddressConverter.Convert(rawNumbersEnumerator.Current);
-            Console.WriteLine(TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((ushort)(object)rawNumber, 2)));
-            var nonSavedBitsCount = i % 8;
-            var isLastRawNumber = (byteArrayLength % BytesInRawNumberCount == 0) && (byteList.Count == byteArrayLength);
-            if(isLastRawNumber)
-            {
-                rawNumber = Bit.ShiftLeft(rawNumber, 8 - nonSavedBitsCount);
-                var @byte = TLinkAddressToByteConverter.Convert(rawNumber);
-                byteList[byteList.Count - 1] = Bit.Or(byteList.Last(), @byte);
-                break;
-            }
-            if (nonSavedBitsCount != 0)
-            {
-                var rawNumberWithOnlyNonSavedBits = rawNumber;
-                rawNumberWithOnlyNonSavedBits = Bit.ShiftLeft(rawNumberWithOnlyNonSavedBits, BitsSize - nonSavedBitsCount);
-                rawNumberWithOnlyNonSavedBits = Bit.ShiftRight(rawNumberWithOnlyNonSavedBits, BitsSize - nonSavedBitsCount);
-                rawNumberWithOnlyNonSavedBits = Bit.ShiftLeft(rawNumberWithOnlyNonSavedBits, 8 - nonSavedBitsCount);
-                var @byte = TLinkAddressToByteConverter.Convert(rawNumberWithOnlyNonSavedBits);
-                byteList[byteList.Count - 1] = Bit.Or(byteList.Last(), @byte);
-                rawNumber = Bit.ShiftRight(rawNumber, nonSavedBitsCount);
-            }
-            var bytesInRawNumber = nonSavedBitsCount == 7 ? BytesInRawNumberCount -1 : BytesInRawNumberCount;
-            for (int j = 0; (j < bytesInRawNumber) && (byteList.Count < byteArrayLength); j++)
-            {
-                var @byte = TLinkAddressToByteConverter.Convert(rawNumber);
-                byteList.Add(@byte);
-                rawNumber = Bit.ShiftRight(rawNumber, 8);
-            }
-            i++;
-        }
-        return byteList;
+        return new RightSequenceWalker<TLinkAddress>(Links, new DefaultStack<TLinkAddress>()).Walk(source).Select(address => NumberToAddressConverter.Convert(address)).Select(address => TLinkAddressToByteConverter.Convert(address)).ToList();
+        // Console.WriteLine("RawSequenceToByteListConverter.Convert");
+        // if (IsEmptyArray(source))
+        // {
+        //     return new List<byte>();
+        // }
+        // EnsureIsByteArray(source);
+        // var byteArrayLength = GetByteArrayLength(source);
+        // List<byte> byteList = new(byteArrayLength);
+        // var rawNumbersEnumerator = GetRawNumbersEnumerator(source);
+        // var i = 0;
+        // while (rawNumbersEnumerator.MoveNext())
+        // {
+        //     Console.WriteLine("Raw number: ");
+        //     var rawNumber = NumberToAddressConverter.Convert(rawNumbersEnumerator.Current);
+        //     Console.WriteLine(TestExtensions.PrettifyBinary<TLinkAddress>(System.Convert.ToString((ushort)(object)rawNumber, 2)));
+        //     var nonSavedBitsCount = i % 8;
+        //     var isLastRawNumber = (byteArrayLength % BytesInRawNumberCount == 0) && (byteList.Count == byteArrayLength);
+        //     if(isLastRawNumber)
+        //     {
+        //         rawNumber = Bit.ShiftLeft(rawNumber, 8 - nonSavedBitsCount);
+        //         var @byte = TLinkAddressToByteConverter.Convert(rawNumber);
+        //         byteList[byteList.Count - 1] = Bit.Or(byteList.Last(), @byte);
+        //         break;
+        //     }
+        //     if (nonSavedBitsCount != 0)
+        //     {
+        //         var rawNumberWithOnlyNonSavedBits = rawNumber;
+        //         rawNumberWithOnlyNonSavedBits = Bit.ShiftLeft(rawNumberWithOnlyNonSavedBits, BitsSize - nonSavedBitsCount);
+        //         rawNumberWithOnlyNonSavedBits = Bit.ShiftRight(rawNumberWithOnlyNonSavedBits, BitsSize - nonSavedBitsCount);
+        //         rawNumberWithOnlyNonSavedBits = Bit.ShiftLeft(rawNumberWithOnlyNonSavedBits, 8 - nonSavedBitsCount);
+        //         var @byte = TLinkAddressToByteConverter.Convert(rawNumberWithOnlyNonSavedBits);
+        //         byteList[byteList.Count - 1] = Bit.Or(byteList.Last(), @byte);
+        //         rawNumber = Bit.ShiftRight(rawNumber, nonSavedBitsCount);
+        //     }
+        //     var bytesInRawNumber = nonSavedBitsCount == 7 ? BytesInRawNumberCount -1 : BytesInRawNumberCount;
+        //     for (int j = 0; (j < bytesInRawNumber) && (byteList.Count < byteArrayLength); j++)
+        //     {
+        //         var @byte = TLinkAddressToByteConverter.Convert(rawNumber);
+        //         byteList.Add(@byte);
+        //         rawNumber = Bit.ShiftRight(rawNumber, 8);
+        //     }
+        //     i++;
+        // }
+        // return byteList;
     }
 
     private static byte GetByteWithNotSavedBitsAtEnd(TLinkAddress currentRawNumber, int nonSavedBits)
