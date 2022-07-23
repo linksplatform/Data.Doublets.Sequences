@@ -70,7 +70,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
             return array;
         }
 
-        [InlineData(new byte[]{})]
+        // [InlineData(new byte[]{})]
         [InlineData(new byte[]{0})]
         [InlineData(new byte[]{0, 0})]
         [InlineData(new byte[]{0, 0, 0, 0})]
