@@ -20,7 +20,7 @@ using Platform.Memory;
 using Platform.Numbers;
 using Platform.Reflection;
 using Xunit;
-using TLinkAddress = System.UInt16;
+using TLinkAddress = System.Byte;
 
 namespace Platform.Data.Doublets.Sequences.Tests
 {

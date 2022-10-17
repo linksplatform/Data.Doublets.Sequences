@@ -80,7 +80,124 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
     
     public TLinkAddress Convert(IList<byte> source)
     {
-        return ListToSequenceConverter.Convert(source.Select(b => AddressToNumberConverter.Convert(ByteToTLinkAddressConverter.Convert(b))).ToList());
+        var byteArraySegment = source.ToArray();
+        var convertedRawNumbers = new List<TLinkAddress>();
+        TLinkAddress rawNumberWithExcessBits = default; 
+        
+        var rawNumber = byteArraySegment.ToStructure<TLinkAddress>();
+        var nonProcessedRawNumber = rawNumber;
+        rawNumber = Bit.And(rawNumber, BitMask);
+        convertedRawNumbers.Add(AddressToNumberConverter.Convert(rawNumber));
+        byteArraySegment = byteArraySegment.Skip(BytesInRawNumberCount).ToArray();
+
+        rawNumber = byteArraySegment.ToStructure<TLinkAddress>();
+        nonProcessedRawNumber = rawNumber;
+        rawNumber = Bit.ShiftLeft(rawNumber, 1);
+        rawNumber = Bit.Or(rawNumber, Bit.ShiftRight(rawNumberWithExcessBits, BitsSize - 1));
+        rawNumber = Bit.And(rawNumber, BitMask);
+        convertedRawNumbers.Add(AddressToNumberConverter.Convert(rawNumber));
+        byteArraySegment = byteArraySegment.Skip(BytesInRawNumberCount).ToArray();
+        rawNumberWithExcessBits = Bit.Or(rawNumberWithExcessBits, Bit.ShiftRight(nonProcessedRawNumber, BitsSize-1));
+
+        rawNumber = byteArraySegment.ToStructure<TLinkAddress>();
+        nonProcessedRawNumber = rawNumber;
+        rawNumber = Bit.ShiftLeft(rawNumber, 2);
+        rawNumber = Bit.Or(rawNumber, Bit.ShiftRight(nonProcessedRawNumber, BitsSize - 2));
+        rawNumber = Bit.And(rawNumber, BitMask);
+        convertedRawNumbers.Add(AddressToNumberConverter.Convert(rawNumber));
+        byteArraySegment = byteArraySegment.Skip(BytesInRawNumberCount).ToArray();
+        rawNumberWithExcessBits = Bit.Or(rawNumberWithExcessBits, Bit.ShiftRight(nonProcessedRawNumber, BitsSize-2));
+        
+        rawNumber = byteArraySegment.ToStructure<TLinkAddress>();
+        nonProcessedRawNumber = rawNumber;
+        rawNumber = Bit.ShiftLeft(rawNumber, 3);
+        rawNumber = Bit.Or(rawNumber, Bit.ShiftRight(nonProcessedRawNumber, BitsSize - 3));
+        rawNumber = Bit.And(rawNumber, BitMask);
+        convertedRawNumbers.Add(AddressToNumberConverter.Convert(rawNumber));
+        byteArraySegment = byteArraySegment.Skip(BytesInRawNumberCount).ToArray();
+        rawNumberWithExcessBits = Bit.Or(rawNumberWithExcessBits, Bit.ShiftRight(nonProcessedRawNumber, BitsSize-3));
+        
+        rawNumber = byteArraySegment.ToStructure<TLinkAddress>();
+        nonProcessedRawNumber = rawNumber;
+        rawNumber = Bit.ShiftLeft(rawNumber, 4);
+        rawNumber = Bit.Or(rawNumber, Bit.ShiftRight(nonProcessedRawNumber, BitsSize - 4));
+        rawNumber = Bit.And(rawNumber, BitMask);
+        convertedRawNumbers.Add(AddressToNumberConverter.Convert(rawNumber));
+        byteArraySegment = byteArraySegment.Skip(BytesInRawNumberCount).ToArray();
+        rawNumberWithExcessBits = Bit.Or(rawNumberWithExcessBits, Bit.ShiftRight(nonProcessedRawNumber, BitsSize-4));
+        
+        rawNumber = byteArraySegment.ToStructure<TLinkAddress>();
+        nonProcessedRawNumber = rawNumber;
+        rawNumber = Bit.ShiftLeft(rawNumber, 5);
+        rawNumber = Bit.Or(rawNumber, Bit.ShiftRight(nonProcessedRawNumber, BitsSize - 5));
+        rawNumber = Bit.And(rawNumber, BitMask);
+        convertedRawNumbers.Add(AddressToNumberConverter.Convert(rawNumber));
+        byteArraySegment = byteArraySegment.Skip(BytesInRawNumberCount).ToArray();
+        rawNumberWithExcessBits = Bit.Or(rawNumberWithExcessBits, Bit.ShiftRight(nonProcessedRawNumber, BitsSize-5));
+        
+        rawNumber = byteArraySegment.ToStructure<TLinkAddress>();
+        nonProcessedRawNumber = rawNumber;
+        rawNumber = Bit.ShiftLeft(rawNumber, 6);
+        rawNumber = Bit.Or(rawNumber, Bit.ShiftRight(nonProcessedRawNumber, BitsSize - 6));
+        rawNumber = Bit.And(rawNumber, BitMask);
+        convertedRawNumbers.Add(AddressToNumberConverter.Convert(rawNumber));
+        byteArraySegment = byteArraySegment.Skip(BytesInRawNumberCount).ToArray();
+        rawNumberWithExcessBits = Bit.Or(rawNumberWithExcessBits, Bit.ShiftRight(nonProcessedRawNumber, BitsSize-6));
+        
+        rawNumber = nonProcessedRawNumber;
+        rawNumber = Bit.Or(rawNumber, Bit.ShiftRight(nonProcessedRawNumber, BitsSize - 7));
+        convertedRawNumbers.Add(AddressToNumberConverter.Convert(rawNumber));
+        rawNumberWithExcessBits = default;
+
+        // Повтор
+        
+        
+        var rawNumbers = new List<TLinkAddress>();
+        foreach (var convertedRawNumber in convertedRawNumbers)
+        {
+            rawNumbers.Add(NumberToAddressConverter.Convert(convertedRawNumber));
+        }
+        
+        foreach (var b in source)
+        {
+            Console.WriteLine(System.Convert.ToString(b, 2).PadLeft(8, '0'));
+        }
+        
+        Console.WriteLine("");
+        
+        foreach (var rN in rawNumbers)
+        {
+            Console.WriteLine(System.Convert.ToString((byte)(object)rN, 2).PadLeft(8, '0'));
+        }
+
+        rawNumber = rawNumbers[0];
+        rawNumber = Bit.Or(rawNumber, Bit.ShiftLeft(rawNumbers[1], BitsSize - 7));
+        if (UncheckedConverter<TLinkAddress, byte>.Default.Convert(rawNumber) != source[0])
+        {
+            throw new Exception("");
+        }
+
+
+        
+        rawNumber = rawNumbers[1];
+        rawNumber = Bit.ShiftRight(rawNumber, 1);
+        rawNumber = Bit.Or(rawNumber, Bit.ShiftLeft(rawNumbers[2], BitsSize - 6));
+        if (UncheckedConverter<TLinkAddress, byte>.Default.Convert(rawNumber) != source[1])
+        {
+            throw new Exception("");
+        }
+        
+        // rawNumber = rawNumbers[2];
+        // rawNumber = Bit.ShiftRight(rawNumber, 2);
+        // rawNumber = Bit.Or(rawNumber, Bit.ShiftLeft(rawNumbers[2], BitsSize - 5));
+        // if (UncheckedConverter<TLinkAddress, byte>.Default.Convert(rawNumber) != source[2])
+        // {
+        //     throw new Exception("");
+        // }
+
+        return default;
+        
+        
         // while (byteArrayToSave.Length != 0)
         // {
         //     var rawNumber = byteArrayToSave.ToStructure<TLinkAddress>();
