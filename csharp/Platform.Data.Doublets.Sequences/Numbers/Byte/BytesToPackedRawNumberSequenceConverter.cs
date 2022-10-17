@@ -17,7 +17,7 @@ using Platform.Unsafe;
 
 namespace Platform.Data.Doublets.Sequences.Numbers.Byte;
 
-public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<IList<byte>, TLinkAddress> where TLinkAddress : struct
+public class BytesToPackedRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<IList<byte>, TLinkAddress> where TLinkAddress : struct
 {
     public static readonly TLinkAddress MaximumValue = NumericType<TLinkAddress>.MaxValue;
 
@@ -50,7 +50,7 @@ public class ByteListToRawSequenceConverter<TLinkAddress> : LinksDecoratorBase<T
     public TLinkAddress EmptyByteArraySequenceType;
 
 
-    public ByteListToRawSequenceConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> addressToNumberConverter, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>,TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter) : base(links)
+    public BytesToPackedRawNumberSequenceConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> addressToNumberConverter, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>,TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter) : base(links)
     {
         AddressToNumberConverter = addressToNumberConverter;
         NumberToAddressConverter = numberToAddressConverter;

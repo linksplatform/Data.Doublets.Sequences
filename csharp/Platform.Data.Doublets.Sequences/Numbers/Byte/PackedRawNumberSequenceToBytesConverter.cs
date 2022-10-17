@@ -18,7 +18,7 @@ using Platform.Unsafe;
 
 namespace Platform.Data.Doublets.Sequences.Numbers.Byte;
 
-public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, IList<byte>> where TLinkAddress : struct
+public class PackedRawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, IList<byte>> where TLinkAddress : struct
 {
     public static readonly EqualityComparer<TLinkAddress> EqualityComparer = EqualityComparer<TLinkAddress>.Default;
 
@@ -43,7 +43,7 @@ public class RawSequenceToByteListConverter<TLinkAddress> : LinksDecoratorBase<T
 
     public readonly TLinkAddress Type;
 
-    public RawSequenceToByteListConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>, TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter, UnicodeSequenceToStringConverter<TLinkAddress> unicodeSequenceToStringConverteer) : base(links)
+    public PackedRawNumberSequenceToBytesConverter(ILinks<TLinkAddress> links, IConverter<TLinkAddress> numberToAddressConverter, IConverter<IList<TLinkAddress>, TLinkAddress> listToSequenceConverter, StringToUnicodeSequenceConverter<TLinkAddress> stringToUnicodeSequenceConverter, UnicodeSequenceToStringConverter<TLinkAddress> unicodeSequenceToStringConverteer) : base(links)
     {
         NumberToAddressConverter = numberToAddressConverter;
         ListToSequenceConverter = listToSequenceConverter;

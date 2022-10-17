@@ -30,8 +30,8 @@ namespace Platform.Data.Doublets.Sequences.Tests
         private static readonly AddressToRawNumberConverter<TLinkAddress> _addressToRawNumberConverter = new();
         private static readonly RawNumberToAddressConverter<TLinkAddress> _rawNumberToAddressConverter = new();
         private readonly BalancedVariantConverter<TLinkAddress> _listToSequenceConverter;
-        private readonly ByteListToRawSequenceConverter<TLinkAddress> _byteListToRawSequenceConverter;
-        private readonly RawSequenceToByteListConverter<TLinkAddress> _rawSequenceToByteListConverter;
+        private readonly BytesToRawNumberSequenceConverter<TLinkAddress> _bytesToRawNumberSequenceConverter;
+        private readonly RawNumberSequenceToBytesConverter<TLinkAddress> _rawNumberSequenceToBytesConverter;
         
         public ByteConvertersTests()
         {
@@ -59,8 +59,8 @@ namespace Platform.Data.Doublets.Sequences.Tests
                 balancedVariantConverter, unicodeSequenceType);
             RightSequenceWalker<TLinkAddress> unicodeSymbolSequenceWalker = new(Storage, new DefaultStack<TLinkAddress>(), unicodeSymbolCriterionMatcher.IsMatched);
             UnicodeSequenceToStringConverter<TLinkAddress> unicodeSequenceToStringConverter = new UnicodeSequenceToStringConverter<TLinkAddress>(Storage, unicodeSequenceCriterionMatcher, unicodeSymbolSequenceWalker, unicodeSymbolToCharConverter, unicodeSequenceType);
-            _byteListToRawSequenceConverter = new ByteListToRawSequenceConverter<TLinkAddress>(Storage, _addressToRawNumberConverter, _rawNumberToAddressConverter, _listToSequenceConverter, stringToUnicodeSequenceConverter);
-            _rawSequenceToByteListConverter = new RawSequenceToByteListConverter<TLinkAddress>(Storage, _rawNumberToAddressConverter, _listToSequenceConverter, stringToUnicodeSequenceConverter, unicodeSequenceToStringConverter);
+            _bytesToRawNumberSequenceConverter = new BytesToRawNumberSequenceConverter<TLinkAddress>(Storage, _addressToRawNumberConverter, _rawNumberToAddressConverter, _listToSequenceConverter, stringToUnicodeSequenceConverter);
+            _rawNumberSequenceToBytesConverter = new RawNumberSequenceToBytesConverter<TLinkAddress>(Storage, _rawNumberToAddressConverter, _listToSequenceConverter, stringToUnicodeSequenceConverter, unicodeSequenceToStringConverter);
         }
 
         private static byte[] GetRandomArray(int length)
@@ -128,9 +128,9 @@ namespace Platform.Data.Doublets.Sequences.Tests
 
         public void Test(byte[] byteArray)
         {
-            var byteListRawSequence = _byteListToRawSequenceConverter.Convert(byteArray);
+            var byteListRawSequence = _bytesToRawNumberSequenceConverter.Convert(byteArray);
             Console.WriteLine();
-            var byteListFromConverter = _rawSequenceToByteListConverter.Convert(byteListRawSequence);
+            var byteListFromConverter = _rawNumberSequenceToBytesConverter.Convert(byteListRawSequence);
             Console.WriteLine("Original");
             foreach (var b in byteArray)
             {
