@@ -1,29 +1,8 @@
 {
   "homepages": [],
-  "source_base_path": "/home/runner/work/Data.Doublets.Sequences/Data.Doublets.Sequences",
+  "source_base_path": "/home/runner/work/Data.Doublets.Sequences/Data.Doublets.Sequences/csharp",
   "xrefmap": "xrefmap.yml",
   "files": [
-    {
-      "type": "Resource",
-      "output": {
-        "resource": {
-          "relative_path": "index.json"
-        }
-      },
-      "is_incremental": false
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "README.md",
-      "output": {
-        ".html": {
-          "relative_path": "README.html",
-          "hash": "Y+vEKw6G02sgzCp8QAh96A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
     {
       "log_codes": [
         "InvalidFileLink"
@@ -33,7 +12,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "dz/Vez3hbnyeAM0pE9HW8g=="
+          "hash": "0WZZq5lO2FionUJ3n+lzJA=="
         }
       },
       "is_incremental": false,
@@ -51,12 +30,6 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 1,
-          "skipped_file_count": 0
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
