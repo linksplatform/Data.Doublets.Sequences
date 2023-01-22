@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Converters;
 
@@ -14,9 +15,8 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{IList{TLinkAddress}}"/>
-    public class SequenceToItsLocalElementLevelsConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<IList<TLinkAddress>>
+    public class SequenceToItsLocalElementLevelsConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<IList<TLinkAddress>> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
         private readonly IConverter<Doublet<TLinkAddress>, TLinkAddress> _linkToItsFrequencyToNumberConveter;
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
             {
                 var previous = GetFrequencyNumber(sequence[i - 1], sequence[i]);
                 var next = GetFrequencyNumber(sequence[i], sequence[i + 1]);
-                levels[i] = _comparer.Compare(previous, next) > 0 ? previous : next;
+                levels[i] = previous > next ? previous : next;
             }
             levels[levels.Length - 1] = GetFrequencyNumber(sequence[sequence.Count - 2], sequence[sequence.Count - 1]);
             return levels;

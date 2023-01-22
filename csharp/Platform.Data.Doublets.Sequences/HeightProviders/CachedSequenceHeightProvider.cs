@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Converters;
@@ -14,9 +15,8 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
     /// <para></para>
     /// </summary>
     /// <seealso cref="ISequenceHeightProvider{TLinkAddress}"/>
-    public class CachedSequenceHeightProvider<TLinkAddress> : ISequenceHeightProvider<TLinkAddress>
+    public class CachedSequenceHeightProvider<TLinkAddress> : ISequenceHeightProvider<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private readonly TLinkAddress _heightPropertyMarker;
         private readonly ISequenceHeightProvider<TLinkAddress> _baseHeightProvider;
         private readonly IConverter<TLinkAddress> _addressToUnaryNumberConverter;
@@ -83,7 +83,7 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
         {
             TLinkAddress height;
             var heightValue = _propertyOperator.GetValue(sequence, _heightPropertyMarker);
-            if (_equalityComparer.Equals(heightValue, default))
+            if (heightValue == TLinkAddress.Zero)
             {
                 height = _baseHeightProvider.Get(sequence);
                 heightValue = _addressToUnaryNumberConverter.Convert(height);

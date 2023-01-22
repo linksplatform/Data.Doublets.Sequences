@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 
@@ -14,7 +15,7 @@ namespace Platform.Data.Doublets.Sequences
     /// <para></para>
     /// </summary>
     /// <seealso cref="ICounter{int}"/>
-    public class DuplicateSegmentsCounter<TLinkAddress> : ICounter<int>
+    public class DuplicateSegmentsCounter<TLinkAddress> : ICounter<int> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly IProvider<IList<KeyValuePair<IList<TLinkAddress>?, IList<TLinkAddress>?>>> _duplicateFragmentsProvider;
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Collections.Lists;
 using Platform.Converters;
@@ -16,10 +17,8 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// <para></para>
     /// </summary>
     /// <seealso cref="LinksListToSequenceConverterBase{TLinkAddress}"/>
-    public class OptimalVariantConverter<TLinkAddress> : LinksListToSequenceConverterBase<TLinkAddress>
+    public class OptimalVariantConverter<TLinkAddress> : LinksListToSequenceConverterBase<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
-        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
         private readonly IConverter<IList<TLinkAddress>> _sequenceToItsLocalElementLevelsConverter;
 
         /// <summary>
@@ -109,7 +108,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
                 var w = 0;
                 for (var i = 1; i < length; i++)
                 {
-                    if (_equalityComparer.Equals(currentLevel, levels[i]))
+                    if ((currentLevel == levels[i]))
                     {
                         levelRepeat++;
                         skipOnce = false;
@@ -164,13 +163,13 @@ namespace Platform.Data.Doublets.Sequences.Converters
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static TLinkAddress GetGreatestNeigbourLowerThanCurrentOrCurrent(TLinkAddress previous, TLinkAddress current, TLinkAddress next)
         {
-            return _comparer.Compare(previous, next) > 0
-                ? _comparer.Compare(previous, current) < 0 ? previous : current
-                : _comparer.Compare(next, current) < 0 ? next : current;
+            return previous > next
+                ? previous < current ? previous : current
+                : next < current ? next : current;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static TLinkAddress GetNextLowerThanCurrentOrCurrent(TLinkAddress current, TLinkAddress next) => _comparer.Compare(next, current) < 0 ? next : current;
+        private static TLinkAddress GetNextLowerThanCurrentOrCurrent(TLinkAddress current, TLinkAddress next) => next < current ? next : current;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static TLinkAddress GetPreviousLowerThanCurrentOrCurrent(TLinkAddress previous, TLinkAddress current) => _comparer.Compare(previous, current) < 0 ? previous : current;
+        private static TLinkAddress GetPreviousLowerThanCurrentOrCurrent(TLinkAddress previous, TLinkAddress current) => previous < current ? previous : current;
     }
 }

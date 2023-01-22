@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 
@@ -12,7 +13,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// <para></para>
     /// </summary>
     /// <seealso cref="SequenceSymbolFrequencyOneOffCounter{TLinkAddress}"/>
-    public class MarkedSequenceSymbolFrequencyOneOffCounter<TLinkAddress> : SequenceSymbolFrequencyOneOffCounter<TLinkAddress>
+    public class MarkedSequenceSymbolFrequencyOneOffCounter<TLinkAddress> : SequenceSymbolFrequencyOneOffCounter<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly ICriterionMatcher<TLinkAddress> _markedSequenceMatcher;
 
@@ -58,7 +59,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         {
             if (!_markedSequenceMatcher.IsMatched(_sequenceLink))
             {
-                return default;
+                return TLinkAddress.Zero;
             }
             return base.Count();
         }

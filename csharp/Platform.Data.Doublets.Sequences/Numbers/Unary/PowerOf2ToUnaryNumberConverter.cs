@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using Platform.Exceptions;
 using Platform.Ranges;
 using Platform.Converters;
@@ -16,9 +17,8 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{int, TLinkAddress}"/>
-    public class PowerOf2ToUnaryNumberConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<int, TLinkAddress>
+    public class PowerOf2ToUnaryNumberConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<int, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private readonly TLinkAddress[] _unaryNumberPowersOf2;
 
         /// <summary>
@@ -36,10 +36,10 @@ namespace Platform.Data.Doublets.Numbers.Unary
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public PowerOf2ToUnaryNumberConverter(ILinks<TLinkAddress> links, TLinkAddress one) : base(links)
+        public PowerOf2ToUnaryNumberConverter(ILinks<TLinkAddress> links) : base(links)
         {
             _unaryNumberPowersOf2 = new TLinkAddress[64];
-            _unaryNumberPowersOf2[0] = one;
+            _unaryNumberPowersOf2[0] = TLinkAddress.One;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
         public TLinkAddress Convert(int power)
         {
             Ensure.Always.ArgumentInRange(power, new Range<int>(0, _unaryNumberPowersOf2.Length - 1), nameof(power));
-            if (!_equalityComparer.Equals(_unaryNumberPowersOf2[power], default))
+            if ((_unaryNumberPowersOf2[power] != TLinkAddress.Zero))
             {
                 return _unaryNumberPowersOf2[power];
             }

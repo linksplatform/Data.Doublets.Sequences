@@ -19,7 +19,7 @@ using Platform.Unsafe;
 
 namespace Platform.Data.Doublets.Sequences.Numbers.Byte;
 
-public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<IList<byte>, TLinkAddress> where TLinkAddress : struct
+public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<IList<byte>, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
 {
     public static readonly TLinkAddress MaximumValue = NumericType<TLinkAddress>.MaxValue;
 
@@ -38,17 +38,12 @@ public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBas
     
     public readonly IConverter<TLinkAddress, string> UnicodeSequenceToStringConverter;
 
-    public readonly TLinkAddress Type = default;
+    public readonly TLinkAddress Type = TLinkAddress.Zero;
 
     public readonly TLinkAddress ByteArrayLengthType;
 
     public readonly TLinkAddress ByteArrayType;
 
-    public static readonly UncheckedConverter<Int32, TLinkAddress> IntToTLinkAddressConverter = UncheckedConverter<int, TLinkAddress>.Default;
-    public static readonly UncheckedConverter<TLinkAddress, byte> TLinkAddressToByteConverter = UncheckedConverter<TLinkAddress, byte>.Default;
-    public ArraySegment<byte> CurrentByteArray;
-    public static readonly int BytesInRawNumberCount = BitsSize / 8;
-    public readonly UncheckedConverter<byte, TLinkAddress> ByteToTLinkAddressConverter = UncheckedConverter<byte, TLinkAddress>.Default;
     public TLinkAddress EmptyByteArraySequenceType;
 
 
@@ -59,8 +54,7 @@ public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBas
         ListToSequenceConverter = listToSequenceConverter;
         BalancedVariantConverter = new BalancedVariantConverter<TLinkAddress>(_links);
         StringToUnicodeSequenceConverter = stringToUnicodeSequenceConverter;
-        TLinkAddress Zero = default;
-        Type = Arithmetic.Increment(Zero);
+        Type = Arithmetic.Increment(TLinkAddress.Zero);
         ByteArrayLengthType = _links.GetOrCreate(Type, StringToUnicodeSequenceConverter.Convert(nameof(ByteArrayLengthType)));
         ByteArrayType = _links.GetOrCreate(Type, StringToUnicodeSequenceConverter.Convert(nameof(ByteArrayType)));
         EmptyByteArraySequenceType = _links.GetOrCreate(Type, StringToUnicodeSequenceConverter.Convert(nameof(EmptyByteArraySequenceType)));
@@ -68,6 +62,6 @@ public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBas
 
     public TLinkAddress Convert(IList<byte> source)
     {
-        return ListToSequenceConverter.Convert(source.Select(b => AddressToNumberConverter.Convert(ByteToTLinkAddressConverter.Convert(b))).ToList());
+        return ListToSequenceConverter.Convert(source.Select(b => AddressToNumberConverter.Convert(TLinkAddress.CreateTruncating(b))).ToList());
     }
 }

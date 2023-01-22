@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 
@@ -13,7 +14,7 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="ICriterionMatcher{TLinkAddress}"/>
-    public class DefaultSequenceElementCriterionMatcher<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ICriterionMatcher<TLinkAddress>
+    public class DefaultSequenceElementCriterionMatcher<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ICriterionMatcher<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         /// <summary>
         /// <para>

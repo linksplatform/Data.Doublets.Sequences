@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Converters;
 
@@ -12,7 +13,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
     /// <para></para>
     /// </summary>
     /// <seealso cref="IConverter{Doublet{TLinkAddress}, TLinkAddress}"/>
-    public class FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<TLinkAddress> : IConverter<Doublet<TLinkAddress>, TLinkAddress>
+    public class FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<TLinkAddress> : IConverter<Doublet<TLinkAddress>, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly LinkFrequenciesCache<TLinkAddress> _cache;
 

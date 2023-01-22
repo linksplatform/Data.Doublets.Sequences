@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Converters;
 
@@ -13,7 +14,7 @@ namespace Platform.Data.Doublets.Unicode
     /// <para></para>
     /// </summary>
     /// <seealso cref="IConverter{string, IList{TLinkAddress}}"/>
-    public class StringToUnicodeSymbolsListConverter<TLinkAddress> : IConverter<string, IList<TLinkAddress>?>
+    public class StringToUnicodeSymbolsListConverter<TLinkAddress> : IConverter<string, IList<TLinkAddress>?> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly IConverter<char, TLinkAddress> _charToUnicodeSymbolConverter;
 

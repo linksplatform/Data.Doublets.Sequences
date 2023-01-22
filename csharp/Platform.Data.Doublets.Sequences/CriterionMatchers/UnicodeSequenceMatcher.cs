@@ -1,13 +1,13 @@
 using System.Collections.Generic;
+using System.Numerics;
 using Platform.Interfaces;
 
 namespace Platform.Data.Doublets.Sequences.CriterionMatchers;
 
-public class UnicodeSequenceMatcher<TLinkAddress> : ICriterionMatcher<TLinkAddress>
+public class UnicodeSequenceMatcher<TLinkAddress> : ICriterionMatcher<TLinkAddress>  where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
 {
     public readonly ILinks<TLinkAddress> Storage;
     public readonly TLinkAddress UnicodeSequenceMarker;
-    public readonly EqualityComparer<TLinkAddress> EqualityComparer = EqualityComparer<TLinkAddress>.Default;
     public UnicodeSequenceMatcher(ILinks<TLinkAddress> storage, TLinkAddress unicodeSequenceMarker)
     {
         Storage = storage;
@@ -16,6 +16,6 @@ public class UnicodeSequenceMatcher<TLinkAddress> : ICriterionMatcher<TLinkAddre
     public bool IsMatched(TLinkAddress argument)
     {
         var target = Storage.GetTarget(argument);
-        return EqualityComparer.Equals(UnicodeSequenceMarker, argument) || EqualityComparer.Equals(UnicodeSequenceMarker, target);
+        return (UnicodeSequenceMarker == argument) || (UnicodeSequenceMarker == target);
     }
 }

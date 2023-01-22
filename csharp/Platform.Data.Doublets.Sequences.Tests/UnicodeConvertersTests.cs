@@ -4,7 +4,6 @@
 // using Platform.Reflection;
 // using Platform.Scopes;
 // using Platform.Data.Numbers.Raw;
-// using Platform.Data.Doublets.Incrementers;
 // using Platform.Data.Doublets.Numbers.Unary;
 // using Platform.Data.Doublets.PropertyOperators;
 // using Platform.Data.Doublets.Sequences.Converters;
@@ -25,8 +24,7 @@
 //             {
 //                 var links = scope.Links;
 //                 var meaningRoot = links.CreatePoint();
-//                 var one = links.CreateAndUpdate(meaningRoot, links.Constants.Itself);
-//                 var powerOf2ToUnaryNumberConverter = new PowerOf2ToUnaryNumberConverter<ulong>(links, one);
+//                 var powerOf2ToUnaryNumberConverter = new PowerOf2ToUnaryNumberConverter<ulong>(links, TLinkAddress.One);
 //                 var addressToUnaryNumberConverter = new AddressToUnaryNumberConverter<ulong>(links, powerOf2ToUnaryNumberConverter);
 //                 var unaryNumberToAddressConverter = new UnaryNumberToAddressOrOperationConverter<ulong>(links, powerOf2ToUnaryNumberConverter);
 //                 TestCharAndUnicodeSymbolConverters(links, meaningRoot, addressToUnaryNumberConverter, unaryNumberToAddressConverter);

@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Collections.Stacks;
 using Platform.Converters;
@@ -19,6 +20,8 @@ namespace Platform.Data.Doublets.Numbers.Raw
     /// <seealso cref="LinksDecoratorBase{TSource}"/>
     /// <seealso cref="IConverter{TSource, TTarget}"/>
     public class LongRawNumberSequenceToNumberConverter<TSource, TTarget> : LinksDecoratorBase<TSource>, IConverter<TSource, TTarget>
+        where TSource : struct, IUnsignedNumber<TSource>, IComparisonOperators<TSource, TSource, bool>
+        where TTarget : struct, IUnsignedNumber<TTarget>, IComparisonOperators<TTarget, TTarget, bool>
     {
         private static readonly int _bitsPerRawNumber = NumericType<TSource>.BitsSize - 1;
         private static readonly UncheckedConverter<TSource, TTarget> _sourceToTargetConverter = UncheckedConverter<TSource, TTarget>.Default;
@@ -68,7 +71,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
             {
                 var pair = Links.GetLink(source);
                 var walker = new LeftSequenceWalker<TSource>(Links, new DefaultStack<TSource>(), (link) => externalReferencesRange.HasValue && externalReferencesRange.Value.Contains(link));
-                TTarget result = default;
+                TTarget result = TTarget.Zero;
                 foreach (var element in walker.Walk(source))
                 {
                     result = Bit.Or(Bit.ShiftLeft(result, _bitsPerRawNumber), Convert(element));

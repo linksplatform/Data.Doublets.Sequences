@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Data.Doublets.Sequences.Frequencies.Cache;
 
@@ -13,9 +14,8 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// <para></para>
     /// </summary>
     /// <seealso cref="ISequenceIndex{TLinkAddress}"/>
-    public class CachedFrequencyIncrementingSequenceIndex<TLinkAddress> : ISequenceIndex<TLinkAddress>
+    public class CachedFrequencyIncrementingSequenceIndex<TLinkAddress> : ISequenceIndex<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private readonly LinkFrequenciesCache<TLinkAddress> _cache;
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             {
                 return false;
             }
-            var indexed = !_equalityComparer.Equals(frequency.Frequency, default);
+            var indexed = (frequency.Frequency != TLinkAddress.Zero);
             if (indexed)
             {
                 _cache.IncrementFrequency(source, target);
@@ -103,7 +103,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             {
                 return false;
             }
-            return !_equalityComparer.Equals(frequency.Frequency, default);
+            return (frequency.Frequency != TLinkAddress.Zero);
         }
     }
 }

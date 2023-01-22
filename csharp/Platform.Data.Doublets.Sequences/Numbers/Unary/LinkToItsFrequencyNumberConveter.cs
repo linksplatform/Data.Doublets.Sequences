@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Platform.Interfaces;
 using Platform.Converters;
 using System.Runtime.CompilerServices;
@@ -16,9 +17,8 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{Doublet{TLinkAddress}, TLinkAddress}"/>
-    public class LinkToItsFrequencyNumberConveter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<Doublet<TLinkAddress>, TLinkAddress>
+    public class LinkToItsFrequencyNumberConveter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<Doublet<TLinkAddress>, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private readonly IProperty<TLinkAddress, TLinkAddress> _frequencyPropertyOperator;
         private readonly IConverter<TLinkAddress> _unaryNumberToAddressConverter;
 
@@ -74,14 +74,14 @@ namespace Platform.Data.Doublets.Numbers.Unary
         {
             var links = _links;
             var link = links.SearchOrDefault(doublet.Source, doublet.Target);
-            if (_equalityComparer.Equals(link, default))
+            if (link == TLinkAddress.Zero)
             {
                 throw new ArgumentException($"Link ({doublet}) not found.", nameof(doublet));
             }
             var frequency = _frequencyPropertyOperator.Get(link);
-            if (_equalityComparer.Equals(frequency, default))
+            if (frequency == TLinkAddress.Zero)
             {
-                return default;
+                return TLinkAddress.Zero;
             }
             var frequencyNumber = links.GetSource(frequency);
             return _unaryNumberToAddressConverter.Convert(frequencyNumber);

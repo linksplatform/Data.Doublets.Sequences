@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Numbers;
@@ -14,7 +15,7 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="ISequenceHeightProvider{TLinkAddress}"/>
-    public class DefaultSequenceRightHeightProvider<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceHeightProvider<TLinkAddress>
+    public class DefaultSequenceRightHeightProvider<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceHeightProvider<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly ICriterionMatcher<TLinkAddress> _elementMatcher;
 
@@ -52,7 +53,7 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TLinkAddress Get(TLinkAddress sequence)
         {
-            var height = default(TLinkAddress);
+            var height = TLinkAddress.Zero;
             var pairOrElement = sequence;
             while (!_elementMatcher.IsMatched(pairOrElement))
             {

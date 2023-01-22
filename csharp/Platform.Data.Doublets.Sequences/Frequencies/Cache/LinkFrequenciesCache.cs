@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Numbers;
@@ -12,12 +13,8 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
     /// Can be used to operate with many CompressingConverters (to keep global frequencies data between them).
     /// TODO: Extract interface to implement frequencies storage inside Links storage
     /// </remarks>
-    public class LinkFrequenciesCache<TLinkAddress> : LinksOperatorBase<TLinkAddress>
+    public class LinkFrequenciesCache<TLinkAddress> : LinksOperatorBase<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
-        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
-        private static readonly TLinkAddress _zero = default;
-        private static readonly TLinkAddress _one = Arithmetic.Increment(_zero);
         private readonly Dictionary<Doublet<TLinkAddress>, LinkFrequency<TLinkAddress>> _doubletsCache;
         private readonly ICounter<TLinkAddress, TLinkAddress> _frequencyCounter;
 
@@ -197,8 +194,8 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             else
             {
                 var link = _links.SearchOrDefault(doublet.Source, doublet.Target);
-                data = new LinkFrequency<TLinkAddress>(_one, link);
-                if (!_equalityComparer.Equals(link, default))
+                data = new LinkFrequency<TLinkAddress>(TLinkAddress.One, link);
+                if ((link != TLinkAddress.Zero))
                 {
                     data.Frequency = Arithmetic.Add(data.Frequency, _frequencyCounter.Count(link));
                 }
@@ -224,13 +221,13 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
             {
                 var value = entry.Value;
                 var linkIndex = value.Link;
-                if (!_equalityComparer.Equals(linkIndex, default))
+                if ((linkIndex != TLinkAddress.Zero))
                 {
                     var frequency = value.Frequency;
                     var count = _frequencyCounter.Count(linkIndex);
                     // TODO: Why `frequency` always greater than `count` by 1?
-                    if (((_comparer.Compare(frequency, count) > 0) && (_comparer.Compare(Arithmetic.Subtract(frequency, count), _one) > 0))
-                     || ((_comparer.Compare(count, frequency) > 0) && (_comparer.Compare(Arithmetic.Subtract(count, frequency), _one) > 0)))
+                    if (((frequency > count) && ((frequency - count) > TLinkAddress.One))
+                     || ((count > frequency) && ((count - frequency) > TLinkAddress.One)))
                     {
                         throw new InvalidOperationException("Frequencies validation failed.");
                     }

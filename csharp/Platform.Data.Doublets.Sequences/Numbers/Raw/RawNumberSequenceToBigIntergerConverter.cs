@@ -20,16 +20,8 @@ namespace Platform.Data.Doublets.Numbers.Raw
     /// </summary>
     /// <seealso cref="LinksDecoratorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{TLinkAddress, BigInteger}"/>
-    public class RawNumberSequenceToBigIntegerConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, BigInteger>
-        where TLinkAddress : struct
+    public class RawNumberSequenceToBigIntegerConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, BigInteger> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        /// <summary>
-        /// <para>
-        /// The default.
-        /// </para>
-        /// <para></para>
-        /// </summary>
-        public readonly EqualityComparer<TLinkAddress> EqualityComparer = EqualityComparer<TLinkAddress>.Default;
         /// <summary>
         /// <para>
         /// The number to address converter.
@@ -99,7 +91,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
         {
             var sign = 1;
             var bigIntegerSequence = bigInteger;
-            if (EqualityComparer.Equals(_links.GetSource(bigIntegerSequence), NegativeNumberMarker))
+            if ((_links.GetSource(bigIntegerSequence) == NegativeNumberMarker))
             {
                 sign = -1;
                 bigIntegerSequence = _links.GetTarget(bigInteger);

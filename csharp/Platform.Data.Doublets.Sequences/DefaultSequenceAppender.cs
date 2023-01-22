@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Collections.Stacks;
 using Platform.Data.Doublets.Sequences.HeightProviders;
@@ -16,9 +17,8 @@ namespace Platform.Data.Doublets.Sequences
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="ISequenceAppender{TLinkAddress}"/>
-    public class DefaultSequenceAppender<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceAppender<TLinkAddress>
+    public class DefaultSequenceAppender<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceAppender<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private readonly IStack<TLinkAddress> _stack;
         private readonly ISequenceHeightProvider<TLinkAddress> _heightProvider;
 
@@ -71,11 +71,11 @@ namespace Platform.Data.Doublets.Sequences
         {
             var cursor = sequence;
             var links = _links;
-            while (!_equalityComparer.Equals(_heightProvider.Get(cursor), default))
+            while ((_heightProvider.Get(cursor) != TLinkAddress.Zero))
             {
                 var source = links.GetSource(cursor);
                 var target = links.GetTarget(cursor);
-                if (_equalityComparer.Equals(_heightProvider.Get(source), _heightProvider.Get(target)))
+                if ((_heightProvider.Get(source) == _heightProvider.Get(target)))
                 {
                     break;
                 }
@@ -87,7 +87,7 @@ namespace Platform.Data.Doublets.Sequences
             }
             var left = cursor;
             var right = appendant;
-            while (!_equalityComparer.Equals(cursor = _stack.PopOrDefault(), links.Constants.Null))
+            while (((cursor = _stack.PopOrDefault()) != links.Constants.Null))
             {
                 right = links.GetOrCreate(left, right);
                 left = cursor;

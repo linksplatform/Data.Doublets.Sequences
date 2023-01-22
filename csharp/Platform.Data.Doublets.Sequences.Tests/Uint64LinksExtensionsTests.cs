@@ -22,11 +22,9 @@ namespace Platform.Data.Doublets.Sequences.Tests
         public void FormatStructureWithExternalReferenceTest()
         {
             ILinks<TLinkAddress> links = CreateLinks();
-            TLinkAddress zero = default;
-            var one = Arithmetic.Increment(zero);
-            var markerIndex = one;
+            var markerIndex = TLinkAddress.CreateTruncating(1);
             var meaningRoot = links.GetOrCreate(markerIndex, markerIndex);
-            var numberMarker = links.GetOrCreate(meaningRoot, Arithmetic.Increment(ref markerIndex));
+            var numberMarker = links.GetOrCreate(meaningRoot, ++markerIndex);
             AddressToRawNumberConverter<TLinkAddress> addressToNumberConverter = new();
             var numberAddress = addressToNumberConverter.Convert(1);
             var numberLink = links.GetOrCreate(numberMarker, numberAddress);

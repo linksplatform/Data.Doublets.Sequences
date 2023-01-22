@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Converters;
 
@@ -13,7 +14,7 @@ namespace Platform.Data.Doublets.Time
     /// <para></para>
     /// </summary>
     /// <seealso cref="IConverter{TLinkAddress, DateTime}"/>
-    public class LongRawNumberSequenceToDateTimeConverter<TLinkAddress> : IConverter<TLinkAddress, DateTime>
+    public class LongRawNumberSequenceToDateTimeConverter<TLinkAddress> : IConverter<TLinkAddress, DateTime> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly IConverter<TLinkAddress, long> _longRawNumberConverterToInt64;
 

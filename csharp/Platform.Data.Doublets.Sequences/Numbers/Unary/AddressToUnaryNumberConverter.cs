@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using Platform.Reflection;
 using Platform.Converters;
 using Platform.Numbers;
@@ -16,11 +17,8 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{TLinkAddress}"/>
-    public class AddressToUnaryNumberConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress>
+    public class AddressToUnaryNumberConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
-        private static readonly TLinkAddress _zero = default;
-        private static readonly TLinkAddress _one = Arithmetic.Increment(_zero);
         private readonly IConverter<int, TLinkAddress> _powerOf2ToUnaryNumberConverter;
 
         /// <summary>
@@ -60,11 +58,11 @@ namespace Platform.Data.Doublets.Numbers.Unary
             var links = _links;
             var nullConstant = links.Constants.Null;
             var target = nullConstant;
-            for (var i = 0; !_equalityComparer.Equals(number, _zero) && i < NumericType<TLinkAddress>.BitsSize; i++)
+            for (var i = 0; (number !=  TLinkAddress.Zero) && i < NumericType<TLinkAddress>.BitsSize; i++)
             {
-                if (_equalityComparer.Equals(Bit.And(number, _one), _one))
+                if ((Bit.And(number, TLinkAddress.One) == TLinkAddress.One))
                 {
-                    target = _equalityComparer.Equals(target, nullConstant)
+                    target = target == nullConstant
                         ? _powerOf2ToUnaryNumberConverter.Convert(i)
                         : links.GetOrCreate(_powerOf2ToUnaryNumberConverter.Convert(i), target);
                 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Collections.Stacks;
 
@@ -14,7 +15,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     /// <para></para>
     /// </summary>
     /// <seealso cref="SequenceWalkerBase{TLinkAddress}"/>
-    public class RightSequenceWalker<TLinkAddress> : SequenceWalkerBase<TLinkAddress>
+    public class RightSequenceWalker<TLinkAddress> : SequenceWalkerBase<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         /// <summary>
         /// <para>

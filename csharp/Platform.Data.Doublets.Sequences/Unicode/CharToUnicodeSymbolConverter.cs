@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Converters;
 
@@ -13,7 +14,7 @@ namespace Platform.Data.Doublets.Unicode
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{char, TLinkAddress}"/>
-    public class CharToUnicodeSymbolConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<char, TLinkAddress>
+    public class CharToUnicodeSymbolConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<char, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private static readonly UncheckedConverter<char, TLinkAddress> _charToAddressConverter = UncheckedConverter<char, TLinkAddress>.Default;
         private readonly IConverter<TLinkAddress> _addressToNumberConverter;

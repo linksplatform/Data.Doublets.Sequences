@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -12,9 +13,8 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// <para></para>
     /// </summary>
     /// <seealso cref="ISequenceIndex{TLinkAddress}"/>
-    public class SynchronizedSequenceIndex<TLinkAddress> : ISequenceIndex<TLinkAddress>
+    public class SynchronizedSequenceIndex<TLinkAddress> : ISequenceIndex<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private readonly ISynchronizedLinks<TLinkAddress> _links;
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             var links = _links.Unsync;
             _links.SyncRoot.DoRead(() =>
             {
-                while (--i >= 1 && (indexed = !_equalityComparer.Equals(links.SearchOrDefault(sequence[i - 1], sequence[i]), default))) { }
+                while (--i >= 1 && (indexed = (links.SearchOrDefault(sequence[i - 1], sequence[i]) != TLinkAddress.Zero))) { }
             });
             if (!indexed)
             {
@@ -89,7 +89,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
             {
                 var indexed = true;
                 var i = sequence.Count;
-                while (--i >= 1 && (indexed = !_equalityComparer.Equals(links.SearchOrDefault(sequence[i - 1], sequence[i]), default))) { }
+                while (--i >= 1 && (indexed = (links.SearchOrDefault(sequence[i - 1], sequence[i]) != TLinkAddress.Zero))) { }
                 return indexed;
             });
         }

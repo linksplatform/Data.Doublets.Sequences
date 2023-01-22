@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 
@@ -13,9 +14,8 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
     /// <para></para>
     /// </summary>
     /// <seealso cref="ICriterionMatcher{TLinkAddress}"/>
-    public class MarkedSequenceCriterionMatcher<TLinkAddress> : ICriterionMatcher<TLinkAddress>
+    public class MarkedSequenceCriterionMatcher<TLinkAddress> : ICriterionMatcher<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private readonly ILinks<TLinkAddress> _links;
         private readonly TLinkAddress _sequenceMarkerLink;
 
@@ -56,7 +56,7 @@ namespace Platform.Data.Doublets.Sequences.CriterionMatchers
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsMatched(TLinkAddress sequenceCandidate)
-            => _equalityComparer.Equals(_links.GetSource(sequenceCandidate), _sequenceMarkerLink)
-            || !_equalityComparer.Equals(_links.SearchOrDefault(_sequenceMarkerLink, sequenceCandidate), _links.Constants.Null);
+            => (_links.GetSource(sequenceCandidate) == _sequenceMarkerLink)
+            || !(_links.SearchOrDefault(_sequenceMarkerLink, sequenceCandidate) == _links.Constants.Null);
     }
 }

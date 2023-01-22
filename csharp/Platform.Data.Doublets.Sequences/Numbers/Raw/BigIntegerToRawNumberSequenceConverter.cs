@@ -19,8 +19,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
     /// </summary>
     /// <seealso cref="LinksDecoratorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{BigInteger, TLinkAddress}"/>
-    public class BigIntegerToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<BigInteger, TLinkAddress>
-        where TLinkAddress : struct
+    public class BigIntegerToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<BigInteger, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         /// <summary>
         /// <para>

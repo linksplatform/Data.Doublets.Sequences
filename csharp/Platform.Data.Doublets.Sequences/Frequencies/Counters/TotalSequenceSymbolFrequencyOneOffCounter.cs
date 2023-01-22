@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Numbers;
@@ -14,11 +15,8 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// <para></para>
     /// </summary>
     /// <seealso cref="ICounter{TLinkAddress}"/>
-    public class TotalSequenceSymbolFrequencyOneOffCounter<TLinkAddress> : ICounter<TLinkAddress>
+    public class TotalSequenceSymbolFrequencyOneOffCounter<TLinkAddress> : ICounter<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
-        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
-
         /// <summary>
         /// <para>
         /// The links.
@@ -68,7 +66,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
             _links = links;
             _symbol = symbol;
             _visits = new HashSet<TLinkAddress>();
-            _total = default;
+            _total = TLinkAddress.Zero;
         }
 
         /// <summary>
@@ -84,7 +82,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TLinkAddress Count()
         {
-            if (_comparer.Compare(_total, default) > 0 || _visits.Count > 0)
+            if (_total > TLinkAddress.Zero || _visits.Count > 0)
             {
                 return _total;
             }
@@ -95,7 +93,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         private void CountCore(TLinkAddress link)
         {
             var any = _links.Constants.Any;
-            if (_equalityComparer.Equals(_links.Count(any, link), default))
+            if ((_links.Count(any, link) == TLinkAddress.Zero))
             {
                 CountSequenceSymbolFrequency(link);
             }

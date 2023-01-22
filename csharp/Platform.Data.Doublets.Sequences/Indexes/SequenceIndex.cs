@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -13,10 +14,8 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="ISequenceIndex{TLinkAddress}"/>
-    public class SequenceIndex<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceIndex<TLinkAddress>
+    public class SequenceIndex<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceIndex<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
-
         /// <summary>
         /// <para>
         /// Initializes a new <see cref="SequenceIndex"/> instance.
@@ -49,7 +48,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         {
             var indexed = true;
             var i = sequence.Count;
-            while (--i >= 1 && (indexed = !_equalityComparer.Equals(_links.SearchOrDefault(sequence[i - 1], sequence[i]), default))) { }
+            while (--i >= 1 && (indexed = (_links.SearchOrDefault(sequence[i - 1], sequence[i]) != TLinkAddress.Zero))) { }
             for (; i >= 1; i--)
             {
                 _links.GetOrCreate(sequence[i - 1], sequence[i]);
@@ -76,7 +75,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
         {
             var indexed = true;
             var i = sequence.Count;
-            while (--i >= 1 && (indexed = !_equalityComparer.Equals(_links.SearchOrDefault(sequence[i - 1], sequence[i]), default))) { }
+            while (--i >= 1 && (indexed = (_links.SearchOrDefault(sequence[i - 1], sequence[i]) != TLinkAddress.Zero))) { }
             return indexed;
         }
     }

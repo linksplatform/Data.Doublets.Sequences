@@ -18,10 +18,8 @@ using Platform.Unsafe;
 
 namespace Platform.Data.Doublets.Sequences.Numbers.Byte;
 
-public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, IList<byte>> where TLinkAddress : struct
+public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, IList<byte>> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
 {
-    public static readonly EqualityComparer<TLinkAddress> EqualityComparer = EqualityComparer<TLinkAddress>.Default;
-
     public static readonly TLinkAddress MaximumValue = NumericType<TLinkAddress>.MaxValue;
 
     public static readonly TLinkAddress BitMask = Bit.ShiftRight(MaximumValue, 1);
@@ -38,8 +36,6 @@ public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBas
     public readonly IConverter<TLinkAddress, string> UnicodeSequenceToStringConverteer;
 
     public readonly BalancedVariantConverter<TLinkAddress> BalancedVariantConverter;
-    public static readonly UncheckedConverter<TLinkAddress, byte> TLinkAddressToByteConverter = UncheckedConverter<TLinkAddress, byte>.Default;
-    public static readonly int BytesInRawNumberCount = BitsSize / 8;
 
     public readonly TLinkAddress Type;
 
@@ -50,30 +46,27 @@ public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBas
         BalancedVariantConverter = new BalancedVariantConverter<TLinkAddress>(links);
         StringToUnicodeSequenceConverteer = stringToUnicodeSequenceConverter;
         UnicodeSequenceToStringConverteer = unicodeSequenceToStringConverteer;
-        TLinkAddress Zero = default;
-        Type = Arithmetic.Increment(Zero);
+        Type = Arithmetic.Increment(TLinkAddress.Zero);
     }
 
     private bool IsEmptyArray(TLinkAddress array)
     {
-        TLinkAddress zero = default;
-        var type = zero.Increment();
+        var type = TLinkAddress.One;
         var emptyArrayTypeUnicodeSequence = StringToUnicodeSequenceConverteer.Convert("EmptyArrayType");
         var emptyArrayType = _links.SearchOrDefault(type, emptyArrayTypeUnicodeSequence);
-        return EqualityComparer.Equals(emptyArrayType, array);
+        return emptyArrayType == array;
     }
     
     private void EnsureIsByteArrayLength(TLinkAddress byteArrayLengthAddress)
     {
         var source = _links.GetSource(byteArrayLengthAddress);
-        TLinkAddress zero = default;
-        var type = Arithmetic.Increment(zero);
+        var type = Arithmetic.Increment(TLinkAddress.Zero);
         var byteArrayLengthType = _links.SearchOrDefault(type, StringToUnicodeSequenceConverteer.Convert("ByteArrayLengthType"));
-        if (EqualityComparer.Equals(byteArrayLengthType, default))
+        if (byteArrayLengthType == TLinkAddress.Zero)
         {
             throw new Exception("Could not find ByteArrayLengthType");
         }
-        if (!EqualityComparer.Equals(source, byteArrayLengthType))
+        if (source != byteArrayLengthType)
         {
             throw new Exception("Source must be ByteArrayLengthType");
         }
@@ -93,12 +86,12 @@ public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBas
     private void EnsureIsByteArray(TLinkAddress possibleByteArray)
     {
         var byteArrayType = Links.SearchOrDefault(Type, StringToUnicodeSequenceConverteer.Convert("ByteArrayType"));
-        if(EqualityComparer.Equals(byteArrayType, default))
+        if(byteArrayType == TLinkAddress.Zero)
         {
             throw new Exception("ByteArrayType not found in the storage.");
         }
         var possibleByteArrayType = Links.GetSource(possibleByteArray);
-        if (!EqualityComparer.Equals(possibleByteArrayType, byteArrayType))
+        if (possibleByteArrayType != byteArrayType)
         {
             throw new ArgumentException($"{possibleByteArray} is not a byte array.");
         }
@@ -116,7 +109,7 @@ public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBas
 
     public IList<byte> Convert(TLinkAddress source)
     {
-        return new RightSequenceWalker<TLinkAddress>(Links, new DefaultStack<TLinkAddress>()).Walk(source).Select(address => NumberToAddressConverter.Convert(address)).Select(address => TLinkAddressToByteConverter.Convert(address)).ToList();
+        return new RightSequenceWalker<TLinkAddress>(Links, new DefaultStack<TLinkAddress>()).Walk(source).Select(address => NumberToAddressConverter.Convert(address)).Select(address => byte.CreateTruncating(address)).ToList();
         // Console.WriteLine("RawSequenceToByteListConverter.Convert");
         // if (IsEmptyArray(source))
         // {
@@ -165,7 +158,7 @@ public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBas
 
     private static byte GetByteWithNotSavedBitsAtEnd(TLinkAddress currentRawNumber, int nonSavedBits)
     {
-        var @byte = TLinkAddressToByteConverter.Convert(currentRawNumber);
+        var @byte = byte.CreateTruncating(currentRawNumber);
         @byte = Bit.ShiftLeft(@byte, 8 - nonSavedBits);
         return @byte;
     }

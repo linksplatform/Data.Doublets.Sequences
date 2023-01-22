@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Numbers;
@@ -15,11 +16,8 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// <para></para>
     /// </summary>
     /// <seealso cref="ICounter{TLinkAddress}"/>
-    public class SequenceSymbolFrequencyOneOffCounter<TLinkAddress> : ICounter<TLinkAddress>
+    public class SequenceSymbolFrequencyOneOffCounter<TLinkAddress> : ICounter<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
-        private static readonly Comparer<TLinkAddress> _comparer = Comparer<TLinkAddress>.Default;
-
         /// <summary>
         /// <para>
         /// The links.
@@ -73,7 +71,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
             _links = links;
             _sequenceLink = sequenceLink;
             _symbol = symbol;
-            _total = default;
+            _total = TLinkAddress.Zero;
         }
 
         /// <summary>
@@ -89,7 +87,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual TLinkAddress Count()
         {
-            if (_comparer.Compare(_total, default) > 0)
+            if (_total > TLinkAddress.Zero)
             {
                 return _total;
             }
@@ -97,11 +95,11 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
             return _total;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsElement(TLinkAddress x) => _equalityComparer.Equals(x, _symbol) || _links.IsPartialPoint(x); // TODO: Use SequenceElementCreteriaMatcher instead of IsPartialPoint
+        private bool IsElement(TLinkAddress x) => x == _symbol || _links.IsPartialPoint(x); // TODO: Use SequenceElementCreteriaMatcher instead of IsPartialPoint
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool VisitElement(TLinkAddress element)
         {
-            if (_equalityComparer.Equals(element, _symbol))
+            if (element == _symbol)
             {
                 _total = Arithmetic.Increment(_total);
             }

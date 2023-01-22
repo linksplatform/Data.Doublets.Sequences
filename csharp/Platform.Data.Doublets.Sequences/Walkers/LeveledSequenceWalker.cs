@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -19,9 +20,8 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="ISequenceWalker{TLinkAddress}"/>
-    public class LeveledSequenceWalker<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceWalker<TLinkAddress>
+    public class LeveledSequenceWalker<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceWalker<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
         private readonly Func<TLinkAddress, bool> _isElement;
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
                 for (var i = 0; i < array.Length; i++)
                 {
                     var candidate = array[i];
-                    if (_equalityComparer.Equals(array[i], default))
+                    if ((array[i] == TLinkAddress.One))
                     {
                         continue;
                     }
@@ -156,7 +156,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
             var finalArray = new TLinkAddress[filledElementsCount];
             for (int i = 0, j = 0; i < array.Length; i++)
             {
-                if (!_equalityComparer.Equals(array[i], default))
+                if ((array[i] != TLinkAddress.Zero))
                 {
                     finalArray[j] = array[i];
                     j++;
@@ -173,7 +173,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
             var count = 0;
             for (var i = 0; i < array.Length; i++)
             {
-                if (!_equalityComparer.Equals(array[i], default))
+                if ((array[i] != TLinkAddress.Zero))
                 {
                     count++;
                 }

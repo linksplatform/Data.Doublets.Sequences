@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Reflection;
 using Platform.Converters;
@@ -16,11 +17,8 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{TLinkAddress}"/>
-    public class UnaryNumberToAddressOrOperationConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress>
+    public class UnaryNumberToAddressOrOperationConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
-        private static readonly TLinkAddress _zero = default;
-        private static readonly TLinkAddress _one = Arithmetic.Increment(_zero);
         private readonly IDictionary<TLinkAddress, int> _unaryNumberPowerOf2Indicies;
 
         /// <summary>
@@ -61,7 +59,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
             var nullConstant = links.Constants.Null;
             var source = sourceNumber;
             var target = nullConstant;
-            if (!_equalityComparer.Equals(source, nullConstant))
+            if ((source != nullConstant))
             {
                 while (true)
                 {
@@ -91,6 +89,6 @@ namespace Platform.Data.Doublets.Numbers.Unary
             return unaryNumberPowerOf2Indicies;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SetBit(ref TLinkAddress target, int powerOf2Index) => target = Bit.Or(target, Bit.ShiftLeft(_one, powerOf2Index));
+        private static void SetBit(ref TLinkAddress target, int powerOf2Index) => target = Bit.Or(target, Bit.ShiftLeft(TLinkAddress.One, powerOf2Index));
     }
 }

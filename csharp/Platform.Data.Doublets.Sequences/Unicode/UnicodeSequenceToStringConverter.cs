@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 using Platform.Converters;
@@ -19,7 +20,7 @@ namespace Platform.Data.Doublets.Unicode
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{TLinkAddress, string}"/>
-    public class UnicodeSequenceToStringConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress, string>
+    public class UnicodeSequenceToStringConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress, string> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly ICriterionMatcher<TLinkAddress> _unicodeSequenceCriterionMatcher;
         private readonly ISequenceWalker<TLinkAddress> _sequenceWalker;
@@ -86,7 +87,7 @@ namespace Platform.Data.Doublets.Unicode
             {
                 throw new ArgumentOutOfRangeException(nameof(source), source, "Specified link is not a unicode sequence.");
             }
-            if(EqualityComparer<TLinkAddress>.Default.Equals(_unicodeSequenceMarker, source))
+            if((_unicodeSequenceMarker == source))
             {
                 return String.Empty;
             }

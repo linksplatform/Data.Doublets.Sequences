@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -12,7 +13,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
     /// <para></para>
     /// </summary>
     /// <seealso cref="LinksListToSequenceConverterBase{TLinkAddress}"/>
-    public class BalancedVariantConverter<TLinkAddress> : LinksListToSequenceConverterBase<TLinkAddress>
+    public class BalancedVariantConverter<TLinkAddress> : LinksListToSequenceConverterBase<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         /// <summary>
         /// <para>
@@ -47,7 +48,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
             var length = sequence.Count;
             if (length < 1)
             {
-                return default;
+                return TLinkAddress.Zero;
             }
             if (length == 1)
             {

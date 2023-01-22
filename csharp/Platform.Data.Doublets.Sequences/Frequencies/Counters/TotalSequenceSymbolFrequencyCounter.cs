@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Interfaces;
 
@@ -12,7 +13,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
     /// <para></para>
     /// </summary>
     /// <seealso cref="ICounter{TLinkAddress, TLinkAddress}"/>
-    public class TotalSequenceSymbolFrequencyCounter<TLinkAddress> : ICounter<TLinkAddress, TLinkAddress>
+    public class TotalSequenceSymbolFrequencyCounter<TLinkAddress> : ICounter<TLinkAddress, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly ILinks<TLinkAddress> _links;
 

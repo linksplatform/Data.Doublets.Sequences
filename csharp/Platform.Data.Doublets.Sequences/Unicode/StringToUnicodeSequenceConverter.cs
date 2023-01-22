@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Converters;
 using Platform.Data.Doublets.Sequences.Indexes;
@@ -15,7 +16,7 @@ namespace Platform.Data.Doublets.Unicode
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{string, TLinkAddress}"/>
-    public class StringToUnicodeSequenceConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<string, TLinkAddress>
+    public class StringToUnicodeSequenceConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<string, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly IConverter<string, IList<TLinkAddress>?> _stringToUnicodeSymbolListConverter;
         private readonly IConverter<IList<TLinkAddress>, TLinkAddress> _unicodeSymbolListToSequenceConverter;

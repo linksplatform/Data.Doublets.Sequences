@@ -14,8 +14,7 @@
 //                 const int N = 10;
 //                 var links = scope.Links;
 //                 var meaningRoot = links.CreatePoint();
-//                 var one = links.CreateAndUpdate(meaningRoot, links.Constants.Itself);
-//                 var powerOf2ToUnaryNumberConverter = new PowerOf2ToUnaryNumberConverter<ulong>(links, one);
+//                 var powerOf2ToUnaryNumberConverter = new PowerOf2ToUnaryNumberConverter<ulong>(links, TLinkAddress.One);
 //                 var toUnaryNumberConverter = new AddressToUnaryNumberConverter<ulong>(links, powerOf2ToUnaryNumberConverter);
 //                 var random = new System.Random(0);
 //                 ulong[] numbers = new ulong[N];
@@ -26,7 +25,7 @@
 //                     unaryNumbers[i] = toUnaryNumberConverter.Convert(numbers[i]);
 //                 }
 //                 var fromUnaryNumberConverterUsingOrOperation = new UnaryNumberToAddressOrOperationConverter<ulong>(links, powerOf2ToUnaryNumberConverter);
-//                 var fromUnaryNumberConverterUsingAddOperation = new UnaryNumberToAddressAddOperationConverter<ulong>(links, one);
+//                 var fromUnaryNumberConverterUsingAddOperation = new UnaryNumberToAddressAddOperationConverter<ulong>(links, TLinkAddress.One);
 //                 for (int i = 0; i < N; i++)
 //                 {
 //                     Assert.Equal(numbers[i], fromUnaryNumberConverterUsingOrOperation.Convert(unaryNumbers[i]));

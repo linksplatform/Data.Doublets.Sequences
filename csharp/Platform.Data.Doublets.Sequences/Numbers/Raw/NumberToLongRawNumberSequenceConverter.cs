@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Converters;
 using Platform.Numbers;
@@ -17,14 +18,15 @@ namespace Platform.Data.Doublets.Numbers.Raw
     /// </summary>
     /// <seealso cref="LinksDecoratorBase{TTarget}"/>
     /// <seealso cref="IConverter{TSource, TTarget}"/>
-    public class NumberToLongRawNumberSequenceConverter<TSource, TTarget> : LinksDecoratorBase<TTarget>, IConverter<TSource, TTarget>
+    public class NumberToLongRawNumberSequenceConverter<TSource, TTarget> : LinksDecoratorBase<TTarget>, IConverter<TSource, TTarget> 
+        where TSource : struct, IUnsignedNumber<TSource>, IComparisonOperators<TSource, TSource, bool>
+        where TTarget : struct, IUnsignedNumber<TTarget>, IComparisonOperators<TTarget, TTarget, bool>
     {
         private static readonly Comparer<TSource> _comparer = Comparer<TSource>.Default;
         private static readonly TSource _maximumValue = NumericType<TSource>.MaxValue;
         private static readonly int _bitsPerRawNumber = NumericType<TTarget>.BitsSize - 1;
         private static readonly TSource _bitMask = Bit.ShiftRight(_maximumValue, NumericType<TTarget>.BitsSize + 1);
-        private static readonly TSource _maximumConvertableAddress = CheckedConverter<TTarget, TSource>.Default.Convert(Arithmetic.Decrement(Hybrid<TTarget>.ExternalZero));
-        private static readonly UncheckedConverter<TSource, TTarget> _sourceToTargetConverter = UncheckedConverter<TSource, TTarget>.Default;
+        private static readonly TSource _maximumConvertableAddress = TSource.CreateChecked(Arithmetic.Decrement(Hybrid<TTarget>.ExternalZero));
         private readonly IConverter<TTarget> _addressToNumberConverter;
 
         /// <summary>
@@ -61,15 +63,15 @@ namespace Platform.Data.Doublets.Numbers.Raw
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TTarget Convert(TSource source)
         {
-            if (_comparer.Compare(source, _maximumConvertableAddress) > 0)
+            if (source > _maximumConvertableAddress)
             {
                 var numberPart = Bit.And(source, _bitMask);
-                var convertedNumber = _addressToNumberConverter.Convert(_sourceToTargetConverter.Convert(numberPart));
+                var convertedNumber = _addressToNumberConverter.Convert(TTarget.CreateTruncating(numberPart));
                 return Links.GetOrCreate(convertedNumber, Convert(Bit.ShiftRight(source, _bitsPerRawNumber)));
             }
             else
             {
-                return _addressToNumberConverter.Convert(_sourceToTargetConverter.Convert(source));
+                return _addressToNumberConverter.Convert(TTarget.CreateTruncating(source));
             }
         }
     }

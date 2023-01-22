@@ -40,9 +40,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
             var storageMemory = new FileMappedResizableDirectMemory(storageFileName);
             Storage = new UnitedMemoryLinks<TLinkAddress>(storageMemory, UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
             _listToSequenceConverter = new BalancedVariantConverter<TLinkAddress>(Storage);
-            TLinkAddress zero = default;
-            TLinkAddress one = Arithmetic.Increment(zero);
-            var type = Storage.GetOrCreate(one, one);
+            var type = Storage.GetOrCreate(TLinkAddress.CreateTruncating(1), TLinkAddress.CreateTruncating(1));
             var typeIndex = type;
             var unicodeSymbolType = Storage.GetOrCreate(type, Arithmetic.Increment(ref typeIndex));
             var unicodeSequenceType = Storage.GetOrCreate(type, Arithmetic.Increment(ref typeIndex));
@@ -129,19 +127,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
         public void Test(byte[] byteArray)
         {
             var byteListRawSequence = _bytesToRawNumberSequenceConverter.Convert(byteArray);
-            Console.WriteLine();
             var byteListFromConverter = _rawNumberSequenceToBytesConverter.Convert(byteListRawSequence);
-            Console.WriteLine("Original");
-            foreach (var b in byteArray)
-            {
-                Console.WriteLine(TestExtensions.PrettifyBinary<byte>(Convert.ToString(b, 2)));
-            }
-            Console.WriteLine();
-            Console.WriteLine("From converter:");
-            foreach (var b in byteListFromConverter)
-            {
-                Console.WriteLine(TestExtensions.PrettifyBinary<byte>(Convert.ToString(b, 2)));
-            }
             Assert.Equal(byteArray, byteListFromConverter.ToArray());                
         }
         

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Platform.Interfaces;
 using Platform.Collections.Stacks;
 using Platform.Converters;
@@ -21,10 +22,8 @@ namespace Platform.Data.Doublets.Sequences
     /// </para>
     /// <para></para>
     /// </summary>
-    public class SequencesOptions<TLinkAddress> // TODO: To use type parameter <TLinkAddress> the ILinks<TLinkAddress> must contain GetConstants function.
+    public class SequencesOptions<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>// TODO: To use type parameter <TLinkAddress> the ILinks<TLinkAddress> must contain GetConstants function. where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-        private static readonly EqualityComparer<TLinkAddress> _equalityComparer = EqualityComparer<TLinkAddress>.Default;
-
         /// <summary>
         /// <para>
         /// Gets or sets the sequence marker link value.
@@ -245,7 +244,7 @@ namespace Platform.Data.Doublets.Sequences
         {
             if (UseSequenceMarker)
             {
-                if (_equalityComparer.Equals(SequenceMarkerLink, links.Constants.Null))
+                if (SequenceMarkerLink == links.Constants.Null)
                 {
                     SequenceMarkerLink = links.CreatePoint();
                 }
@@ -254,7 +253,7 @@ namespace Platform.Data.Doublets.Sequences
                     if (!links.Exists(SequenceMarkerLink))
                     {
                         var link = links.CreatePoint();
-                        if (!_equalityComparer.Equals(link, SequenceMarkerLink))
+                        if ((link != SequenceMarkerLink))
                         {
                             throw new InvalidOperationException("Cannot recreate sequence marker link.");
                         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -12,7 +13,7 @@ namespace Platform.Data.Doublets.Sequences.Indexes
     /// <para></para>
     /// </summary>
     /// <seealso cref="ISequenceIndex{TLinkAddress}"/>
-    public class Unindex<TLinkAddress> : ISequenceIndex<TLinkAddress>
+    public class Unindex<TLinkAddress> : ISequenceIndex<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         /// <summary>
         /// <para>

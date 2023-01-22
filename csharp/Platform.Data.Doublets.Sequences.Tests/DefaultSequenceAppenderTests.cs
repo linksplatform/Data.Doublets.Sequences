@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using Platform.Collections.Stacks;
 using Platform.Data.Doublets.Memory;
 using Platform.Data.Doublets.Memory.United.Generic;
@@ -30,7 +31,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
             return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
         }
         
-        public class ValueCriterionMatcher<TLinkAddress> : ICriterionMatcher<TLinkAddress>
+        public class ValueCriterionMatcher<TLinkAddress> : ICriterionMatcher<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
         {
             public readonly ILinks<TLinkAddress> Links;
             public readonly TLinkAddress Marker;
@@ -40,15 +41,14 @@ namespace Platform.Data.Doublets.Sequences.Tests
                 Marker = marker;
             }
 
-            public bool IsMatched(TLinkAddress link) => EqualityComparer<TLinkAddress>.Default.Equals(Links.GetSource(link), Marker);
+            public bool IsMatched(TLinkAddress link) => (Links.GetSource(link) == Marker);
         }
 
         [Fact]
         public void AppendArrayBug()
         {
             ILinks<TLinkAddress> links = CreateLinks();
-            TLinkAddress zero = default;
-            var markerIndex = Arithmetic.Increment(zero);
+            var markerIndex = Arithmetic.Increment(TLinkAddress.CreateTruncating(0));
             var meaningRoot = links.GetOrCreate(markerIndex, markerIndex);
             var sequence = links.Create();
             sequence = links.Update(sequence, meaningRoot, sequence);

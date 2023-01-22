@@ -1,3 +1,4 @@
+using System.Numerics;
 using Platform.Converters;
 using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.Numbers.Raw;
@@ -14,8 +15,7 @@ namespace Platform.Data.Doublets.Numbers.Rational
     /// </summary>
     /// <seealso cref="LinksDecoratorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{TLinkAddress, decimal}"/>
-    public class RationalToDecimalConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, decimal>
-        where TLinkAddress: struct
+    public class RationalToDecimalConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, decimal> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         /// <summary>
         /// <para>
