@@ -68,59 +68,6 @@ public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBas
 
     public TLinkAddress Convert(IList<byte> source)
     {
-        TLinkAddress buffer = default;
-        var bufferBitsCount = 0;
-        var byteArray = source.ToArray();
-        var rawNumbers = new List<TLinkAddress>();
-        
-        var rawNumber = byteArray.ToStructure<TLinkAddress>();
-        Console.WriteLine("Raw number: " + rawNumber);
-        buffer = rawNumber;
-        buffer = Bit.And(buffer, BitMask);
-        buffer = AddressToNumberConverter.Convert(buffer);
-        rawNumbers.Add(buffer);
-        buffer = default;
-        buffer = Bit.ShiftRight(rawNumber, BitsSize - 1);
-        ++bufferBitsCount;
-        byteArray = byteArray.Skip(BitsSize / 8).ToArray();
-        while (byteArray.Length != 0)
-        {
-            if (bufferBitsCount == 7)
-            {
-                buffer = AddressToNumberConverter.Convert(buffer);
-                rawNumbers.Add(buffer);
-                buffer = default;
-                bufferBitsCount = 0;
-            }
-            rawNumber = byteArray.ToStructure<TLinkAddress>();
-            buffer = Bit.Or(buffer, Bit.ShiftLeft(rawNumber, bufferBitsCount));
-            buffer = Bit.And(buffer, BitMask);
-            buffer = AddressToNumberConverter.Convert(buffer);
-            rawNumbers.Add(buffer);
-            buffer = default;
-            buffer = Bit.ShiftRight(rawNumber, BitsSize - (bufferBitsCount + 1));
-            ++bufferBitsCount;
-            byteArray = byteArray.Skip(BitsSize / 8).ToArray();
-        }
-        {
-            for (var i = 0; i < rawNumbers.Count; i++)
-            {
-                var excessBitsCount = i;
-                if (excessBitsCount == 7)
-                {
-                    Console.WriteLine("Raw number: " + buffer);
-                    buffer = default;
-                    excessBitsCount = 0;
-                }
-                rawNumber = Bit.ShiftRight(rawNumbers[i], excessBitsCount);
-                buffer = Bit.ShiftRight(Bit.ShiftLeft(rawNumbers[i + 1], BitsSize - excessBitsCount + 1), BitsSize - excessBitsCount + 1);
-                rawNumber = Bit.Or(rawNumber, buffer);
-                rawNumber = NumberToAddressConverter.Convert(rawNumber);
-                Console.WriteLine("Raw number: " + rawNumber);
-
-            }
-        }
-        
         return ListToSequenceConverter.Convert(source.Select(b => AddressToNumberConverter.Convert(ByteToTLinkAddressConverter.Convert(b))).ToList());
     }
 }
