@@ -4,7 +4,7 @@
     <Description>LinksPlatform's Platform.Data.Doublets.Sequences Class Library</Description>
     <Copyright>konard, FreePhoenix888</Copyright>
     <AssemblyTitle>Platform.Data.Doublets.Sequences</AssemblyTitle>
-    <VersionPrefix>0.1.2</VersionPrefix>
+    <VersionPrefix>0.2.0</VersionPrefix>
     <Authors>konard, FreePhoenix888</Authors>
     <TargetFramework>net7</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -24,13 +24,10 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>Byte converters are added.</PackageReleaseNotes>
+    <PackageReleaseNotes>Target framework is changed to net7.
+Generic math is used therefore generic constraints are changed.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith('net4')) AND '$(MSBuildRuntimeType)' == 'Core' AND '$(OS)' != 'Windows_NT'">
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="All" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
