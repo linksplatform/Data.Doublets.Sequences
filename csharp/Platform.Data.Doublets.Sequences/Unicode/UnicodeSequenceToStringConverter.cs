@@ -1,16 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using Platform.Interfaces;
-using Platform.Converters;
-using Platform.Data.Doublets.Sequences.Walkers;
 using System.Text;
+using Platform.Converters;
 using Platform.Data.Doublets.Sequences.CriterionMatchers;
+using Platform.Data.Doublets.Sequences.Walkers;
+using Platform.Interfaces;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Platform.Data.Doublets.Unicode
+namespace Platform.Data.Doublets.Sequences.Unicode
 {
     /// <summary>
     /// <para>

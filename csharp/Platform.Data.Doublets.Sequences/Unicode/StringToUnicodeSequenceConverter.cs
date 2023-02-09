@@ -6,7 +6,7 @@ using Platform.Data.Doublets.Sequences.Indexes;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Platform.Data.Doublets.Unicode
+namespace Platform.Data.Doublets.Sequences.Unicode
 {
     /// <summary>
     /// <para>

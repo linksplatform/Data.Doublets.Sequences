@@ -1,8 +1,8 @@
 using Platform.Data.Doublets.Memory;
 using Platform.Data.Doublets.Memory.United.Generic;
-using Platform.Data.Doublets.Numbers.Rational;
-using Platform.Data.Doublets.Numbers.Raw;
 using Platform.Data.Doublets.Sequences.Converters;
+using Platform.Data.Doublets.Sequences.Numbers.Rational;
+using Platform.Data.Doublets.Sequences.Numbers.Raw;
 using Platform.Data.Numbers.Raw;
 using Platform.Memory;
 using Xunit;

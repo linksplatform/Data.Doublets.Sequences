@@ -1,13 +1,9 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Platform.Singletons;
-using Platform.Data.Doublets.Unicode;
+using Platform.Data.Doublets.Sequences.Unicode;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Platform.Data.Doublets
+namespace Platform.Data.Doublets.Sequences
 {
     /// <summary>
     /// <para>

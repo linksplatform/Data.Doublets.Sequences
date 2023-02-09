@@ -12,7 +12,7 @@ using Platform.Converters;
 using Platform.Data.Doublets.CriterionMatchers;
 using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.Sequences.Converters;
-using Platform.Data.Doublets.Unicode;
+using Platform.Data.Doublets.Sequences.Unicode;
 using Platform.Numbers;
 using Platform.Reflection;
 using Platform.Unsafe;

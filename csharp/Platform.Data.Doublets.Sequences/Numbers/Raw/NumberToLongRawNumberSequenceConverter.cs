@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Converters;
-using Platform.Numbers;
-using Platform.Reflection;
 using Platform.Data.Doublets.Decorators;
+using Platform.Reflection;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Platform.Data.Doublets.Numbers.Raw
+namespace Platform.Data.Doublets.Sequences.Numbers.Raw
 {
     /// <summary>
     /// <para>

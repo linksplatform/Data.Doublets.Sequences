@@ -1,12 +1,12 @@
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using Platform.Interfaces;
 using Platform.Converters;
+using Platform.Interfaces;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Platform.Data.Doublets.Unicode
+namespace Platform.Data.Doublets.Sequences.Unicode
 {
     /// <summary>
     /// <para>

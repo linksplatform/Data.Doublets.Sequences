@@ -1,12 +1,12 @@
+using System.Globalization;
 using System.Numerics;
 using Platform.Converters;
 using Platform.Data.Doublets.Decorators;
-using System.Globalization;
-using Platform.Data.Doublets.Numbers.Raw;
+using Platform.Data.Doublets.Sequences.Numbers.Raw;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Platform.Data.Doublets.Numbers.Rational
+namespace Platform.Data.Doublets.Sequences.Numbers.Rational
 {
     /// <summary>
     /// <para>
@@ -51,7 +51,7 @@ namespace Platform.Data.Doublets.Numbers.Rational
         /// </para>
         /// <para></para>
         /// </summary>
-        /// <param name="@decimal">
+        /// <param name="decimal">
         /// <para>The decimal.</para>
         /// <para></para>
         /// </param>

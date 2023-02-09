@@ -1,13 +1,11 @@
-using System.Collections.Generic;
 using System.Numerics;
-using Platform.Reflection;
-using Platform.Converters;
-using Platform.Numbers;
 using System.Runtime.CompilerServices;
+using Platform.Converters;
+using Platform.Reflection;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Platform.Data.Doublets.Numbers.Unary
+namespace Platform.Data.Doublets.Sequences.Numbers.Unary
 {
     /// <summary>
     /// <para>

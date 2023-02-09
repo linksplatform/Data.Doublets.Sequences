@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Numerics;
 using Platform.Collections.Stacks;
 using Platform.Converters;
@@ -10,7 +9,7 @@ using Platform.Unsafe;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace Platform.Data.Doublets.Numbers.Raw
+namespace Platform.Data.Doublets.Sequences.Numbers.Raw
 {
     /// <summary>
     /// <para>
