@@ -20,7 +20,7 @@ namespace Platform.Data.Doublets.Sequences.Numbers.Raw
     /// <seealso cref="IConverter{TSource, TTarget}"/>
     public class LongRawNumberSequenceToNumberConverter<TSource, TTarget> : LinksDecoratorBase<TSource>, IConverter<TSource, TTarget>
         where TSource : struct, IUnsignedNumber<TSource>, IComparisonOperators<TSource, TSource, bool>, IBitwiseOperators<TSource, TSource, TSource>, IShiftOperators<TSource, int, TSource>
-        where TTarget : struct, IUnsignedNumber<TTarget>, IComparisonOperators<TTarget, TTarget, bool>, IBitwiseOperators<TTarget, TTarget, TTarget>, IShiftOperators<TTarget, int, TTarget>
+        where TTarget : struct, INumber<TTarget>, IComparisonOperators<TTarget, TTarget, bool>, IBitwiseOperators<TTarget, TTarget, TTarget>, IShiftOperators<TTarget, int, TTarget>
     {
         private static readonly int _bitsPerRawNumber = NumericType<TSource>.BitsSize - 1;
         private static readonly UncheckedConverter<TSource, TTarget> _sourceToTargetConverter = UncheckedConverter<TSource, TTarget>.Default;
