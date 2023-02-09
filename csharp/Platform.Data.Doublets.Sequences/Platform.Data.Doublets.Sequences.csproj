@@ -4,7 +4,7 @@
     <Description>LinksPlatform's Platform.Data.Doublets.Sequences Class Library</Description>
     <Copyright>konard, FreePhoenix888</Copyright>
     <AssemblyTitle>Platform.Data.Doublets.Sequences</AssemblyTitle>
-    <VersionPrefix>0.2.0</VersionPrefix>
+    <VersionPrefix>0.3.0</VersionPrefix>
     <Authors>konard, FreePhoenix888</Authors>
     <TargetFramework>net7</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -24,9 +24,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>Target framework is changed to net7.
-Generic math is used therefore generic constraints are changed.
-Platform.Data.Doublets dependency is updated to 0.17.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Namespaces are adjusted.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
