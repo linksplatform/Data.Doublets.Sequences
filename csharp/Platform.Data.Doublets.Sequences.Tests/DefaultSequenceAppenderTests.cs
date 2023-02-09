@@ -23,9 +23,9 @@ namespace Platform.Data.Doublets.Sequences.Tests
         {
             _output = output;
         }
-        public static ILinks<TLinkAddress> CreateLinks() => CreateLinks<TLinkAddress>(new IO.TemporaryFile());
+        public static ILinks<TLinkAddress> CreateLinks() => CreateLinks(new IO.TemporaryFile());
 
-        public static ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDBFilename)
+        public static ILinks<TLinkAddress> CreateLinks(string dataDBFilename)
         {
             var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
             return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);
@@ -48,7 +48,7 @@ namespace Platform.Data.Doublets.Sequences.Tests
         public void AppendArrayBug()
         {
             ILinks<TLinkAddress> links = CreateLinks();
-            var markerIndex = Arithmetic.Increment(TLinkAddress.CreateTruncating(0));
+            var markerIndex = TLinkAddress.CreateTruncating(1);
             var meaningRoot = links.GetOrCreate(markerIndex, markerIndex);
             var sequence = links.Create();
             sequence = links.Update(sequence, meaningRoot, sequence);

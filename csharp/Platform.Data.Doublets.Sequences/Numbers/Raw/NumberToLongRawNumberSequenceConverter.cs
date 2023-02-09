@@ -19,14 +19,14 @@ namespace Platform.Data.Doublets.Numbers.Raw
     /// <seealso cref="LinksDecoratorBase{TTarget}"/>
     /// <seealso cref="IConverter{TSource, TTarget}"/>
     public class NumberToLongRawNumberSequenceConverter<TSource, TTarget> : LinksDecoratorBase<TTarget>, IConverter<TSource, TTarget> 
-        where TSource : struct, IUnsignedNumber<TSource>, IComparisonOperators<TSource, TSource, bool>
-        where TTarget : struct, IUnsignedNumber<TTarget>, IComparisonOperators<TTarget, TTarget, bool>
+        where TSource : struct, IUnsignedNumber<TSource>, IComparisonOperators<TSource, TSource, bool>, IShiftOperators<TSource, int, TSource>, IBitwiseOperators<TSource, TSource, TSource>
+        where TTarget : struct, IUnsignedNumber<TTarget>, IComparisonOperators<TTarget, TTarget, bool>, IShiftOperators<TTarget, int, TTarget>, IBitwiseOperators<TSource, TSource, TSource>
     {
         private static readonly Comparer<TSource> _comparer = Comparer<TSource>.Default;
         private static readonly TSource _maximumValue = NumericType<TSource>.MaxValue;
         private static readonly int _bitsPerRawNumber = NumericType<TTarget>.BitsSize - 1;
-        private static readonly TSource _bitMask = Bit.ShiftRight(_maximumValue, NumericType<TTarget>.BitsSize + 1);
-        private static readonly TSource _maximumConvertableAddress = TSource.CreateChecked(Arithmetic.Decrement(Hybrid<TTarget>.ExternalZero));
+        private static readonly TSource _bitMask = (_maximumValue >> (NumericType<TTarget>.BitsSize + 1));
+        private static readonly TSource _maximumConvertableAddress = TSource.CreateChecked(Hybrid<TTarget>.ExternalZero - TTarget.One);
         private readonly IConverter<TTarget> _addressToNumberConverter;
 
         /// <summary>
@@ -65,9 +65,9 @@ namespace Platform.Data.Doublets.Numbers.Raw
         {
             if (source > _maximumConvertableAddress)
             {
-                var numberPart = Bit.And(source, _bitMask);
+                var numberPart = (source & _bitMask);
                 var convertedNumber = _addressToNumberConverter.Convert(TTarget.CreateTruncating(numberPart));
-                return Links.GetOrCreate(convertedNumber, Convert(Bit.ShiftRight(source, _bitsPerRawNumber)));
+                return Links.GetOrCreate(convertedNumber, Convert((source >> _bitsPerRawNumber)));
             }
             else
             {

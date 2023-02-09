@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Collections.Lists;
 
@@ -37,7 +38,7 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TLinkAddress Create<TLinkAddress>(this ILinks<TLinkAddress> sequences, IList<TLinkAddress[]> groupedSequence)
+        public static TLinkAddress Create<TLinkAddress>(this ILinks<TLinkAddress> sequences, IList<TLinkAddress[]> groupedSequence) where TLinkAddress: struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
         {
             var finalSequence = new TLinkAddress[groupedSequence.Count];
             for (var i = 0; i < finalSequence.Length; i++)
@@ -71,7 +72,7 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IList<TLinkAddress>? ToList<TLinkAddress>(this ILinks<TLinkAddress> sequences, TLinkAddress sequence)
+        public static IList<TLinkAddress>? ToList<TLinkAddress>(this ILinks<TLinkAddress> sequences, TLinkAddress sequence) where TLinkAddress: struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
         {
             var list = new List<TLinkAddress>();
             var filler = new ListFiller<TLinkAddress, TLinkAddress>(list, sequences.Constants.Break);

@@ -117,7 +117,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         protected virtual void CountSequenceSymbolFrequency(TLinkAddress link)
         {
             var symbolFrequencyCounter = new SequenceSymbolFrequencyOneOffCounter<TLinkAddress>(_links, link, _symbol);
-            _total = Arithmetic.Add(_total, symbolFrequencyCounter.Count());
+            _total = _total + symbolFrequencyCounter.Count();
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private TLinkAddress EachElementHandler(IList<TLinkAddress>? doublet)

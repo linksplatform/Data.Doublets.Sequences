@@ -16,7 +16,7 @@ namespace Platform.Data.Doublets.Numbers.Rational
     /// </summary>
     /// <seealso cref="LinksDecoratorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{decimal, TLinkAddress}"/>
-    public class DecimalToRationalConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<decimal, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
+    public class DecimalToRationalConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<decimal, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>, IBitwiseOperators<TLinkAddress, TLinkAddress, TLinkAddress>, IShiftOperators<TLinkAddress, int, TLinkAddress>
     {
         /// <summary>
         /// <para>

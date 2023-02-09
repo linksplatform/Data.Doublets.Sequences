@@ -101,7 +101,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         {
             if (element == _symbol)
             {
-                _total = Arithmetic.Increment(_total);
+                _total = _total + TLinkAddress.One;
             }
             return true;
         }

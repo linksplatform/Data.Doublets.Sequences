@@ -18,11 +18,11 @@ using Platform.Unsafe;
 
 namespace Platform.Data.Doublets.Sequences.Numbers.Byte;
 
-public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, IList<byte>> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
+public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<TLinkAddress, IList<byte>> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>, IShiftOperators<TLinkAddress, int, TLinkAddress>
 {
     public static readonly TLinkAddress MaximumValue = NumericType<TLinkAddress>.MaxValue;
 
-    public static readonly TLinkAddress BitMask = Bit.ShiftRight(MaximumValue, 1);
+    public static readonly TLinkAddress BitMask = (MaximumValue >> 1);
 
     public static readonly int BitsSize = NumericType<TLinkAddress>.BitsSize;
 
@@ -46,7 +46,7 @@ public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBas
         BalancedVariantConverter = new BalancedVariantConverter<TLinkAddress>(links);
         StringToUnicodeSequenceConverteer = stringToUnicodeSequenceConverter;
         UnicodeSequenceToStringConverteer = unicodeSequenceToStringConverteer;
-        Type = Arithmetic.Increment(TLinkAddress.Zero);
+        Type = TLinkAddress.Zero + TLinkAddress.One;
     }
 
     private bool IsEmptyArray(TLinkAddress array)
@@ -60,7 +60,7 @@ public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBas
     private void EnsureIsByteArrayLength(TLinkAddress byteArrayLengthAddress)
     {
         var source = _links.GetSource(byteArrayLengthAddress);
-        var type = Arithmetic.Increment(TLinkAddress.Zero);
+        var type = TLinkAddress.Zero + TLinkAddress.One;
         var byteArrayLengthType = _links.SearchOrDefault(type, StringToUnicodeSequenceConverteer.Convert("ByteArrayLengthType"));
         if (byteArrayLengthType == TLinkAddress.Zero)
         {
@@ -156,10 +156,13 @@ public class RawNumberSequenceToBytesConverter<TLinkAddress> : LinksDecoratorBas
         // return byteList;
     }
 
-    private static byte GetByteWithNotSavedBitsAtEnd(TLinkAddress currentRawNumber, int nonSavedBits)
-    {
-        var @byte = byte.CreateTruncating(currentRawNumber);
-        @byte = Bit.ShiftLeft(@byte, 8 - nonSavedBits);
-        return @byte;
-    }
+    // private static byte GetByteWithNotSavedBitsAtEnd(TLinkAddress currentRawNumber, int nonSavedBits)
+    // {
+    //     byte @byte = byte.CreateTruncating(currentRawNumber);
+    //     var a = @byte << 1;
+    //     var b = byte.CreateTruncating(1) << 1;
+    //     var c = uint.CreateTruncating(1) << 1;
+    //     @byte = (@byte << 2);
+    //     return @byte;
+    // }
 }

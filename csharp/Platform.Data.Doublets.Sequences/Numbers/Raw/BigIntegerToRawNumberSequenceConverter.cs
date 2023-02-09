@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
     /// </summary>
     /// <seealso cref="LinksDecoratorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{BigInteger, TLinkAddress}"/>
-    public class BigIntegerToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<BigInteger, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
+    public class BigIntegerToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<BigInteger, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>, IBitwiseOperators<TLinkAddress, TLinkAddress, TLinkAddress>, IShiftOperators<TLinkAddress, int, TLinkAddress>
     {
         /// <summary>
         /// <para>
@@ -34,7 +34,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
         /// </para>
         /// <para></para>
         /// </summary>
-        public static readonly TLinkAddress BitMask = Bit.ShiftRight(MaximumValue, 1);
+        public static readonly TLinkAddress BitMask = (MaximumValue >> 1);
         /// <summary>
         /// <para>
         /// The address to number converter.
@@ -92,7 +92,7 @@ namespace Platform.Data.Doublets.Numbers.Raw
             do
             {
                 var bigIntBytes = currentBigInt.ToByteArray();
-                var bigIntWithBitMask = Bit.And(bigIntBytes.ToStructure<TLinkAddress>(), BitMask);
+                var bigIntWithBitMask = (bigIntBytes.ToStructure<TLinkAddress>() & BitMask);
                 var rawNumber = AddressToNumberConverter.Convert(bigIntWithBitMask);
                 rawNumbers.Add(rawNumber);
                 currentBigInt >>= (NumericType<TLinkAddress>.BitsSize - 1);

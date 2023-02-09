@@ -13,9 +13,9 @@ namespace Platform.Data.Doublets.Sequences.Tests
 {
     public class BigIntegerConvertersTests
     {
-        public ILinks<TLinkAddress> CreateLinks() => CreateLinks<TLinkAddress>(new IO.TemporaryFile());
+        public ILinks<TLinkAddress> CreateLinks() => CreateLinks(new IO.TemporaryFile());
 
-        public ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDbFilename)
+        public ILinks<TLinkAddress> CreateLinks(string dataDbFilename)
         {
             var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
             return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDbFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);

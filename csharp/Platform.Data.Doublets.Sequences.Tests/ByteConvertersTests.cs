@@ -42,8 +42,8 @@ namespace Platform.Data.Doublets.Sequences.Tests
             _listToSequenceConverter = new BalancedVariantConverter<TLinkAddress>(Storage);
             var type = Storage.GetOrCreate(TLinkAddress.CreateTruncating(1), TLinkAddress.CreateTruncating(1));
             var typeIndex = type;
-            var unicodeSymbolType = Storage.GetOrCreate(type, Arithmetic.Increment(ref typeIndex));
-            var unicodeSequenceType = Storage.GetOrCreate(type, Arithmetic.Increment(ref typeIndex));
+            var unicodeSymbolType = Storage.GetOrCreate(type, ++typeIndex);
+            var unicodeSequenceType = Storage.GetOrCreate(type, ++typeIndex);
             BalancedVariantConverter<TLinkAddress> balancedVariantConverter = new(Storage);
             AddressToRawNumberConverter<TLinkAddress> addressToRawNumberConverter = new();
             RawNumberToAddressConverter<TLinkAddress> rawNumberToAddressConverter = new();

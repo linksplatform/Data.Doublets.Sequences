@@ -17,7 +17,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{TLinkAddress}"/>
-    public class AddressToUnaryNumberConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
+    public class AddressToUnaryNumberConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>, IBitwiseOperators<TLinkAddress, TLinkAddress, TLinkAddress>, IShiftOperators<TLinkAddress, int, TLinkAddress>
     {
         private readonly IConverter<int, TLinkAddress> _powerOf2ToUnaryNumberConverter;
 
@@ -60,13 +60,13 @@ namespace Platform.Data.Doublets.Numbers.Unary
             var target = nullConstant;
             for (var i = 0; (number !=  TLinkAddress.Zero) && i < NumericType<TLinkAddress>.BitsSize; i++)
             {
-                if ((Bit.And(number, TLinkAddress.One) == TLinkAddress.One))
+                if (((number & TLinkAddress.One) == TLinkAddress.One))
                 {
                     target = target == nullConstant
                         ? _powerOf2ToUnaryNumberConverter.Convert(i)
                         : links.GetOrCreate(_powerOf2ToUnaryNumberConverter.Convert(i), target);
                 }
-                number = Bit.ShiftRight(number, 1);
+                number = (number >> 1);
             }
             return target;
         }

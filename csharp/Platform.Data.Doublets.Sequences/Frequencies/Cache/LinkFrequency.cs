@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Numbers;
 
@@ -11,7 +12,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
     /// </para>
     /// <para></para>
     /// </summary>
-    public class LinkFrequency<TLinkAddress>
+    public class LinkFrequency<TLinkAddress> where TLinkAddress: struct, IUnsignedNumber<TLinkAddress>
     {
         /// <summary>
         /// <para>
@@ -65,7 +66,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void IncrementFrequency() => Frequency = Arithmetic<TLinkAddress>.Increment(Frequency);
+        public void IncrementFrequency() => Frequency = Frequency + TLinkAddress.One;
 
         /// <summary>
         /// <para>
@@ -74,7 +75,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
         /// <para></para>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void DecrementFrequency() => Frequency = Arithmetic<TLinkAddress>.Decrement(Frequency);
+        public void DecrementFrequency() => Frequency = Frequency - TLinkAddress.One;
 
         /// <summary>
         /// <para>

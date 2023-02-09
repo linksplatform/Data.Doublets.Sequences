@@ -55,7 +55,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Counters
         protected override void CountSequenceSymbolFrequency(TLinkAddress link)
         {
             var symbolFrequencyCounter = new MarkedSequenceSymbolFrequencyOneOffCounter<TLinkAddress>(_links, _markedSequenceMatcher, link, _symbol);
-            _total = Arithmetic.Add(_total, symbolFrequencyCounter.Count());
+            _total = _total + symbolFrequencyCounter.Count();
         }
     }
 }

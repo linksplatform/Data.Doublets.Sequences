@@ -11,9 +11,9 @@ namespace Platform.Data.Doublets.Sequences.Tests
 {
     public class Uint64LinksExtensionsTests
     {
-        public static ILinks<TLinkAddress> CreateLinks() => CreateLinks<TLinkAddress>(new Platform.IO.TemporaryFile());
+        public static ILinks<TLinkAddress> CreateLinks() => CreateLinks(new Platform.IO.TemporaryFile());
 
-        public static ILinks<TLinkAddress> CreateLinks<TLinkAddress>(string dataDBFilename)
+        public static ILinks<TLinkAddress> CreateLinks(string dataDBFilename)
         {
             var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
             return new UnitedMemoryLinks<TLinkAddress>(new FileMappedResizableDirectMemory(dataDBFilename), UnitedMemoryLinks<TLinkAddress>.DefaultLinksSizeStep, linksConstants, IndexTreeType.Default);

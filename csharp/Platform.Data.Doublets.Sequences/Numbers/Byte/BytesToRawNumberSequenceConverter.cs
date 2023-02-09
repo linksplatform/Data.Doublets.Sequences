@@ -19,11 +19,11 @@ using Platform.Unsafe;
 
 namespace Platform.Data.Doublets.Sequences.Numbers.Byte;
 
-public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<IList<byte>, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
+public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<IList<byte>, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>, IShiftOperators<TLinkAddress, int, TLinkAddress>
 {
     public static readonly TLinkAddress MaximumValue = NumericType<TLinkAddress>.MaxValue;
 
-    public static readonly TLinkAddress BitMask = Bit.ShiftRight(MaximumValue, 1);
+    public static readonly TLinkAddress BitMask = (MaximumValue >> 1);
 
     public static readonly int BitsSize = NumericType<TLinkAddress>.BitsSize;
     
@@ -54,7 +54,7 @@ public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBas
         ListToSequenceConverter = listToSequenceConverter;
         BalancedVariantConverter = new BalancedVariantConverter<TLinkAddress>(_links);
         StringToUnicodeSequenceConverter = stringToUnicodeSequenceConverter;
-        Type = Arithmetic.Increment(TLinkAddress.Zero);
+        Type = TLinkAddress.Zero + TLinkAddress.One;
         ByteArrayLengthType = _links.GetOrCreate(Type, StringToUnicodeSequenceConverter.Convert(nameof(ByteArrayLengthType)));
         ByteArrayType = _links.GetOrCreate(Type, StringToUnicodeSequenceConverter.Convert(nameof(ByteArrayType)));
         EmptyByteArraySequenceType = _links.GetOrCreate(Type, StringToUnicodeSequenceConverter.Convert(nameof(EmptyByteArraySequenceType)));

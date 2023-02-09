@@ -197,7 +197,7 @@ namespace Platform.Data.Doublets.Sequences.Frequencies.Cache
                 data = new LinkFrequency<TLinkAddress>(TLinkAddress.One, link);
                 if ((link != TLinkAddress.Zero))
                 {
-                    data.Frequency = Arithmetic.Add(data.Frequency, _frequencyCounter.Count(link));
+                    data.Frequency = data.Frequency + _frequencyCounter.Count(link);
                 }
                 _doubletsCache.Add(doublet, data);
             }

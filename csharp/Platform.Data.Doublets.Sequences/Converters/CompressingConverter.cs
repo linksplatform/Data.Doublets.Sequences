@@ -319,7 +319,7 @@ namespace Platform.Data.Doublets.Sequences.Converters
         var frequency = data.Frequency;
         var maxFrequency = _maxDoubletData.Frequency;
         //if (frequency > _minFrequencyToCompress && (maxFrequency < frequency || (maxFrequency == frequency && doublet.Source + doublet.Target < /* gives better compression string data (and gives collisions quickly) */ _maxDoublet.Source + _maxDoublet.Target))) 
-        if (frequency > _minFrequencyToCompress && (maxFrequency > frequency) || (maxFrequency == frequency && (Arithmetic.Add(doublet.Source, doublet.Target) > Arithmetic.Add(_maxDoublet.Source, _maxDoublet.Target)))) /* gives better stability and better compression on sequent data and even on rundom numbers data (but gives collisions anyway) */
+        if (frequency > _minFrequencyToCompress && (maxFrequency > frequency) || (maxFrequency == frequency && (doublet.Source + doublet.Target > _maxDoublet.Source + _maxDoublet.Target))) /* gives better stability and better compression on sequent data and even on rundom numbers data (but gives collisions anyway) */
         {
             _maxDoublet = doublet;
             _maxDoubletData = data;

@@ -58,7 +58,7 @@ namespace Platform.Data.Doublets.Sequences.HeightProviders
             while (!_elementMatcher.IsMatched(pairOrElement))
             {
                 pairOrElement = _links.GetTarget(pairOrElement);
-                height = Arithmetic.Increment(height);
+                height = height + TLinkAddress.One;
             }
             return height;
         }

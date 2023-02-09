@@ -17,7 +17,7 @@ namespace Platform.Data.Doublets.Numbers.Unary
     /// </summary>
     /// <seealso cref="LinksOperatorBase{TLinkAddress}"/>
     /// <seealso cref="IConverter{TLinkAddress}"/>
-    public class UnaryNumberToAddressOrOperationConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
+    public class UnaryNumberToAddressOrOperationConverter<TLinkAddress> : LinksOperatorBase<TLinkAddress>, IConverter<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>, IBitwiseOperators<TLinkAddress, TLinkAddress, TLinkAddress>, IShiftOperators<TLinkAddress, int, TLinkAddress>
     {
         private readonly IDictionary<TLinkAddress, int> _unaryNumberPowerOf2Indicies;
 
@@ -89,6 +89,6 @@ namespace Platform.Data.Doublets.Numbers.Unary
             return unaryNumberPowerOf2Indicies;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SetBit(ref TLinkAddress target, int powerOf2Index) => target = Bit.Or(target, Bit.ShiftLeft(TLinkAddress.One, powerOf2Index));
+        private static void SetBit(ref TLinkAddress target, int powerOf2Index) => target = (target | TLinkAddress.CreateTruncating(1 << powerOf2Index));
     }
 }

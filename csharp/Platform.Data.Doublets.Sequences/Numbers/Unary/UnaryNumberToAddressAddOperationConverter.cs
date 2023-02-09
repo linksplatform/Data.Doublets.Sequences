@@ -82,10 +82,10 @@ namespace Platform.Data.Doublets.Numbers.Unary
                 while (!_unaryToUInt64.TryGetValue(target, out lastValue))
                 {
                     source = links.GetSource(target);
-                    result = Arithmetic<TLinkAddress>.Add(result, _unaryToUInt64[source]);
+                    result = result + _unaryToUInt64[source];
                     target = links.GetTarget(target);
                 }
-                result = Arithmetic<TLinkAddress>.Add(result, lastValue);
+                result = result + lastValue;
                 return result;
             }
         }
