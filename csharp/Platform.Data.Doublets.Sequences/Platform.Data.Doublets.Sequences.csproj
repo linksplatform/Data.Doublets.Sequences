@@ -4,7 +4,7 @@
     <Description>LinksPlatform's Platform.Data.Doublets.Sequences Class Library</Description>
     <Copyright>konard, FreePhoenix888</Copyright>
     <AssemblyTitle>Platform.Data.Doublets.Sequences</AssemblyTitle>
-    <VersionPrefix>0.3.0</VersionPrefix>
+    <VersionPrefix>0.4.0</VersionPrefix>
     <Authors>konard, FreePhoenix888</Authors>
     <TargetFramework>net7</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -24,7 +24,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>Namespaces are adjusted.</PackageReleaseNotes>
+    <PackageReleaseNotes>LongConverter generic type constraints are changed.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
