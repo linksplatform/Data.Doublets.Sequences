@@ -732,22 +732,6 @@
 //
 //         #endregion
 //
-//         #region Garbage Collection
-//         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//         private bool IsGarbage(LinkIndex link) => link != Options.SequenceMarkerLink && !Links.Unsync.IsPartialPoint(link) && Links.Count(Constants.Any, link) == 0;
-//         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-//         private void ClearGarbage(LinkIndex link)
-//         {
-//             if (IsGarbage(link))
-//             {
-//                 var contents = new Link<ulong>(Links.GetLink(link));
-//                 Links.Unsync.Delete(link);
-//                 ClearGarbage(contents.Source);
-//                 ClearGarbage(contents.Target);
-//             }
-//         }
-//
-//         #endregion
 //
 //         #region Walkers
 //
