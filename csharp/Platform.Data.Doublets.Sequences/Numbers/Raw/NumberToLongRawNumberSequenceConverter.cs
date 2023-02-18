@@ -19,7 +19,7 @@ namespace Platform.Data.Doublets.Sequences.Numbers.Raw
     /// <seealso cref="IConverter{TSource, TTarget}"/>
     public class NumberToLongRawNumberSequenceConverter<TSource, TTarget> : LinksDecoratorBase<TTarget>, IConverter<TSource, TTarget> 
         where TSource : struct, INumber<TSource>, IComparisonOperators<TSource, TSource, bool>, IShiftOperators<TSource, int, TSource>, IBitwiseOperators<TSource, TSource, TSource>
-        where TTarget : struct, IUnsignedNumber<TTarget>, IComparisonOperators<TTarget, TTarget, bool>, IShiftOperators<TTarget, int, TTarget>, IBitwiseOperators<TSource, TSource, TSource>
+        where TTarget : struct, IUnsignedNumber<TTarget>, IComparisonOperators<TTarget, TTarget, bool>, IShiftOperators<TTarget, int, TTarget>, IBitwiseOperators<TTarget, TTarget, TTarget>
     {
         private static readonly Comparer<TSource> _comparer = Comparer<TSource>.Default;
         private static readonly TSource _maximumValue = NumericType<TSource>.MaxValue;
