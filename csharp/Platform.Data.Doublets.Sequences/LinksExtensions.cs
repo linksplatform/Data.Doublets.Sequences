@@ -1,3 +1,5 @@
+using System;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Platform.Data.Doublets.Sequences.Unicode;
 
@@ -24,6 +26,9 @@ namespace Platform.Data.Doublets.Sequences
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void UseUnicode(this ILinks<ulong> links) => UnicodeMap.InitNew(links);
+        public static void UseUnicode<TLinkAddress>(this ILinks<TLinkAddress> links) where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
+        {
+            UnicodeMap<TLinkAddress>.InitNew(links);
+        }
     }
 }

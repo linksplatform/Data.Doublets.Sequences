@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Platform.Data.Sequences;
@@ -15,7 +16,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
     /// </para>
     /// <para></para>
     /// </summary>
-    public class UnicodeMap
+    public class UnicodeMap<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         /// <summary>
         /// <para>
@@ -23,22 +24,22 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// </para>
         /// <para></para>
         /// </summary>
-        public static readonly ulong FirstCharLink = 1;
+        public static readonly TLinkAddress FirstCharLink = TLinkAddress.One;
         /// <summary>
         /// <para>
         /// The max value.
         /// </para>
         /// <para></para>
         /// </summary>
-        public static readonly ulong LastCharLink = FirstCharLink + char.MaxValue;
+        public static readonly TLinkAddress LastCharLink = FirstCharLink + TLinkAddress.CreateTruncating(char.MaxValue);
         /// <summary>
         /// <para>
         /// The max value.
         /// </para>
         /// <para></para>
         /// </summary>
-        public static readonly ulong MapSize = 1 + char.MaxValue;
-        private readonly ILinks<ulong> _links;
+        public static readonly TLinkAddress MapSize = TLinkAddress.One + TLinkAddress.CreateTruncating(char.MaxValue);
+        private readonly ILinks<TLinkAddress> _links;
         private bool _initialized;
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnicodeMap(ILinks<ulong> links) => _links = links;
+        public UnicodeMap(ILinks<TLinkAddress> links) => _links = links;
 
         /// <summary>
         /// <para>
@@ -69,9 +70,9 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static UnicodeMap InitNew(ILinks<ulong> links)
+        public static UnicodeMap<TLinkAddress> InitNew(ILinks<TLinkAddress> links)
         {
-            var map = new UnicodeMap(links);
+            var map = new UnicodeMap<TLinkAddress>(links);
             map.Init();
             return map;
         }
@@ -101,7 +102,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
             }
             else
             {
-                for (var i = FirstCharLink + 1; i <= LastCharLink; i++)
+                for (var i = FirstCharLink + TLinkAddress.One; i <= LastCharLink; i++)
                 {
                     // From NIL to It (NIL -> Character) transformation meaning, (or infinite amount of NIL characters before actual Character)
                     var createdLink = _links.CreatePoint();
@@ -130,11 +131,11 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </param>
         /// <returns>
-        /// <para>The ulong</para>
+        /// <para>The TLinkAddress</para>
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong FromCharToLink(char character) => (ulong)character + 1;
+        public static TLinkAddress FromCharToLink(char character) => TLinkAddress.CreateTruncating(character) + TLinkAddress.One; 
 
         /// <summary>
         /// <para>
@@ -151,7 +152,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static char FromLinkToChar(ulong link) => (char)(link - 1);
+        public static char FromLinkToChar(TLinkAddress link) => (char)(object)(link - TLinkAddress.One);
 
         /// <summary>
         /// <para>
@@ -168,7 +169,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsCharLink(ulong link) => link <= MapSize;
+        public static bool IsCharLink(TLinkAddress link) => link <= MapSize;
 
         /// <summary>
         /// <para>
@@ -185,7 +186,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string FromLinksToString(IList<ulong> linksList)
+        public static string FromLinksToString(IList<TLinkAddress> linksList)
         {
             var sb = new StringBuilder();
             for (int i = 0; i < linksList.Count; i++)
@@ -214,7 +215,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string FromSequenceLinkToString(ulong link, ILinks<ulong> links)
+        public static string FromSequenceLinkToString(TLinkAddress link, ILinks<TLinkAddress> links)
         {
             var sb = new StringBuilder();
             if (links.Exists(link))
@@ -240,11 +241,11 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </param>
         /// <returns>
-        /// <para>The ulong array</para>
+        /// <para>The TLinkAddress array</para>
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong[] FromCharsToLinkArray(char[] chars) => FromCharsToLinkArray(chars, chars.Length);
+        public static TLinkAddress[] FromCharsToLinkArray(char[] chars) => FromCharsToLinkArray(chars, chars.Length);
 
         /// <summary>
         /// <para>
@@ -265,10 +266,10 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong[] FromCharsToLinkArray(char[] chars, int count)
+        public static TLinkAddress[] FromCharsToLinkArray(char[] chars, int count)
         {
-            // char array to ulong array
-            var linksSequence = new ulong[count];
+            // char array to TLinkAddress array
+            var linksSequence = new TLinkAddress[count];
             for (var i = 0; i < count; i++)
             {
                 linksSequence[i] = FromCharToLink(chars[i]);
@@ -291,10 +292,10 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong[] FromStringToLinkArray(string sequence)
+        public static TLinkAddress[] FromStringToLinkArray(string sequence)
         {
-            // char array to ulong array
-            var linksSequence = new ulong[sequence.Length];
+            // char array to TLinkAddress array
+            var linksSequence = new TLinkAddress[sequence.Length];
             for (var i = 0; i < sequence.Length; i++)
             {
                 linksSequence[i] = FromCharToLink(sequence[i]);
@@ -317,9 +318,9 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static List<ulong[]> FromStringToLinkArrayGroups(string sequence)
+        public static List<TLinkAddress[]> FromStringToLinkArrayGroups(string sequence)
         {
-            var result = new List<ulong[]>();
+            var result = new List<TLinkAddress[]>();
             var offset = 0;
             while (offset < sequence.Length)
             {
@@ -332,8 +333,8 @@ namespace Platform.Data.Doublets.Sequences.Unicode
                     relativeLength++;
                     absoluteLength++;
                 }
-                // char array to ulong array
-                var innerSequence = new ulong[relativeLength];
+                // char array to TLinkAddress array
+                var innerSequence = new TLinkAddress[relativeLength];
                 var maxLength = offset + relativeLength;
                 for (var i = offset; i < maxLength; i++)
                 {
@@ -360,9 +361,9 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static List<ulong[]> FromLinkArrayToLinkArrayGroups(ulong[] array)
+        public static List<TLinkAddress[]> FromLinkArrayToLinkArrayGroups(TLinkAddress[] array)
         {
-            var result = new List<ulong[]>();
+            var result = new List<TLinkAddress[]>();
             var offset = 0;
             while (offset < array.Length)
             {
@@ -389,7 +390,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
                     }
                 }
                 // copy array
-                var innerSequence = new ulong[relativeLength];
+                var innerSequence = new TLinkAddress[relativeLength];
                 var maxLength = offset + relativeLength;
                 for (var i = offset; i < maxLength; i++)
                 {
