@@ -1,3 +1,5 @@
+[![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/linksplatform/Data.Doublets.Sequences)
+
 [![NuGet Version and Downloads count](https://buildstats.info/nuget/Platform.Data.Doublets.Sequences)](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences)
 [![Actions Status](https://github.com/linksplatform/Data.Doublets.Sequences/workflows/csharp/badge.svg)](https://github.com/linksplatform/Data.Doublets.Sequences/actions?workflow=csharp)
 [![Actions Status](https://github.com/linksplatform/Data.Doublets.Sequences/workflows/cpp/badge.svg)](https://github.com/linksplatform/Data.Doublets.Sequences/actions?workflow=cpp)
