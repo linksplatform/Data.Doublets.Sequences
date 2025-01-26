@@ -4,7 +4,7 @@
     <Description>LinksPlatform's Platform.Data.Doublets.Sequences Class Library</Description>
     <Copyright>konard, FreePhoenix888</Copyright>
     <AssemblyTitle>Platform.Data.Doublets.Sequences</AssemblyTitle>
-    <VersionPrefix>0.6.0</VersionPrefix>
+    <VersionPrefix>0.6.1</VersionPrefix>
     <Authors>konard, FreePhoenix888</Authors>
     <TargetFramework>net8</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
