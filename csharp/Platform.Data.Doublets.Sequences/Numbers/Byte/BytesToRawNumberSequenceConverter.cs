@@ -17,6 +17,8 @@ using Platform.Numbers;
 using Platform.Reflection;
 using Platform.Unsafe;
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace Platform.Data.Doublets.Sequences.Numbers.Byte;
 
 public class BytesToRawNumberSequenceConverter<TLinkAddress> : LinksDecoratorBase<TLinkAddress>, IConverter<IList<byte>, TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>, IShiftOperators<TLinkAddress, int, TLinkAddress>
