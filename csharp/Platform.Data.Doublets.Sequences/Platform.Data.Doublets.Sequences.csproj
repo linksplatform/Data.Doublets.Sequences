@@ -4,9 +4,9 @@
     <Description>LinksPlatform's Platform.Data.Doublets.Sequences Class Library</Description>
     <Copyright>konard, FreePhoenix888</Copyright>
     <AssemblyTitle>Platform.Data.Doublets.Sequences</AssemblyTitle>
-    <VersionPrefix>0.5.2</VersionPrefix>
+    <VersionPrefix>0.6.0</VersionPrefix>
     <Authors>konard, FreePhoenix888</Authors>
-    <TargetFramework>net7</TargetFramework>
+    <TargetFramework>net8</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyName>Platform.Data.Doublets.Sequences</AssemblyName>
     <PackageId>Platform.Data.Doublets.Sequences</PackageId>
@@ -24,7 +24,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>Platform.Data.Doublets dependency is updated to 0.17.2.</PackageReleaseNotes>
+    <PackageReleaseNotes>Move to .NET 8.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
