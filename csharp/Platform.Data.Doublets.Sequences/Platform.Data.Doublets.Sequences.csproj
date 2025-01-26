@@ -25,18 +25,19 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>Fix CI and CD.</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated Platform.Data.Doublets package reference from version 0.18.0 to 0.18.1.
+Updated Platform.Data.Sequences package reference from version 0.3.1 to 0.3.2.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="Platform.Data.Doublets" Version="0.17.2" />
-    <PackageReference Include="Platform.Data.Sequences" Version="0.2.1" />
+    <PackageReference Include="Platform.Data.Doublets" Version="0.18.1" />
+    <PackageReference Include="Platform.Data.Sequences" Version="0.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
