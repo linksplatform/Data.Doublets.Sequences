@@ -24,16 +24,7 @@ jobs:
           submodules: true
       - name: Test
         run: |
-          dotnet test -c Release -f net8name: Publish NuGet Package
-
-on:
-  push:
-    branches:
-      - main
-    tags:
-      - 'v*.*.*'
-
-jobs:
+          dotnet test -c Release -f net8
   pushNuGetPackageToGitHubPackageRegistry: 
     needs: test 
     runs-on: ubuntu-latest 
