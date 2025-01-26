@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Numerics;
 using Xunit;
 using Platform.Collections.Stacks;
 using Platform.Collections.Arrays;
@@ -30,6 +31,21 @@ namespace Platform.Data.Doublets.Sequences.Tests
       var converter = new BalancedVariantConverter<uint>(null);
       Assert.NotNull(converter);
     }
+
+    private static BalancedVariantConverter<TLinkAddress> MakeConverter<TLinkAddress>() 
+      where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
+    {
+
+      return new BalancedVariantConverter<TLinkAddress>(null);
+    }
+
+    [Fact]
+    public static void GenericConstructorTest()
+    {
+      var converter = MakeConverter<uint>();
+      Assert.NotNull(converter);
+    }
+
 
     //         private static readonly string _loremIpsumExample = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     // Facilisi nullam vehicula ipsum a arcu cursus vitae congue mauris.
