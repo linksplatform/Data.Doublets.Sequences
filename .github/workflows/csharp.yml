@@ -36,12 +36,19 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
-      - name: Publish NuGet package to GitHub Package Registry
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Pack
+        run: dotnet pack --configuration Release --no-restore --output ./nupkgs
+      - name: Push NuGet package to GitHub Package Registry 
         run: |
-          dotnet build -c Release
-          dotnet pack -c Release
-          nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/linksplatform/index.json" -UserName linksplatform -Password ${{ secrets.GITHUB_TOKEN }}
-          nuget push **/*.nupkg -Source "GitHub" -SkipDuplicate
+          dotnet nuget push ./nupkgs/*.nupkg \
+            --source "github" \
+            --api-key "${{ secrets.GITHUB_TOKEN }}"
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   pusnToNuget:
     runs-on: ubuntu-latest
     needs: test
