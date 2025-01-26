@@ -35,7 +35,6 @@ namespace Platform.Data.Doublets.Sequences.Tests
     private static BalancedVariantConverter<TLinkAddress> MakeConverter<TLinkAddress>() 
       where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
-
       return new BalancedVariantConverter<TLinkAddress>(null);
     }
 
