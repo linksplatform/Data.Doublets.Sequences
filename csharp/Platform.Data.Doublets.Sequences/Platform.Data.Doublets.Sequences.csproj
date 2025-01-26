@@ -4,7 +4,7 @@
     <Description>LinksPlatform's Platform.Data.Doublets.Sequences Class Library</Description>
     <Copyright>konard, FreePhoenix888</Copyright>
     <AssemblyTitle>Platform.Data.Doublets.Sequences</AssemblyTitle>
-    <VersionPrefix>0.6.3</VersionPrefix>
+    <VersionPrefix>0.6.4</VersionPrefix>
     <Authors>konard, FreePhoenix888</Authors>
     <TargetFramework>net8</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -25,7 +25,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>Add README file to NuGet.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix CI and CD.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
