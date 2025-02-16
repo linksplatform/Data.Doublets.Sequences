@@ -22,7 +22,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
 
         /// <summary>
         /// <para>
-        /// Initializes a new <see cref="CharToUnicodeSymbolConverter"/> instance.
+        /// Initializes a new <see cref="CharToUnicodeSymbolConverter{TLinkAddress}"/> instance.
         /// </para>
         /// <para></para>
         /// </summary>
