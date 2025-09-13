@@ -20,6 +20,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     {
         private readonly IStack<TLinkAddress> _stack;
         private readonly Func<TLinkAddress, bool> _isElement;
+        private readonly HashSet<TLinkAddress> _visited;
 
         /// <summary>
         /// <para>
@@ -44,6 +45,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         {
             _stack = stack;
             _isElement = isElement;
+            _visited = new HashSet<TLinkAddress>();
         }
 
         /// <summary>
@@ -81,6 +83,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         public IEnumerable<TLinkAddress> Walk(TLinkAddress sequence)
         {
             _stack.Clear();
+            _visited.Clear();
             var element = sequence;
             if (IsElement(element))
             {
@@ -105,8 +108,24 @@ namespace Platform.Data.Doublets.Sequences.Walkers
                     }
                     else
                     {
-                        _stack.Push(element);
-                        element = GetNextElementAfterPush(element);
+                        if (_visited.Add(element))
+                        {
+                            _stack.Push(element);
+                            element = GetNextElementAfterPush(element);
+                        }
+                        else
+                        {
+                            if (_stack.IsEmpty)
+                            {
+                                break;
+                            }
+                            element = _stack.Pop();
+                            foreach (var output in WalkContents(element))
+                            {
+                                yield return output;
+                            }
+                            element = GetNextElementAfterPop(element);
+                        }
                     }
                 }
             }

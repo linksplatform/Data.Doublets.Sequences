@@ -23,6 +23,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
     public class LeveledSequenceWalker<TLinkAddress> : LinksOperatorBase<TLinkAddress>, ISequenceWalker<TLinkAddress> where TLinkAddress : struct, IUnsignedNumber<TLinkAddress>, IComparisonOperators<TLinkAddress, TLinkAddress, bool>
     {
         private readonly Func<TLinkAddress, bool> _isElement;
+        private readonly HashSet<TLinkAddress> _visited;
 
         /// <summary>
         /// <para>
@@ -39,7 +40,11 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LeveledSequenceWalker(ILinks<TLinkAddress> links, Func<TLinkAddress, bool> isElement) : base(links) => _isElement = isElement;
+        public LeveledSequenceWalker(ILinks<TLinkAddress> links, Func<TLinkAddress, bool> isElement) : base(links)
+        {
+            _isElement = isElement;
+            _visited = new HashSet<TLinkAddress>();
+        }
 
         /// <summary>
         /// <para>
@@ -52,7 +57,11 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         /// <para></para>
         /// </param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LeveledSequenceWalker(ILinks<TLinkAddress> links) : base(links) => _isElement = _links.IsPartialPoint;
+        public LeveledSequenceWalker(ILinks<TLinkAddress> links) : base(links)
+        {
+            _isElement = _links.IsPartialPoint;
+            _visited = new HashSet<TLinkAddress>();
+        }
 
         /// <summary>
         /// <para>
@@ -88,6 +97,7 @@ namespace Platform.Data.Doublets.Sequences.Walkers
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TLinkAddress[] ToArray(TLinkAddress sequence)
         {
+            _visited.Clear();
             var length = 1;
             var array = new TLinkAddress[length];
             array[0] = sequence;
@@ -119,15 +129,22 @@ namespace Platform.Data.Doublets.Sequences.Walkers
                     }
                     else
                     {
-                        var links = _links;
-                        var link = links.GetLink(candidate);
-                        var linkSource = links.GetSource(link);
-                        var linkTarget = links.GetTarget(link);
-                        nextArray[doubletOffset] = linkSource;
-                        nextArray[doubletOffset + 1] = linkTarget;
-                        if (!hasElements)
+                        if (_visited.Add(candidate))
                         {
-                            hasElements = !(_isElement(linkSource) && _isElement(linkTarget));
+                            var links = _links;
+                            var link = links.GetLink(candidate);
+                            var linkSource = links.GetSource(link);
+                            var linkTarget = links.GetTarget(link);
+                            nextArray[doubletOffset] = linkSource;
+                            nextArray[doubletOffset + 1] = linkTarget;
+                            if (!hasElements)
+                            {
+                                hasElements = !(_isElement(linkSource) && _isElement(linkTarget));
+                            }
+                        }
+                        else
+                        {
+                            nextArray[doubletOffset] = candidate;
                         }
                     }
                 }
