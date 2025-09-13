@@ -220,6 +220,20 @@ namespace Platform.Data.Doublets.Sequences
             set;
         }
 
+        /// <summary>
+        /// <para>
+        /// Gets or sets the use synchronization value.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        public bool UseSynchronization
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set;
+        } = true;
+
         // TODO: Реализовать компактификацию при чтении
         //public bool EnforceSingleSequenceVersionOnRead { get; set; }
         //public bool UseRequestMarker { get; set; }
