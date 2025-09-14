@@ -65,7 +65,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </param>
         /// <param name="listToSequenceLinkConverter">
-        /// <para>A list to sequence link converter.</para>
+        /// <para>A list to sequence link converter. Possible values (inherited from LinksListToSequenceConverterBase): OptimalVariantConverter, BalancedVariantConverter, CompressingConverter.</para>
         /// <para></para>
         /// </param>
         /// <param name="unicodeSequenceMarker">
@@ -95,7 +95,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </param>
         /// <param name="listToSequenceLinkConverter">
-        /// <para>A list to sequence link converter.</para>
+        /// <para>A list to sequence link converter. Possible values (inherited from LinksListToSequenceConverterBase): OptimalVariantConverter, BalancedVariantConverter, CompressingConverter.</para>
         /// <para></para>
         /// </param>
         /// <param name="unicodeSequenceMarker">
@@ -121,7 +121,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </param>
         /// <param name="listToSequenceLinkConverter">
-        /// <para>A list to sequence link converter.</para>
+        /// <para>A list to sequence link converter. Possible values (inherited from LinksListToSequenceConverterBase): OptimalVariantConverter, BalancedVariantConverter, CompressingConverter.</para>
         /// <para></para>
         /// </param>
         /// <param name="unicodeSequenceMarker">
@@ -147,7 +147,7 @@ namespace Platform.Data.Doublets.Sequences.Unicode
         /// <para></para>
         /// </param>
         /// <param name="listToSequenceLinkConverter">
-        /// <para>A list to sequence link converter.</para>
+        /// <para>A list to sequence link converter. Possible values (inherited from LinksListToSequenceConverterBase): OptimalVariantConverter, BalancedVariantConverter, CompressingConverter.</para>
         /// <para></para>
         /// </param>
         /// <param name="unicodeSequenceMarker">
